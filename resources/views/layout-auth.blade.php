@@ -31,7 +31,7 @@
 			</a>
 			<div class="sidebar-content">
 				<div class="sidebar-user">
-					<img src="https://pipeline-apps.sgp1.cdn.digitaloceanspaces.com/{{ Auth::user()->profile_picture }}" class="img-fluid rounded-circle mb-2" alt="Profile Picture" />
+					<img src="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{ Auth::user()->profile_picture }}" class="img-fluid rounded-circle mb-2" alt="Profile Picture" />
 					<div class="fw-bold">{{ Auth::user()->name }}</div>
 					<small>{{ Auth::user()->position }}</small>
 				</div>
@@ -319,7 +319,7 @@
 								<i class="align-middle fas fa-cog"></i>
 							</a>
 							<div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="/"><i class="align-middle me-1 fas fa-fw fa-user"></i> Profile</a>
+								<a class="dropdown-item" href="/profile"><i class="align-middle me-1 fas fa-fw fa-user"></i> Profile</a>
 								{{-- <a class="dropdown-item" href="/spark/#"><i class="align-middle me-1 fas fa-fw fa-comments"></i> Contacts</a> --}}
 								{{-- <a class="dropdown-item" href="/spark/#"><i class="align-middle me-1 fas fa-fw fa-chart-pie"></i> Analytics</a> --}}
 								{{-- <a class="dropdown-item" href="/spark/#"><i class="align-middle me-1 fas fa-fw fa-cogs"></i> Settings</a> --}}

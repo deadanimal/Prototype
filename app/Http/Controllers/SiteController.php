@@ -10,7 +10,20 @@ class SiteController extends Controller
         return view('home');
     }
 
-    public function show_dashboard() {
-        return view('dashboard');
+    public function show_dashboard(Request $request) {
+        $user = $request->user();
+        return view('dashboard', compact('user'));
     }    
+
+    public function show_profile(Request $request) {
+        $user = $request->user();
+        return view('profile', compact('user'));
+    }        
+
+    public function update_profile_picture(Request $request) {
+        $user = $request->user();
+        $user->profile_picture = $request->file('profile_picture')->store('prototype/profile_picture');
+        $user->save();
+        return back();
+    }
 }
