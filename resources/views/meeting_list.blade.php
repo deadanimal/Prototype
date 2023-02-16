@@ -13,10 +13,10 @@
                             <h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
                         </div>
                         <div class="card-body">
-                           
+
                         </div>
                     </div>
-                </div>                
+                </div>
 
                 <div class="col-12 col-xl-6">
                     <div class="card">
@@ -27,32 +27,36 @@
                         <div class="card-body">
                             <form action="/meetings" method="POST">
                                 @csrf
+
                                 <div class="mb-3">
-                                    <label class="form-label">Email address</label>
-                                    <input type="email" class="form-control" placeholder="Email" autocomplete="off"
-                                        style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAYAAADo6zjiAAAAAXNSR0IArs4c6QAAAbNJREFUWAntV8FqwkAQnaymUkpChB7tKSfxWCie/Yb+gbdeCqGf0YsQ+hU95QNyDoWCF/HkqdeiIaEUqyZ1ArvodrOHxanQOiCzO28y781skKwFW3scPV1/febP69XqarNeNTB2KGs07U3Ttt/Ozp3bh/u7V7muheQf6ftLUWyYDB5yz1ijuPAub2QRDDunJsdGkAO55KYYjl0OUu1VXOzQZ64Tr+IiPXedGI79bQHdbheCIAD0dUY6gV6vB67rAvo6IxVgWVbFy71KBKkAFaEc2xPQarXA931ot9tyHphiPwpJgSbfe54Hw+EQHMfZ/msVEEURjMfjCjbFeG2dFxPo9/sVOSYzxmAwGIjnTDFRQLMQAjQ5pJAQkCQJ5HlekeERxHEsiE0xUUCzEO9AmqYQhiF0Oh2Yz+ewWCzEY6aYKKBZCAGYs1wuYTabKdNNMWWxnaA4gp3Yry5JBZRlWTXDvaozUgGTyQSyLAP0dbb3DtQlmcan0yngT2ekE9ARc+z4AvC7nauh9iouhpcGamJeX8XF8MaClwaeROWRA7nk+tUnyzGvZrKg0/40gdME/t8EvgG0/NOS6v9NHQAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+                                    <label class="form-label">Project</label>
+                                    <select class="form-control mb-3" name="project_id">
+                                        @foreach ($projects as $project)
+                                            <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+
                                 <div class="mb-3">
-                                    <label class="form-label">Password</label>
-                                    <input type="password" class="form-control" placeholder="Password" autocomplete="off"
-                                        style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAYAAADo6zjiAAAAAXNSR0IArs4c6QAAAbNJREFUWAntV8FqwkAQnaymUkpChB7tKSfxWCie/Yb+gbdeCqGf0YsQ+hU95QNyDoWCF/HkqdeiIaEUqyZ1ArvodrOHxanQOiCzO28y781skKwFW3scPV1/febP69XqarNeNTB2KGs07U3Ttt/Ozp3bh/u7V7muheQf6ftLUWyYDB5yz1ijuPAub2QRDDunJsdGkAO55KYYjl0OUu1VXOzQZ64Tr+IiPXedGI79bQHdbheCIAD0dUY6gV6vB67rAvo6IxVgWVbFy71KBKkAFaEc2xPQarXA931ot9tyHphiPwpJgSbfe54Hw+EQHMfZ/msVEEURjMfjCjbFeG2dFxPo9/sVOSYzxmAwGIjnTDFRQLMQAjQ5pJAQkCQJ5HlekeERxHEsiE0xUUCzEO9AmqYQhiF0Oh2Yz+ewWCzEY6aYKKBZCAGYs1wuYTabKdNNMWWxnaA4gp3Yry5JBZRlWTXDvaozUgGTyQSyLAP0dbb3DtQlmcan0yngT2ekE9ARc+z4AvC7nauh9iouhpcGamJeX8XF8MaClwaeROWRA7nk+tUnyzGvZrKg0/40gdME/t8EvgG0/NOS6v9NHQAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                                    <label class="form-label">Meeting Title</label>
+                                    <input type="text" class="form-control" name="title" placeholder="Meeting title">
                                 </div>
+
                                 <div class="mb-3">
-                                    <label class="form-label">Textarea</label>
-                                    <textarea class="form-control" placeholder="Textarea" rows="1"></textarea>
+                                    <label class="form-label">Meeting Type</label>
+                                    <select class="form-control mb-3">
+                                        <option value="requirement">Requirement</option>
+                                        <option value="testing">Testing</option>
+                                        <option value="progress">Progress</option>
+                                    </select>
                                 </div>
+
                                 <div class="mb-3">
-                                    <label class="form-label w-100">File input</label>
-                                    <input type="file">
-                                    <small class="form-text d-block text-muted">Example block-level help text here.</small>
+                                    <label class="form-label">Meeting Date</label>
+                                    <input type="text" class="form-control" data-mask="00/00/0000" autocomplete="off" maxlength="10">
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-check">
-                                        <input type="checkbox" class="form-check-input">
-                                        <span class="form-check-label">Check me out</span>
-                                    </label>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+
+                                <button type="submit" class="btn btn-primary">Create Meeting</button>
                             </form>
                         </div>
                     </div>
