@@ -38,15 +38,10 @@
 
 				<ul class="sidebar-nav">
 
-					<li class="sidebar-item active">
-						<a data-bs-target="#dashboards" data-bs-toggle="collapse" class="sidebar-link">
-							<i class="align-middle me-2 fas fa-fw fa-home"></i> <span class="align-middle">Meeting</span>
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="/meetings">
+							<i class="align-middle me-2 far fa-fw fa-sticky-note"></i> <span class="align-middle">Meeting</span>
 						</a>
-						<ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show" data-bs-parent="#sidebar">
-							<li class="sidebar-item active"><a class="sidebar-link" href="/spark/dashboard-default.html">Default</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="/spark/dashboard-analytics.html">Analytics</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="/spark/dashboard-e-commerce.html">E-commerce</a></li>
-						</ul>
 					</li>
 
 					{{-- <li class="sidebar-item">
@@ -324,10 +319,10 @@
 								<i class="align-middle fas fa-cog"></i>
 							</a>
 							<div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="/spark/#"><i class="align-middle me-1 fas fa-fw fa-user"></i> View Profile</a>
-								<a class="dropdown-item" href="/spark/#"><i class="align-middle me-1 fas fa-fw fa-comments"></i> Contacts</a>
-								<a class="dropdown-item" href="/spark/#"><i class="align-middle me-1 fas fa-fw fa-chart-pie"></i> Analytics</a>
-								<a class="dropdown-item" href="/spark/#"><i class="align-middle me-1 fas fa-fw fa-cogs"></i> Settings</a>
+								<a class="dropdown-item" href="/"><i class="align-middle me-1 fas fa-fw fa-user"></i> Profile</a>
+								{{-- <a class="dropdown-item" href="/spark/#"><i class="align-middle me-1 fas fa-fw fa-comments"></i> Contacts</a> --}}
+								{{-- <a class="dropdown-item" href="/spark/#"><i class="align-middle me-1 fas fa-fw fa-chart-pie"></i> Analytics</a> --}}
+								{{-- <a class="dropdown-item" href="/spark/#"><i class="align-middle me-1 fas fa-fw fa-cogs"></i> Settings</a> --}}
 								<div class="dropdown-divider"></div>
 								<form action="/logout" method="POST">
 									@csrf
