@@ -44,7 +44,7 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Meeting Type</label>
-                                    <select class="form-control mb-3">
+                                    <select class="form-control mb-3" name="meeting_type">
                                         <option value="requirement">Requirement</option>
                                         <option value="testing">Testing</option>
                                         <option value="progress">Progress</option>
@@ -53,7 +53,7 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Meeting Date</label>
-                                    <input type="text" class="form-control" data-mask="00/00/0000" autocomplete="off" maxlength="10">
+                                    <input type="date" name="meeting_date" class="form-control">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Create Meeting</button>

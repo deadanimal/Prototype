@@ -12,6 +12,8 @@ class MeetingItem extends Model
     protected $fillable = [
         'item',        
         'category',
+        'meeting_id',
+        'user_id',
     ];      
 
     public function meeting()

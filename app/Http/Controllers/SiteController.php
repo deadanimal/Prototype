@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SiteController extends Controller
 {
@@ -24,6 +25,7 @@ class SiteController extends Controller
         $user = $request->user();
         $user->profile_picture = $request->file('profile_picture')->store('prototype/profile_picture');
         $user->save();
+        Alert::success('Success', 'Profile picture has successfully uploaded');
         return back();
     }
 }

@@ -21,6 +21,11 @@ class Meeting extends Model
     public function meeting_items()
     {
         return $this->hasMany(MeetingItem::class);
+    } 
+    
+    public function meeting_attendees()
+    {
+        return $this->hasMany(MeetingItem::class);
     }      
 
 
