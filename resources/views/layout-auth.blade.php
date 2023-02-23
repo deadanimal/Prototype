@@ -332,8 +332,8 @@
 							</a>
 							<div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
 								<a class="dropdown-item" href="/profile"><i class="align-middle me-1 fas fa-fw fa-user"></i> Profile</a>
-								<a class="dropdown-item" href="/progress-update"><i class="align-middle me-1 fas fa-fw fa-comments"></i> Contacts</a> 
-								<a class="dropdown-item" href="/location-update"><i class="align-middle me-1 fas fa-fw fa-comments"></i> Contacts</a> 
+								<a class="dropdown-item" href="/progress"><i class="align-middle me-1 fas fa-fw fa-briefcase"></i> Progress</a> 
+								<a class="dropdown-item" href="/location"><i class="align-middle me-1 fas fa-fw fa-map-marker"></i> Location</a> 
 								{{-- <a class="dropdown-item" href="/spark/#"><i class="align-middle me-1 fas fa-fw fa-chart-pie"></i> Analytics</a>
 								{{-- <a class="dropdown-item" href="/spark/#"><i class="align-middle me-1 fas fa-fw fa-cogs"></i> Settings</a> --}}
 								<div class="dropdown-divider"></div>
