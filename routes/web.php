@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [SiteController::class, 'show_dashboard']);
     Route::get('/profile', [SiteController::class, 'show_profile']);
     Route::post('/profile-picture', [SiteController::class, 'update_profile_picture']);
+    Route::put('/profile-password', [SiteController::class, 'change_password']);
 
     Route::get('/location', [UserUpdateController::class, 'get_locations']);
     Route::post('/location', [UserUpdateController::class, 'send_location']);
