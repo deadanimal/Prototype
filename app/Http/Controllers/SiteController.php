@@ -51,5 +51,34 @@ class SiteController extends Controller
 
         Alert::success('Success', 'Password has been changed.');
         return back();
-    }    
+    }   
+    
+    public function show_users(Request $request) {
+        $user = $request->user();
+        if ($user->email != 'afeezaziz@pipeline.com.my') {
+            return redirect('/');
+        }
+        $users = User::all();
+        return view('users', compact('users'));
+    }   
+    
+    public function create_user(Request $request) {
+        $user = $request->user();
+        if ($user->email != 'afeezaziz@pipeline.com.my') {
+            return redirect('/');
+        }
+        
+        $new_user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make('PabloEscobar')
+        ]);
+        $new_user->position = $request->position;
+        $new_user->user_type = 'staff';
+        $new_user->save();
+
+        return back();
+    }          
+
+
 }

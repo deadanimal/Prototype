@@ -6,6 +6,7 @@ use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\MockupController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\WorkpackageController;
 use App\Http\Controllers\UserUpdateController;
 
 Route::get('/', [SiteController::class, 'show_home']);
@@ -38,6 +39,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/mockups', [MockupController::class, 'create_mockup']);   
     Route::get('/mockups/{mockup_id}', [MockupController::class, 'show_mockup']); 
     Route::put('/mockups/{mockup_id}', [MockupController::class, 'update_mockup']);  
+
+    Route::get('/workpackages', [WorkpackageController::class, 'show_workpackages']);
+    Route::post('/workpackages', [WorkpackageController::class, 'create_workpackage']);   
+    Route::get('/workpackages/{workpackage_id}', [WorkpackageController::class, 'show_workpackage']); 
+    Route::put('/workpackages/{workpackage_id}', [WorkpackageController::class, 'update_workpackage']);      
         
 
     Route::get('/projects', [ProjectController::class, 'show_projects']);
@@ -55,5 +61,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/test-scripts/{test-script_id}', [ProjectController::class, 'show_test_script']); 
     Route::put('/test-scripts/{test-script_id}', [ProjectController::class, 'update_test_script']);      
    
+    Route::get('/users', [SiteController::class, 'show_users']);
+    Route::post('/users', [SiteController::class, 'create_user']);
+    Route::get('/users/{id}', [SiteController::class, 'show_user']);    
+    Route::put('/users/{id}', [SiteController::class, 'update_user']);    
 
 });
