@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/meetings', [MeetingController::class, 'show_meetings']);
     Route::post('/meetings', [MeetingController::class, 'create_meeting']);    
     Route::put('/meetings/{meeting_id}', [MeetingController::class, 'update_meeting']);    
+    
 
     Route::post('/meetings/{meeting_id}/attendances', [MeetingController::class, 'attend_meeting']);
     Route::post('/meetings/{meeting_id}/notes', [MeetingController::class, 'create_note']);
@@ -60,6 +61,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/test-scripts', [ProjectController::class, 'create_test_script']);   
     Route::get('/test-scripts/{test-script_id}', [ProjectController::class, 'show_test_script']); 
     Route::put('/test-scripts/{test-script_id}', [ProjectController::class, 'update_test_script']);      
+
+    Route::get('/resources', [ProjectController::class, 'show_resources']);
+    Route::post('/resources', [ProjectController::class, 'create_resource']);    
+    Route::put('/resources/{resource_id}', [ProjectController::class, 'update_resource']);       
    
     Route::get('/users', [SiteController::class, 'show_users']);
     Route::post('/users', [SiteController::class, 'create_user']);

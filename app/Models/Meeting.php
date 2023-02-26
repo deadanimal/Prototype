@@ -14,9 +14,16 @@ class Meeting extends Model
         'project_id',
         'meeting_type',
         'meeting_date',
+        'remarks',
         'status',
         'user_id',
     ];  
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    } 
+        
     
     public function meeting_items()
     {

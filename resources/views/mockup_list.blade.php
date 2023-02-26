@@ -28,14 +28,6 @@
                             <form action="/meetings" method="POST">
                                 @csrf
 
-                                <div class="mb-3">
-                                    <label class="form-label">Project</label>
-                                    <select class="form-control mb-3" name="project_id">
-                                        @foreach ($projects as $project)
-                                            <option value="{{ $project->id }}">{{ $project->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Meeting Title</label>

@@ -12,6 +12,11 @@ class Project extends Model
     protected $fillable = [
         'name',        
     ];  
+
+    public function organisation()
+    {
+        return $this->belongsTo(Organisation::class);
+    }          
     
     public function users()
     {

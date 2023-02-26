@@ -8,16 +8,16 @@ use App\Models\Meeting;
 use App\Models\MeetingAttendee;
 use App\Models\MeetingItem;
 use App\Models\Project;
-
+use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MeetingController extends Controller
 {
     public function show_meetings(Request $request) {
-        $meetings = Meeting::all();
+        $upcoming_meetings = Meeting::where('meeting_date', '>', Carbon::now('Asia/Singapore'))->orderBy('meeting_date')->get();
         $projects = Project::all();
 
-        return view('meeting_list', compact('meetings', 'projects'));
+        return view('meeting_list', compact('upcoming_meetings', 'projects'));
     }
 
     public function show_meeting(Request $request) {
@@ -35,11 +35,12 @@ class MeetingController extends Controller
             'project_id'=> $request->project_id,
             'meeting_type'=> $request->meeting_type,
             'meeting_date'=> $request->meeting_date,
-            'status' => 'created',
+            'remarks'=> $request->meeting_remarks,
+            'status' => 'draft',
             'user_id'=> $user->id,
         ]);
 
-        Alert::success('Success', 'Meeting has been created!');
+        Alert::success('Success', 'Meeting is in Draft');
 
         return back();
     }  

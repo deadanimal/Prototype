@@ -6,44 +6,24 @@
 
             <div class="row">
 
-                <div class="col-12 col-xl-9">
+                <div class="col-12 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Upcoming Meeting</h5>                            
+                            <h5 class="card-title">Upcoming Meeting</h5>
+                            <h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
                         </div>
-                        
+                        <div class="card-body">
 
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Project</th>
-                                        <th>Title</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                  
-
-                                    @foreach($upcoming_meetings as $meeting)
-                                    <tr>
-                                        <td>{{ $meeting->meeting_date }}</td>
-                                        <td>{{ $meeting->project->organisation->shortname }} - {{ $meeting->project->name }} </td>
-                                        <td><a href="/meetings/{{$meeting->id}}"> {{ $meeting->title }}</a></td>
-                                        <td>{{ ucfirst($meeting->status) }}</td>
-                                    </tr>
-                                    @endforeach
-
-                                </tbody>
-                            </table>
-
-                        
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-12 col-xl-3">
+                <div class="col-12 col-xl-6">
                     <div class="card">
-      
+                        <div class="card-header">
+                            <h5 class="card-title">Create Meeting</h5>
+                            <h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
+                        </div>
                         <div class="card-body">
                             <form action="/meetings" method="POST">
                                 @csrf
@@ -52,8 +32,7 @@
                                     <label class="form-label">Project</label>
                                     <select class="form-control mb-3" name="project_id">
                                         @foreach ($projects as $project)
-                                            <option value="{{ $project->id }}">({{ $project->organisation->shortname }})
-                                                {{ $project->name }}</option>
+                                            <option value="{{ $project->id }}">{{ $project->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -75,11 +54,6 @@
                                 <div class="mb-3">
                                     <label class="form-label">Meeting Date</label>
                                     <input type="date" name="meeting_date" class="form-control">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Meeting Remarks</label>
-                                    <textarea class="form-control" rows="5" name="meeting_remarks" placeholder="Textarea"></textarea>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Create Meeting</button>
