@@ -12,19 +12,19 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Client</th>
-                                    <th>Project</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                               
 
-                                @foreach($projects as $project)
+                                @foreach($resources as $resource)
                                 <tr>
-                                    <td>{{ $project->organisation->name }}</td>
-                                    <td><a href="/projects/{{$project->id}}">{{ $project->name }}</a></td>
-                                    <td>{{ ucfirst($project->status) }}</td>
+                                    <td>{{ $resource->user->name }}</td>
+                                    <td>{{ $resource->resource_type }}</td>
+                                    <td>{{ ucfirst($resource->status) }}</td>
                                 </tr>
                                 @endforeach
 
