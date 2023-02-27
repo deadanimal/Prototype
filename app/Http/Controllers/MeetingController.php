@@ -15,7 +15,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 class MeetingController extends Controller
 {
     public function show_meetings(Request $request) {
-        $upcoming_meetings = Meeting::where('meeting_date', '>', Carbon::now('Asia/Singapore'))->orderBy('meeting_date')->get();
+        $upcoming_meetings = Meeting::where('meeting_date', '>', Carbon::now('Asia/Singapore')->subDays(1))->orderBy('meeting_date')->get();
         $projects = Project::all();
 
         return view('meeting_list', compact('upcoming_meetings', 'projects'));

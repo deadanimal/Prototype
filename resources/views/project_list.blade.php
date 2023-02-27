@@ -6,7 +6,7 @@
 
             <div class="row">
 
-                <div class="col-12 col-xl-9">
+                <div class="col-12">
                     <div class="card">
                       
                         <table class="table">

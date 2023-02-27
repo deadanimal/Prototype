@@ -51,6 +51,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/projects', [ProjectController::class, 'create_project']);   
     Route::get('/projects/{project_id}', [ProjectController::class, 'show_project']); 
     Route::put('/projects/{project_id}', [ProjectController::class, 'update_project']);  
+
+    Route::post('/projects/{project_id}/documents', [ProjectController::class, 'upload_project_document']);   
+    Route::post('/projects/{project_id}/deliverables', [ProjectController::class, 'add_project_deliverable']);   
+    Route::post('/projects/{project_id}/members', [ProjectController::class, 'add_project_member']);   
+    Route::post('/projects/{project_id}/payments', [ProjectController::class, 'add_project_payment']);   
+    Route::post('/projects/{project_id}/phases', [ProjectController::class, 'add_project_phase']);   
     
     Route::get('/projects/{project_id}/requirements', [ProjectController::class, 'show_requirements']);
     Route::post('/requirements', [ProjectController::class, 'create_requirement']);   
