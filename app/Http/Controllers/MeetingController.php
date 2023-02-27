@@ -8,6 +8,7 @@ use App\Models\Meeting;
 use App\Models\MeetingAttendee;
 use App\Models\MeetingItem;
 use App\Models\Project;
+use App\Models\Workpackage;
 use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -24,7 +25,10 @@ class MeetingController extends Controller
         $id = (int) $request->route('meeting_id');  
         $meeting = Meeting::find($id);
 
-        return view('meeting_detail', compact('meeting'));
+        $client_attendees = MeetingAttendee::where('meeting_id', $meeting->id)->get();
+        $pnsb_attendees = Workpackage::where('meeting_id', $meeting->id)->get();
+
+        return view('meeting_detail', compact('meeting', 'client_attendees', 'pnsb_attendees'));
     }
 
     public function create_meeting(Request $request) {
@@ -69,17 +73,22 @@ class MeetingController extends Controller
         return back();
     }    
 
-    public function create_meeting_item(Request $request) {
+    public function create_note(Request $request) {
         $user = $request->user();
         $id = (int) $request->route('meeting_id');  
         $meeting = Meeting::find($id);        
 
-        MeetingItem::create([            
+        $item = MeetingItem::create([            
             'item'=> $request->item,
             'category'=> $request->category,
             'meeting_id'=> $meeting->id,
             'user_id'=> $user->id,
         ]);
+
+        if($request->has('attachment')) {
+            $item->attachment = $request->file('attachment')->store('prototype/meeting_attachment');
+            $item->save();
+        }        
 
         Alert::success('Success', 'Meeting item has been created!');
 

@@ -8,382 +8,199 @@
                 <h1 class="header-title">
                     {{ $meeting->title }}
                 </h1>
-                <p class="header-subtitle">{{ $meeting->date }} | {{ $meeting->location }}</p>
+                <p class="header-subtitle">{{ $meeting->meeting_date }} | {{ ucfirst($meeting->status) }}</p>
             </div>
 
             <div class="row">
-                <div class="col-xl-6 col-xxl-7">
-                    <div class="card flex-fill w-100">
-                        <div class="card-header">
-                            <div class="card-actions float-end">
-                                <a href="/spark/#" class="me-1">
-                                    <i class="align-middle" data-feather="refresh-cw"></i>
-                                </a>
-                                <div class="d-inline-block dropdown show">
-                                    <a href="/spark/#" data-bs-toggle="dropdown" data-bs-display="static">
-                                        <i class="align-middle" data-feather="more-vertical"></i>
-                                    </a>
 
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="/spark/#">Action</a>
-                                        <a class="dropdown-item" href="/spark/#">Another action</a>
-                                        <a class="dropdown-item" href="/spark/#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <h5 class="card-title mb-0">Recent Movement</h5>
+                <div class="col-12 col-xl-9">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Meeting Detail</h5>
                         </div>
-                        <div class="card-body py-3">
-                            <div class="chart chart-sm">
-                                <canvas id="chartjs-dashboard-line"></canvas>
-                            </div>
-                        </div>
+
+
+           
+
+
                     </div>
                 </div>
 
-                <div class="col-xl-6 col-xxl-5 d-flex">
-                    <div class="w-100">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col mt-0">
-                                                <h5 class="card-title">Sales Today</h5>
-                                            </div>
-
-                                            <div class="col-auto">
-                                                <div class="avatar">
-                                                    <div class="avatar-title rounded-circle bg-primary-dark">
-                                                        <i class="align-middle" data-feather="truck"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h1 class="display-5 mt-1 mb-3">2.562</h1>
-                                        <div class="mb-0">
-                                            <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.65%
-                                            </span>
-                                            Less sales than usual
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col mt-0">
-                                                <h5 class="card-title">Visitors Today</h5>
-                                            </div>
-
-                                            <div class="col-auto">
-                                                <div class="avatar">
-                                                    <div class="avatar-title rounded-circle bg-primary-dark">
-                                                        <i class="align-middle" data-feather="users"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h1 class="display-5 mt-1 mb-3">17.212</h1>
-                                        <div class="mb-0">
-                                            <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.50%
-                                            </span>
-                                            More visitors than usual
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col mt-0">
-                                                <h5 class="card-title">Total Earnings</h5>
-                                            </div>
-
-                                            <div class="col-auto">
-                                                <div class="avatar">
-                                                    <div class="avatar-title rounded-circle bg-primary-dark">
-                                                        <i class="align-middle" data-feather="dollar-sign"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h1 class="display-5 mt-1 mb-3">$24.300</h1>
-                                        <div class="mb-0">
-                                            <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 8.35%
-                                            </span>
-                                            More earnings than usual
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col mt-0">
-                                                <h5 class="card-title">Pending Orders</h5>
-                                            </div>
-
-                                            <div class="col-auto">
-                                                <div class="avatar">
-                                                    <div class="avatar-title rounded-circle bg-primary-dark">
-                                                        <i class="align-middle" data-feather="shopping-cart"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h1 class="display-5 mt-1 mb-3">43</h1>
-                                        <div class="mb-0">
-                                            <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -4.25%
-                                            </span>
-                                            Less orders than usual
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
-                    <div class="card flex-fill">
+                <div class="col-12 col-xl-3">
+                    <div class="card">
                         <div class="card-header">
-                            <div class="card-actions float-end">
-                                <a href="/spark/#" class="me-1">
-                                    <i class="align-middle" data-feather="refresh-cw"></i>
-                                </a>
-                                <div class="d-inline-block dropdown show">
-                                    <a href="/spark/#" data-bs-toggle="dropdown" data-bs-display="static">
-                                        <i class="align-middle" data-feather="more-vertical"></i>
-                                    </a>
+                            <h5 class="card-title">Meeting Attendee</h5>
+                        </div>
 
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="/spark/#">Action</a>
-                                        <a class="dropdown-item" href="/spark/#">Another action</a>
-                                        <a class="dropdown-item" href="/spark/#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <h5 class="card-title mb-0">Calendar</h5>
-                        </div>
-                        <div class="card-body d-flex">
-                            <div class="align-self-center w-100">
-                                <div class="chart">
-                                    <div id="datetimepicker-dashboard"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
-                    <div class="card flex-fill w-100">
-                        <div class="card-header">
-                            <div class="card-actions float-end">
-                                <a href="/spark/#" class="me-1">
-                                    <i class="align-middle" data-feather="refresh-cw"></i>
-                                </a>
-                                <div class="d-inline-block dropdown show">
-                                    <a href="/spark/#" data-bs-toggle="dropdown" data-bs-display="static">
-                                        <i class="align-middle" data-feather="more-vertical"></i>
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="/spark/#">Action</a>
-                                        <a class="dropdown-item" href="/spark/#">Another action</a>
-                                        <a class="dropdown-item" href="/spark/#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <h5 class="card-title mb-0">Current Visitors</h5>
-                        </div>
-                        <div class="card-body px-4">
-                            <div id="world_map" style="height:350px;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
-                    <div class="card flex-fill w-100">
-                        <div class="card-header">
-                            <div class="card-actions float-end">
-                                <a href="/spark/#" class="me-1">
-                                    <i class="align-middle" data-feather="refresh-cw"></i>
-                                </a>
-                                <div class="d-inline-block dropdown show">
-                                    <a href="/spark/#" data-bs-toggle="dropdown" data-bs-display="static">
-                                        <i class="align-middle" data-feather="more-vertical"></i>
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="/spark/#">Action</a>
-                                        <a class="dropdown-item" href="/spark/#">Another action</a>
-                                        <a class="dropdown-item" href="/spark/#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <h5 class="card-title mb-0">Browser Usage</h5>
-                        </div>
-                        <div class="card-body d-flex">
-                            <div class="align-self-center w-100">
-                                <div class="py-3">
-                                    <div class="chart chart-xs">
-                                        <canvas id="chartjs-dashboard-pie"></canvas>
-                                    </div>
-                                </div>
-
-                                <table class="table mb-0">
-                                    <tbody>
-                                        <tr>
-                                            <td><i class="fas fa-circle text-primary fa-fw"></i> Chrome</td>
-                                            <td class="text-end">4401</td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="fas fa-circle text-warning fa-fw"></i> Firefox</td>
-                                            <td class="text-end">4003</td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="fas fa-circle text-danger fa-fw"></i> IE</td>
-                                            <td class="text-end">1589</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12 col-lg-8 col-xxl-9 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-header">
-                            <div class="card-actions float-end">
-                                <a href="/spark/#" class="me-1">
-                                    <i class="align-middle" data-feather="refresh-cw"></i>
-                                </a>
-                                <div class="d-inline-block dropdown show">
-                                    <a href="/spark/#" data-bs-toggle="dropdown" data-bs-display="static">
-                                        <i class="align-middle" data-feather="more-vertical"></i>
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="/spark/#">Action</a>
-                                        <a class="dropdown-item" href="/spark/#">Another action</a>
-                                        <a class="dropdown-item" href="/spark/#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <h5 class="card-title mb-0">Latest Projects</h5>
-                        </div>
-                        <table id="datatables-dashboard-projects" class="table table-striped my-0">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th class="d-none d-xl-table-cell">Start Date</th>
-                                    <th class="d-none d-xl-table-cell">End Date</th>
-                                    <th>Status</th>
-                                    <th class="d-none d-md-table-cell">Assignee</th>
+                                    <th>Email</th>
                                 </tr>
                             </thead>
                             <tbody>
+                              
+
+                                @foreach($client_attendees as $attendee)
                                 <tr>
-                                    <td>Project Apollo</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                    <td><span class="badge bg-success">Done</span></td>
-                                    <td class="d-none d-md-table-cell">Carl Jenkins</td>
+                                    <td>{{ $attendee->name }}</td>
+                                    <td>{{ $attendee->email }}</td>
                                 </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+           
+
+
+                    </div>
+                </div>    
+                
+                <div class="col-12">
+                    <div class="card">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>Project Fireball</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                    <td><span class="badge bg-danger">Cancelled</span></td>
-                                    <td class="d-none d-md-table-cell">Bertha Martin</td>
+                                    <th style="width:5%">No.</th>
+                                    <th style="width:15%">Category</th>
+                                    <th style="width:80%">Item</th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                              
+
+                                @foreach($meeting->meeting_items as $item)
                                 <tr>
-                                    <td>Project Hades</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                    <td><span class="badge bg-success">Done</span></td>
-                                    <td class="d-none d-md-table-cell">Stacie Hall</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ ucfirst($item->category) }}</td>
+                                    <td>
+                                        {{ $item->item }}
+                                        <br/><br/>
+                                        <i>Written at {{$item->created_at}}</i>
+                                        
+                                        @if($item->attachment)
+                                        <br/><br/>
+                                        Link to <a href="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{$item->attachment}}">Attachment</a>
+                                        @endif
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td>Project Nitro</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                    <td><span class="badge bg-warning">In progress</span></td>
-                                    <td class="d-none d-md-table-cell">Carl Jenkins</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Phoenix</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                    <td><span class="badge bg-success">Done</span></td>
-                                    <td class="d-none d-md-table-cell">Bertha Martin</td>
-                                </tr>
-                                <tr>
-                                    <td>Project X</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                    <td><span class="badge bg-success">Done</span></td>
-                                    <td class="d-none d-md-table-cell">Stacie Hall</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Romeo</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                    <td><span class="badge bg-success">Done</span></td>
-                                    <td class="d-none d-md-table-cell">Ashley Briggs</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Wombat</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                    <td><span class="badge bg-warning">In progress</span></td>
-                                    <td class="d-none d-md-table-cell">Bertha Martin</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Zircon</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2021</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                    <td><span class="badge bg-danger">Cancelled</span></td>
-                                    <td class="d-none d-md-table-cell">Stacie Hall</td>
-                                </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="col-12 col-lg-4 col-xxl-3 d-flex">
-                    <div class="card flex-fill w-100">
-                        <div class="card-header">
-                            <div class="card-actions float-end">
-                                <a href="/spark/#" class="me-1">
-                                    <i class="align-middle" data-feather="refresh-cw"></i>
-                                </a>
-                                <div class="d-inline-block dropdown show">
-                                    <a href="/spark/#" data-bs-toggle="dropdown" data-bs-display="static">
-                                        <i class="align-middle" data-feather="more-vertical"></i>
-                                    </a>
 
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="/spark/#">Action</a>
-                                        <a class="dropdown-item" href="/spark/#">Another action</a>
-                                        <a class="dropdown-item" href="/spark/#">Something else here</a>
-                                    </div>
+                <div class="col-12">
+                    <div class="card">
+
+
+               
+
+                        <div class="card-body">
+                            <form action="/meetings/{{$meeting->id}}/notes" method="POST" enctype="multipart/form-data">
+                                @csrf
+
+                        
+
+                                <div class="mb-3">
+                                    <label class="form-label">Category</label>
+                                    <select class="form-control mb-3" name="category">
+                                        <option value="general">General</option>
+                                    </select>
                                 </div>
-                            </div>
-                            <h5 class="card-title mb-0">Monthly Sales</h5>
-                        </div>
-                        <div class="card-body d-flex w-100">
-                            <div class="align-self-center chart chart-lg">
-                                <canvas id="chartjs-dashboard-bar"></canvas>
-                            </div>
+
+       
+
+                                <div class="mb-3">
+                                    <label class="form-label">Item</label>
+                                    <textarea class="form-control" rows="5" name="item" placeholder="Textarea"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Attachment</label>
+                                    <input type="file" name="attachment">
+                                </div>                                      
+
+                                <button type="submit" class="btn btn-primary">Add Meeting Item</button>
+                            </form>
                         </div>
                     </div>
                 </div>
+
+                {{-- <div class="col-12 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Horizontal form</h5>
+                            <h6 class="card-subtitle text-muted">Horizontal Bootstrap layout.</h6>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3 row">
+                                    <label class="col-form-label col-sm-2 text-sm-end">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" placeholder="Email" autocomplete="off"
+                                            style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAYAAADo6zjiAAAAAXNSR0IArs4c6QAAAbNJREFUWAntV8FqwkAQnaymUkpChB7tKSfxWCie/Yb+gbdeCqGf0YsQ+hU95QNyDoWCF/HkqdeiIaEUqyZ1ArvodrOHxanQOiCzO28y781skKwFW3scPV1/febP69XqarNeNTB2KGs07U3Ttt/Ozp3bh/u7V7muheQf6ftLUWyYDB5yz1ijuPAub2QRDDunJsdGkAO55KYYjl0OUu1VXOzQZ64Tr+IiPXedGI79bQHdbheCIAD0dUY6gV6vB67rAvo6IxVgWVbFy71KBKkAFaEc2xPQarXA931ot9tyHphiPwpJgSbfe54Hw+EQHMfZ/msVEEURjMfjCjbFeG2dFxPo9/sVOSYzxmAwGIjnTDFRQLMQAjQ5pJAQkCQJ5HlekeERxHEsiE0xUUCzEO9AmqYQhiF0Oh2Yz+ewWCzEY6aYKKBZCAGYs1wuYTabKdNNMWWxnaA4gp3Yry5JBZRlWTXDvaozUgGTyQSyLAP0dbb3DtQlmcan0yngT2ekE9ARc+z4AvC7nauh9iouhpcGamJeX8XF8MaClwaeROWRA7nk+tUnyzGvZrKg0/40gdME/t8EvgG0/NOS6v9NHQAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-form-label col-sm-2 text-sm-end">Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" placeholder="Password"
+                                            autocomplete="off"
+                                            style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAYAAADo6zjiAAAAAXNSR0IArs4c6QAAAbNJREFUWAntV8FqwkAQnaymUkpChB7tKSfxWCie/Yb+gbdeCqGf0YsQ+hU95QNyDoWCF/HkqdeiIaEUqyZ1ArvodrOHxanQOiCzO28y781skKwFW3scPV1/febP69XqarNeNTB2KGs07U3Ttt/Ozp3bh/u7V7muheQf6ftLUWyYDB5yz1ijuPAub2QRDDunJsdGkAO55KYYjl0OUu1VXOzQZ64Tr+IiPXedGI79bQHdbheCIAD0dUY6gV6vB67rAvo6IxVgWVbFy71KBKkAFaEc2xPQarXA931ot9tyHphiPwpJgSbfe54Hw+EQHMfZ/msVEEURjMfjCjbFeG2dFxPo9/sVOSYzxmAwGIjnTDFRQLMQAjQ5pJAQkCQJ5HlekeERxHEsiE0xUUCzEO9AmqYQhiF0Oh2Yz+ewWCzEY6aYKKBZCAGYs1wuYTabKdNNMWWxnaA4gp3Yry5JBZRlWTXDvaozUgGTyQSyLAP0dbb3DtQlmcan0yngT2ekE9ARc+z4AvC7nauh9iouhpcGamJeX8XF8MaClwaeROWRA7nk+tUnyzGvZrKg0/40gdME/t8EvgG0/NOS6v9NHQAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-form-label col-sm-2 text-sm-end">Textarea</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" placeholder="Textarea" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <fieldset class="mb-3">
+                                    <div class="row">
+                                        <label class="col-form-label col-sm-2 text-sm-end pt-sm-0">Radios</label>
+                                        <div class="col-sm-10">
+                                            <label class="form-check">
+                                                <input name="radio-3" type="radio" class="form-check-input"
+                                                    checked="">
+                                                <span class="form-check-label">Default radio</span>
+                                            </label>
+                                            <label class="form-check">
+                                                <input name="radio-3" type="radio" class="form-check-input">
+                                                <span class="form-check-label">Second default radio</span>
+                                            </label>
+                                            <label class="form-check">
+                                                <input name="radio-3" type="radio" class="form-check-input"
+                                                    disabled="">
+                                                <span class="form-check-label">Disabled radio</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="mb-3 row">
+                                    <label class="col-form-label col-sm-2 text-sm-end pt-sm-0">Checkbox</label>
+                                    <div class="col-sm-10">
+                                        <label class="form-check m-0">
+                                            <input type="checkbox" class="form-check-input">
+                                            <span class="form-check-label">Check me out</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <div class="col-sm-10 ms-sm-auto">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div> --}}
+
             </div>
 
-            @yield('content')
+
         </div>
     </main>
 @endsection

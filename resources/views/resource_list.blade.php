@@ -22,8 +22,10 @@
 
                                 @foreach($resources as $resource)
                                 <tr>
-                                    <td>{{ $resource->user->name }}</td>
-                                    <td>{{ $resource->resource_type }}</td>
+                                    <td>
+                                        <img src="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{ $resource->user->profile_picture }}" width="48" height="48" class="rounded-circle me-2" alt="Avatar">
+                                        {{ $resource->user->name }}</td>
+                                    <td>{{ ucfirst($resource->resource_type) }}</td>
                                     <td>{{ ucfirst($resource->status) }}</td>
                                 </tr>
                                 @endforeach
@@ -32,6 +34,36 @@
                         </table>
                     </div>
                 </div>
+
+                @if(Auth::user()->user_type == 'admin')
+                <div class="col-12 col-xl-3">
+                    <div class="card">
+      
+                        <div class="card-body">
+                            <form action="/resources" method="POST">
+                                @csrf
+
+                                <div class="mb-3">
+                                    <label class="form-label">User ID</label>
+                                    <input type="text" class="form-control" name="user_id" >
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Type</label>
+                                    <select class="form-control mb-3" name="resource_type">
+                                        <option value="analyst">Analyst</option>
+                                        <option value="developer">Developer</option>
+                                        <option value="pmo">PMO</option>
+                                    </select>
+                                </div>
+
+
+                                <button type="submit" class="btn btn-primary">Create Resource</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>                
+                @endif
 
     
 

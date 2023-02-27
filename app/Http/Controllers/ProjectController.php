@@ -46,4 +46,18 @@ class ProjectController extends Controller
 
         return view('resource_detail', compact('resource'));
     }    
+
+    public function create_resource(Request $request) {
+        $id = (int) $request->route('resource_id');  
+        $user = $request->user();
+        if ($user->user_type == 'admin') {
+            Resource::create([
+                'user_id' => $request->user_id,
+                'resource_type' => $request->resource_type,
+                'status' => 'active'
+            ]);
+        } 
+
+        return back();
+    }       
 }
