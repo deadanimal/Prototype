@@ -11,6 +11,7 @@ class Trail extends Model
 
     protected $fillable = [   
         'message',
+        'category',
         'old',
         'new',        
         'user_id',

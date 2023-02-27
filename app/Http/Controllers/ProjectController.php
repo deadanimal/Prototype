@@ -10,6 +10,7 @@ use App\Models\ProjectPayment;
 use App\Models\ProjectPhase;
 use App\Models\ProjectUser;
 use App\Models\Resource;
+use App\Models\Trail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -85,7 +86,7 @@ class ProjectController extends Controller
                 'resource_type' => $request->resource_type,
                 'status' => 'active'
             ]);
-        } 
+        }     
 
         return back();
     }    
@@ -93,6 +94,7 @@ class ProjectController extends Controller
     public function upload_project_document(Request $request) {
         $id = (int) $request->route('project_id');  
         $user = $request->user();
+        $project = Project::find($id);
 
             $document = ProjectDocument::create([
                 'name' => $request->name,
@@ -105,17 +107,34 @@ class ProjectController extends Controller
             $document->document = $request->file('document')->store('prototype/document');
             $document->save();
 
+            $trail_message = 'Upload new document for ' + $project->name;
+
+            Trail::create([
+                'category' => 'project/documents',
+                'user_id'=>auth()->user()->id,
+                'message' => $trail_message,
+            ]);                 
+
         return back();
     }   
     
     public function add_project_member(Request $request) {
-        $id = (int) $request->route('project_id');  
+        $id = (int) $request->route('project_id');          
 
         ProjectUser::create([
             'category' => $request->category,
             'project_id' => $id,
             'user_id' => $request->user_id,
         ]);
+
+        $project = Project::find($id);
+        $trail_message = 'Add new project member for ' + $project->name;
+
+        Trail::create([
+            'category' => 'project/members',
+            'user_id'=>auth()->user()->id,
+            'message' => $trail_message,
+        ]);         
 
         return back();
     }    
@@ -133,6 +152,15 @@ class ProjectController extends Controller
             'user_id' => $request->user_id,
         ]);
 
+        $project = Project::find($id);
+        $trail_message = 'Add new project payment for ' + $project->name;
+
+        Trail::create([
+            'category' => 'project/payments',
+            'user_id'=>auth()->user()->id,
+            'message' => $trail_message,
+        ]);           
+
         return back();
     }    
     
@@ -149,6 +177,15 @@ class ProjectController extends Controller
             'user_id' => $user->id,
         ]);
 
+        $project = Project::find($id);
+        $trail_message = 'Add new project phase for ' + $project->name;
+
+        Trail::create([
+            'category' => 'project/phases',
+            'user_id'=>auth()->user()->id,
+            'message' => $trail_message,
+        ]);  
+
         return back();
     }    
     
@@ -163,6 +200,15 @@ class ProjectController extends Controller
             'project_id' => $id,
             'user_id' => $request->user_id,
         ]);
+
+        $project = Project::find($id);
+        $trail_message = 'Add new project deliverable for ' + $project->name;
+
+        Trail::create([
+            'category' => 'project/deliverables',
+            'user_id'=>auth()->user()->id,
+            'message' => $trail_message,
+        ]);          
 
         return back();
     }       

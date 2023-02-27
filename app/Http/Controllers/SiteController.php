@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Trail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -49,6 +50,12 @@ class SiteController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
+        Trail::create([
+            'category' => 'authentication',
+            'user_id'=>auth()->user()->id,
+            'message' => 'Change password',
+        ]);
+
         Alert::success('Success', 'Password has been changed.');
         return back();
     }   
@@ -76,6 +83,14 @@ class SiteController extends Controller
         $new_user->position = $request->position;
         $new_user->user_type = 'staff';
         $new_user->save();
+
+        $trail_message = 'Add new user: ' + $request->email;
+
+        Trail::create([
+            'category' => 'authentication',
+            'user_id'=>auth()->user()->id,
+            'message' => $trail_message,
+        ]);        
 
         return back();
     }          
