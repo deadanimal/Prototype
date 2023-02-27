@@ -27,7 +27,7 @@
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar">
 			<a class="sidebar-brand" href="/dashboard">
-				Management
+				Dashboard
 			</a>
 			<div class="sidebar-content">
 				<div class="sidebar-user">
