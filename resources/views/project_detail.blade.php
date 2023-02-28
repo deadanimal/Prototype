@@ -246,7 +246,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $document->created_at }}</td>
-                                    <td><a href="/projects/{{$project->id}}/documents/{{$document->id}}">{{ $document->name }}</a></td>
+                                    <td><a href="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{ $document->document }}">{{ $document->name }}</a></td>
                                     <td>{{ ucfirst($document->category) }}</td>
                                 </tr>
                                 @endforeach                                
