@@ -107,13 +107,13 @@ class ProjectController extends Controller
             $document->document = $request->file('document')->store('prototype/document');
             $document->save();
 
-            $trail_message = 'Upload new document for ' + $project->name;
+            // $trail_message = 'Upload new document for ' + $project->name;
 
-            Trail::create([
-                'category' => 'project/documents',
-                'user_id'=>auth()->user()->id,
-                'message' => $trail_message,
-            ]);                 
+            // Trail::create([
+            //     'category' => 'project/documents',
+            //     'user_id'=>auth()->user()->id,
+            //     'message' => $trail_message,
+            // ]);                 
 
         return back();
     }   
@@ -127,14 +127,14 @@ class ProjectController extends Controller
             'user_id' => $request->user_id,
         ]);
 
-        $project = Project::find($id);
-        $trail_message = 'Add new project member for ' + $project->name;
+        // $project = Project::find($id);
+        // $trail_message = 'Add new project member for ' + $project->name;
 
-        Trail::create([
-            'category' => 'project/members',
-            'user_id'=>auth()->user()->id,
-            'message' => $trail_message,
-        ]);         
+        // Trail::create([
+        //     'category' => 'project/members',
+        //     'user_id'=>auth()->user()->id,
+        //     'message' => $trail_message,
+        // ]);         
 
         return back();
     }    
@@ -152,14 +152,14 @@ class ProjectController extends Controller
             'user_id' => $request->user_id,
         ]);
 
-        $project = Project::find($id);
-        $trail_message = 'Add new project payment for ' + $project->name;
+        // $project = Project::find($id);
+        // $trail_message = 'Add new project payment for ' + $project->name;
 
-        Trail::create([
-            'category' => 'project/payments',
-            'user_id'=>auth()->user()->id,
-            'message' => $trail_message,
-        ]);           
+        // Trail::create([
+        //     'category' => 'project/payments',
+        //     'user_id'=>auth()->user()->id,
+        //     'message' => $trail_message,
+        // ]);           
 
         return back();
     }    
@@ -177,14 +177,14 @@ class ProjectController extends Controller
             'user_id' => $user->id,
         ]);
 
-        $project = Project::find($id);
-        $trail_message = 'Add new project phase for ' + $project->name;
+        // $project = Project::find($id);
+        // $trail_message = 'Add new project phase for ' + $project->name;
 
-        Trail::create([
-            'category' => 'project/phases',
-            'user_id'=>auth()->user()->id,
-            'message' => $trail_message,
-        ]);  
+        // Trail::create([
+        //     'category' => 'project/phases',
+        //     'user_id'=>auth()->user()->id,
+        //     'message' => $trail_message,
+        // ]);  
 
         return back();
     }    
@@ -201,14 +201,14 @@ class ProjectController extends Controller
             'user_id' => $request->user_id,
         ]);
 
-        $project = Project::find($id);
-        $trail_message = 'Add new project deliverable for ' + $project->name;
+        // $project = Project::find($id);
+        // $trail_message = 'Add new project deliverable for ' + $project->name;
 
-        Trail::create([
-            'category' => 'project/deliverables',
-            'user_id'=>auth()->user()->id,
-            'message' => $trail_message,
-        ]);          
+        // Trail::create([
+        //     'category' => 'project/deliverables',
+        //     'user_id'=>auth()->user()->id,
+        //     'message' => $trail_message,
+        // ]);          
 
         return back();
     }       

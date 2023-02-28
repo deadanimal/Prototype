@@ -84,13 +84,13 @@ class SiteController extends Controller
         $new_user->user_type = 'staff';
         $new_user->save();
 
-        $trail_message = 'Add new user: ' + $request->email;
+        // $trail_message = 'Add new user: ' + $request->email;
 
-        Trail::create([
-            'category' => 'authentication',
-            'user_id'=>auth()->user()->id,
-            'message' => $trail_message,
-        ]);        
+        // Trail::create([
+        //     'category' => 'authentication',
+        //     'user_id'=>auth()->user()->id,
+        //     'message' => $trail_message,
+        // ]);        
 
         return back();
     }          
