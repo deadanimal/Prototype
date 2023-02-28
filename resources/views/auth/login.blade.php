@@ -29,8 +29,8 @@
                         </form>
                     </div>
                     <p class="has-text-grey">
-                        <a href="/register">Register</a> &nbsp;·&nbsp;
-                        <a href="/forgot-password">Forgot Password</a>
+                        {{-- <a href="/register">Register</a> &nbsp;·&nbsp;
+                        <a href="/forgot-password">Forgot Password</a> --}}
                     </p>
                 </div>
             </div>
