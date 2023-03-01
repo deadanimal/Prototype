@@ -9,7 +9,7 @@ class MockupController extends Controller
 {
     public function show_mockups(Request $request) {
         $mockups = Mockup::all();
-        $upcoming_mockups = Mockup::where('status', 'draft')->get();
+        $upcoming_mockups = Mockup::where('status', 'draft')->orderBy('mockup_date')->get();
         return view('mockup_list', compact('upcoming_mockups'));
     }
 
@@ -26,6 +26,7 @@ class MockupController extends Controller
             'project_name' => $request->project_name,
             'client_name' => $request->client_name,
             'mockup_date' => $request->mockup_date,
+            'trello_link' => $request->trello_link,
             'status' => 'draft',
             'user_id' => $user->id,
         ]);

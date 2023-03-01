@@ -14,6 +14,7 @@ class Mockup extends Model
         'project_name',
         'client_name',
         'status',
+        'trello_link',
         'user_id',
     ];       
 }

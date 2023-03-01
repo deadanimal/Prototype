@@ -19,6 +19,7 @@
                                         <th>Date</th>
                                         <th>Client</th>
                                         <th>Project</th>
+                                        <th>Requested Date</th>
                                         <th>Specification</th>
                                         <th>Status</th>
                                         <th>Link</th>
@@ -32,6 +33,7 @@
                                         <td>{{ $mockup->mockup_date }}</td>
                                         <td>{{ $mockup->client_name }}</td>
                                         <td>{{ $mockup->project_name }}</td>
+                                        <td>{{ $mockup->created_at->format('j F Y') }}</td>
                                         <td>
                                             @if($mockup->specification)
                                                 <a href="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{$mockup->specification}}">Link</a>
@@ -75,7 +77,12 @@
                                 <div class="mb-3">
                                     <label class="form-label">Project Name</label>
                                     <input type="text" class="form-control" name="project_name">
-                                </div>                                
+                                </div>   
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Trello Link</label>
+                                    <input type="text" class="form-control" name="trello_link">
+                                </div>                                    
 
                                 <div class="mb-3">
                                     <label class="form-label">Mockup Date</label>
