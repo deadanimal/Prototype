@@ -9,10 +9,37 @@
                 <div class="col-12 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Upcoming Meeting</h5>
-                            <h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
+                            <h5 class="card-title">Upcoming Mockups</h5>
                         </div>
                         <div class="card-body">
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Client</th>
+                                        <th>Project</th>
+                                        <th>Specification</th>
+                                        <th>Status</th>
+                                        <th>Link</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  
+
+                                    @foreach($upcoming_mockups as $mockup)
+                                    <tr>
+                                        <td>{{ $mockup->mockup_date }}</td>
+                                        <td>{{ $mockup->client_name }}</td>
+                                        <td>{{ $mockup->project_name }}</td>
+                                        <td><a href="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{$mockup->specification}}">Link</a></td>
+                                        <td>{{ ucfirst($mockup->status) }}</td>
+                                        <td><a href="{{$mockup->link}}">Prototype</a></td>
+                                    </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>                            
 
                         </div>
                     </div>
@@ -21,34 +48,34 @@
                 <div class="col-12 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Create Meeting</h5>
-                            <h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
+                            <h5 class="card-title">Create Mockup Request</h5>
                         </div>
                         <div class="card-body">
-                            <form action="/meetings" method="POST">
+                            <form action="/mockups" method="POST">
                                 @csrf
 
 
                                 <div class="mb-3">
-                                    <label class="form-label">Meeting Title</label>
-                                    <input type="text" class="form-control" name="title" placeholder="Meeting title">
+                                    <label class="form-label">Client Name</label>
+                                    <input type="text" class="form-control" name="client_name">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Meeting Type</label>
-                                    <select class="form-control mb-3" name="meeting_type">
-                                        <option value="requirement">Requirement</option>
-                                        <option value="testing">Testing</option>
-                                        <option value="progress">Progress</option>
-                                    </select>
+                                    <label class="form-label">Project Name</label>
+                                    <input type="text" class="form-control" name="project_name">
+                                </div>                                
+
+                                <div class="mb-3">
+                                    <label class="form-label">Mockup Date</label>
+                                    <input type="date" name="mockup_date" class="form-control">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Meeting Date</label>
-                                    <input type="date" name="meeting_date" class="form-control">
+                                    <label class="form-label w-100">Specification</label>
+                                    <input type="file" name="specification">
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Create Meeting</button>
+                                <button type="submit" class="btn btn-primary">Create Mockup</button>
                             </form>
                         </div>
                     </div>
