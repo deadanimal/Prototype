@@ -9,7 +9,8 @@ class MockupController extends Controller
 {
     public function show_mockups(Request $request) {
         $mockups = Mockup::all();
-        return view('mockup_list', compact('mockups'));
+        $upcoming_mockups = Mockup::where('status', 'draft')->get();
+        return view('mockup_list', compact('upcoming_mockups'));
     }
 
     public function show_mockup(Request $request) {
@@ -29,8 +30,8 @@ class MockupController extends Controller
             'user_id' => $user->id,
         ]);
 
-        if($request->has('specification')) {
-            $mockup->specification = $request->file('specification')->store('prototype/specification');
-        }
+        $mockup->specification = $request->file('attachment')->store('prototype/specification');
+        $mockup->save();
+        return back();
     }    
 }

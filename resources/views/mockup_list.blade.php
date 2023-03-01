@@ -6,7 +6,7 @@
 
             <div class="row">
 
-                <div class="col-12 col-xl-6">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title">Upcoming Mockups</h5>
@@ -32,9 +32,21 @@
                                         <td>{{ $mockup->mockup_date }}</td>
                                         <td>{{ $mockup->client_name }}</td>
                                         <td>{{ $mockup->project_name }}</td>
-                                        <td><a href="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{$mockup->specification}}">Link</a></td>
+                                        <td>
+                                            @if($mockup->specification)
+                                                <a href="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{$mockup->specification}}">Link</a>
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
                                         <td>{{ ucfirst($mockup->status) }}</td>
-                                        <td><a href="{{$mockup->link}}">Prototype</a></td>
+                                        <td>
+                                            @if($mockup->link)
+                                                <a href="{{$mockup->link}}">Prototype</a>
+                                            @else
+                                                -
+                                            @endif                                            
+                                        </td>
                                     </tr>
                                     @endforeach
 
@@ -45,13 +57,13 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-xl-6">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title">Create Mockup Request</h5>
                         </div>
                         <div class="card-body">
-                            <form action="/mockups" method="POST">
+                            <form action="/mockups" method="POST" enctype="multipart/form-data">
                                 @csrf
 
 
@@ -72,7 +84,7 @@
 
                                 <div class="mb-3">
                                     <label class="form-label w-100">Specification</label>
-                                    <input type="file" name="specification">
+                                    <input type="file" name="attachment">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Create Mockup</button>
