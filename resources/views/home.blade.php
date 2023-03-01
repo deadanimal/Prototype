@@ -42,9 +42,9 @@
 
 						<div class="text-center">
 							<h1 class="display-1 fw-bold">Prototype</h1>
-							<p class="h1">Where me make prototype</p>
+							<p class="h1">We try to make the world a better place through software.</p>
 							<p class="h2 fw-normal mt-3 mb-4">If you reached this page, it means that you got lost in the web.</p>
-							<a href="/dashboard" class="btn btn-primary btn-lg">Access the system</a>
+							<a href="/dashboard" class="btn btn-primary btn-lg">Access Prototype</a>
 						</div>
 
 					</div>
