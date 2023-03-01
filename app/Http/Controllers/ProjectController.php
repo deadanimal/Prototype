@@ -194,8 +194,7 @@ class ProjectController extends Controller
 
         ProjectDeliverable::create([
             'name' => $request->name,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
+            'remarks' => $request->remarks,
             'status'=> 'draft',
             'project_id' => $id,
             'user_id' => $request->user_id,

@@ -6,7 +6,7 @@
 
             <div class="row">
 
-                <div class="col-12 col-xl-9">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title">Upcoming Meeting</h5>                            
@@ -17,6 +17,7 @@
                                 <thead>
                                     <tr>
                                         <th>Date</th>
+                                        <th>Type</th>
                                         <th>Project</th>
                                         <th>Title</th>
                                         <th>Status</th>
@@ -28,6 +29,7 @@
                                     @foreach($upcoming_meetings as $meeting)
                                     <tr>
                                         <td>{{ $meeting->meeting_date }}</td>
+                                        <td>{{ ucfirst($meeting->meeting_type) }}</td>
                                         <td>{{ $meeting->project->organisation->shortname }} - {{ $meeting->project->name }} </td>
                                         <td><a href="/meetings/{{$meeting->id}}"> {{ $meeting->title }}</a></td>
                                         <td>{{ ucfirst($meeting->status) }}</td>
@@ -41,7 +43,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-xl-3">
+                <div class="col-6">
                     <div class="card">
       
                         <div class="card-body">
@@ -69,6 +71,7 @@
                                         <option value="requirement">Requirement</option>
                                         <option value="testing">Testing</option>
                                         <option value="progress">Progress</option>
+                                        <option value="business">Business</option>
                                     </select>
                                 </div>
 

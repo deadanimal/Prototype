@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/meetings/{meeting_id}/attendances', [MeetingController::class, 'attend_meeting']);
     Route::post('/meetings/{meeting_id}/notes', [MeetingController::class, 'create_note']);
     Route::put('/meetings/{meeting_id}/notes/{note_id}', [MeetingController::class, 'edit_note']);
+    Route::post('/meetings/{meeting_id}/reschedule', [MeetingController::class, 'reschedule_meeting']);
 
     Route::get('/mockups', [MockupController::class, 'show_mockups']);
     Route::post('/mockups', [MockupController::class, 'create_mockup']);   

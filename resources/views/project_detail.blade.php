@@ -81,6 +81,9 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Name</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,7 +92,10 @@
                                 @foreach($phases as $phase)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $phase->name }}</td>
+                                    <td>{{ ucfirst($phase->name) }}</td>
+                                    <td>{{ $phase->start_date }}</td>
+                                    <td>{{ $phase->end_date }}</td>
+                                    <td>{{ $phase->status }}</td>
                                 </tr>
                                 @endforeach                                
                               
@@ -154,7 +160,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Name</th>
-                                    <th>Category</th>
+                                    <th>Remarks</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -164,6 +170,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td><a href="/projects/{{$project->id}}/deliverables/{{$deliverable->id}}">{{ $deliverable->name }}</a></td>
+                                    <td>{{ $deliverable->remarks }}</td>
                                 </tr>
                                 @endforeach                                
                               

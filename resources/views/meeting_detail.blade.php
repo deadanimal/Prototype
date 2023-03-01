@@ -129,6 +129,44 @@
                     </div>
                 </div>
 
+                <div class="col-12">
+                    <div class="card">
+
+
+               
+
+                        <div class="card-body">
+                            <form action="/meetings/{{$meeting->id}}/reschedule" method="POST" enctype="multipart/form-data">
+                                @csrf
+
+                        
+
+                                <div class="mb-3">
+                                    <label class="form-label">Purpose</label>
+                                    <select class="form-control mb-3" name="purpose">
+                                        <option value="cancel">Cancel</option>
+                                        <option value="reschedule">Reschedule</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">New Meeting Date</label>
+                                    <input type="date" name="meeting_date" class="form-control">
+                                </div>                                
+
+       
+
+                                <div class="mb-3">
+                                    <label class="form-label">Cancel or Reschedule Remarks</label>
+                                    <textarea class="form-control" rows="5" name="remarks" placeholder="Textarea"></textarea>
+                                </div>                             
+
+                                <button type="submit" class="btn btn-primary">Reschedule Meeting</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>                
+
                 {{-- <div class="col-12 col-xl-6">
                     <div class="card">
                         <div class="card-header">

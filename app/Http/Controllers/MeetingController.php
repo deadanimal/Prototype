@@ -15,7 +15,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 class MeetingController extends Controller
 {
     public function show_meetings(Request $request) {
-        $upcoming_meetings = Meeting::where('meeting_date', '>', Carbon::now('Asia/Singapore')->subDays(1))->orderBy('meeting_date')->get();
+        $upcoming_meetings = Meeting::where([
+            ['meeting_date', '>', Carbon::now('Asia/Singapore')->subDays(1)],
+            ['status', '=', 'draft'],
+        ])->orderBy('meeting_date')->get();
         $projects = Project::all();
 
         return view('meeting_list', compact('upcoming_meetings', 'projects'));
@@ -108,5 +111,32 @@ class MeetingController extends Controller
         Alert::success('Success', 'Meeting item has been updated!');
 
         return back();
-    }    
+    }   
+    
+    public function reschedule_meeting(Request $request) {
+        $user = $request->user();
+        $id = (int) $request->route('meeting_id');  
+        $meeting = Meeting::find($id);
+        $meeting->status = $request->purpose;
+        $meeting->reschedule_remarks = $request->remarks;
+        $meeting->save();
+
+        if ($meeting->status == 'reschedule') {
+            Meeting::create([
+                'title'=> $meeting->title,
+                'project_id'=> $meeting->project_id,
+                'meeting_type'=> $meeting->meeting_type,
+                'meeting_date'=> $request->meeting_date,
+                'remarks'=> $meeting->remarks,
+                'status' => 'draft',
+                'user_id'=> $user->id,
+            ]);   
+        }    
+
+
+
+        Alert::success('Success', 'Meeting has been updated!');
+
+        return back();
+    }        
 }

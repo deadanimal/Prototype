@@ -68,6 +68,19 @@ class SiteController extends Controller
         $users = User::all();
         return view('users', compact('users'));
     }   
+
+    public function show_user(Request $request) {
+        $user = $request->user();
+        if ($user->user_type != 'admin') {
+            return redirect('/');
+        }
+
+        $id = (int) $request->route('id');  
+        $user = User::find($id);
+        return view('user_detail', compact('user'));
+    }    
+
+
     
     public function create_user(Request $request) {
         $user = $request->user();
