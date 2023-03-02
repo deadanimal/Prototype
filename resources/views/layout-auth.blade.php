@@ -44,6 +44,7 @@
                 </div>
 
                 <ul class="sidebar-nav">
+					
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/meetings">
@@ -60,11 +61,17 @@
                     </li>
 
 
+					@if (Auth::user()->user_type == 'admin')
+
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/products">
                             <i class="align-middle me-2 fa fa-fw fa-ship"></i> <span class="align-middle">Product</span>
                         </a>
                     </li>
+
+					@endif
+
+					@if( Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/projects">
@@ -72,12 +79,18 @@
                         </a>
                     </li>
 
+					@endif
+
+					@if( Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
+
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/resources">
                             <i class="align-middle me-2 fa fa-fw fa-user-md"></i> <span
                                 class="align-middle">Resource</span>
                         </a>
                     </li>
+
+					@endif
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/workpackages">

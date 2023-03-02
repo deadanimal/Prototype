@@ -50,5 +50,10 @@ class User extends Authenticatable
     public function organisation()
     {
         return $this->belongsTo(Organisation::class);
+    }  
+    
+    public function resource()
+    {
+        return $this->hasOne(Resource::class);
     }      
 }

@@ -15,7 +15,8 @@ class Workpackage extends Model
         'package_level',
         'estimate_delivery',
         'user_id',
-        'coordinator_id'
+        'coordinator_id',
+        'assignment_remarks'
     ];     
 
     public function coordinator()

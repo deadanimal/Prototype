@@ -58,6 +58,7 @@
                                     <select class="form-control mb-3" name="resource_type">
                                         <option value="analyst">Analyst</option>
                                         <option value="developer">Developer</option>
+                                        <option value="business">Business</option>
                                         <option value="pmo">PMO</option>
                                     </select>
                                 </div>

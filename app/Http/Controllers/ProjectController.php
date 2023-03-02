@@ -61,9 +61,9 @@ class ProjectController extends Controller
     public function show_resources(Request $request) {
         $user = $request->user();
         if ($user->user_type == 'admin') {
-            $resources = Resource::all();
+            $resources = Resource::orderBy('resource_type')->get();
         } elseif ($user->user_type == 'staff') {
-            $resources = Resource::where('status', 'active')->get();
+            $resources = Resource::where('status', 'active')->orderBy('resource_type')->get();
         } else {
             return redirect('/'); 
         }

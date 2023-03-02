@@ -137,7 +137,12 @@
                                     </select>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Create Meeting</button>
+                                <div class="mb-3">
+                                    <label class="form-label">Assignment Remarks</label>
+                                    <textarea class="form-control" rows="5" name="assignment_remarks" placeholder="Textarea"></textarea>
+                                </div>                                
+
+                                <button type="submit" class="btn btn-primary">Create Work Package</button>
                             </form>
                         </div>
                     </div>

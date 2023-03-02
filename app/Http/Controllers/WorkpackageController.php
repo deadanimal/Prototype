@@ -55,6 +55,7 @@ class WorkpackageController extends Controller
             'package_type' => $request->package_type,
             'package_level' => $request->package_level,
             'estimate_delivery' => $request->estimate_delivery,
+            'assignment_remarks' => $request->assignment_remarks,
             'coordinator_id' => $user->id,
         ]);
 
