@@ -76,6 +76,19 @@ class MeetingController extends Controller
         return back();
     }    
 
+    public function create_meeting_attendee(Request $request) {
+        $user = $request->user();
+        $id = (int) $request->route('meeting_id');  
+        $meeting = Meeting::find($id);        
+
+        $attendee = New MeetingAttendee;
+        $attendee->save();
+
+        Alert::success('Success', 'Meeting attendee has been created!');
+
+        return back();
+    }      
+
     public function create_note(Request $request) {
         $user = $request->user();
         $id = (int) $request->route('meeting_id');  

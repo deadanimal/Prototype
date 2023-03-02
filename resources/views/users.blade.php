@@ -14,7 +14,40 @@
 
             <div class="row">
 
-                <div class="col-12 col-xl-3">
+                <div class="col-12">
+                    <div class="card">
+                        {{-- <div class="card-header">
+                            <h5 class="card-title">Profile Picture</h5>
+                            <h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
+                        </div> --}}
+                        
+
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Position</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach ($users as $user)
+                                        <tr>
+                                            <td><a href="/users/{{$user->id}}">{{$user->name}}</a> - {{$user->id}}</td>
+                                            <td>{{$user->email}}</td>
+                                            <td>{{$user->position}}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+
+                        
+                    </div>
+                </div>
+
+                <div class="col-6">
                     <div class="card">
                         {{-- <div class="card-header">
                             <h5 class="card-title">Profile Picture</h5>
@@ -51,40 +84,37 @@
 
                         </div>
                     </div>
-                </div>
-
-                <div class="col-12 col-xl-9">
+                </div>  
+                
+                <div class="col-6">
                     <div class="card">
                         {{-- <div class="card-header">
                             <h5 class="card-title">Profile Picture</h5>
                             <h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
                         </div> --}}
-                        
+                        <div class="card-body">
 
-                            <table class="table table-striped table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Position</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                            <form action="/organisations" method="POST">
+                                @csrf
 
-                                    @foreach ($users as $user)
-                                        <tr>
-                                            <td><a href="/users/{{$user->id}}">{{$user->name}}</a> - {{$user->id}}</td>
-                                            <td>{{$user->email}}</td>
-                                            <td>{{$user->position}}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Name</label>
+                                    <input type="text" name="name" class="form-control">
+                                </div>   
+                                
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Shortname</label>
+                                    <input type="text" name="email" class="form-control">
+                                </div>                                
+                                                                
 
+                                <button type="submit" class="btn btn-primary">Submit</button>
 
-                        
+                            </form>
+
+                        </div>
                     </div>
-                </div>
+                </div>                 
 
 
 

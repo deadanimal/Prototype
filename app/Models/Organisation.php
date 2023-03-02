@@ -9,6 +9,11 @@ class Organisation extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',        
+        'shortname',        
+    ];      
+
     public function projects()
     {
         return $this->hasMany(Project::class);

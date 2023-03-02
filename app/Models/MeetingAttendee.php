@@ -11,6 +11,12 @@ class MeetingAttendee extends Model
 
     protected $fillable = [ 
         'email',
+        'user_id',
         'meeting_id',
-    ];      
+    ];     
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }      
 }

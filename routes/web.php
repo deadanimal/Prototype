@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/meetings/{meeting_id}/attendances', [MeetingController::class, 'attend_meeting']);
     Route::post('/meetings/{meeting_id}/notes', [MeetingController::class, 'create_note']);
+    Route::post('/meetings/{meeting_id}/attendee', [MeetingController::class, 'create_meeting_attendee']);
     Route::put('/meetings/{meeting_id}/notes/{note_id}', [MeetingController::class, 'edit_note']);
     Route::post('/meetings/{meeting_id}/reschedule', [MeetingController::class, 'reschedule_meeting']);
 
@@ -77,5 +78,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/users', [SiteController::class, 'create_user']);
     Route::get('/users/{id}', [SiteController::class, 'show_user']);    
     Route::put('/users/{id}', [SiteController::class, 'update_user']);    
+
+    Route::post('/organisations', [SiteController::class, 'create_organisation']);
 
 });

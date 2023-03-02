@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Organisation;
 use App\Models\Trail;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -94,6 +95,7 @@ class SiteController extends Controller
             'password' => Hash::make('PabloEscobar')
         ]);
         $new_user->position = $request->position;
+        $new_user->organisation_id = $request->organisation_id;
         $new_user->user_type = 'staff';
         $new_user->save();
 
@@ -106,7 +108,21 @@ class SiteController extends Controller
         // ]);        
 
         return back();
-    }          
+    }  
+    
+    public function create_organisation(Request $request) {
+        $user = $request->user();
+        if ($user->email != 'afeezaziz@pipeline.com.my') {
+            return redirect('/');
+        }
+        
+        Organisation::create([
+            'name' => $request->name,
+            'shortname' => $request->shortname,
+        ]);
+
+        return back();
+    }         
 
 
 }
