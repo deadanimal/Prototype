@@ -12,7 +12,7 @@
                             <h5 class="card-title">List of Work Package</h5>
                         </div>
 
-                        <table class="table">
+                        <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
                                     <th>No</th>

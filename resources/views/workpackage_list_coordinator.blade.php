@@ -13,7 +13,7 @@
                             <h6 class="card-subtitle text-muted">See WPs assigned to self? Click <a href="/workpackages/assigned">here</a></h6>
                         </div>
 
-                        <table class="table">
+                        <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
                                     <th>No</th>

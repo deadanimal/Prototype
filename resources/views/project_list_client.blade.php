@@ -9,7 +9,7 @@
                 <div class="col-12">
                     <div class="card">
                       
-                        <table class="table">
+                        <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
                                     <th>Client</th>

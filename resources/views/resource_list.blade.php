@@ -9,7 +9,7 @@
                 <div class="col-12 col-xl-9">
                     <div class="card">
                       
-                        <table class="table">
+                        <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -32,7 +32,7 @@
 
                             </tbody>
                         </table>
-                        
+
                     </div>
                 </div>
 
