@@ -53,7 +53,7 @@
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="/products">
-							<i class="align-middle me-2 fa fa-fw fa-bank"></i> <span class="align-middle">Product</span>
+							<i class="align-middle me-2 fa fa-fw fa-ship"></i> <span class="align-middle">Product</span>
 						</a>
 					</li>					
 					

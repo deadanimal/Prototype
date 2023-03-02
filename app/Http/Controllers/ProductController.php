@@ -21,7 +21,9 @@ class ProductController extends Controller
     } 
     
     public function create_product(Request $request) {
+        Product::create([
 
+        ]);
         return back();
     }
 

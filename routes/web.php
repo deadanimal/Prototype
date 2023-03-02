@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\MockupController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\WorkpackageController;
@@ -80,5 +81,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/users/{id}', [SiteController::class, 'update_user']);    
 
     Route::post('/organisations', [SiteController::class, 'create_organisation']);
+
+    Route::get('/products', [ProductController::class, 'show_products']);
+    Route::post('/products', [ProductController::class, 'create_product']);   
+    Route::get('/products/{product_id}', [ProductController::class, 'show_product']); 
+    Route::put('/products/{product_id}', [ProductController::class, 'update_product']);     
 
 });

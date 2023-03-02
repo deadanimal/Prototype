@@ -49,10 +49,9 @@
 
                 <div class="col-6">
                     <div class="card">
-                        {{-- <div class="card-header">
-                            <h5 class="card-title">Profile Picture</h5>
-                            <h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
-                        </div> --}}
+                        <div class="card-header">
+                            <h5 class="card-title">Add User</h5>
+                        </div>
                         <div class="card-body">
 
                             <form action="/users" method="POST">
@@ -88,10 +87,9 @@
                 
                 <div class="col-6">
                     <div class="card">
-                        {{-- <div class="card-header">
-                            <h5 class="card-title">Profile Picture</h5>
-                            <h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
-                        </div> --}}
+                        <div class="card-header">
+                            <h5 class="card-title">Add Organisation</h5>
+                        </div>
                         <div class="card-body">
 
                             <form action="/organisations" method="POST">
@@ -104,7 +102,7 @@
                                 
                                 <div class="mb-3">
                                     <label class="form-label w-100">Shortname</label>
-                                    <input type="text" name="email" class="form-control">
+                                    <input type="text" name="shortname" class="form-control">
                                 </div>                                
                                                                 
 
