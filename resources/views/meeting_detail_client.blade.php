@@ -4,144 +4,228 @@
     <main class="content">
         <div class="container-fluid">
 
+            <div class="header">
+                <h1 class="header-title">
+                    {{ $meeting->title }}
+                </h1>
+                <p class="header-subtitle">{{ $meeting->meeting_date }} | {{ ucfirst($meeting->status) }}</p>
+            </div>
+
             <div class="row">
 
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">List of Work Packages</h5>
-                            <h6 class="card-subtitle text-muted">See WPs assigned to self? Click <a href="/workpackages/assigned">here</a></h6>
+                            <h5 class="card-title">Meeting Detail</h5>
                         </div>
 
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Name</th>
-                                    <th>Estimate Delivery</th>
-                                    <th>Project</th>
-                                    <th>Resource</th>
-                                    <th>Type</th>
-                                    <th>Level</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                              
+                        <div class="card-body">
+                            {{$meeting->remarks}}
+                        </div>                        
 
-                                @foreach($workpackages as $wp)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $wp->name }}</td>
-                                    <td>{{ $wp->estimate_delivery }}</td>
-                                    <td>
-                                        @if($wp->project_id)
-                                            {{$wp->project->name}}
-                                        @else
-                                        -
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if($wp->resource_id)
-                                            {{$wp->resource->user->name}}
-                                        @else
-                                        -
-                                        @endif                                        
-                                    </td>
-                                    <td>{{ $wp->package_type }}</td>
-                                    <td>{{ $wp->package_level }}</td>
-                                    <td>{{ $wp->status }}</td>
-                                </tr>
-                                @endforeach
 
-                            </tbody>
-                        </table>                        
+           
+
 
                     </div>
                 </div>
 
                 <div class="col-12">
                     <div class="card">
+
                         <div class="card-header">
-                            <h5 class="card-title">Create Work Package</h5>
+                            <h5 class="card-title">Meeting Attendee</h5>
                         </div>
+                        
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width:5%">No.</th>
+                                    <th style="width:15%">Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>                            
+
+                                @foreach($meeting->meeting_attendees as $attendee)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ ucfirst($attendee->name) }}</td>                      
+                                </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h5 class="card-title">Add Meeting Attendee</h5>
+                        </div>                        
+
+
+               
+
                         <div class="card-body">
-                            <form action="/workpackages" method="POST">
+                            <form action="/meetings/{{$meeting->id}}/attendees" method="POST" enctype="multipart/form-data">
                                 @csrf
+
+                        
+
 
                                 <div class="mb-3">
                                     <label class="form-label">Name</label>
-                                    <input type="text" class="form-control" name="name" placeholder="Name">
+                                    <input type="text" class="form-control" name="name">
                                 </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label">Type</label>
-                                    <select class="form-control mb-3" name="package_type">
-                                        <option value="analyst - wireframe">Analyst - Wireframe</option>
-                                        <option value="analyst - erd + dfd">Analyst - ERD & DFD</option>
-                                        <option value="analyst - use case + process flow">Analyst - Use Case & Process Flow
-                                        </option>
-                                        <option value="analyst - system architecture">Analyst - System Architecture</option>
-                                        <option value="analyst - testing scripts">Analyst - Testing Scripts</option>
-                                        <option value="analyst - test">Analyst - Test</option>
-                                        <option value="analyst - pentest + stress test">Analyst - Pentest & Stress Test
-                                        </option>
-                                        <option value="analyst - integration documents">Analyst - Integration Documents
-                                        </option>
-                                        <option value="analyst - migration documents">Analyst - Migration Documents</option>
-                                        <option value="analyst - migration">Analyst - Migration</option>
-                                        <option value="analyst - integration testings">Analyst - Integration Test</option>
-                                        <option value="analyst - documentations">Analyst - Documentations</option>
-                                        <option value="analyst - miscelleneous">Analyst - Miscelleneous</option>
-
-                                        <option value="developer - develop functional">Developer - Develop Functional
-                                        </option>
-                                        <option value="developer - develop interface">Developer - Develop Interface</option>
-                                        <option value="developer - deployment">Developer - Deployment</option>
-                                        <option value="developer - bug fixing">Developer - Bug Fixing</option>
-                                    </select>
-                                </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Level</label>
-                                    <select class="form-control mb-3" name="package_level">
-                                        <option value="1 - 6 hours">Level 1 - 6 Hours</option>
-                                        <option value="2 - 3 hours">Level 2 - 3 Hours</option>
-                                        <option value="3 - 1 hour">Level 3 - 1 Hour</option>
-                                    </select>
-                                </div>
-
+                                    <label class="form-label">Email</label>
+                                    <input type="text" class="form-control" name="email">
+                                </div>     
+                                
                                 <div class="mb-3">
-                                    <label class="form-label">Delivery Date</label>
-                                    <input type="date" name="estimate_delivery" class="form-control">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Project</label>
-                                    <select class="form-control mb-3" name="project_id">
-                                        @foreach ($projects as $project)
-                                            <option value="{{ $project->id }}">({{ $project->organisation->shortname }})
-                                                {{ $project->name }}</option>
+                                    <label class="form-label">User</label>
+                                    <select class="form-control mb-3" name="user_id">
+                                        @foreach($users as $user)
+                                            <option value="{{$user->id}}">{{ $user->name }}</option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div>                                
+                                           
+
+                                <button type="submit" class="btn btn-primary">Add Meeting Attendee</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>                
+                  
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h5 class="card-title">Meeting Note</h5>
+                        </div>
+                        
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width:5%">No.</th>
+                                    <th style="width:15%">Category</th>
+                                    <th style="width:80%">Item</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              
+
+                                @foreach($meeting->meeting_items as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ ucfirst($item->category) }}</td>
+                                    <td>
+                                        {{ $item->item }}
+                                        <br/><br/>
+                                        <i>Written at {{$item->created_at}}</i>
+                                        
+                                        @if($item->attachment)
+                                        <br/><br/>
+                                        Link to <a href="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{$item->attachment}}">Attachment</a>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h5 class="card-title">Add Meeting Note</h5>
+                        </div>                        
+
+
+               
+
+                        <div class="card-body">
+                            <form action="/meetings/{{$meeting->id}}/notes" method="POST" enctype="multipart/form-data">
+                                @csrf
+
+                        
 
                                 <div class="mb-3">
-                                    <label class="form-label">Resource</label>
-                                    <select class="form-control mb-3" name="resource_id">
-                                        @foreach ($resources as $resource)
-                                            <option value="{{ $resource->id }}">
-                                                ({{ ucfirst($resource->resource_type) }})
-                                                {{ $resource->user->name }}</option>
-                                        @endforeach
+                                    <label class="form-label">Category</label>
+                                    <select class="form-control mb-3" name="category">
+                                        <option value="general">General</option>
                                     </select>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Create Meeting</button>
+       
+
+                                <div class="mb-3">
+                                    <label class="form-label">Item</label>
+                                    <textarea class="form-control" rows="5" name="item" placeholder="Textarea"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Attachment</label>
+                                    <input type="file" name="attachment">
+                                </div>                                      
+
+                                <button type="submit" class="btn btn-primary">Add Meeting Item</button>
                             </form>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h5 class="card-title">Reschedule or Cancel Meeting</h5>
+                        </div>                        
+
+
+               
+
+                        <div class="card-body">
+                            <form action="/meetings/{{$meeting->id}}/reschedule" method="POST" enctype="multipart/form-data">
+                                @csrf
+
+                        
+
+                                <div class="mb-3">
+                                    <label class="form-label">Purpose</label>
+                                    <select class="form-control mb-3" name="purpose">
+                                        <option value="cancel">Cancel</option>
+                                        <option value="reschedule">Reschedule</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">New Meeting Date</label>
+                                    <input type="date" name="meeting_date" class="form-control">
+                                </div>                                
+
+       
+
+                                <div class="mb-3">
+                                    <label class="form-label">Cancel or Reschedule Remarks</label>
+                                    <textarea class="form-control" rows="5" name="remarks" placeholder="Textarea"></textarea>
+                                </div>                             
+
+                                <button type="submit" class="btn btn-primary">Reschedule Meeting</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>                
 
                 {{-- <div class="col-12 col-xl-6">
                     <div class="card">

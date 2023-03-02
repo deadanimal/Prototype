@@ -33,8 +33,20 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $wp->name }}</td>
                                     <td>{{ $wp->estimate_delivery }}</td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>
+                                        @if($wp->project_id)
+                                            {{$wp->project->name}}
+                                        @else
+                                        -
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($wp->resource_id)
+                                            {{$wp->resource->user->name}}
+                                        @else
+                                        -
+                                        @endif                                        
+                                    </td>
                                     <td>{{ $wp->package_type }}</td>
                                     <td>{{ $wp->package_level }}</td>
                                     <td>{{ $wp->status }}</td>
@@ -43,7 +55,7 @@
 
                             </tbody>
                         </table>  
-                                                
+
                     </div>
                 </div>
 

@@ -25,6 +25,8 @@
                             <table class="table table-striped table-sm">
                                 <thead>
                                     <tr>
+                                        <th>No.</th>
+                                        <th>Organisation</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Position</th>
@@ -34,6 +36,8 @@
 
                                     @foreach ($users as $user)
                                         <tr>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$user->organisation->name}}</td>
                                             <td><a href="/users/{{$user->id}}">{{$user->name}}</a> - {{$user->id}}</td>
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->position}}</td>

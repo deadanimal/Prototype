@@ -16,13 +16,20 @@ use RealRashid\SweetAlert\Facades\Alert;
 class MeetingController extends Controller
 {
     public function show_meetings(Request $request) {
-        $upcoming_meetings = Meeting::where([
-            ['meeting_date', '>', Carbon::now('Asia/Singapore')->subDays(1)],
-            ['status', '=', 'draft'],
-        ])->orderBy('meeting_date')->get();
-        $projects = Project::all();
 
-        return view('meeting_list', compact('upcoming_meetings', 'projects'));
+        $user = $request->user();
+        if ($user->user_type == 'client') {
+            return view('dashboard_client', compact('user'));
+        } else {
+            $upcoming_meetings = Meeting::where([
+                ['meeting_date', '>', Carbon::now('Asia/Singapore')->subDays(1)],
+                ['status', '=', 'draft'],
+            ])->orderBy('meeting_date')->get();
+            $projects = Project::all();
+    
+            return view('meeting_list', compact('upcoming_meetings', 'projects'));
+        }  
+
     }
 
     public function show_meeting(Request $request) {

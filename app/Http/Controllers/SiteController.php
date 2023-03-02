@@ -17,7 +17,11 @@ class SiteController extends Controller
 
     public function show_dashboard(Request $request) {
         $user = $request->user();
-        return view('dashboard', compact('user'));
+        if ($user->user_type == 'client') {
+            return view('dashboard_client', compact('user'));
+        } else {
+            return view('dashboard', compact('user'));
+        }        
     }    
 
     public function show_profile(Request $request) {
@@ -66,7 +70,7 @@ class SiteController extends Controller
         if ($user->email != 'afeezaziz@pipeline.com.my') {
             return redirect('/');
         }
-        $users = User::all();
+        $users = User::orderBy('organisation_id')->orderBy('position')->get();
         return view('users', compact('users'));
     }   
 
@@ -96,7 +100,12 @@ class SiteController extends Controller
         ]);
         $new_user->position = $request->position;
         $new_user->organisation_id = $request->organisation_id;
-        $new_user->user_type = 'staff';
+        if($request->organisation_id == 1) {
+            $new_user->user_type = 'staff';
+        } else {
+            $new_user->user_type = 'client';
+        }
+        
         $new_user->save();
 
         // $trail_message = 'Add new user: ' + $request->email;

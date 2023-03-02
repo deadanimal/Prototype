@@ -24,7 +24,8 @@ class ProjectController extends Controller
         } elseif ($user->user_type == 'staff') {
             $projects = Project::whereNotIn('organisation_id', [1])->get();
         } else {
-            return redirect('/'); 
+            $projects = Project::where('organisation_id', $user->organisation_id)->get();
+            return view('project_list_client', compact('projects'));
         }
         return view('project_list', compact('projects'));
     }
