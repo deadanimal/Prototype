@@ -19,12 +19,11 @@
                             <h5 class="card-title">User Location</h5>
                             {{-- <h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6> --}}
                         </div>
-                        <div class="card-body">
+                        
 
                             <table class="table table-striped table-sm">
                                 <thead>
                                     <tr>
-                                        <th>No.</th>
                                         <th>Date</th>
                                         <th>Purpose</th>
                                     </tr>
@@ -33,8 +32,7 @@
                                   
     
                                     @foreach($user->user_locations as $location)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>                                        
+                                    <tr>                                    
                                         <td>{{ $location->created_at }}</td>
                                         <td>{{ ucfirst($location->purpose) }}</td>
                                     </tr>
@@ -44,7 +42,7 @@
                             </table>
 
 
-                        </div>
+                        
                     </div>
 
                     <div class="card">

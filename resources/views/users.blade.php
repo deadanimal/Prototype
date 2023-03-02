@@ -38,7 +38,7 @@
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{$user->organisation->name}}</td>
-                                            <td><a href="/users/{{$user->id}}">{{$user->name}}</a> - {{$user->id}}</td>
+                                            <td><a href="/users/{{$user->id}}">{{$user->name}}</a></td>
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->position}}</td>
                                         </tr>
