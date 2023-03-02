@@ -21,8 +21,15 @@ class ProductController extends Controller
     } 
     
     public function create_product(Request $request) {
+        $user = $request->user();
+        if ($user->email != 'afeezaziz@pipeline.com.my') {
+            return redirect('/');
+        }        
         Product::create([
-
+            'name' => $request->name,
+            'description' => $request->description,
+            'prototype_link' => $request->prototype_link,
+            'web_link' => $request->web_link,
         ]);
         return back();
     }

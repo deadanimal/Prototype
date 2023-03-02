@@ -32,7 +32,7 @@ class Meeting extends Model
     
     public function meeting_attendees()
     {
-        return $this->hasMany(MeetingItem::class);
+        return $this->hasMany(MeetingAttendee::class);
     }      
 
 

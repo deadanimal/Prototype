@@ -8,6 +8,7 @@ use App\Models\Meeting;
 use App\Models\MeetingAttendee;
 use App\Models\MeetingItem;
 use App\Models\Project;
+use App\Models\User;
 use App\Models\Workpackage;
 use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -27,11 +28,9 @@ class MeetingController extends Controller
     public function show_meeting(Request $request) {
         $id = (int) $request->route('meeting_id');  
         $meeting = Meeting::find($id);
+        $users = User::where('organisation_id', 1)->get();
 
-        $client_attendees = MeetingAttendee::where('meeting_id', $meeting->id)->get();
-        $pnsb_attendees = Workpackage::where('meeting_id', $meeting->id)->get();
-
-        return view('meeting_detail', compact('meeting', 'client_attendees', 'pnsb_attendees'));
+        return view('meeting_detail', compact('meeting', 'users'));
     }
 
     public function create_meeting(Request $request) {
@@ -79,9 +78,17 @@ class MeetingController extends Controller
     public function create_meeting_attendee(Request $request) {
         $user = $request->user();
         $id = (int) $request->route('meeting_id');  
-        $meeting = Meeting::find($id);        
+        $meeting = Meeting::find($id);    
 
         $attendee = New MeetingAttendee;
+        $attendee->name = $request->name;
+        $attendee->meeting_id = $meeting->id;
+        if($request->email) {
+            $attendee->email = $request->email;
+        } else {
+            $attendee->user_id = $request->user_id;
+        }
+        
         $attendee->save();
 
         Alert::success('Success', 'Meeting attendee has been created!');

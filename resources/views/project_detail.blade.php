@@ -285,6 +285,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Date</th>
                                     <th>Name</th>
                                 </tr>
                             </thead>
@@ -294,7 +295,8 @@
                                 @foreach($meetings as $meeting)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $meeting->name }}</td>
+                                    <td>{{ $meeting->meeting_date }}</td>
+                                    <td><a href="/meetings/{{$meeting->id}}">{{ $meeting->title }}</a></td>
                                 </tr>
                                 @endforeach                                
                               

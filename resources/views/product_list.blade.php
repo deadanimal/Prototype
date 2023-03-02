@@ -9,23 +9,45 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Upcoming Mockups</h5>
+                            <h5 class="card-title">List of Product</h5>
                         </div>
-                        <div class="card-body">
+                      
 
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Date</th>
-                                        <th>Client</th>
-                                        <th>Project</th>
-                                        <th>Requested Date</th>
-                                        <th>Specification</th>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
                                         <th>Status</th>
-                                        <th>Link</th>
+                                        <th>Web Link</th>
+                                        <th>Prototype Link</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+
+                                    @foreach($products as $product)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td><a href="/products/{{$product->id}}">{{ $product->name }}</a></td>
+                                        <td>{{ $product->description }}</td>
+                                        <td>{{ $product->status }}</td>
+                                        <td>
+                                            @if($product->web_link)
+                                                <a href="{{$product->web_link}}">Link</a>
+                                            @else
+                                                -
+                                            @endif                                            
+                                        </td>
+                                        <td>
+                                            @if($product->prototype_link)
+                                                <a href="{{$product->prototype_link}}">Link</a>
+                                            @else
+                                                -
+                                            @endif                                             
+                                        </td>
+                                    </tr>
+                                    @endforeach                                    
                                   
 
 
@@ -33,46 +55,41 @@
                                 </tbody>
                             </table>                            
 
-                        </div>
+
                     </div>
                 </div>
 
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Create Mockup Request</h5>
+                            <h5 class="card-title">Create Product</h5>
                         </div>
                         <div class="card-body">
-                            <form action="/mockups" method="POST" enctype="multipart/form-data">
+                            <form action="/products" method="POST" enctype="multipart/form-data">
                                 @csrf
 
 
                                 <div class="mb-3">
-                                    <label class="form-label">Client Name</label>
-                                    <input type="text" class="form-control" name="client_name">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control" name="name">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Project Name</label>
-                                    <input type="text" class="form-control" name="project_name">
+                                    <label class="form-label">Description</label>
+                                    <textarea class="form-control" rows="5" name="description" placeholder="Textarea"></textarea>
+                                </div>                                
+
+                                <div class="mb-3">
+                                    <label class="form-label">Web link</label>
+                                    <input type="text" class="form-control" name="web_link">
                                 </div>   
                                 
                                 <div class="mb-3">
-                                    <label class="form-label">Trello Link</label>
-                                    <input type="text" class="form-control" name="trello_link">
+                                    <label class="form-label">Prototype link</label>
+                                    <input type="text" class="form-control" name="prototype_link">
                                 </div>                                    
 
-                                <div class="mb-3">
-                                    <label class="form-label">Mockup Date</label>
-                                    <input type="date" name="mockup_date" class="form-control">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label w-100">Specification</label>
-                                    <input type="file" name="attachment">
-                                </div>
-
-                                <button type="submit" class="btn btn-primary">Create Mockup</button>
+                                <button type="submit" class="btn btn-primary">Create Product</button>
                             </form>
                         </div>
                     </div>

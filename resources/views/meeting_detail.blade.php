@@ -13,11 +13,15 @@
 
             <div class="row">
 
-                <div class="col-12 col-xl-9">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title">Meeting Detail</h5>
                         </div>
+
+                        <div class="card-body">
+                            {{$meeting->remarks}}
+                        </div>                        
 
 
            
@@ -26,39 +30,87 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-xl-3">
+                <div class="col-12">
                     <div class="card">
+
                         <div class="card-header">
                             <h5 class="card-title">Meeting Attendee</h5>
                         </div>
-
+                        
+                        
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
+                                    <th style="width:5%">No.</th>
+                                    <th style="width:15%">Name</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                              
+                            <tbody>                            
 
-                                @foreach($client_attendees as $attendee)
+                                @foreach($meeting->meeting_attendees as $attendee)
                                 <tr>
-                                    <td>{{ $attendee->name }}</td>
-                                    <td>{{ $attendee->email }}</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ ucfirst($attendee->name) }}</td>                      
                                 </tr>
                                 @endforeach
 
                             </tbody>
                         </table>
-           
-
-
                     </div>
-                </div>    
-                
+                </div>
+
                 <div class="col-12">
                     <div class="card">
+
+                        <div class="card-header">
+                            <h5 class="card-title">Add Meeting Attendee</h5>
+                        </div>                        
+
+
+               
+
+                        <div class="card-body">
+                            <form action="/meetings/{{$meeting->id}}/attendees" method="POST" enctype="multipart/form-data">
+                                @csrf
+
+                        
+
+
+                                <div class="mb-3">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control" name="name">
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="text" class="form-control" name="email">
+                                </div>     
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">User</label>
+                                    <select class="form-control mb-3" name="user_id">
+                                        @foreach($users as $user)
+                                            <option value="{{$user->id}}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>                                
+                                           
+
+                                <button type="submit" class="btn btn-primary">Add Meeting Attendee</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>                
+                  
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h5 class="card-title">Meeting Note</h5>
+                        </div>
+                        
+                        
                         <table class="table">
                             <thead>
                                 <tr>
@@ -94,6 +146,10 @@
 
                 <div class="col-12">
                     <div class="card">
+
+                        <div class="card-header">
+                            <h5 class="card-title">Add Meeting Note</h5>
+                        </div>                        
 
 
                
@@ -131,6 +187,10 @@
 
                 <div class="col-12">
                     <div class="card">
+
+                        <div class="card-header">
+                            <h5 class="card-title">Reschedule or Cancel Meeting</h5>
+                        </div>                        
 
 
                

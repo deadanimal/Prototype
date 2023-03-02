@@ -10,6 +10,7 @@ class MeetingAttendee extends Model
     use HasFactory;
 
     protected $fillable = [ 
+        'name',
         'email',
         'user_id',
         'meeting_id',
