@@ -23,7 +23,11 @@
                                 @foreach($resources as $resource)
                                 <tr>
                                     <td>
-                                        <img src="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{ $resource->user->profile_picture }}" width="48" height="48" class="rounded-circle me-2" alt="Avatar">
+                                        @if($resource->user->profile_picture)
+                                            <img src="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{ $resource->user->profile_picture }}" width="48" height="48" class="rounded-circle me-2" alt="Avatar">
+                                        @else 
+                                            <img src="https://pipeline-apps.sgp1.digitaloceanspaces.com/prototype/profile_picture/QSaCQtnzxuLwd1aDyqDXKHapWdjOMMTqvNrK5828.png" width="48" height="48" class="rounded-circle me-2" alt="Avatar">
+                                        @endif
                                         {{ $resource->user->name }}</td>
                                     <td>{{ ucfirst($resource->resource_type) }}</td>
                                     <td>{{ ucfirst($resource->status) }}</td>

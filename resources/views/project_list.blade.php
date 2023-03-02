@@ -12,8 +12,9 @@
                         <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th>Client</th>
+                                    <th>No.</th>
                                     <th>Project</th>
+                                    <th>Client</th>                                    
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -22,8 +23,9 @@
 
                                 @foreach($projects as $project)
                                 <tr>
-                                    <td>{{ $project->organisation->name }}</td>
+                                    <td>{{ $loop->iteration }}</td>                                    
                                     <td><a href="/projects/{{$project->id}}">{{ $project->name }}</a></td>
+                                    <td>{{ $project->organisation->name }}</td>
                                     <td>{{ ucfirst($project->status) }}</td>
                                 </tr>
                                 @endforeach

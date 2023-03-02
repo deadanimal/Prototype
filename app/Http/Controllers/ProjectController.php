@@ -22,7 +22,7 @@ class ProjectController extends Controller
         if ($user->user_type == 'admin') {
             $projects = Project::all();
         } elseif ($user->user_type == 'staff') {
-            $projects = Project::whereNotIn('organisation_id', [1])->get();
+            $projects = Project::whereNotIn('organisation_id', [1])->orderBy('name')->get();
         } else {
             $projects = Project::where('organisation_id', $user->organisation_id)->get();
             return view('project_list_client', compact('projects'));

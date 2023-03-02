@@ -71,7 +71,8 @@ class SiteController extends Controller
             return redirect('/');
         }
         $users = User::orderBy('organisation_id')->orderBy('position')->get();
-        return view('users', compact('users'));
+        $organisations = Organisation::all();
+        return view('users', compact('users', 'organisations'));
     }   
 
     public function show_user(Request $request) {

@@ -18,10 +18,9 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Name</th>
-                                        <th>Description</th>
                                         <th>Status</th>
-                                        <th>Web Link</th>
-                                        <th>Prototype Link</th>
+                                        <th>Web</th>
+                                        <th>Staging</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -30,7 +29,6 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td><a href="/products/{{$product->id}}">{{ $product->name }}</a></td>
-                                        <td>{{ $product->description }}</td>
                                         <td>{{ $product->status }}</td>
                                         <td>
                                             @if($product->web_link)

@@ -2,104 +2,116 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="The prototype maker">
-	<meta name="author" content="Prototype">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="The prototype maker">
+    <meta name="author" content="Prototype">
 
-	<title>Prototype</title>
+    <title>Prototype</title>
 
-	<link href="/spark/css/modern.css" rel="stylesheet"> 
-	<style>
-		body {
-			opacity: 0;
-		}
-	</style>
-	<script src="/spark/js/settings.js"></script>
+    <link href="/spark/css/modern.css" rel="stylesheet">
+    <style>
+        body {
+            opacity: 0;
+        }
+    </style>
+    <script src="/spark/js/settings.js"></script>
 </head>
 
 <body>
-	<div class="splash active">
-		<div class="splash-icon"></div>
-	</div>
+    <div class="splash active">
+        <div class="splash-icon"></div>
+    </div>
 
-	<div class="wrapper">
-		<nav id="sidebar" class="sidebar">
-			<a class="sidebar-brand" href="/dashboard">
-				Dashboard
-			</a>
-			<div class="sidebar-content">
-				<div class="sidebar-user">
-					<img src="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{ Auth::user()->profile_picture }}" class="img-fluid rounded-circle mb-2" alt="Profile Picture" />
-					<div class="fw-bold">{{ Auth::user()->name }}</div>
-					<small>{{ Auth::user()->position }}</small>
-				</div>
+    <div class="wrapper">
+        <nav id="sidebar" class="sidebar">
+            <a class="sidebar-brand" href="/dashboard">
+                Dashboard
+            </a>
+            <div class="sidebar-content">
+                <div class="sidebar-user">
+                    @if (Auth::user()->profile_picture)
+                        <img src="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{ Auth::user()->profile_picture }}"
+                            class="img-fluid rounded-circle mb-2" alt="Profile Picture" />
+                    @else
+                        <img src="https://pipeline-apps.sgp1.digitaloceanspaces.com/prototype/profile_picture/QSaCQtnzxuLwd1aDyqDXKHapWdjOMMTqvNrK5828.png"
+                            class="img-fluid rounded-circle mb-2" alt="Profile Picture" />
+                    @endif
 
-				<ul class="sidebar-nav">
+                    <div class="fw-bold">{{ Auth::user()->name }}</div>
+                    <small>{{ Auth::user()->position }}</small>
+                </div>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/meetings">
-							<i class="align-middle me-2 fa fa-fw fa-sticky-note"></i> <span class="align-middle">Meeting</span>
-						</a>
-					</li>
+                <ul class="sidebar-nav">
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/mockups">
-							<i class="align-middle me-2 fa fa-fw fa-television"></i> <span class="align-middle">Mock-up</span>
-						</a>
-					</li>		
-				
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/meetings">
+                            <i class="align-middle me-2 fa fa-fw fa-sticky-note"></i> <span
+                                class="align-middle">Meeting</span>
+                        </a>
+                    </li>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/products">
-							<i class="align-middle me-2 fa fa-fw fa-ship"></i> <span class="align-middle">Product</span>
-						</a>
-					</li>					
-					
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/projects">
-							<i class="align-middle me-2 fa fa-fw fa-bank"></i> <span class="align-middle">Project</span>
-						</a>
-					</li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/mockups">
+                            <i class="align-middle me-2 fa fa-fw fa-television"></i> <span
+                                class="align-middle">Mock-up</span>
+                        </a>
+                    </li>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/resources">
-							<i class="align-middle me-2 fa fa-fw fa-user-md"></i> <span class="align-middle">Resource</span>
-						</a>
-					</li>						
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/workpackages">
-							<i class="align-middle me-2 fa fa-fw fa-terminal"></i> <span class="align-middle">Work Package</span>
-						</a>
-					</li>					
-					
-					@if(Auth::user()->user_type == 'admin')
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/users">
-							<i class="align-middle me-2 fa fa-fw fa-users"></i> <span class="align-middle">User</span>
-						</a>
-					</li>								
-					@endif			
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/products">
+                            <i class="align-middle me-2 fa fa-fw fa-ship"></i> <span class="align-middle">Product</span>
+                        </a>
+                    </li>
 
-				</ul>
-			</div>
-		</nav>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/projects">
+                            <i class="align-middle me-2 fa fa-fw fa-bank"></i> <span class="align-middle">Project</span>
+                        </a>
+                    </li>
 
-		<div class="main">
-			<nav class="navbar navbar-expand navbar-theme">
-				<a class="sidebar-toggle d-flex me-2">
-					<i class="hamburger align-self-center"></i>
-				</a>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/resources">
+                            <i class="align-middle me-2 fa fa-fw fa-user-md"></i> <span
+                                class="align-middle">Resource</span>
+                        </a>
+                    </li>
 
-				{{-- <form class="d-none d-sm-inline-block">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/workpackages">
+                            <i class="align-middle me-2 fa fa-fw fa-terminal"></i> <span class="align-middle">Work
+                                Package</span>
+                        </a>
+                    </li>
+
+                    @if (Auth::user()->user_type == 'admin')
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/users">
+                                <i class="align-middle me-2 fa fa-fw fa-users"></i> <span
+                                    class="align-middle">User</span>
+                            </a>
+                        </li>
+                    @endif
+
+                </ul>
+            </div>
+        </nav>
+
+        <div class="main">
+            <nav class="navbar navbar-expand navbar-theme">
+                <a class="sidebar-toggle d-flex me-2">
+                    <i class="hamburger align-self-center"></i>
+                </a>
+
+                {{-- <form class="d-none d-sm-inline-block">
 					<input class="form-control form-control-lite" type="text" placeholder="Search projects...">
 				</form> --}}
 
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav ms-auto">
-						{{-- <li class="nav-item dropdown active">
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav ms-auto">
+                        {{-- <li class="nav-item dropdown active">
 							<a class="nav-link dropdown-toggle position-relative" href="/spark/#" id="messagesDropdown" data-bs-toggle="dropdown">
 								<i class="align-middle fas fa-envelope-open"></i>
 							</a>
@@ -227,37 +239,43 @@
 								</div>
 							</div>
 						</li> --}}
-						<li class="nav-item dropdown ms-lg-2">
-							<a class="nav-link dropdown-toggle position-relative" href="/spark/#" id="userDropdown" data-bs-toggle="dropdown">
-								<i class="align-middle fas fa-cog"></i>
-							</a>
-							<div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="/profile"><i class="align-middle me-1 fas fa-fw fa-user"></i> Profile</a>
-								<a class="dropdown-item" href="/progress"><i class="align-middle me-1 fas fa-fw fa-briefcase"></i> Progress</a> 
-								<a class="dropdown-item" href="/location"><i class="align-middle me-1 fas fa-fw fa-map-marker"></i> Location</a> 
-								{{-- <a class="dropdown-item" href="/spark/#"><i class="align-middle me-1 fas fa-fw fa-chart-pie"></i> Analytics</a>
+                        <li class="nav-item dropdown ms-lg-2">
+                            <a class="nav-link dropdown-toggle position-relative" href="/spark/#" id="userDropdown"
+                                data-bs-toggle="dropdown">
+                                <i class="align-middle fas fa-cog"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="/profile"><i
+                                        class="align-middle me-1 fas fa-fw fa-user"></i> Profile</a>
+                                <a class="dropdown-item" href="/progress"><i
+                                        class="align-middle me-1 fas fa-fw fa-briefcase"></i> Progress</a>
+                                <a class="dropdown-item" href="/location"><i
+                                        class="align-middle me-1 fas fa-fw fa-map-marker"></i> Location</a>
+                                {{-- <a class="dropdown-item" href="/spark/#"><i class="align-middle me-1 fas fa-fw fa-chart-pie"></i> Analytics</a>
 								{{-- <a class="dropdown-item" href="/spark/#"><i class="align-middle me-1 fas fa-fw fa-cogs"></i> Settings</a> --}}
-								<div class="dropdown-divider"></div>
-								<form action="/logout" method="POST">
-									@csrf
-									<button class="dropdown-item" type="submit"><i class="align-middle me-1 fas fa-fw fa-arrow-alt-circle-right"></i> Sign out</button>
-								</form>
-								
-							</div>
-						</li>
-					</ul>
-				</div>
-			</nav>
+                                <div class="dropdown-divider"></div>
+                                <form action="/logout" method="POST">
+                                    @csrf
+                                    <button class="dropdown-item" type="submit"><i
+                                            class="align-middle me-1 fas fa-fw fa-arrow-alt-circle-right"></i> Sign
+                                        out</button>
+                                </form>
 
-			@yield('content')
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            @yield('content')
 
 
-		</div>
-        
-	</div>
+        </div>
 
-	
-	<script src="/spark/js/app.js"></script>
+    </div>
+
+
+    <script src="/spark/js/app.js"></script>
 
 </body>
 

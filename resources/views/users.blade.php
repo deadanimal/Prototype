@@ -51,6 +51,37 @@
                     </div>
                 </div>
 
+                <div class="col-12">
+                    <div class="card">
+                        {{-- <div class="card-header">
+                            <h5 class="card-title">Profile Picture</h5>
+                            <h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
+                        </div> --}}
+                        
+
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach ($organisations as $organisation)
+                                        <tr>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$organisation->name}}</td>                                       
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+
+                        
+                    </div>
+                </div>                
+
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">
