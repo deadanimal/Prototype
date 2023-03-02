@@ -22,13 +22,21 @@ class WorkpackageController extends Controller
             if ($resource->resource_type == 'pmo') {
                 $workpackages = Workpackage::all();
             } else {
-                $workpackages = Workpackage::where('user_id', $user->id)->get();
+                return redirect('/workpackages/assigned');
             }
         } else {
             return redirect('/'); 
         }
 
-        return view('workpackage_list', compact('workpackages', 'projects'));
+        $resources = Resource::orderBy('resource_type')->get();
+        return view('workpackage_list_coordinator', compact('workpackages', 'projects', 'resources'));
+    }
+
+    public function show_workpackages_assigned(Request $request) {
+        $user = $request->user();
+        $resource = Resource::where('user_id', $user->id)->first();
+        $workpackages = Workpackage::where('resource_id', $resource->id)->get();
+        return view('workpackage_list_resource', compact('workpackages'));        
     }
 
     public function show_workpackage(Request $request) {
@@ -39,15 +47,30 @@ class WorkpackageController extends Controller
     }
 
     public function create_workpackage(Request $request) {
+
+        $user = $request->user();
 ;  
-        Workpackage::create([
+        $wp = Workpackage::create([
             'name' => $request->name,
             'package_type' => $request->package_type,
             'package_level' => $request->package_level,
-            'date_estimate' => $request->date_estimate,
-            'project_id' => $request->project_id,
-            'user_id' => $request->user_id,
+            'estimate_delivery' => $request->estimate_delivery,
+            'coordinator_id' => $user->id,
         ]);
+
+        if($request->project_id) {
+            $wp->project_id = $request->project_id;
+            $wp->save();
+        }
+
+        if($request->resource_id) {
+            $wp->resource_id = $request->resource_id;
+            $wp->status = 'assigned';
+            $wp->save();
+        } else {
+            $wp->status = 'unassigned';
+            $wp->save();
+        }        
 
         return back();
     }    

@@ -6,54 +6,123 @@
 
             <div class="row">
 
-                <div class="col-12 col-xl-6">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Upcoming Meeting</h5>
-                            <h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
+                            <h5 class="card-title">List of Work Packages</h5>
+                            <h6 class="card-subtitle text-muted">See WPs assigned to self? Click <a href="/workpackages/assigned">here</a></h6>
                         </div>
-                        <div class="card-body">
 
-                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Estimate Delivery</th>
+                                    <th>Project</th>
+                                    <th>Resource</th>
+                                    <th>Type</th>
+                                    <th>Level</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              
+
+                                @foreach($workpackages as $wp)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $wp->name }}</td>
+                                    <td>{{ $wp->estimate_delivery }}</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>{{ $wp->package_type }}</td>
+                                    <td>{{ $wp->package_level }}</td>
+                                    <td>{{ $wp->status }}</td>
+                                </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>                        
+
                     </div>
                 </div>
 
-                <div class="col-12 col-xl-6">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Create Meeting</h5>
-                            <h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
+                            <h5 class="card-title">Create Work Package</h5>
                         </div>
                         <div class="card-body">
-                            <form action="/meetings" method="POST">
+                            <form action="/workpackages" method="POST">
                                 @csrf
+
+                                <div class="mb-3">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Name">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Type</label>
+                                    <select class="form-control mb-3" name="package_type">
+                                        <option value="analyst - wireframe">Analyst - Wireframe</option>
+                                        <option value="analyst - erd + dfd">Analyst - ERD & DFD</option>
+                                        <option value="analyst - use case + process flow">Analyst - Use Case & Process Flow
+                                        </option>
+                                        <option value="analyst - system architecture">Analyst - System Architecture</option>
+                                        <option value="analyst - testing scripts">Analyst - Testing Scripts</option>
+                                        <option value="analyst - test">Analyst - Test</option>
+                                        <option value="analyst - pentest + stress test">Analyst - Pentest & Stress Test
+                                        </option>
+                                        <option value="analyst - integration documents">Analyst - Integration Documents
+                                        </option>
+                                        <option value="analyst - migration documents">Analyst - Migration Documents</option>
+                                        <option value="analyst - migration">Analyst - Migration</option>
+                                        <option value="analyst - integration testings">Analyst - Integration Test</option>
+                                        <option value="analyst - documentations">Analyst - Documentations</option>
+                                        <option value="analyst - miscelleneous">Analyst - Miscelleneous</option>
+
+                                        <option value="developer - develop functional">Developer - Develop Functional
+                                        </option>
+                                        <option value="developer - develop interface">Developer - Develop Interface</option>
+                                        <option value="developer - deployment">Developer - Deployment</option>
+                                        <option value="developer - bug fixing">Developer - Bug Fixing</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Level</label>
+                                    <select class="form-control mb-3" name="package_level">
+                                        <option value="1 - 6 hours">Level 1 - 6 Hours</option>
+                                        <option value="2 - 3 hours">Level 2 - 3 Hours</option>
+                                        <option value="3 - 1 hour">Level 3 - 1 Hour</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Delivery Date</label>
+                                    <input type="date" name="estimate_delivery" class="form-control">
+                                </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Project</label>
                                     <select class="form-control mb-3" name="project_id">
                                         @foreach ($projects as $project)
-                                            <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                            <option value="{{ $project->id }}">({{ $project->organisation->shortname }})
+                                                {{ $project->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Meeting Title</label>
-                                    <input type="text" class="form-control" name="title" placeholder="Meeting title">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Meeting Type</label>
-                                    <select class="form-control mb-3" name="meeting_type">
-                                        <option value="requirement">Requirement</option>
-                                        <option value="testing">Testing</option>
-                                        <option value="progress">Progress</option>
+                                    <label class="form-label">Resource</label>
+                                    <select class="form-control mb-3" name="resource_id">
+                                        @foreach ($resources as $resource)
+                                            <option value="{{ $resource->id }}">
+                                                ({{ ucfirst($resource->resource_type) }})
+                                                {{ $resource->user->name }}</option>
+                                        @endforeach
                                     </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Meeting Date</label>
-                                    <input type="date" name="meeting_date" class="form-control">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Create Meeting</button>

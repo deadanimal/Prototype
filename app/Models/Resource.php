@@ -18,5 +18,10 @@ class Resource extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }         
+    }   
+    
+    public function workpackages()
+    {
+        return $this->hasMany(Workpackage::class);
+    }             
 }

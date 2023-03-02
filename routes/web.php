@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/mockups/{mockup_id}', [MockupController::class, 'update_mockup']);  
 
     Route::get('/workpackages', [WorkpackageController::class, 'show_workpackages']);
+    Route::get('/workpackages/assigned', [WorkpackageController::class, 'show_workpackages_assigned']);
     Route::post('/workpackages', [WorkpackageController::class, 'create_workpackage']);   
     Route::get('/workpackages/{workpackage_id}', [WorkpackageController::class, 'show_workpackage']); 
     Route::put('/workpackages/{workpackage_id}', [WorkpackageController::class, 'update_workpackage']);      
