@@ -4,6 +4,13 @@
     <main class="content">
         <div class="container-fluid">
 
+            <div class="header">
+                <h1 class="header-title">
+                    Work Package
+                </h1>
+
+            </div>              
+
             <div class="row">
 
                 <div class="col-12">
@@ -16,13 +23,15 @@
                         <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <th>ID</th>
                                     <th>Name</th>
-                                    <th>Estimate Delivery</th>
+                                    <th>Estimated Delivery</th>
                                     <th>Project</th>
                                     <th>Resource</th>
+                                    <th>Reviewer</th>
+                                    {{-- <th>Coordinator</th>
                                     <th>Type</th>
-                                    <th>Level</th>
+                                    <th>Level</th> --}}
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -31,12 +40,24 @@
 
                                 @foreach($workpackages as $wp)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $wp->name }}</td>
-                                    <td>{{ $wp->estimate_delivery }}</td>
+                                    <td>{{ $wp->id }}</td>
+                                    <td>
+                                        <a href="/workpackages/{{$wp->id}}">
+                                        {{ $wp->name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @if($wp->estimate_delivery)
+                                        {{ $wp->estimate_delivery }}
+                                        @else
+                                        ?
+                                        @endif                                        
+                                        </td>
                                     <td>
                                         @if($wp->project_id)
+                                        <a href="/projects/{{$wp->project_id}}">
                                             {{$wp->project->name}}
+                                        </a>
                                         @else
                                         -
                                         @endif
@@ -48,8 +69,16 @@
                                         -
                                         @endif                                        
                                     </td>
+                                    <td>
+                                        @if($wp->reviewer_id)
+                                            {{$wp->reviewer->user->name}}
+                                        @else
+                                        -
+                                        @endif                                        
+                                    </td>                                    
+                                    {{-- <td>{{ $wp->coordinator->name }}</td>
                                     <td>{{ $wp->package_type }}</td>
-                                    <td>{{ $wp->package_level }}</td>
+                                    <td>{{ $wp->package_level }}</td> --}}
                                     <td>{{ $wp->status }}</td>
                                 </tr>
                                 @endforeach
@@ -129,6 +158,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Resource</label>
                                     <select class="form-control mb-3" name="resource_id">
+                                        <option value="">-</option>
                                         @foreach ($resources as $resource)
                                             <option value="{{ $resource->id }}">
                                                 ({{ ucfirst($resource->resource_type) }})
@@ -138,8 +168,20 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Assignment Remarks</label>
-                                    <textarea class="form-control" rows="5" name="assignment_remarks" placeholder="Textarea"></textarea>
+                                    <label class="form-label">Reviewer</label>
+                                    <select class="form-control mb-3" name="reviewer_id">
+                                        <option value="">-</option>
+                                        @foreach ($resources as $resource)
+                                            <option value="{{ $resource->id }}">
+                                                ({{ ucfirst($resource->resource_type) }})
+                                                {{ $resource->user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>                                
+
+                                <div class="mb-3">
+                                    <label class="form-label">Remarks</label>
+                                    <textarea class="form-control" rows="5" name="remarks" placeholder="Textarea"></textarea>
                                 </div>                                
 
                                 <button type="submit" class="btn btn-primary">Create Work Package</button>

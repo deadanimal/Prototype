@@ -4,6 +4,13 @@
     <main class="content">
         <div class="container-fluid">
 
+            <div class="header">
+                <h1 class="header-title">
+                    Resource
+                </h1>
+
+            </div>                
+
             <div class="row">
 
                 <div class="col-12 col-xl-9">

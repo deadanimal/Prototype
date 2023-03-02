@@ -48,7 +48,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/workpackages/assigned', [WorkpackageController::class, 'show_workpackages_assigned']);
     Route::post('/workpackages', [WorkpackageController::class, 'create_workpackage']);   
     Route::get('/workpackages/{workpackage_id}', [WorkpackageController::class, 'show_workpackage']); 
-    Route::put('/workpackages/{workpackage_id}', [WorkpackageController::class, 'update_workpackage']);      
+    Route::put('/workpackages/{workpackage_id}', [WorkpackageController::class, 'update_workpackage']);
+    Route::post('/workpackages/{workpackage_id}/review', [WorkpackageController::class, 'review_workpackage']);
         
 
     Route::get('/projects', [ProjectController::class, 'show_projects']);

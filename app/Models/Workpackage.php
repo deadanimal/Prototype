@@ -15,13 +15,14 @@ class Workpackage extends Model
         'package_level',
         'estimate_delivery',
         'user_id',
+        'reviewer_id',
         'coordinator_id',
-        'assignment_remarks'
+        'remarks'
     ];     
 
     public function coordinator()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'coordinator_id');
     } 
     
     public function project()
@@ -32,6 +33,16 @@ class Workpackage extends Model
     public function resource()
     {
         return $this->belongsTo(Resource::class);
-    }         
+    }     
+    
+    public function reviewer()
+    {
+        return $this->belongsTo(Resource::class, 'reviewer_id');
+    }    
+    
+    public function reviews()
+    {
+        return $this->hasMany(WorkpackageReview::class);
+    }     
  
 }

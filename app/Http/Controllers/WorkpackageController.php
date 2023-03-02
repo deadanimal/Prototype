@@ -41,9 +41,9 @@ class WorkpackageController extends Controller
 
     public function show_workpackage(Request $request) {
         $id = (int) $request->route('workpackage_id');  
-        $workpackage = Workpackage::find($id);
+        $wp = Workpackage::find($id);
 
-        return view('workpackage_detail', compact('workpackage'));
+        return view('workpackage_detail', compact('wp'));
     }
 
     public function create_workpackage(Request $request) {
@@ -55,7 +55,7 @@ class WorkpackageController extends Controller
             'package_type' => $request->package_type,
             'package_level' => $request->package_level,
             'estimate_delivery' => $request->estimate_delivery,
-            'assignment_remarks' => $request->assignment_remarks,
+            'remarks' => $request->remarks,
             'coordinator_id' => $user->id,
         ]);
 
@@ -63,6 +63,11 @@ class WorkpackageController extends Controller
             $wp->project_id = $request->project_id;
             $wp->save();
         }
+
+        if($request->reviewer_id) {
+            $wp->reviewer_id = $request->reviewer_id;
+            $wp->save();
+        }          
 
         if($request->resource_id) {
             $wp->resource_id = $request->resource_id;
