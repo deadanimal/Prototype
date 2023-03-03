@@ -123,11 +123,12 @@
                                         <option value="analyst - documentations">Analyst - Documentations</option>
                                         <option value="analyst - miscelleneous">Analyst - Miscelleneous</option>
 
-                                        <option value="developer - develop functional">Developer - Develop Functional
+                                        <option value="developer - develop function">Developer - Develop Function
                                         </option>
                                         <option value="developer - develop interface">Developer - Develop Interface</option>
                                         <option value="developer - deployment">Developer - Deployment</option>
                                         <option value="developer - bug fixing">Developer - Bug Fixing</option>
+                                        <option value="other - training">Other - Training</option>
                                     </select>
                                 </div>
 

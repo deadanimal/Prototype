@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Meeting;
 use App\Models\Organisation;
 use App\Models\Trail;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -20,7 +23,18 @@ class SiteController extends Controller
         if ($user->user_type == 'client') {
             return view('dashboard_client', compact('user'));
         } else {
-            return view('dashboard', compact('user'));
+
+            $meetings = Meeting::where([
+                ['meeting_date', '>', Carbon::now('Asia/Singapore')->subDays(1)],
+                ['status', '=', 'draft'],
+            ])->orderBy('meeting_date')->get();  
+            
+            // $meetings = DB::table('meetings')
+            //     ->join('meeting_attendees', 'meeting_attendees.user_id', '=', $user->id)
+                // ->select('meetings.*', 'meeting_attendees.user_id')->get();
+            // $meetings = Meeting::join('meeting_attendees','meeting_attendees.user_id','=',$user->id)->get();
+
+            return view('dashboard', compact('user', 'meetings'));
         }        
     }    
 
