@@ -8,6 +8,9 @@ use App\Models\ProjectDeliverable;
 use App\Models\ProjectDocument;
 use App\Models\ProjectPayment;
 use App\Models\ProjectPhase;
+use App\Models\ProjectRequirement;
+use App\Models\ProjectTestflow;
+use App\Models\ProjectTestflowItem;
 use App\Models\ProjectUser;
 use App\Models\Resource;
 use App\Models\Trail;
@@ -54,9 +57,10 @@ class ProjectController extends Controller
         $payments = ProjectPayment::where('project_id', $id)->get();
         $phases = ProjectPhase::where('project_id', $id)->get();
         $wps = Workpackage::where('project_id', $id)->get();
-        
+        $requirements = ProjectRequirement::where('project_id', $id)->get();
 
-        return view('project_detail', compact('project', 'documents','meetings','deliverables', 'users', 'members','payments','phases','wps'));
+        return view('project_detail', compact(['project', 'documents','meetings',
+        'deliverables', 'users', 'members','payments','phases','wps', 'requirements']));
     }
 
     public function show_resources(Request $request) {
@@ -213,4 +217,52 @@ class ProjectController extends Controller
 
         return back();
     }       
+
+    public function create_requirement(Request $request) {
+        
+        $user = $request->user();
+
+        ProjectRequirement::create([
+            'name' => $request->name,
+            'category' => $request->category,
+            'remarks' => $request->remarks,
+
+            'project_id' => $request->project_id,
+            'user_id' => $user->id,
+        ]);
+     
+        return back();        
+    }
+
+    public function create_testingflow(Request $request) {
+
+        $user = $request->user();
+
+        $testflow = ProjectTestflow::create([
+            'name' => $request->name,
+
+            'project_id' => $request->project_id,
+            'user_id' => $user->id,
+        ]);
+     
+        return back();   
+                
+    }
+
+    public function create_testingflow_item(Request $request) {
+        
+        $user = $request->user();
+
+        $testflow_item = ProjectTestflowItem::create([
+            'name' => $request->name,
+            
+            'testingflow_id' => $request->testingflow_id,
+            'project_id' => $request->project_id,
+            'user_id' => $user->id,
+        ]);
+     
+        return back();  
+
+    }
 }
+

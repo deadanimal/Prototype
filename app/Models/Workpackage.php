@@ -40,7 +40,7 @@ class Workpackage extends Model
         return $this->belongsTo(Resource::class, 'reviewer_id');
     }    
     
-    public function reviews()
+    public function workpackage_reviews()
     {
         return $this->hasMany(WorkpackageReview::class);
     }     

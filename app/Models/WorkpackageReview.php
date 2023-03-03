@@ -10,8 +10,14 @@ class WorkpackageReview extends Model
     use HasFactory;
 
     protected $fillable = [
+        'attachment',
         'remarks',
         'workpackage_id',
-        'user_id',
+        'resource_id',
     ];     
+
+    public function resource()
+    {
+        return $this->belongsTo(Resource::class);
+    }     
 }

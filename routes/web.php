@@ -63,15 +63,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/projects/{project_id}/payments', [ProjectController::class, 'add_project_payment']);   
     Route::post('/projects/{project_id}/phases', [ProjectController::class, 'add_project_phase']);   
     
-    Route::get('/projects/{project_id}/requirements', [ProjectController::class, 'show_requirements']);
     Route::post('/requirements', [ProjectController::class, 'create_requirement']);   
     Route::get('/requirements/{requirement_id}', [ProjectController::class, 'show_requirement']); 
     Route::put('/requirements/{requirement_id}', [ProjectController::class, 'update_requirement']);
     
-    Route::get('/projects/{project_id}/test-scripts', [ProjectController::class, 'show_test_scripts']);
-    Route::post('/test-scripts', [ProjectController::class, 'create_test_script']);   
-    Route::get('/test-scripts/{test-script_id}', [ProjectController::class, 'show_test_script']); 
-    Route::put('/test-scripts/{test-script_id}', [ProjectController::class, 'update_test_script']);      
+    Route::post('/testflows', [ProjectController::class, 'create_testflow']);   
+    Route::get('/testflows/{testflow_id}', [ProjectController::class, 'show_testflow']); 
+    Route::put('/testflows/{testflow_id}', [ProjectController::class, 'update_testflow']);   
+    
+    Route::post('/testflow-items', [ProjectController::class, 'create_testflow_item']);
+    Route::get('/testflow-items/{testflow_item_id}', [ProjectController::class, 'show_testflow_item']); 
+    Route::put('/testflow-items/{testflow_item_id}', [ProjectController::class, 'update_testflow_item']);     
 
     Route::get('/resources', [ProjectController::class, 'show_resources']);
     Route::get('/resources/{resource_id}', [ProjectController::class, 'show_resource']);

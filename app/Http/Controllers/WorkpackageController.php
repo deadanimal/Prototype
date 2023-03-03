@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Resource;
 use App\Models\Workpackage;
+use App\Models\WorkpackageReview;
 use Illuminate\Http\Request;
 
 class WorkpackageController extends Controller
@@ -16,11 +17,11 @@ class WorkpackageController extends Controller
         $user = $request->user();
 
         if ($user->user_type == 'admin') {
-            $workpackages = Workpackage::all();
+            $workpackages = Workpackage::orderBy('estimate_delivery')->get();
         } elseif ($user->user_type == 'staff') {
             $resource = Resource::where('user_id', $user->id)->first();
             if ($resource->resource_type == 'pmo') {
-                $workpackages = Workpackage::all();
+                $workpackages = Workpackage::orderBy('estimate_delivery')->get();
             } else {
                 return redirect('/workpackages/assigned');
             }
@@ -42,8 +43,9 @@ class WorkpackageController extends Controller
     public function show_workpackage(Request $request) {
         $id = (int) $request->route('workpackage_id');  
         $wp = Workpackage::find($id);
-
-        return view('workpackage_detail', compact('wp'));
+        $projects = Project::all();
+        $resources = Resource::orderBy('resource_type')->get();
+        return view('workpackage_detail', compact('wp', 'projects','resources'));
     }
 
     public function create_workpackage(Request $request) {
@@ -71,13 +73,47 @@ class WorkpackageController extends Controller
 
         if($request->resource_id) {
             $wp->resource_id = $request->resource_id;
-            $wp->status = 'assigned';
+            $wp->status = 'Assigned';
             $wp->save();
         } else {
-            $wp->status = 'unassigned';
+            $wp->status = 'Unassigned';
             $wp->save();
         }        
 
         return back();
-    }    
+    }   
+    
+    public function review_workpackage(Request $request) {
+        $id = (int) $request->route('workpackage_id');  
+        $user = $request->user();
+        $wp = Workpackage::find($id);
+
+        if($request->action == 'submit_work_complete') {
+            $wp->status = 'Work Package In Review';
+        } elseif($request->action == 'submit_work_incomplete') {
+            $wp->status = 'Work Package Incomplete';
+        } elseif($request->action == 'review_work_complete') {
+            $wp->status = 'Work Package Approved';
+        } elseif($request->action == 'review_work_incomplete') {
+            $wp->status = 'Work Package Incomplete';
+        } else {
+
+        }
+
+        $wp->save();
+        
+
+        $wp_review = WorkpackageReview::create([
+            'remarks' => $request->remarks,
+            'workpackage_id' => $wp->id,
+            'resource_id'=> $user->resource->id
+        ]);
+
+        if($request->attachment) {
+            $wp_review->attachment = $request->file('attachment')->store('prototype/attachment');
+            $wp_review->save();
+        }
+
+        return back();
+    } 
 }

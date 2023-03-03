@@ -9,7 +9,7 @@
                     Work Package
                 </h1>
 
-            </div>              
+            </div>
 
             <div class="row">
 
@@ -17,7 +17,8 @@
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title">List of Work Packages</h5>
-                            <h6 class="card-subtitle text-muted">See WPs assigned to self? Click <a href="/workpackages/assigned">here</a></h6>
+                            <h6 class="card-subtitle text-muted">See WPs assigned to self? Click <a
+                                    href="/workpackages/assigned">here</a></h6>
                         </div>
 
                         <table class="table table-striped table-sm">
@@ -25,8 +26,9 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Estimated Delivery</th>
                                     <th>Project</th>
+                                    <th>Level</th>
+                                    <th>Estimated Delivery</th>
                                     <th>Resource</th>
                                     <th>Reviewer</th>
                                     {{-- <th>Coordinator</th>
@@ -36,55 +38,67 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              
 
-                                @foreach($workpackages as $wp)
-                                <tr>
-                                    <td>{{ $wp->id }}</td>
-                                    <td>
-                                        <a href="/workpackages/{{$wp->id}}">
-                                        {{ $wp->name }}
-                                        </a>
-                                    </td>
-                                    <td>
-                                        @if($wp->estimate_delivery)
-                                        {{ $wp->estimate_delivery }}
-                                        @else
-                                        ?
-                                        @endif                                        
+
+                                @foreach ($workpackages as $wp)
+                                    <tr>
+                                        <td>{{ $wp->id }}</td>
+                                        <td>
+                                            <a href="/workpackages/{{ $wp->id }}">
+                                                {{ $wp->name }}
+                                            </a>
                                         </td>
-                                    <td>
-                                        @if($wp->project_id)
-                                        <a href="/projects/{{$wp->project_id}}">
-                                            {{$wp->project->name}}
-                                        </a>
-                                        @else
-                                        -
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if($wp->resource_id)
-                                            {{$wp->resource->user->name}}
-                                        @else
-                                        -
-                                        @endif                                        
-                                    </td>
-                                    <td>
-                                        @if($wp->reviewer_id)
-                                            {{$wp->reviewer->user->name}}
-                                        @else
-                                        -
-                                        @endif                                        
-                                    </td>                                    
-                                    {{-- <td>{{ $wp->coordinator->name }}</td>
+                                        <td>
+                                            @if ($wp->project_id)
+                                                <a href="/projects/{{ $wp->project_id }}">
+                                                    {{ $wp->project->name }}
+                                                </a>
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>
+
+                                            @if ($wp->package_level == "1 - 6 hours")
+                                                Level 1
+                                            @elseif($wp->package_level == "2 - 3 hours")
+                                                Level 2
+                                            @elseif($wp->package_level == "3 - 1 hour")
+                                                Level 3                                             
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($wp->estimate_delivery)
+                                                {{ $wp->estimate_delivery }}
+                                            @else
+                                                ?
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($wp->resource_id)
+                                                {{ $wp->resource->user->name }}
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($wp->reviewer_id)
+                                                {{ $wp->reviewer->user->name }}
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        {{-- <td>{{ $wp->coordinator->name }}</td>
                                     <td>{{ $wp->package_type }}</td>
                                     <td>{{ $wp->package_level }}</td> --}}
-                                    <td>{{ $wp->status }}</td>
-                                </tr>
+                                        <td>{{ $wp->status }}</td>
+                                    </tr>
                                 @endforeach
 
                             </tbody>
-                        </table>                        
+                        </table>
 
                     </div>
                 </div>
@@ -178,12 +192,12 @@
                                                 {{ $resource->user->name }}</option>
                                         @endforeach
                                     </select>
-                                </div>                                
+                                </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Remarks</label>
                                     <textarea class="form-control" rows="5" name="remarks" placeholder="Textarea"></textarea>
-                                </div>                                
+                                </div>
 
                                 <button type="submit" class="btn btn-primary">Create Work Package</button>
                             </form>

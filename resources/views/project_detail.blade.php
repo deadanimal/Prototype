@@ -436,6 +436,62 @@
                             <div class="tab-pane" id="vertical-icon-tab-7" role="tabpanel">
                                 <h4 class="tab-title">Requirement</h4>
 
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Name</th>
+                                            <th>Category</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+        
+        
+                                        @foreach ($requirements as $requirement)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $requirement->name }}</td>
+                                                <td>{{ $requirement->category }}</td>
+                                            </tr>
+                                        @endforeach
+        
+        
+        
+        
+                                    </tbody>
+                                </table>                                  
+
+                                <form action="/requirements" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+
+                                    <input type="hidden" name="project_id" value="{{$project->id}}">
+    
+                                    <div class="mb-3">
+                                        <label class="form-label w-100">Name</label>
+                                        <input type="text" name="name" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Category</label>
+                                        <select class="form-control mb-3" name="category">
+                                            <option value="view">View</option>
+                                            <option value="function">Function</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>                                    
+    
+    
+                                    <div class="mb-3">
+                                        <label class="form-label w-100">Remarks</label>
+                                        <textarea class="form-control" rows="5" name="remarks" placeholder="Textarea"></textarea>
+                                    </div>
+    
+    
+                                    <button type="submit" class="btn btn-primary">Add Requirement</button>
+    
+                                </form>                                
+
                             </div>    
                             <div class="tab-pane" id="vertical-icon-tab-8" role="tabpanel">
                                 <h4 class="tab-title">Testing</h4>
