@@ -74,6 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/test-scripts/{test-script_id}', [ProjectController::class, 'update_test_script']);      
 
     Route::get('/resources', [ProjectController::class, 'show_resources']);
+    Route::get('/resources/{resource_id}', [ProjectController::class, 'show_resource']);
     Route::post('/resources', [ProjectController::class, 'create_resource']);    
     Route::put('/resources/{resource_id}', [ProjectController::class, 'update_resource']);       
    

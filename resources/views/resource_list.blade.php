@@ -35,7 +35,10 @@
                                         @else 
                                             <img src="https://pipeline-apps.sgp1.digitaloceanspaces.com/prototype/profile_picture/QSaCQtnzxuLwd1aDyqDXKHapWdjOMMTqvNrK5828.png" width="48" height="48" class="rounded-circle me-2" alt="Avatar">
                                         @endif
-                                        {{ $resource->user->name }}</td>
+                                        <a href="/resources/{{$resource->id}}">
+                                        {{ $resource->user->name }}
+                                        </a>
+                                    </td>
                                     <td>{{ ucfirst($resource->resource_type) }}</td>
                                     <td>{{ ucfirst($resource->status) }}</td>
                                 </tr>
@@ -67,6 +70,7 @@
                                         <option value="developer">Developer</option>
                                         <option value="business">Business</option>
                                         <option value="pmo">PMO</option>
+                                        <option value="other">Other</option>
                                     </select>
                                 </div>
 

@@ -12,6 +12,7 @@ use App\Models\ProjectUser;
 use App\Models\Resource;
 use App\Models\Trail;
 use App\Models\User;
+use App\Models\Workpackage;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -52,10 +53,10 @@ class ProjectController extends Controller
         $members = ProjectUser::where('project_id', $id)->get();
         $payments = ProjectPayment::where('project_id', $id)->get();
         $phases = ProjectPhase::where('project_id', $id)->get();
-        
+        $wps = Workpackage::where('project_id', $id)->get();
         
 
-        return view('project_detail', compact('project', 'documents','meetings','deliverables', 'users', 'members','payments','phases'));
+        return view('project_detail', compact('project', 'documents','meetings','deliverables', 'users', 'members','payments','phases','wps'));
     }
 
     public function show_resources(Request $request) {
@@ -74,8 +75,8 @@ class ProjectController extends Controller
     public function show_resource(Request $request) {
         $id = (int) $request->route('resource_id');  
         $resource = Resource::find($id);
-
-        return view('resource_detail', compact('resource'));
+        $projects = Project::all();
+        return view('resource_detail', compact('resource', 'projects'));
     }    
 
     public function create_resource(Request $request) {
