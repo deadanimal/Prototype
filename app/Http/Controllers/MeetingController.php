@@ -11,6 +11,8 @@ use App\Models\Project;
 use App\Models\User;
 use App\Models\Workpackage;
 use Carbon\Carbon;
+use DataTables;
+
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MeetingController extends Controller
@@ -165,5 +167,18 @@ class MeetingController extends Controller
         Alert::success('Success', 'Meeting has been updated!');
 
         return back();
-    }        
+    }    
+    
+    
+    public function datatable_meetings(Request $request) {
+        $data = Meeting::all();
+        return Datatables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                return $actionBtn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }    
 }

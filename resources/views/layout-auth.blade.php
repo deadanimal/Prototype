@@ -17,6 +17,14 @@
         }
     </style>
     <script src="/spark/js/settings.js"></script>
+
+
+	<!-- Datatable -->	
+	<link href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js" rel="stylesheet">
+
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>	
 </head>
 
 <body>
@@ -98,6 +106,17 @@
                                 Package</span>
                         </a>
                     </li>
+
+					@if( Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'business')
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/tenderproposals">
+                            <i class="align-middle me-2 fa fa-fw fa-briefcase"></i> <span
+                                class="align-middle">Tender</span>
+                        </a>
+                    </li>
+
+					@endif					
 
                     @if (Auth::user()->user_type == 'admin')
                         <li class="sidebar-item">

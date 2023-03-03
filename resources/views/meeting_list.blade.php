@@ -20,7 +20,7 @@
                         </div>
                         
 
-                            <table class="table table-striped table-sm">
+                            <table class="table table-striped table-sm meeting-datatable">
                                 <thead>
                                     <tr>
                                         <th>Date</th>
@@ -28,20 +28,11 @@
                                         <th>Project</th>
                                         <th>Title</th>
                                         <th>Status</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                   
-
-                                    @foreach($upcoming_meetings as $meeting)
-                                    <tr>
-                                        <td>{{ $meeting->meeting_date }}</td>
-                                        <td>{{ ucfirst($meeting->meeting_type) }}</td>
-                                        <td>{{ $meeting->project->organisation->shortname }} - {{ $meeting->project->name }} </td>
-                                        <td><a href="/meetings/{{$meeting->id}}"> {{ $meeting->title }}</a></td>
-                                        <td>{{ ucfirst($meeting->status) }}</td>
-                                    </tr>
-                                    @endforeach
 
                                 </tbody>
                             </table>
@@ -172,4 +163,31 @@
 
         </div>
     </main>
+
+
+    <script type="text/javascript">
+        $(function () {
+          
+          var table = $('.meeting-datatable').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "/dt/meetings",
+              columns: [
+                  //{data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                  {data: 'meeting_date', name: 'meeting_date'},
+                  {data: 'meeting_type', name: 'meeting_type'},
+                  {data: 'meeting_type', name: 'meeting_type'},
+                  {data: 'title', name: 'title'},
+                  {data: 'status', name: 'status'},
+                  {
+                      data: 'action', 
+                      name: 'action', 
+                      orderable: true, 
+                      searchable: true
+                  },
+              ]
+          });
+          
+        });
+      </script>    
 @endsection

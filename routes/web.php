@@ -7,6 +7,7 @@ use App\Http\Controllers\MockupController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\TenderproposalController;
 use App\Http\Controllers\WorkpackageController;
 use App\Http\Controllers\UserUpdateController;
 
@@ -90,6 +91,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/products', [ProductController::class, 'show_products']);
     Route::post('/products', [ProductController::class, 'create_product']);   
     Route::get('/products/{product_id}', [ProductController::class, 'show_product']); 
-    Route::put('/products/{product_id}', [ProductController::class, 'update_product']);     
+    Route::put('/products/{product_id}', [ProductController::class, 'update_product']);  
+    
+    Route::get('/tenderproposals', [TenderproposalController::class, 'show_tenderproposals']);
+    Route::post('/tenderproposals', [TenderproposalController::class, 'create_tenderproposal']);   
+    Route::get('/tenderproposals/{tenderproposal_id}', [TenderproposalController::class, 'show_tenderproposal']); 
+    Route::put('/tenderproposals/{tenderproposal_id}', [TenderproposalController::class, 'update_tenderproposal']);    
 
+
+
+    Route::get('/dt/meetings', [MeetingController::class, 'datatable_meetings']);
 });
