@@ -29,7 +29,7 @@
                             Package level: {{ $wp->package_level }} <br/>
                             Remarks: {{ $wp->remarks }} <br/>
                             Status: {{ $wp->status }} <br/>
-                            Project: {{ $wp->project->name }} <br/>
+                            Project: {{ $wp->project->organisation->name }} - {{ $wp->project->name }} <br/>
                             Resource: 
                             @if($wp->resource_id)
                                 {{ $wp->resource->user->name }}

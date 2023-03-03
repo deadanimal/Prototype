@@ -82,6 +82,29 @@ class WorkpackageController extends Controller
 
         return back();
     }   
+
+    public function update_workpackage(Request $request) {
+        $id = (int) $request->route('workpackage_id');  
+        $wp = Workpackage::find($id);  
+        
+        $wp->update([
+            'name' => $request->name,
+            'remarks' => $request->remarks,
+        ]);   
+        
+        if($request->reviewer_id) {
+            $wp->reviewer_id = $request->reviewer_id;
+            $wp->save();
+        }          
+
+        if($request->resource_id) {
+            $wp->resource_id = $request->resource_id;
+            $wp->status = 'Reassigned';
+            $wp->save();
+        }     
+        
+        return back();
+    }
     
     public function review_workpackage(Request $request) {
         $id = (int) $request->route('workpackage_id');  
