@@ -30,8 +30,20 @@
                             Remarks: {{ $wp->remarks }} <br/>
                             Status: {{ $wp->status }} <br/>
                             Project: {{ $wp->project->name }} <br/>
-                            Resource: {{ $wp->resource->user->name }} <br/>
-                            Reviewer: {{ $wp->reviewer->user->name }} <br/>
+                            Resource: 
+                            @if($wp->resource_id)
+                                {{ $wp->resource->user->name }}
+                            @else
+                                -
+                            @endif
+                             <br/>
+                            Reviewer: 
+                            @if($wp->reviewer_id)
+                                {{ $wp->reviewer->user->name }}
+                            @else
+                                -
+                            @endif
+                            <br/>
                             Coordinator: {{ $wp->coordinator->name }} <br/>
                             Created: {{ $wp->created_at }} <br/>
                         </div>
@@ -136,7 +148,7 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Update Workpackage</h5>
+                                <h5 class="card-title">Update Work Package</h5>
                             </div>
 
                             <div class="card-body">
