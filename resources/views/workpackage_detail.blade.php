@@ -27,12 +27,13 @@
                             Estimate Delivery: {{ $wp->estimate_delivery }} <br/>
                             Package Type: {{ $wp->package_type }} <br/>
                             Package level: {{ $wp->package_level }} <br/>
-                            remarks: {{ $wp->remarks }} <br/>
-                            status: {{ $wp->status }} <br/>
-                            resource: {{ $wp->resource->user->name }} <br/>
-                            reviewer: {{ $wp->reviewer->user->name }} <br/>
-                            coordinator: {{ $wp->coordinator->name }} <br/>
-                            created_at: {{ $wp->created_at }} <br/>
+                            Remarks: {{ $wp->remarks }} <br/>
+                            Status: {{ $wp->status }} <br/>
+                            Project: {{ $wp->project->name }} <br/>
+                            Resource: {{ $wp->resource->user->name }} <br/>
+                            Reviewer: {{ $wp->reviewer->user->name }} <br/>
+                            Coordinator: {{ $wp->coordinator->name }} <br/>
+                            Created: {{ $wp->created_at }} <br/>
                         </div>
 
 
@@ -49,6 +50,8 @@
 
                         <div class="card-body">
 
+
+                            @if($wp->workpackage_reviews->count() > 0)
                             <table class="table table-striped table-sm">
                                 <thead>
                                     <tr>
@@ -93,6 +96,7 @@
     
                                 </tbody>
                             </table>                            
+                            @endif
 
                             @if (Auth::user()->resource->id == $wp->resource_id || Auth::user()->resource->id == $wp->reviewer_id || Auth::user()->resource->resource_type == 'all')
                             <form action="/workpackages/{{ $wp->id }}/review" method="POST" enctype="multipart/form-data">
