@@ -14,6 +14,8 @@ class Product extends Model
         'description',
         'prototype_link',
         'web_link',
+        'web_repo',
+        'app_repo',
     ];  
     
     

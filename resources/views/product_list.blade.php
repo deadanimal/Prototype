@@ -108,7 +108,17 @@
                                 <div class="mb-3">
                                     <label class="form-label">Prototype link</label>
                                     <input type="text" class="form-control" name="prototype_link">
-                                </div>                                    
+                                </div>    
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Web Repo</label>
+                                    <input type="text" class="form-control" name="web_repo">
+                                </div>   
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">App Repo</label>
+                                    <input type="text" class="form-control" name="app_repo">
+                                </div>                                  
 
                                 <button type="submit" class="btn btn-primary">Create Product</button>
                             </form>
