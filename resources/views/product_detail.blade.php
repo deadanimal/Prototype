@@ -31,7 +31,7 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Description</label>
-                                    <textarea class="form-control" rows="5" name="description" value="{{ $product->description }}" placeholder="Textarea"></textarea>
+                                    <textarea class="form-control" rows="5" name="description" placeholder="Textarea">{{ $product->description }}</textarea>
                                 </div>                                
 
                                 <div class="mb-3">
