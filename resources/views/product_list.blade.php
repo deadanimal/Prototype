@@ -25,9 +25,11 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Name</th>
-                                        <th>Status</th>
+                                        {{-- <th>Status</th> --}}
                                         <th>Web</th>
                                         <th>Staging</th>
+                                        <th>App Repo</th>
+                                        <th>Web Repo</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -36,7 +38,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td><a href="/products/{{$product->id}}">{{ $product->name }}</a></td>
-                                        <td>{{ $product->status }}</td>
+                                        {{-- <td>{{ $product->status }}</td> --}}
                                         <td>
                                             @if($product->web_link)
                                                 <a href="{{$product->web_link}}">Link</a>
@@ -51,6 +53,20 @@
                                                 -
                                             @endif                                             
                                         </td>
+                                        <td>
+                                            @if($product->app_repo)
+                                                <a href="{{$product->app_repo}}">Github</a>
+                                            @else
+                                                -
+                                            @endif                                             
+                                        </td>   
+                                        <td>
+                                            @if($product->web_repo)
+                                                <a href="{{$product->web_repo}}">Github</a>
+                                            @else
+                                                -
+                                            @endif                                             
+                                        </td>                                                                              
                                     </tr>
                                     @endforeach                                    
                                   
