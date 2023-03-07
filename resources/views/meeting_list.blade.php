@@ -24,6 +24,7 @@
                                 <thead>
                                     <tr>
                                         <th>Date</th>
+                                        <th>Time</th>
                                         <th>Type</th>
                                         <th>Project</th>
                                         <th>Title</th>
@@ -36,6 +37,7 @@
                                     @foreach($upcoming_meetings as $meeting)
                                     <tr>
                                         <td>{{ $meeting->meeting_date }}</td>
+                                        <td>{{ $meeting->start_time }} - {{ $meeting->end_time }}</td>
                                         <td>{{ ucfirst($meeting->meeting_type) }}</td>
                                         <td>{{ $meeting->project->organisation->shortname }} - {{ $meeting->project->name }} </td>
                                         <td><a href="/meetings/{{$meeting->id}}"> {{ $meeting->title }}</a></td>
