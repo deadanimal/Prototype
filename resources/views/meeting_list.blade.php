@@ -33,7 +33,7 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach($meetings as $meeting)
+                                    @foreach($upcoming_meetings as $meeting)
                                     <tr>
                                         <td>{{ $meeting->meeting_date }}</td>
                                         <td>{{ ucfirst($meeting->meeting_type) }}</td>
