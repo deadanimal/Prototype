@@ -89,6 +89,16 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label class="form-label">Start Time</label>
+                                    <input type="time" name="start_time" class="form-control">
+                                </div>          
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">End Time</label>
+                                    <input type="time" name="end_time" class="form-control">
+                                </div>                                   
+
+                                <div class="mb-3">
                                     <label class="form-label">Meeting Remarks</label>
                                     <textarea class="form-control" rows="5" name="meeting_remarks" placeholder="Textarea"></textarea>
                                 </div>

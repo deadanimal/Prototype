@@ -10,9 +10,15 @@ class Tenderproposal extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 
+        'title', 
         'category', 
-        'type', 
+        'tender_type', 
+
+        'submission_date', 
+        'briefing_date', 
+
+        'submission_file',
+        'remarks', 
 
         'organisation_id',
         'user_id',
