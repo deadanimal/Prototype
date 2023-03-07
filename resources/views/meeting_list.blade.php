@@ -32,6 +32,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
+                                    @foreach($meetings as $meeting)
+                                    <tr>
+                                        <td>{{ $meeting->meeting_date }}</td>
+                                        <td>{{ ucfirst($meeting->meeting_type) }}</td>
+                                        <td>{{ $meeting->project->organisation->shortname }} - {{ $meeting->project->name }} </td>
+                                        <td><a href="/meetings/{{$meeting->id}}"> {{ $meeting->title }}</a></td>
+                                        <td>{{ ucfirst($meeting->status) }}</td>
+                                    </tr>
+                                    @endforeach                                    
                                   
 
                                 </tbody>
@@ -164,7 +174,7 @@
         </div>
     </main>
 
-
+{{-- 
     <script type="text/javascript">
         $(function () {
           
@@ -189,5 +199,5 @@
           });
           
         });
-      </script>    
+      </script>     --}}
 @endsection
