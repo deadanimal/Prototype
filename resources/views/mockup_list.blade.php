@@ -97,6 +97,11 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label class="form-label">Remarks</label>
+                                    <textarea class="form-control" rows="5" name="remarks" placeholder="Textarea"></textarea>
+                                </div>                                
+
+                                <div class="mb-3">
                                     <label class="form-label w-100">Specification</label>
                                     <input type="file" name="attachment">
                                 </div>

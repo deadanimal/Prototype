@@ -27,6 +27,7 @@ class MockupController extends Controller
             'client_name' => $request->client_name,
             'mockup_date' => $request->mockup_date,
             'trello_link' => $request->trello_link,
+            'remarks' => $request->remarks,
             'status' => 'draft',
             'user_id' => $user->id,
         ]);
