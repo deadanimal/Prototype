@@ -38,7 +38,7 @@
                                 @foreach($workpackages as $wp)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $wp->name }}</td>
+                                    <td><a href="/workpackages/{{$wp->id}}">{{ $wp->name }}</a></td>
                                     <td>{{ $wp->estimate_delivery }}</td>
                                     <td>
                                         @if($wp->project_id)
