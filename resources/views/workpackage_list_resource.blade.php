@@ -16,7 +16,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">List of Work Package</h5>
+                            <h5 class="card-title">List of Work Packages Assigned</h5>
                         </div>
 
                         <table class="table table-striped table-sm">

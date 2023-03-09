@@ -107,6 +107,13 @@
                         </a>
                     </li>
 
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/tickets">
+                            <i class="align-middle me-2 fa fa-fw fa-ticket"></i> <span
+                                class="align-middle">Ticket</span>
+                        </a>
+                    </li>					
+
 					@if( Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'business')
 
                     <li class="sidebar-item">

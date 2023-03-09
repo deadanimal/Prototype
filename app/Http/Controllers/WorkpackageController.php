@@ -36,7 +36,9 @@ class WorkpackageController extends Controller
     public function show_workpackages_assigned(Request $request) {
         $user = $request->user();
         $resource = Resource::where('user_id', $user->id)->first();
+        
         $workpackages = Workpackage::where('resource_id', $resource->id)->get();
+
         return view('workpackage_list_resource', compact('workpackages'));        
     }
 

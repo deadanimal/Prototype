@@ -264,5 +264,15 @@ class ProjectController extends Controller
         return back();  
 
     }
+
+    public function show_tickets(Request $request) {}
+
+    public function show_ticket(Request $request) {}
+
+    public function create_ticket(Request $request) {}
+
+    public function reply_ticket(Request $request) {}
+
+    public function update_ticket(Request $request) {}
 }
 

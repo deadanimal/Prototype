@@ -42,7 +42,13 @@ class TenderproposalController extends Controller
     
     public function update_tenderproposal(Request $request) {
         $user = $request->user();
+        $id = (int) $request->route('tenderproposal_id');  
         $tender = Tenderproposal::find($id);
+        $tender->title = $request->title;
+        $tender->submission_date = $request->submission_date;
+        $tender->briefing_date = $request->briefing_date;
+        $tender->remarks = $request->remarks;
+        $tender->save();
         return back();
     }      
 }
