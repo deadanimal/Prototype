@@ -20,7 +20,7 @@
                         </div>
 
                         <div class="card-body">
-                            {{$meeting->remarks}}
+                            {{$meeting}}
                         </div>                        
 
 
