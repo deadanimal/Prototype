@@ -218,6 +218,7 @@
                                 </form>
 
                                 @if( Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
+                                <h4 class="tab-title mt-3">Meeting Detail</h4>
                                 <form action="/meetings/{{$meeting->id}}" method="POST">
                                     @csrf
                                     @method('PUT')
