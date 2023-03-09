@@ -14,6 +14,8 @@ class Meeting extends Model
         'project_id',
         'meeting_type',
         'meeting_date',
+        'start_time',
+        'end_time',
         'remarks',
         'status',
         'user_id',
