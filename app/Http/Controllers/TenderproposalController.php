@@ -31,7 +31,7 @@ class TenderproposalController extends Controller
             'submission_date' => $request->submission_date,
             'briefing_date' => $request->briefing_date,
     
-            'submission_file' => $request->file('attachment')->store('prototype/submission_file'),
+            //'submission_file' => $request->file('attachment')->store('prototype/submission_file'),
             'remarks' => $request->remarks,
     
             'organisation_id' => $request->organisation_id,
