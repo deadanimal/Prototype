@@ -216,6 +216,40 @@
     
                                     <button type="submit" class="btn btn-primary">Reschedule Meeting</button>
                                 </form>
+
+                                @if( Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
+                                <form action="/meetings/{{$meeting->id}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+    
+                                    <div class="mb-3">
+                                        <label class="form-label">Meeting Title</label>
+                                        <input type="text" class="form-control" name="title" value="{{$meeting->title}}">
+                                    </div>
+    
+                                    <div class="mb-3">
+                                        <label class="form-label">Meeting Date</label>
+                                        <input type="date" name="meeting_date" class="form-control" value="{{$meeting->meeting_date}}">
+                                    </div>
+    
+                                    <div class="mb-3">
+                                        <label class="form-label">Start Time</label>
+                                        <input type="time" name="start_time" class="form-control" value="{{$meeting->start_time}}">
+                                    </div>          
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">End Time</label>
+                                        <input type="time" name="end_time" class="form-control" value="{{$meeting->end_time}}">
+                                    </div>                                   
+    
+                                    <div class="mb-3">
+                                        <label class="form-label">Meeting Remarks</label>
+                                        <textarea class="form-control" rows="5" name="meeting_remarks" placeholder="Textarea">{{$meeting->remarks}}</textarea>
+                                    </div>
+    
+                                    <button type="submit" class="btn btn-primary">Update Meeting</button>
+                                </form> 
+                                @endif                               
                             </div>
                                                                                                                                                                                                 
                         </div>

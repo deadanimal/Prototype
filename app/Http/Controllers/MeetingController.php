@@ -50,6 +50,8 @@ class MeetingController extends Controller
             'project_id'=> $request->project_id,
             'meeting_type'=> $request->meeting_type,
             'meeting_date'=> $request->meeting_date,
+            'start_time'=> $request->start_time,
+            'end_time'=> $request->end_time,
             'remarks'=> $request->meeting_remarks,
             'status' => 'draft',
             'user_id'=> $user->id,
@@ -64,7 +66,12 @@ class MeetingController extends Controller
         $user = $request->user();
         $id = (int) $request->route('meeting_id');  
         $meeting = Meeting::find($id);
-
+        $meeting->title = $request->title;
+        $meeting->meeting_date = $request->meeting_date;
+        $meeting->start_time = $request->start_time;
+        $meeting->end_time = $request->end_time;
+        $meeting->remarks = $request->meeting_remarks;      
+        $meeting->save();
         Alert::success('Success', 'Meeting has been updated!');
 
         return back();
