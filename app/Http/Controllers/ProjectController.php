@@ -276,13 +276,16 @@ class ProjectController extends Controller
 
         $user = $request->user();
         if ($user->user_type == 'admin') {
-            $tickets = Ticket::all();
+            $tickets = Ticket::where('status', 'opened')->get();
             $projects = Project::all();
         } elseif ($user->user_type == 'staff') {            
-            $tickets = Ticket::all();
+            $tickets = Ticket::where('status', 'opened')->get();
             $projects = Project::whereNotIn('organisation_id', [1])->orderBy('name')->get();
         } else {
-            $tickets = Ticket::where('organisation_id', $user->organisation_id)->get();
+            $tickets = Ticket::where([
+                ['organisation_id','=', $user->organisation_id],
+                ['status','=', 'opened'],
+            ])->get();
             $projects = Project::where('organisation_id', $user->organisation_id)->get();
         }
         $organisations = Organisation::all();
