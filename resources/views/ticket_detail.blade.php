@@ -20,7 +20,7 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>User</th>
+                                    <th>Sender</th>
                                     <th>Message</th>                                    
                                     <th>Attachment</th>   
                                     <th>Timestamp</th>   

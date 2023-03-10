@@ -352,8 +352,25 @@ class ProjectController extends Controller
     }
 
     public function update_ticket(Request $request) {
+        $user = $request->user();
         $id = (int) $request->route('ticket_id');  
         $ticket = Ticket::find($id);
+
+        $message = TicketMessage::create([
+            'message' => $request->message, 
+
+            'ticket_id' => $ticket->id,
+            'user_id' => $user->id,
+        ]);
+
+        if($request->has('attachment')) {
+            $message->attachment = $request->file('attachment')->store('prototype/attachment');
+            $message->save();
+        }    
+
+        $ticket->status = $request->status;
+        $ticket->save();
+        
         return back();
     }
 }
