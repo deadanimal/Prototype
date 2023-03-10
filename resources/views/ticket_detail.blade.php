@@ -6,7 +6,7 @@
 
             <div class="header">
                 <h1 class="header-title">
-                    Ticket
+                    {{$ticket->title}} | {{ ucfirst($ticket->status) }}
                 </h1>
 
             </div>                
