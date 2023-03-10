@@ -79,6 +79,7 @@
                     </div>
                 </div>    
 
+                @if(Auth::user()->user_type == 'admin' || Auth::user()->user_type == 'staff')
                 <div class="col-12">
                     <div class="card">
 
@@ -104,7 +105,8 @@
                         </div>
 
                     </div>
-                </div>                    
+                </div>  
+                @endif                  
 
             </div>
 
