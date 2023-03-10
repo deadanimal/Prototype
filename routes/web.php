@@ -101,6 +101,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tickets', [ProjectController::class, 'show_tickets']);
     Route::post('/tickets', [ProjectController::class, 'create_ticket']);   
     Route::get('/tickets/{ticket_id}', [ProjectController::class, 'show_ticket']); 
+    Route::post('/tickets/{ticket_id}/reply', [ProjectController::class, 'reply_ticket']); 
     Route::put('/tickets/{ticket_id}', [ProjectController::class, 'update_ticket']); 
 
     Route::get('/dt/meetings', [MeetingController::class, 'datatable_meetings']);

@@ -27,5 +27,10 @@ class Ticket extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
-    }       
+    }  
+    
+    public function ticket_messages()
+    {
+        return $this->belongsTo(TicketMessage::class);
+    }           
 }

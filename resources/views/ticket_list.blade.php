@@ -13,6 +13,7 @@
 
             <div class="row">
 
+                @if($tickets)
                 <div class="col-12">
                     <div class="card">
                       
@@ -41,13 +42,14 @@
                         </table>
                     </div>
                 </div>
+                @endif
 
                 <div class="col-12">
                     <div class="card">
 
                         <div class="card-body">
                                                       
-                        <form action="/tickets" method="POST">
+                        <form action="/tickets" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             @if(Auth::user()->user_type == 'admin' || Auth::user()->user_type == 'staff')
@@ -56,7 +58,7 @@
                                 <label class="form-label">Project</label>
                                 <select class="form-control mb-3" name="project_id">
                                     @foreach ($projects as $project)
-                                        <option value="{{ $project->id }}">{{ $project->organisation->name }} {{ $project->name }}</option>
+                                        <option value="{{ $project->id }}">{{ $project->organisation->name }} ({{ $project->name }})</option>
                                     @endforeach
                                 </select>
                             </div>                              
@@ -80,6 +82,11 @@
                                 <label class="form-label">Message</label>
                                 <textarea class="form-control" rows="5" name="message" placeholder="Textarea"></textarea>
                             </div>
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Attachment</label>
+                                <input type="file" name="attachment">
+                            </div>                            
 
                             <button type="submit" class="btn btn-primary">Create Ticket</button>
                         </form>

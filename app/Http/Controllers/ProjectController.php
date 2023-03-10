@@ -274,20 +274,21 @@ class ProjectController extends Controller
         $user = $request->user();
         if ($user->user_type == 'admin') {
             $tickets = Ticket::all();
+            $projects = Project::all();
         } elseif ($user->user_type == 'staff') {            
             $tickets = Ticket::all();
+            $projects = Project::whereNotIn('organisation_id', [1])->orderBy('name')->get();
         } else {
             $tickets = Ticket::where('organisation_id', $user->organisation_id)->get();
+            $projects = Project::where('organisation_id', $user->organisation_id)->get();
         }
         $organisations = Organisation::all();
-        $projects = Project::whereNotIn('organisation_id', [1])->orderBy('name')->get();
 
         return view('ticket_list', compact('tickets', 'organisations', 'projects'));
 
     }
 
     public function show_ticket(Request $request) {
-        
         $id = (int) $request->route('ticket_id');  
         $ticket = Ticket::find($id);
         return view('ticket_detail', compact('ticket'));        
@@ -307,20 +308,40 @@ class ProjectController extends Controller
             'user_id' => $user->id,
         ]);
 
-        TicketMessage::create([
+        $message = TicketMessage::create([
             'message' => $request->message, 
 
             'ticket_id' => $ticket->id,
             'user_id' => $user->id,
         ]);
 
+        if($request->has('attachment')) {
+            $message->attachment = $request->file('attachment')->store('prototype/attachment');
+            $message->save();
+        }
+
         Alert::success('Success', 'Ticket has been created');
         return back();
     }
 
     public function reply_ticket(Request $request) {
+        $user = $request->user();
         $id = (int) $request->route('ticket_id');  
         $ticket = Ticket::find($id);
+
+        $message = TicketMessage::create([
+            'message' => $request->message, 
+
+            'ticket_id' => $ticket->id,
+            'user_id' => $user->id,
+        ]);
+
+        if($request->has('attachment')) {
+            $message->attachment = $request->file('attachment')->store('prototype/attachment');
+            $message->save();
+        }        
+
+        Alert::success('Success', 'Message has been created');        
         return back();
     }
 
