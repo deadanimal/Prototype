@@ -100,7 +100,13 @@
                                     aria-selected="false">
                                     Work Package
                                 </a>
-                            </li>                                                                                                                                                         
+                            </li>       
+                            <li class="nav-item">
+                                <a class="nav-link" href="#vertical-icon-tab-10" data-bs-toggle="tab" role="tab"
+                                    aria-selected="false">
+                                    Ticket
+                                </a>
+                            </li>                                                                                                                                                                                 
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="vertical-icon-tab-0" role="tabpanel">
@@ -566,7 +572,42 @@
                                     </tbody>
                                 </table>                                  
 
-                            </div>                                                                                                                                                                          
+                            </div>          
+                            <div class="tab-pane" id="vertical-icon-tab-10" role="tabpanel">
+                                <h4 class="tab-title">Ticket</h4>
+
+                                @if($tickets)
+                                <div class="col-12">
+                                    <div class="card">
+                                      
+                                        <table class="table table-striped table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Title</th>
+                                                    <th>Client</th>                                    
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                              
+                
+                                                @foreach($tickets as $ticket)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>                                    
+                                                    <td><a href="/tickets/{{$ticket->id}}">{{ $ticket->title }}</a></td>
+                                                    <td>{{ $ticket->organisation->name }}</td>
+                                                    <td>{{ ucfirst($ticket->status) }}</td>
+                                                </tr>
+                                                @endforeach
+                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                @endif                             
+
+                            </div>                                                                                                                                                                                               
                         </div>
                     </div>
                 </div>

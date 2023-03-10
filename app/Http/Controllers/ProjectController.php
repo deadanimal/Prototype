@@ -62,9 +62,12 @@ class ProjectController extends Controller
         $phases = ProjectPhase::where('project_id', $id)->get();
         $wps = Workpackage::where('project_id', $id)->get();
         $requirements = ProjectRequirement::where('project_id', $id)->get();
+        $tickets = Ticket::where('project_id', $id)->get();
 
         return view('project_detail', compact(['project', 'documents','meetings',
-        'deliverables', 'users', 'members','payments','phases','wps', 'requirements']));
+            'deliverables', 'users', 'members','payments','phases','wps', 'requirements',
+            'tickets'
+        ]));
     }
 
     public function show_resources(Request $request) {
