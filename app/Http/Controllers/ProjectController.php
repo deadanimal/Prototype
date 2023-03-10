@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meeting;
+use App\Models\Organisation;
 use App\Models\Project;
 use App\Models\ProjectDeliverable;
 use App\Models\ProjectDocument;
@@ -13,6 +14,8 @@ use App\Models\ProjectTestflow;
 use App\Models\ProjectTestflowItem;
 use App\Models\ProjectUser;
 use App\Models\Resource;
+use App\Models\Ticket;
+use App\Models\TicketMessage;
 use App\Models\Trail;
 use App\Models\User;
 use App\Models\Workpackage;
@@ -266,14 +269,67 @@ class ProjectController extends Controller
 
     }
 
-    public function show_tickets(Request $request) {}
+    public function show_tickets(Request $request) {
 
-    public function show_ticket(Request $request) {}
+        $user = $request->user();
+        if ($user->user_type == 'admin') {
+            $tickets = Ticket::all();
+        } elseif ($user->user_type == 'staff') {            
+            $tickets = Ticket::all();
+        } else {
+            $tickets = Ticket::where('organisation_id', $user->organisation_id)->get();
+        }
+        $organisations = Organisation::all();
 
-    public function create_ticket(Request $request) {}
+        return view('ticket_list', compact('tickets', 'organisations'));
 
-    public function reply_ticket(Request $request) {}
+    }
 
-    public function update_ticket(Request $request) {}
+    public function show_ticket(Request $request) {
+        
+        $id = (int) $request->route('ticket_id');  
+        $ticket = Ticket::find($id);
+        return view('ticket_detail', compact('ticket'));        
+    }
+
+    public function create_ticket(Request $request) {
+        $user = $request->user();
+        if($user->user_type == 'admin' || $user->user_type == 'staff') {
+            $organisation_id = $request->organisation_id;
+        } else {
+            $organisation_id = $user->organisation_id;
+        }        
+
+        $ticket = Ticket::create([
+            'title' => $request->title,
+            'category' => $request->category,
+            'status' => 'opened',
+    
+            'organisation_id' => $organisation_id,
+            'user_id' => $user->id,
+        ]);
+
+        TicketMessage::create([
+            'message' => $request->message, 
+
+            'ticket_id' => $ticket->id,
+            'user_id' => $user->id,
+        ]);
+
+        Alert::success('Success', 'Ticket has been created');
+        return back();
+    }
+
+    public function reply_ticket(Request $request) {
+        $id = (int) $request->route('ticket_id');  
+        $ticket = Ticket::find($id);
+        return back();
+    }
+
+    public function update_ticket(Request $request) {
+        $id = (int) $request->route('ticket_id');  
+        $ticket = Ticket::find($id);
+        return back();
+    }
 }
 

@@ -98,7 +98,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/tenderproposals/{tenderproposal_id}', [TenderproposalController::class, 'show_tenderproposal']); 
     Route::put('/tenderproposals/{tenderproposal_id}', [TenderproposalController::class, 'update_tenderproposal']);    
 
-
+    Route::get('/tickets', [ProjectController::class, 'show_tickets']);
+    Route::post('/tickets', [ProjectController::class, 'create_ticket']);   
+    Route::get('/tickets/{ticket_id}', [ProjectController::class, 'show_ticket']); 
+    Route::put('/tickets/{ticket_id}', [ProjectController::class, 'update_ticket']); 
 
     Route::get('/dt/meetings', [MeetingController::class, 'datatable_meetings']);
 });
