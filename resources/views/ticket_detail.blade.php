@@ -23,6 +23,7 @@
                                     <th>User</th>
                                     <th>Message</th>                                    
                                     <th>Attachment</th>   
+                                    <th>Timestamp</th>   
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,6 +42,7 @@
                                             -
                                         @endif
                                     </td>
+                                    <td>{{ $message->created_at }}</td>
                                 </tr>
                                 @endforeach
                                 @endif
