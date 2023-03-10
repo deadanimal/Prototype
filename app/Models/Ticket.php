@@ -31,6 +31,6 @@ class Ticket extends Model
     
     public function ticket_messages()
     {
-        return $this->belongsTo(TicketMessage::class);
+        return $this->hasMany(TicketMessage::class);
     }           
 }
