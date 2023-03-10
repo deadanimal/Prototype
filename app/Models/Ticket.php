@@ -15,11 +15,17 @@ class Ticket extends Model
         'status', 
 
         'organisation_id',
+        'project_id',
         'user_id',
     ];    
     
     public function organisation()
     {
         return $this->belongsTo(Organisation::class);
+    }   
+    
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
     }       
 }

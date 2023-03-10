@@ -51,20 +51,12 @@
                             @csrf
 
                             @if(Auth::user()->user_type == 'admin' || Auth::user()->user_type == 'staff')
-                            <div class="mb-3">
-                                <label class="form-label">Organisation</label>
-                                <select class="form-control mb-3" name="organisation_id">
-                                    @foreach ($organisations as $organisation)
-                                        <option value="{{ $organisation->id }}">{{ $organisation->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>    
                             
                             <div class="mb-3">
                                 <label class="form-label">Project</label>
                                 <select class="form-control mb-3" name="project_id">
                                     @foreach ($projects as $project)
-                                        <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                        <option value="{{ $project->id }}">{{ $project->organisation->name }} {{ $project->name }}</option>
                                     @endforeach
                                 </select>
                             </div>                              

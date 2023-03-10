@@ -295,19 +295,15 @@ class ProjectController extends Controller
 
     public function create_ticket(Request $request) {
         $user = $request->user();
-        if($user->user_type == 'admin' || $user->user_type == 'staff') {
-            $organisation_id = $request->organisation_id;
-        } else {
-            $organisation_id = $user->organisation_id;
-        }        
+        $project = Project::find($request->project_id);
 
         $ticket = Ticket::create([
             'title' => $request->title,
             'category' => $request->category,
             'status' => 'opened',
     
-            'organisation_id' => $organisation_id,
-            'project_id' => $request->project_id,
+            'organisation_id' => $project->organisation->id,
+            'project_id' => $project->id,
             'user_id' => $user->id,
         ]);
 
