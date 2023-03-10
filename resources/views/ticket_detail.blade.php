@@ -79,6 +79,33 @@
                     </div>
                 </div>    
 
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                                                      
+                        <form action="/tickets/{{$ticket->id}}" method="POST">
+                            @csrf
+                            @method('PUT')
+                                                
+
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select class="form-control mb-3" name="status">
+                                    <option value="closed">Close</option>
+                                    <option value="delayed">Delayed</option>
+                                    <option value="reopened">Reopen</option>
+                                </select>
+                            </div>                       
+
+                            <button type="submit" class="btn btn-primary">Update Ticket</button>
+                        </form>
+
+                        </div>
+
+                    </div>
+                </div>                    
+
             </div>
 
 
