@@ -20,6 +20,9 @@
 </head>
 
 <body>
+
+	@include('sweetalert::alert')
+
 	<div class="splash active">
 		<div class="splash-icon"></div>
 	</div>

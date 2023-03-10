@@ -25,13 +25,14 @@ class ProjectController extends Controller
         $user = $request->user();
         if ($user->user_type == 'admin') {
             $projects = Project::all();
-        } elseif ($user->user_type == 'staff') {
+            return view('project_list', compact('projects'));
+        } elseif ($user->user_type == 'staff') {            
             $projects = Project::whereNotIn('organisation_id', [1])->orderBy('name')->get();
+            return view('project_list', compact('projects'));
         } else {
             $projects = Project::where('organisation_id', $user->organisation_id)->get();
             return view('project_list_client', compact('projects'));
         }
-        return view('project_list', compact('projects'));
     }
 
     public function show_project(Request $request) {
