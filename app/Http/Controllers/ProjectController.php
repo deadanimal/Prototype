@@ -280,8 +280,9 @@ class ProjectController extends Controller
             $tickets = Ticket::where('organisation_id', $user->organisation_id)->get();
         }
         $organisations = Organisation::all();
+        $projects = Project::whereNotIn('organisation_id', [1])->orderBy('name')->get();
 
-        return view('ticket_list', compact('tickets', 'organisations'));
+        return view('ticket_list', compact('tickets', 'organisations', 'projects'));
 
     }
 
@@ -306,6 +307,7 @@ class ProjectController extends Controller
             'status' => 'opened',
     
             'organisation_id' => $organisation_id,
+            'project_id' => $request->project_id,
             'user_id' => $user->id,
         ]);
 
