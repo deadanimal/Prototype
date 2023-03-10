@@ -28,6 +28,7 @@
                             <tbody>
                               
 
+                                @if($ticket->ticket_messages)
                                 @foreach($ticket->ticket_messages as $message)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>                                    
@@ -42,6 +43,7 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                @endif
 
                             </tbody>
                         </table>
