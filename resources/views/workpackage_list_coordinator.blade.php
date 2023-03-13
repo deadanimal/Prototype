@@ -196,7 +196,7 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Remarks</label>
-                                    <textarea class="form-control" rows="5" name="remarks" placeholder="Textarea"></textarea>
+                                    <textarea class="form-control" id="my-text-area" rows="5" name="remarks" placeholder="Textarea"></textarea>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Create Work Package</button>
@@ -279,4 +279,16 @@
 
         </div>
     </main>
+
+    <script>
+        function markdown_editor() {
+            const easyMDE = new EasyMDE({
+                element: document.getElementById('my-text-area')
+            });
+
+        }
+
+
+        markdown_editor();
+    </script>        
 @endsection
