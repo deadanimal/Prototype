@@ -86,7 +86,7 @@
                         </li>
                     @endif
 
-                    @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
+                    @if (Auth::user()->user_type == 'admin' || Auth::user()->->user_type == 'staff')
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="/projects">
                                 <i class="align-middle me-2 fa fa-fw fa-bank"></i> <span
