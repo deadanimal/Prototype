@@ -121,6 +121,10 @@ class WorkpackageController extends Controller
             $wp->status = 'Work Package Approved';
         } elseif($request->action == 'review_work_incomplete') {
             $wp->status = 'Work Package Incomplete';
+        } elseif($request->action == 'question') {
+            $wp->status = 'Has Problem';
+        } elseif($request->action == 'answer') {
+            $wp->status = 'Question Answered';            
         } else {
 
         }
