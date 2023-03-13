@@ -84,9 +84,13 @@ class SiteController extends Controller
         if ($user->email != 'afeezaziz@pipeline.com.my') {
             return redirect('/');
         }
-        $users = User::orderBy('organisation_id')->orderBy('position')->get();
+        $internal_users = User::where([
+            ['status','=', 'active'],
+            ['organisation_id','=', 1],
+        ])->orderBy('position')->get();
+        $external_users = User::where('status', 'active')->whereNotIn('organisation_id', [1])->orderBy('position')->get();        
         $organisations = Organisation::all();
-        return view('users', compact('users', 'organisations'));
+        return view('users', compact('internal_users', 'external_users', 'organisations'));
     }   
 
     public function show_user(Request $request) {
@@ -115,11 +119,7 @@ class SiteController extends Controller
         ]);
         $new_user->position = $request->position;
         $new_user->organisation_id = $request->organisation_id;
-        if($request->organisation_id == 1) {
-            $new_user->user_type = 'staff';
-        } else {
-            $new_user->user_type = 'client';
-        }
+        $new_user->user_type = $request->user_type;
         
         $new_user->save();
 

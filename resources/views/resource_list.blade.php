@@ -70,6 +70,7 @@
                                         <option value="developer">Developer</option>
                                         <option value="business">Business</option>
                                         <option value="pmo">PMO</option>
+                                        <option value="all">All</option>
                                         <option value="other">Other</option>
                                     </select>
                                 </div>

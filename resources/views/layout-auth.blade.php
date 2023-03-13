@@ -19,23 +19,23 @@
     <script src="/spark/js/settings.js"></script>
 
 
-	<!-- Datatable -->	
-	<link href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-	<link href="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js" rel="stylesheet">
+    <!-- Datatable -->
+    <link href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js" rel="stylesheet">
 
-	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-	<script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>	
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
-	<script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
 
 </head>
 
 <body>
 
-	@include('sweetalert::alert')
+    @include('sweetalert::alert')
 
-	
+
     <div class="splash active">
         <div class="splash-icon"></div>
     </div>
@@ -60,7 +60,7 @@
                 </div>
 
                 <ul class="sidebar-nav">
-					
+
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/meetings">
@@ -77,42 +77,41 @@
                     </li>
 
 
-					@if (Auth::user()->user_type == 'admin')
+                    @if (Auth::user()->user_type == 'admin')
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/products">
+                                <i class="align-middle me-2 fa fa-fw fa-ship"></i> <span
+                                    class="align-middle">Product</span>
+                            </a>
+                        </li>
+                    @endif
 
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/products">
-                            <i class="align-middle me-2 fa fa-fw fa-ship"></i> <span class="align-middle">Product</span>
-                        </a>
-                    </li>
+                    @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/projects">
+                                <i class="align-middle me-2 fa fa-fw fa-bank"></i> <span
+                                    class="align-middle">Project</span>
+                            </a>
+                        </li>
+                    @endif
 
-					@endif
-
-					@if( Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/projects">
-                            <i class="align-middle me-2 fa fa-fw fa-bank"></i> <span class="align-middle">Project</span>
-                        </a>
-                    </li>
-
-					@endif
-
-					@if( Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/resources">
-                            <i class="align-middle me-2 fa fa-fw fa-user-md"></i> <span
-                                class="align-middle">Resource</span>
-                        </a>
-                    </li>
-
-					@endif
+                    @if (Auth::user()->user_type == 'admin' || Auth::user()->user_type == 'staff')
+                        @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/resources">
+                                    <i class="align-middle me-2 fa fa-fw fa-user-md"></i> <span
+                                        class="align-middle">Resource</span>
+                                </a>
+                            </li>
+                        @endif
+                    @endif
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/kitabs">
-                            <i class="align-middle me-2 fa fa-fw fa-book"></i> <span class="align-middle">Knowledge Book</span>
+                            <i class="align-middle me-2 fa fa-fw fa-book"></i> <span class="align-middle">Knowledge
+                                Book</span>
                         </a>
-                    </li>					
+                    </li>
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/workpackages">
@@ -126,18 +125,16 @@
                             <i class="align-middle me-2 fa fa-fw fa-ticket"></i> <span
                                 class="align-middle">Ticket</span>
                         </a>
-                    </li>					
-
-					@if( Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'business')
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/tenderproposals">
-                            <i class="align-middle me-2 fa fa-fw fa-briefcase"></i> <span
-                                class="align-middle">Tender</span>
-                        </a>
                     </li>
 
-					@endif					
+                    @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'business')
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/tenderproposals">
+                                <i class="align-middle me-2 fa fa-fw fa-briefcase"></i> <span
+                                    class="align-middle">Tender</span>
+                            </a>
+                        </li>
+                    @endif
 
                     @if (Auth::user()->user_type == 'admin')
                         <li class="sidebar-item">

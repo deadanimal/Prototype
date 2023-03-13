@@ -16,17 +16,15 @@
 
                 <div class="col-12">
                     <div class="card">
-                        {{-- <div class="card-header">
-                            <h5 class="card-title">Profile Picture</h5>
-                            <h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
-                        </div> --}}
+                        <div class="card-header">
+                            <h5 class="card-title">Internal User</h5>
+                        </div>
                         
 
                             <table class="table table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Organisation</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Position</th>
@@ -34,10 +32,9 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($users as $user)
+                                    @foreach ($internal_users as $user)
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td>{{$user->organisation->name}}</td>
                                             <td><a href="/users/{{$user->id}}">{{$user->name}}</a></td>
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->position}}</td>
@@ -53,10 +50,45 @@
 
                 <div class="col-12">
                     <div class="card">
-                        {{-- <div class="card-header">
-                            <h5 class="card-title">Profile Picture</h5>
-                            <h6 class="card-subtitle text-muted">Default Bootstrap form layout.</h6>
-                        </div> --}}
+                        <div class="card-header">
+                            <h5 class="card-title">External User</h5>
+                        </div>
+                        
+
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Organisation</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Position</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach ($external_users as $user)
+                                        <tr>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$user->organisation->name}}</td>
+                                            <td><a href="/users/{{$user->id}}">{{$user->name}}</a></td>
+                                            <td>{{$user->email}}</td>
+                                            <td>{{$user->position}}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+
+                        
+                    </div>
+                </div>                
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Organisation</h5>
+                        </div>
                         
 
                             <table class="table table-striped table-sm">
@@ -100,7 +132,17 @@
                                 <div class="mb-3">
                                     <label class="form-label w-100">Email</label>
                                     <input type="text" name="email" class="form-control">
-                                </div>                                
+                                </div>      
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">User Type</label>
+                                    <select class="form-control mb-3" name="user_type">
+                                        <option value="staff">Staff</option>
+                                        <option value="client">Client</option>
+                                        <option value="remote - my">Remote - MY</option>
+                                        <option value="remote - etc">Remote - etc</option>
+                                    </select>
+                                </div>                                    
                                 
                                 <div class="mb-3">
                                     <label class="form-label w-100">Position</label>
