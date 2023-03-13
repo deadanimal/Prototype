@@ -38,7 +38,7 @@ class WorkpackageController extends Controller
             ->orderBy('status')
             ->get();
 
-        $resources = Resource::orderBy('resource_type')->get();
+        $resources = Resource::where('status', 'active')->orderBy('resource_type')->get();
         return view('workpackage_list_coordinator', compact('workpackages', 'projects', 'resources'));
     }
 
