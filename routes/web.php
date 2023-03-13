@@ -121,5 +121,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/kitabs/{kitab_id}', [WorkpackageController::class, 'show_kitab']); 
     Route::put('/kitabs/{kitab_id}', [WorkpackageController::class, 'update_kitab']);     
 
+    Route::post('/kitab-attachments', [WorkpackageController::class, 'create_kitab_attachment']);   
+
     Route::get('/dt/meetings', [MeetingController::class, 'datatable_meetings']);
 });

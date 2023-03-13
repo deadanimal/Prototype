@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 
 use App\Models\Kitab;
+use App\Models\KitabAttachment;
 use App\Models\Project;
 use App\Models\Resource;
 use App\Models\Workpackage;
@@ -155,7 +156,10 @@ class WorkpackageController extends Controller
         $notes = Kitab::where([
             ['user_id', '=', $user->id]
         ])->orderBy('category')->orderBy('title')->get();
-        return view('kitab_list', compact('kitabs','notes'));
+        $attachments = KitabAttachment::where([
+            ['user_id', '=', $user->id]
+        ])->orderBy('title')->get();
+        return view('kitab_list', compact('kitabs','notes', 'attachments'));
     }
 
     public function show_kitab(Request $request) {
@@ -181,6 +185,21 @@ class WorkpackageController extends Controller
 
         return back();
     }   
+
+    public function create_kitab_attachment(Request $request) {
+
+        $user = $request->user();
+;  
+        KitabAttachment::create([
+            'title' => $request->title,        
+            'link' => $request->file('attachment')->store('prototype/attachment'),
+            'user_id' => $user->id,
+        ]);
+    
+
+        return back();
+    }       
+
 
     public function update_kitab(Request $request) {
         $id = (int) $request->route('kitab_id');  
