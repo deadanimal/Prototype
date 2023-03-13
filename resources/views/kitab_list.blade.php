@@ -21,7 +21,9 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
+                                    <th>Category</th>  
                                     <th>Title</th>                                  
+                                    <th>Author</th>                                  
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,7 +32,9 @@
                                 @foreach($kitabs as $kitab)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>                                    
+                                    <td>{{ ucfirst($kitab->category) }}</td>
                                     <td><a href="/kitabs/{{$kitab->id}}">{{ $kitab->title }}</a></td>
+                                    <td>{{ ucfirst($kitab->user->name) }}</td>
                                 </tr>
                                 @endforeach
 
