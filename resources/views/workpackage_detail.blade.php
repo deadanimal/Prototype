@@ -127,10 +127,12 @@
                                 @if (Auth::user()->resource->id == $wp->resource_id || Auth::user()->resource->resource_type == 'all')
                                 <button type="submit" name="action" value="submit_work_complete" class="btn btn-primary">Submit Complete Work</button>
                                 <button type="submit" name="action" value="submit_work_incomplete" class="btn btn-warning">Submit Incomplete Work</button>
+                                <button type="submit" name="action" value="question" class="btn btn-info">Ask Question</button>
                                 @endif
                                 @if (Auth::user()->resource->id == $wp->reviewer_id || Auth::user()->resource->resource_type == 'all')
                                 <button type="submit" name="action" value="review_work_complete" class="btn btn-success">Mark as Complete</button>
                                 <button type="submit" name="action" value="review_work_incomplete" class="btn btn-danger">Mark as Incomplete</button>
+                                <button type="submit" name="action" value="answer" class="btn btn-info">Answer Question</button>
                                 @endif
                             </form>
                             @endif
