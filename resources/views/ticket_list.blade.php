@@ -80,7 +80,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Message</label>
-                                <textarea class="form-control" rows="5" name="message" placeholder="Textarea"></textarea>
+                                <textarea class="form-control" id="my-text-area" rows="5" name="message" placeholder="Textarea"></textarea>
                             </div>
 
                             <div class="mb-3">
@@ -101,4 +101,17 @@
 
         </div>
     </main>
+
+    <script>
+        function markdown_editor() {
+            const easyMDE = new EasyMDE({
+                element: document.getElementById('my-text-area')
+            });
+
+        }
+
+
+        markdown_editor();
+    </script>
+
 @endsection

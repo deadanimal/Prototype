@@ -14,7 +14,7 @@
 
             <div class="row">
 
-                <div class="col-12">
+                <div class="col-4">
 
                     <div class="card">
                         <div class="card-header">
@@ -22,12 +22,32 @@
                         </div>
 
                         <div class="card-body">
-                            ID: {{ $wp->id }} <br/>
-                            Name: {{ $wp->name }} <br/>
+
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+    
+                                    <tr>
+                                        <td><b>ID</b></td>
+                                        <td>{{ $wp->id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Name</b></td>
+                                        <td>{{ $wp->name }}</td>
+                                    </tr>                                    
+    
+                                </tbody>
+                            </table>
+
+                    
                             Estimate Delivery: {{ $wp->estimate_delivery }} <br/>
                             Package Type: {{ $wp->package_type }} <br/>
                             Package level: {{ $wp->package_level }} <br/>
-                            Remarks: {{ $wp->remarks }} <br/>
                             Status: {{ $wp->status }} <br/>
                             Project: {{ $wp->project->organisation->name }} - {{ $wp->project->name }} <br/>
                             Resource: 
@@ -52,6 +72,24 @@
                     </div>
 
                 </div>
+
+                <div class="col-8">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Remarks</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <x-markdown>
+                                {{ $wp->remarks }}
+                            </x-markdown>
+                        </div>
+
+
+                    </div>
+
+                </div>                
 
                 <div class="col-12">
 

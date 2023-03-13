@@ -140,7 +140,10 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ ucfirst($item->category) }}</td>
                                             <td>
+                                                <x-markdown>
                                                 {{ $item->item }}
+                                                </x-markdown>
+
                                                 <br/><br/>
                                                 <i>Written at {{$item->created_at}}</i>
                                                 
@@ -171,7 +174,7 @@
         
                                     <div class="mb-3">
                                         <label class="form-label">Item</label>
-                                        <textarea class="form-control" rows="5" name="item" placeholder="Textarea"></textarea>
+                                        <textarea class="form-control" id="my-text-area-1" rows="5" name="item" placeholder="Textarea"></textarea>
                                     </div>
         
                                     <div class="mb-3">
@@ -245,7 +248,7 @@
     
                                     <div class="mb-3">
                                         <label class="form-label">Meeting Remarks</label>
-                                        <textarea class="form-control" rows="5" name="meeting_remarks" placeholder="Textarea">{{$meeting->remarks}}</textarea>
+                                        <textarea class="form-control" id="my-text-area-2" rows="5" name="meeting_remarks" placeholder="Textarea">{{$meeting->remarks}}</textarea>
                                     </div>
     
                                     <button type="submit" class="btn btn-primary">Update Meeting</button>
@@ -269,4 +272,20 @@
 
         </div>
     </main>
+
+    <script>
+        function markdown_editor() {
+            const easyMDE1 = new EasyMDE({
+                element: document.getElementById('my-text-area-1')
+            });
+
+            const easyMDE2 = new EasyMDE({
+                element: document.getElementById('my-text-area-2')
+            });
+
+        }
+
+
+        markdown_editor();
+    </script>    
 @endsection

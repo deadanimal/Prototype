@@ -34,7 +34,11 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>                                    
                                     <td>{{$message->user->name}}</td>
-                                    <td>{{ $message->message }}</td>
+                                    <td>
+                                        <x-markdown>
+                                            {{ $message->message }}
+                                        </x-markdown>
+                                    </td>
                                     <td>
                                         @if($message->attachment)
                                             <a href="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{$message->attachment}}">Link</a>
@@ -63,7 +67,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Message</label>
-                                <textarea class="form-control" rows="5" name="message" placeholder="Textarea"></textarea>
+                                <textarea class="form-control" id="my-text-area" rows="5" name="message" placeholder="Textarea"></textarea>
                             </div>
 
                             <div class="mb-3">
@@ -71,7 +75,7 @@
                                 <input type="file" name="attachment">
                             </div>                             
 
-                            <button type="submit" class="btn btn-primary">Create Message</button>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
                         </form>
 
                         </div>
@@ -113,4 +117,16 @@
 
         </div>
     </main>
+
+    <script>
+        function markdown_editor() {
+            const easyMDE = new EasyMDE({
+                element: document.getElementById('my-text-area')
+            });
+
+        }
+
+
+        markdown_editor();
+    </script>    
 @endsection
