@@ -91,7 +91,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/products', [ProductController::class, 'show_products']);
     Route::post('/products', [ProductController::class, 'create_product']);   
     Route::get('/products/{product_id}', [ProductController::class, 'show_product']); 
-    Route::put('/products/{product_id}', [ProductController::class, 'update_product']);  
+    Route::put('/products/{product_id}', [ProductController::class, 'update_product']);
+    Route::get('/products/{product_id}/technical', [ProductController::class, 'show_product_technicals']);   
+
+    Route::post('/products/{product_id}/actors', [ProductController::class, 'create_product_actor']);
+    Route::put('/products/{product_id}/actors/{actor_id}', [ProductController::class, 'update_product_actor']);
+    Route::post('/products/{product_id}/usecases', [ProductController::class, 'create_product_usecase']);
+    Route::put('/products/{product_id}/usecases/{usecase_id}', [ProductController::class, 'update_product_usecase']);    
+    Route::post('/products/{product_id}/tables', [ProductController::class, 'create_product_table']);
+    Route::put('/products/{product_id}/tables/{table_id}', [ProductController::class, 'update_product_table']); 
+    Route::post('/products/{product_id}/attributes', [ProductController::class, 'create_product_table_attribute']);
+    Route::put('/products/{product_id}/attributes/{attribute_id}', [ProductController::class, 'update_product_table_attribute']);
+    Route::post('/products/{product_id}/methods', [ProductController::class, 'create_product_method']);
+    Route::put('/products/{product_id}/methods/{method_id}', [ProductController::class, 'update_product_method']);            
     
     Route::get('/tenderproposals', [TenderproposalController::class, 'show_tenderproposals']);
     Route::post('/tenderproposals', [TenderproposalController::class, 'create_tenderproposal']);   
