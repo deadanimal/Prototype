@@ -82,6 +82,7 @@
                                         <option value="testing">Testing</option>
                                         <option value="progress">Progress</option>
                                         <option value="business">Business</option>
+                                        <option value="internal">Internal</option>
                                     </select>
                                 </div>
 
