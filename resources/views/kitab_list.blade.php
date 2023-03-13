@@ -63,6 +63,7 @@
                                 <select class="form-control mb-3" name="category">
                                     <option value="analyst">Analyst</option>
                                     <option value="developer">Developer</option>
+                                    <option value="devops">Devops</option>
                                     <option value="project">Project</option>
                                 </select>
                             </div>

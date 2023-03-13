@@ -150,7 +150,7 @@ class WorkpackageController extends Controller
     } 
 
     public function show_kitabs(Request $request) {
-        $kitabs = Kitab::all();
+        $kitabs = Kitab::orderBy('category')->orderBy('title')->get();
         return view('kitab_list', compact('kitabs'));
     }
 
