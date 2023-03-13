@@ -60,7 +60,7 @@ class ProjectController extends Controller
         $members = ProjectUser::where('project_id', $id)->get();
         $payments = ProjectPayment::where('project_id', $id)->get();
         $phases = ProjectPhase::where('project_id', $id)->get();
-        $wps = Workpackage::where('project_id', $id)->get();
+        $wps = Workpackage::where('project_id', $id)->orderBy('estimate_delivery')->orderBy('status')->get();
         $requirements = ProjectRequirement::where('project_id', $id)->get();
         $tickets = Ticket::where('project_id', $id)->get();
 
