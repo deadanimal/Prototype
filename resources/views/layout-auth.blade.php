@@ -25,6 +25,10 @@
 
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>	
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+
 </head>
 
 <body>
@@ -103,6 +107,12 @@
                     </li>
 
 					@endif
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/kitabs">
+                            <i class="align-middle me-2 fa fa-fw fa-book"></i> <span class="align-middle">Knowledge Book</span>
+                        </a>
+                    </li>					
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/workpackages">

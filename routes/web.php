@@ -104,5 +104,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/tickets/{ticket_id}/reply', [ProjectController::class, 'reply_ticket']); 
     Route::put('/tickets/{ticket_id}', [ProjectController::class, 'update_ticket']); 
 
+    Route::get('/kitabs', [WorkpackageController::class, 'show_kitabs']);
+    Route::post('/kitabs', [WorkpackageController::class, 'create_kitab']);   
+    Route::get('/kitabs/{kitab_id}', [WorkpackageController::class, 'show_kitab']); 
+    Route::put('/kitabs/{kitab_id}', [WorkpackageController::class, 'update_kitab']);     
+
     Route::get('/dt/meetings', [MeetingController::class, 'datatable_meetings']);
 });

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
+
+use App\Models\Kitab;
 use App\Models\Project;
 use App\Models\Resource;
 use App\Models\Workpackage;
@@ -145,4 +148,46 @@ class WorkpackageController extends Controller
 
         return back();
     } 
+
+    public function show_kitabs(Request $request) {
+        $kitabs = Kitab::all();
+        return view('kitab_list', compact('kitabs'));
+    }
+
+    public function show_kitab(Request $request) {
+        $id = (int) $request->route('kitab_id');  
+        $kitab = Kitab::find($id);
+        $remarks = Str::markdown($kitab->remarks);
+
+        return view('kitab_detail', compact('kitab', 'remarks'));
+    }    
+
+    public function create_kitab(Request $request) {
+
+        $user = $request->user();
+;  
+        Kitab::create([
+            'title' => $request->title,        
+            'category' => $request->category,
+            'remarks' => $request->remarks,
+            'status' => 'draft',
+            'user_id' => $user->id,
+        ]);
+    
+
+        return back();
+    }   
+
+    public function update_kitab(Request $request) {
+        $id = (int) $request->route('kitab_id');  
+        $kitab = Kitab::find($id);
+        $kitab->update([
+            'title' => $request->title,        
+            'remarks' => $request->remarks,
+        ]);
+        
+        return back();
+    }    
+
+
 }
