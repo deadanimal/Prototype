@@ -24,7 +24,7 @@
                         <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>No.</th>
                                     <th>Name</th>
                                     <th>Project</th>
                                     <th>Level</th>
@@ -42,10 +42,10 @@
 
                                 @foreach ($workpackages as $wp)
                                     <tr>
-                                        <td>{{ $wp->id }}</td>
+                                        <td>{{$loop->iteration}}</td>
                                         <td>
                                             <a href="/workpackages/{{ $wp->id }}">
-                                                {{ $wp->name }}
+                                                {{ $wp->name }} ({{ $wp->id }})
                                             </a>
                                         </td>
                                         <td>
