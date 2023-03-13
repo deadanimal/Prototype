@@ -19,9 +19,11 @@
                         <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
-                                    <th>Project</th>
-                                    <th>Client</th>                                    
+                                    <th>No.</th>                                    
+                                    <th>Client</th>
+                                    <th>Project</th>                                    
+                                    <th>Briefing Date</th>
+                                    <th>Submission Date</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -31,8 +33,10 @@
                                 @foreach($tenders as $tender)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>                                    
-                                    <td><a href="/tenderproposals/{{$tender->id}}">{{ $tender->title }}</a></td>
                                     <td>{{ $tender->organisation->name }}</td>
+                                    <td><a href="/tenderproposals/{{$tender->id}}">{{ $tender->title }}</a></td>                                    
+                                    <td>{{ $tender->briefing_date }}</td>
+                                    <td>{{ $tender->submission_date }}</td>
                                     <td>{{ ucfirst($tender->status) }}</td>
                                 </tr>
                                 @endforeach
