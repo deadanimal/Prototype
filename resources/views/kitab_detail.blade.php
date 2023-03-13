@@ -48,7 +48,7 @@
 
                                           
 
-                            <button type="submit" class="btn btn-primary">Update Kitab</button>
+                            <button type="submit" class="btn btn-primary">Update Note</button>
                         </form>
 
                         </div>

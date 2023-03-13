@@ -150,8 +150,12 @@ class WorkpackageController extends Controller
     } 
 
     public function show_kitabs(Request $request) {
+        $user = $request->user();
         $kitabs = Kitab::orderBy('category')->orderBy('title')->get();
-        return view('kitab_list', compact('kitabs'));
+        $notes = Kitab::where([
+            ['user_id', '=', $user->id]
+        ])->orderBy('category')->orderBy('title')->get();
+        return view('kitab_list', compact('kitabs','notes'));
     }
 
     public function show_kitab(Request $request) {
