@@ -31,7 +31,7 @@
                                 @foreach($tenders as $tender)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>                                    
-                                    <td><a href="/tenders/{{$tender->id}}">{{ $tender->title }}</a></td>
+                                    <td><a href="/tenderproposals/{{$tender->id}}">{{ $tender->title }}</a></td>
                                     <td>{{ $tender->organisation->name }}</td>
                                     <td>{{ ucfirst($tender->status) }}</td>
                                 </tr>
