@@ -21,11 +21,11 @@ class WorkpackageController extends Controller
         $user = $request->user();
 
         if ($user->user_type == 'admin') {
-            $workpackages = Workpackage::orderBy('estimate_delivery')->get();
+            $workpackages = Workpackage::orderBy('estimate_delivery')->orderBy('status')->get();
         } elseif ($user->user_type == 'staff') {
             $resource = Resource::where('user_id', $user->id)->first();
             if ($resource->resource_type == 'pmo') {
-                $workpackages = Workpackage::orderBy('estimate_delivery')->get();
+                $workpackages = Workpackage::orderBy('estimate_delivery')->orderBy('status')->get();
             } else {
                 return redirect('/workpackages/assigned');
             }
@@ -40,8 +40,9 @@ class WorkpackageController extends Controller
     public function show_workpackages_assigned(Request $request) {
         $user = $request->user();
         $resource = Resource::where('user_id', $user->id)->first();
-        
-        $workpackages = Workpackage::where('resource_id', $resource->id)->get();
+        $workpackages = Workpackage::where([
+            ['resource_id','=', $resource->id]
+        ])->orderBy('estimate_delivery')->orderBy('status')->get();
 
         return view('workpackage_list_resource', compact('workpackages'));        
     }
