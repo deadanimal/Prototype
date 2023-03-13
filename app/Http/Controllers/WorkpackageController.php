@@ -21,17 +21,22 @@ class WorkpackageController extends Controller
         $user = $request->user();
 
         if ($user->user_type == 'admin') {
-            $workpackages = Workpackage::whereNotIn('status', ['Work Package Approved'])->orderBy('estimate_delivery')->orderBy('status')->get();
+            
         } elseif ($user->user_type == 'staff') {
             $resource = Resource::where('user_id', $user->id)->first();
             if ($resource->resource_type == 'pmo') {
-                $workpackages = Workpackage::whereNotIn('status', ['Work Package Approved'])->orderBy('estimate_delivery')->orderBy('status')->get();
+
             } else {
                 return redirect('/workpackages/assigned');
             }
         } else {
             return redirect('/'); 
         }
+
+        $workpackages = Workpackage::whereNotIn('status', ['Work Package Approved'])
+            ->orderBy('estimate_delivery')
+            ->orderBy('status')
+            ->get();
 
         $resources = Resource::orderBy('resource_type')->get();
         return view('workpackage_list_coordinator', compact('workpackages', 'projects', 'resources'));
