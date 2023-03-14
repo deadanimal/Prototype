@@ -37,7 +37,10 @@ class MeetingController extends Controller
     public function show_meeting(Request $request) {
         $id = (int) $request->route('meeting_id');  
         $meeting = Meeting::find($id);
-        $users = User::where('organisation_id', 1)->get();
+        $users = User::where([
+            ['organisation_id','=', 1],
+            ['status','=', 'active']
+        ])->get();
 
         return view('meeting_detail', compact('meeting', 'users'));
     }

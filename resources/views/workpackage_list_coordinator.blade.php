@@ -16,7 +16,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">List of Work Packages</h5>
+                            <h5 class="card-title">List of Assigned Work Packages</h5>
                             <h6 class="card-subtitle text-muted">See WPs assigned to self? Click <a
                                     href="/workpackages/assigned">here</a></h6>
                         </div>
@@ -102,6 +102,96 @@
 
                     </div>
                 </div>
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">List of Question & Answer Work Packages</h5>
+                            <h6 class="card-subtitle text-muted">See WPs assigned to self? Click <a
+                                    href="/workpackages/assigned">here</a></h6>
+                        </div>
+
+                        <table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Name</th>
+                                    <th>Project</th>
+                                    <th>Level</th>
+                                    <th>Estimated Delivery</th>
+                                    <th>Resource</th>
+                                    <th>Reviewer</th>
+                                    {{-- <th>Coordinator</th>
+                                    <th>Type</th>
+                                    <th>Level</th> --}}
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                @foreach ($question_wps as $wp)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>
+                                            <a href="/workpackages/{{ $wp->id }}">
+                                                {{ $wp->name }} ({{ $wp->id }})
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @if ($wp->project_id)
+                                                <a href="/projects/{{ $wp->project_id }}">
+                                                    {{ $wp->project->name }}
+                                                </a>
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>
+
+                                            @if ($wp->package_level == "1 - 6 hours")
+                                                Level 1
+                                            @elseif($wp->package_level == "2 - 3 hours")
+                                                Level 2
+                                            @elseif($wp->package_level == "3 - 1 hour")
+                                                Level 3                                             
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($wp->estimate_delivery)
+                                                {{ $wp->estimate_delivery }}
+                                            @else
+                                                ?
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($wp->resource_id)
+                                                {{ $wp->resource->user->name }}
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($wp->reviewer_id)
+                                                {{ $wp->reviewer->user->name }}
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        {{-- <td>{{ $wp->coordinator->name }}</td>
+                                    <td>{{ $wp->package_type }}</td>
+                                    <td>{{ $wp->package_level }}</td> --}}
+                                        <td>{{ $wp->status }}</td>
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>                
 
                 <div class="col-12">
                     <div class="card">

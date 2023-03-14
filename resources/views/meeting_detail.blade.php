@@ -13,15 +13,44 @@
 
             <div class="row">
 
-                <div class="col-12">
+                <div class="col-6">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title">Meeting Detail</h5>
                         </div>
 
-                        <div class="card-body">
-                            {{$meeting}}
-                        </div>                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody> 
+                                <tr>
+                                    <td>Title</td>
+                                    <td>{{$meeting->title}}</td>
+                                </tr> 
+                                <tr>
+                                    <td>Status</td>
+                                    <td>{{$meeting->status}}</td>
+                                </tr>                                                                   
+                                <tr>
+                                    <td>Date</td>
+                                    <td>{{$meeting->meeting_date}}</td>
+                                </tr> 
+                                <tr>
+                                    <td>Time</td>
+                                    <td>{{$meeting->start_time}} - {{$meeting->end_time}}</td>
+                                </tr>   
+                                <tr>
+                                    <td>Created By</td>
+                                    <td>{{$meeting->user->name}}</td>
+                                </tr>                                                                                                                                                                                             
+
+
+                            </tbody>
+                        </table>                                       
 
 
            
@@ -29,6 +58,25 @@
 
                     </div>
                 </div>
+
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Remarks</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <x-markdown>
+                                {{$meeting->remarks}}
+                            </x-markdown>
+                        </div>                        
+
+
+           
+
+
+                    </div>
+                </div>                
 
                 <div class="col-12">
 
