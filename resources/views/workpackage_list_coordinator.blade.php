@@ -40,7 +40,7 @@
                             <tbody>
 
 
-                                @foreach ($workpackages as $wp)
+                                @foreach ($assigned_wps as $wp)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
                                         <td>

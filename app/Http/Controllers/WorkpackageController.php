@@ -38,8 +38,35 @@ class WorkpackageController extends Controller
             ->orderBy('status')
             ->get();
 
+            $all_wps = Workpackage::orderBy('estimate_delivery')->get();        
+            
+            $assigned_wps = Workpackage::where([
+                ['status','=', 'Reassigned']
+            ])->orWhere([
+                ['status','=', 'Assigned']
+            ])->orWhere([
+                ['status','=', 'Work Package Incomplete']
+            ])->orderBy('estimate_delivery')->get();
+    
+            $approved_wps = Workpackage::where([
+                ['status','=', 'Work Package Approved']
+            ])->orderBy('estimate_delivery')->get();    
+            
+            $inreview_wps = Workpackage::where([
+                ['status','=', 'Work Package In Review']
+            ])->orderBy('estimate_delivery')->get(); 
+            
+            $question_wps = Workpackage::where([
+                ['status','=', 'Has Problem']
+            ])->orWhere([
+                ['status','=', 'Question Answered']
+            ])->orderBy('estimate_delivery')->get();              
+
         $resources = Resource::where('status', 'active')->orderBy('resource_type')->get();
-        return view('workpackage_list_coordinator', compact('workpackages', 'projects', 'resources'));
+        return view('workpackage_list_coordinator', compact([
+            'workpackages', 'projects', 'resources',
+            'all_wps','assigned_wps', 'approved_wps','inreview_wps', 'question_wps'
+    ]));
     }
 
     public function show_workpackages_assigned(Request $request) {
@@ -53,9 +80,12 @@ class WorkpackageController extends Controller
         $assigned_wps = Workpackage::where([
             ['resource_id','=', $resource->id],
             ['status','=', 'Reassigned']
-        ])->whereOr([
+        ])->orWhere([
             ['resource_id','=', $resource->id],
             ['status','=', 'Assigned']
+        ])->orWhere([
+            ['resource_id','=', $resource->id],
+            ['status','=', 'Work Package Incomplete']
         ])->orderBy('estimate_delivery')->get();
 
         $approved_wps = Workpackage::where([
@@ -63,8 +93,22 @@ class WorkpackageController extends Controller
             ['status','=', 'Work Package Approved']
         ])->orderBy('estimate_delivery')->get();        
 
+        $inreview_wps = Workpackage::where([
+            ['resource_id','=', $resource->id],
+            ['status','=', 'Work Package In Review']
+        ])->orderBy('estimate_delivery')->get(); 
+        
+        $question_wps = Workpackage::where([
+            ['resource_id','=', $resource->id],
+            ['status','=', 'Has Problem']
+        ])->orWhere([
+            ['resource_id','=', $resource->id],
+            ['status','=', 'Question Answered']
+        ])->orderBy('estimate_delivery')->get();          
+
         return view('workpackage_list_resource', compact([
-            'all_wps','assigned_wps', 'approved_wps','resource'
+            'all_wps','assigned_wps', 'approved_wps','inreview_wps', 'question_wps',
+            'resource'
         ]));        
     }
 
