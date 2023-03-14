@@ -46,7 +46,7 @@ class WorkpackageController extends Controller
                 ['status','=', 'Assigned']
             ])->orWhere([
                 ['status','=', 'Work Package Incomplete']
-            ])->orderBy('estimate_delivery')->get();
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();
     
             $approved_wps = Workpackage::where([
                 ['status','=', 'Work Package Approved']
@@ -86,7 +86,7 @@ class WorkpackageController extends Controller
         ])->orWhere([
             ['resource_id','=', $resource->id],
             ['status','=', 'Work Package Incomplete']
-        ])->orderBy('estimate_delivery')->get();
+        ])->orderBy('estimate_delivery')->orderBy('status')->get();
 
         $approved_wps = Workpackage::where([
             ['resource_id','=', $resource->id],
