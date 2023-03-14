@@ -158,6 +158,7 @@
                                     <div class="mb-3">
                                         <label class="form-label">User</label>
                                         <select class="form-control mb-3" name="user_id">
+                                            <option value="" disabled>Client</option>
                                             @foreach($users as $user)
                                                 <option value="{{$user->id}}">{{ $user->name }}</option>
                                             @endforeach
