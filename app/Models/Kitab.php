@@ -12,6 +12,7 @@ class Kitab extends Model
     protected $fillable = [
         'title',        
         'category',
+        'privacy',
         'remarks',
         'status',
         'user_id',

@@ -174,9 +174,10 @@ class WorkpackageController extends Controller
 
     public function show_kitabs(Request $request) {
         $user = $request->user();
-        $kitabs = Kitab::orderBy('category')->orderBy('title')->get();
+        $kitabs = Kitab::where('privacy', 'public')->orderBy('category')->orderBy('title')->get();
         $notes = Kitab::where([
-            ['user_id', '=', $user->id]
+            ['user_id', '=', $user->id],
+            ['privacy', '=', 'private']
         ])->orderBy('category')->orderBy('title')->get();
         $attachments = KitabAttachment::where([
             ['user_id', '=', $user->id]
@@ -200,6 +201,7 @@ class WorkpackageController extends Controller
             'title' => $request->title,        
             'category' => $request->category,
             'remarks' => $request->remarks,
+            'privacy' => $request->privacy,
             'status' => 'draft',
             'user_id' => $user->id,
         ]);
