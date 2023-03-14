@@ -96,6 +96,8 @@
                                 <div class="tab-pane active" id="vertical-icon-tab-0" role="tabpanel">
                                     <h4 class="tab-title">Summary</h4>
 
+                                    WP Costs: RM {{$wp_costs}}
+
 
                                 </div>
 

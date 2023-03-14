@@ -11,7 +11,9 @@ class Resource extends Model
 
     protected $fillable = [   
         'resource_type',        
-        'status',        
+        'status',   
+        'currency',        
+        'hourly_rate',        
         'user_id',
     ];      
 

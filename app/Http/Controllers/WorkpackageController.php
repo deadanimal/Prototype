@@ -45,11 +45,27 @@ class WorkpackageController extends Controller
     public function show_workpackages_assigned(Request $request) {
         $user = $request->user();
         $resource = Resource::where('user_id', $user->id)->first();
-        $workpackages = Workpackage::where([
-            ['resource_id','=', $resource->id]
-        ])->orderBy('estimate_delivery')->orderBy('status')->get();
 
-        return view('workpackage_list_resource', compact('workpackages'));        
+        $all_wps = Workpackage::where([
+            ['resource_id','=', $resource->id],
+        ])->orderBy('estimate_delivery')->get();        
+        
+        $assigned_wps = Workpackage::where([
+            ['resource_id','=', $resource->id],
+            ['status','=', 'Reassigned']
+        ])->whereOr([
+            ['resource_id','=', $resource->id],
+            ['status','=', 'Assigned']
+        ])->orderBy('estimate_delivery')->get();
+
+        $approved_wps = Workpackage::where([
+            ['resource_id','=', $resource->id],
+            ['status','=', 'Work Package Approved']
+        ])->orderBy('estimate_delivery')->get();        
+
+        return view('workpackage_list_resource', compact([
+            'all_wps','assigned_wps', 'approved_wps','resource'
+        ]));        
     }
 
     public function show_workpackage(Request $request) {

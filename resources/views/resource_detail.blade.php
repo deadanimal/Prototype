@@ -6,33 +6,51 @@
 
             <div class="row">
 
-                <div class="col-12 col-xl-6">
+                <div class="col-12">
                     <div class="card">
                       
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Client</th>
-                                    <th>Project</th>
-                                    <th>Status</th>
+                                    <th>Item</th>
+                                    <th>Description</th>
                                 </tr>
                             </thead>
                             <tbody>
-                              
-
-                                @foreach($projects as $project)
                                 <tr>
-                                    <td>{{ $project->organisation->name }}</td>
-                                    <td><a href="/projects/{{$project->id}}">{{ $project->name }}</a></td>
-                                    <td>{{ ucfirst($project->status) }}</td>
-                                </tr>
-                                @endforeach
+                                    <td>Hourly Rate</td>
+                                    <td>
+                                        @if($resource->currency == 'myr')
+                                        RM
+                                        @else
+                                        USD 
+                                        @endif
+
+                                        {{$resource->hourly_rate}}</td>
+                                </tr>     
+                                <tr>
+                                    <td>Total Accumulated Pay</td>
+                                    <td>-</td>
+                                </tr> 
+                                <tr>
+                                    <td>Monthly Pay Assigned</td>
+                                    <td>-</td>
+                                </tr>   
+                                <tr>
+                                    <td>Monthly Pay In Review</td>
+                                    <td>-</td>
+                                </tr>      
+                                <tr>
+                                    <td>Monthly Pay Approved</td>
+                                    <td>-</td>
+                                </tr>                                                                                                                                                           
+
 
                             </tbody>
                         </table>
                     </div>
                 </div>
-
+            
     
 
             </div>

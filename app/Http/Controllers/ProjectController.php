@@ -64,9 +64,23 @@ class ProjectController extends Controller
         $requirements = ProjectRequirement::where('project_id', $id)->get();
         $tickets = Ticket::where('project_id', $id)->get();
 
+        $wp_costs = 0;
+        foreach($wps as $wp) {
+            if($wp->package_level == '1 - 6 hours') {
+                $cost = $wp->resource->hourly_rate * 6;
+            } elseif ($wp->package_level == '2 - 3 hours') {
+                $cost = $wp->resource->hourly_rate * 3;
+            } elseif ($wp->package_level == '3 - 1 hour') {
+                $cost = $wp->resource->hourly_rate * 1;
+            } else {
+                $cost = 0;
+            }
+            $wp_costs += $cost;
+        }
+
         return view('project_detail', compact(['project', 'documents','meetings',
             'deliverables', 'users', 'members','payments','phases','wps', 'requirements',
-            'tickets'
+            'tickets', 'wp_costs'
         ]));
     }
 
@@ -74,20 +88,31 @@ class ProjectController extends Controller
         $user = $request->user();
         if ($user->user_type == 'admin') {
             $resources = Resource::where('status', 'active')->orderBy('resource_type')->get();
+            return view('resource_list', compact('resources'));
         } elseif ($user->user_type == 'staff') {
-            $resources = Resource::where('status', 'active')->orderBy('resource_type')->get();
+            $resource = Resource::where([
+                ['user_id', '=', $user->id],
+            ])->first();
+            return view('resource_detail', compact('resource'));        
         } else {
             return redirect('/'); 
         }
         
-        return view('resource_list', compact('resources'));
     }
 
     public function show_resource(Request $request) {
-        $id = (int) $request->route('resource_id');  
-        $resource = Resource::find($id);
+        $user = $request->user();
+        $id = (int) $request->route('resource_id');          ;
         $projects = Project::all();
-        return view('resource_detail', compact('resource', 'projects'));
+        if ($user->user_type == 'admin') {
+            $resource = Resource::find($id);
+        } else {
+            $resource = Resource::where([
+                ['id', '=', $id],
+                ['user_id', '=', $user->id],
+            ])->first();
+        }
+        return view('resource_detail', compact('resource'));        
     }    
 
     public function create_resource(Request $request) {
@@ -97,6 +122,8 @@ class ProjectController extends Controller
             Resource::create([
                 'user_id' => $request->user_id,
                 'resource_type' => $request->resource_type,
+                'currency' => 'myr',
+                'hourly_rate' => $request->hourly_rate,
                 'status' => 'active'
             ]);
         }     
