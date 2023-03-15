@@ -216,6 +216,7 @@ class WorkpackageController extends Controller
 
         $wp_review = WorkpackageReview::create([
             'remarks' => $request->remarks,
+            'status' => $wp->status,
             'workpackage_id' => $wp->id,
             'resource_id'=> $user->resource->id
         ]);

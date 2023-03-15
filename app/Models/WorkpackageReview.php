@@ -12,6 +12,7 @@ class WorkpackageReview extends Model
     protected $fillable = [
         'attachment',
         'remarks',
+        'status',
         'workpackage_id',
         'resource_id',
     ];     
