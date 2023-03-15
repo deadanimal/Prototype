@@ -171,7 +171,7 @@
                                 <button type="submit" name="action" value="review_work_complete" class="btn btn-success">Mark as Complete</button>
                                 <button type="submit" name="action" value="review_work_incomplete" class="btn btn-danger">Mark as Incomplete</button>
                                 <button type="submit" name="action" value="answer" class="btn btn-info">Answer Question</button>
-                                <button type="submit" name="action" value="delay" class="btn btn-danger">Mark as Delayed</button>
+                                <button type="submit" name="action" value="delayed" class="btn btn-danger">Mark as Delayed</button>
                                 @endif
                             </form>
                             @endif
