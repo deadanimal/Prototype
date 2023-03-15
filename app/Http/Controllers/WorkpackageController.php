@@ -47,6 +47,10 @@ class WorkpackageController extends Controller
             ])->orWhere([
                 ['status','=', 'Work Package Incomplete']
             ])->orderBy('estimate_delivery')->orderBy('status')->get();
+
+            $delayed_wps = Workpackage::where([
+                ['status','=', 'Delayed']
+            ])->orderBy('estimate_delivery')->get();                
     
             $approved_wps = Workpackage::where([
                 ['status','=', 'Work Package Approved']
@@ -65,7 +69,8 @@ class WorkpackageController extends Controller
         $resources = Resource::where('status', 'active')->orderBy('resource_type')->get();
         return view('workpackage_list_coordinator', compact([
             'workpackages', 'projects', 'resources',
-            'all_wps','assigned_wps', 'approved_wps','inreview_wps', 'question_wps'
+            'all_wps','assigned_wps', 'approved_wps','inreview_wps', 'question_wps',
+            'delayed_wps'
     ]));
     }
 
@@ -88,6 +93,11 @@ class WorkpackageController extends Controller
             ['status','=', 'Work Package Incomplete']
         ])->orderBy('estimate_delivery')->orderBy('status')->get();
 
+        $delayed_wps = Workpackage::where([
+            ['resource_id','=', $resource->id],
+            ['status','=', 'Delayed']
+        ])->orderBy('estimate_delivery')->get();            
+
         $approved_wps = Workpackage::where([
             ['resource_id','=', $resource->id],
             ['status','=', 'Work Package Approved']
@@ -108,7 +118,7 @@ class WorkpackageController extends Controller
 
         return view('workpackage_list_resource', compact([
             'all_wps','assigned_wps', 'approved_wps','inreview_wps', 'question_wps',
-            'resource'
+            'resource','delayed_wps'
         ]));        
     }
 
@@ -195,6 +205,8 @@ class WorkpackageController extends Controller
             $wp->status = 'Has Problem';
         } elseif($request->action == 'answer') {
             $wp->status = 'Question Answered';            
+        } elseif($request->action == 'delayed') {
+            $wp->status = 'Delayed';            
         } else {
 
         }
