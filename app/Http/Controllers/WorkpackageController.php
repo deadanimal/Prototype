@@ -171,6 +171,7 @@ class WorkpackageController extends Controller
         
         $wp->update([
             'name' => $request->name,
+            'estimate_delivery' => $request->estimate_delivery,
             'remarks' => $request->remarks,
         ]);   
         
