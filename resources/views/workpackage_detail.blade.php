@@ -107,6 +107,7 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Remarks</th>
+                                        <th>Status</th>
                                         <th>Attachment</th>
                                         <th>Name</th>
                                         <th>Timestamp</th>
@@ -119,8 +120,23 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                {{ $review->remarks }}
+                                                @if ($review->remarks)
+                                                    <x-markdown>
+                                                        {{ $review->remarks }}
+                                                    </x-markdown>                                            
+                                                @else
+                                                    -
+                                                @endif                                                
+                                                
                                             </td>
+                                            <td>
+                                                @if ($review->status)                                                    
+                                                        {{ $review->status }}                                                                                             
+                                                @else
+                                                    -
+                                                @endif                                                
+                                                
+                                            </td>                                            
                                             <td>
                                                 @if ($review->attachment)
                                                 <a
@@ -168,6 +184,7 @@
                                 <button type="submit" name="action" value="question" class="btn btn-info">Ask Question</button>
                                 @endif
                                 @if (Auth::user()->resource->id == $wp->reviewer_id || Auth::user()->resource->resource_type == 'all')
+                                <br/>
                                 <button type="submit" name="action" value="review_work_complete" class="btn btn-success">Mark as Complete</button>
                                 <button type="submit" name="action" value="review_work_incomplete" class="btn btn-danger">Mark as Incomplete</button>
                                 <button type="submit" name="action" value="answer" class="btn btn-info">Answer Question</button>
