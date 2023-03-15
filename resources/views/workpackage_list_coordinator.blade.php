@@ -67,33 +67,7 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="vertical-icon-tab-0" role="tabpanel">
-                                    <h4 class="tab-title">Summary</h4>
-
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Item</th>
-                                                <th>Description</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-        
-                                            <tr>
-                                                <td>Monthly Pay Assigned</td>
-                                                <td>-</td>
-                                            </tr>   
-                                            <tr>
-                                                <td>Monthly Pay In Review</td>
-                                                <td>-</td>
-                                            </tr>      
-                                            <tr>
-                                                <td>Monthly Pay Approved</td>
-                                                <td>-</td>
-                                            </tr>                                                                                                                                                           
-            
-            
-                                        </tbody>
-                                    </table>                                    
+                                    <h4 class="tab-title">Summary</h4>                               
 
 
                                 </div>

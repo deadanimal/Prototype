@@ -67,14 +67,21 @@ class ProjectController extends Controller
         $wp_costs = 0;
         foreach($wps as $wp) {
             if($wp->package_level == '1 - 6 hours') {
-                $cost = $wp->resource->hourly_rate * 6;
+                $rate = 6;                
             } elseif ($wp->package_level == '2 - 3 hours') {
-                $cost = $wp->resource->hourly_rate * 3;
+                $rate = 3;
             } elseif ($wp->package_level == '3 - 1 hour') {
-                $cost = $wp->resource->hourly_rate * 1;
+                $rate = 1;
             } else {
-                $cost = 0;
+                $rate = 1;
             }
+
+            if($wp->resource) {
+                $cost = $wp->resource->hourly_rate * 6;            
+            } else {
+                $cost = 0;            
+            }        
+
             $wp_costs += $cost;
         }
 
