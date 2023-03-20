@@ -106,6 +106,14 @@
                                     Action
                                 </a>
                             </li>
+                            @if( Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#vertical-icon-tab-4" data-bs-toggle="tab" role="tab"
+                                    aria-selected="false">
+                                    Detail
+                                </a>
+                            </li>                            
+                            @endif
                                                                                                                                                               
                         </ul>
                         <div class="tab-content">
@@ -262,7 +270,12 @@
                                     <button type="submit" name="action" value="reschedule"  class="btn btn-primary">Reschedule</button>
                                 </form>
 
-                                @if( Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
+                                    
+                            </div>
+
+                            <div class="tab-pane" id="vertical-icon-tab-4" role="tabpanel">
+                                <h4 class="tab-title">Detail</h4>
+
                                 <h4 class="tab-title mt-3">Meeting Detail</h4>
                                 <form action="/meetings/{{$meeting->id}}" method="POST">
                                     @csrf
@@ -295,8 +308,8 @@
     
                                     <button type="submit" class="btn btn-primary">Update Meeting</button>
                                 </form> 
-                                @endif                               
-                            </div>
+                                                           
+                            </div>                            
                                                                                                                                                                                                 
                         </div>
                     </div> 
