@@ -124,6 +124,7 @@
                                         <tr>
                                             <th style="width:5%">No.</th>
                                             <th style="width:15%">Name</th>
+                                            <th style="width:15%">Email</th>
                                         </tr>
                                     </thead>
                                     <tbody>                            
@@ -131,7 +132,8 @@
                                         @foreach($meeting->meeting_attendees as $attendee)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ ucfirst($attendee->name) }}</td>                      
+                                            <td>{{ ucfirst($attendee->name) }}</td>    
+                                            <td>{{ $attendee->email }}</td>                      
                                         </tr>
                                         @endforeach
         
@@ -247,26 +249,17 @@
                             
     
                                     <div class="mb-3">
-                                        <label class="form-label">Purpose</label>
-                                        <select class="form-control mb-3" name="purpose">
-                                            <option value="cancel">Cancel</option>
-                                            <option value="reschedule">Reschedule</option>
-                                        </select>
-                                    </div>
-    
-                                    <div class="mb-3">
                                         <label class="form-label">New Meeting Date</label>
                                         <input type="date" name="meeting_date" class="form-control">
                                     </div>                                
     
-           
-    
                                     <div class="mb-3">
-                                        <label class="form-label">Cancel or Reschedule Remarks</label>
+                                        <label class="form-label">Remarks</label>
                                         <textarea class="form-control" rows="5" name="remarks" placeholder="Textarea"></textarea>
                                     </div>                             
     
-                                    <button type="submit" class="btn btn-primary">Reschedule Meeting</button>
+                                    <button type="submit" name="action" value="cancel"  class="btn btn-danger">Cancel</button>
+                                    <button type="submit" name="action" value="reschedule"  class="btn btn-primary">Reschedule</button>
                                 </form>
 
                                 @if( Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')

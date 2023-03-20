@@ -174,7 +174,7 @@ class MeetingController extends Controller
         $user = $request->user();
         $id = (int) $request->route('meeting_id');  
         $meeting = Meeting::find($id);
-        $meeting->status = $request->purpose;
+        $meeting->status = $request->action;
         $meeting->reschedule_remarks = $request->remarks;
         $meeting->save();
 
