@@ -1,4 +1,6 @@
-<h3>Meeting Detail</h3>
+
+Hello {{$attendee->name}}, please find below meeting details
+
 <table class="table table-striped table-sm">
     <tbody>
 
@@ -25,3 +27,7 @@
 
     </tbody>
 </table>                        
+
+<div class="card-body">
+    Remarks: {{ $meeting->remarks }} <br/>
+</div>
