@@ -209,9 +209,9 @@
                                                                 Action
                                                             </button>
                                                             <div class="dropdown-menu hide" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34.5px, 0px);">
-                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalDeliverableView{{$phase->id}}" href="#">View</a>
+                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalDeliverableView{{$deliverable->id}}" href="#">View</a>
                                                                 @if(Auth::user()->organisation_id == 1)
-                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalDeliverableEdit{{$phase->id}}" href="#">Edit</a>
+                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalDeliverableEdit{{$deliverable->id}}" href="#">Edit</a>
                                                                 @endif
                                                                 <div class="dropdown-divider"></div>
                                                                 <form action="/projects/{{$project->id}}/deliverables/{{$deliverable->id}}" method="POST">                                                            
