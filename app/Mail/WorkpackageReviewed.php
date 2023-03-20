@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class WorkpackageAssigned extends Mailable
+class WorkpackageReviewed extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -27,7 +27,7 @@ class WorkpackageAssigned extends Mailable
      */
     public function envelope(): Envelope
     {
-        $statement = 'Work Package Assigned: ' + $this->wp->id;
+        $statement = 'Work Package Reviewed: ' + $this->wp->id;
         return new Envelope(
             subject: $statement,
         );
@@ -39,7 +39,7 @@ class WorkpackageAssigned extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.workpackage_assigned',
+            view: 'emails.workpackage_reviewed',
             with: [
                 'wp' => $this->wp
             ]

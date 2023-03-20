@@ -11,6 +11,8 @@ use App\Models\Resource;
 use App\Models\Workpackage;
 use App\Models\WorkpackageReview;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 
 class WorkpackageController extends Controller
 {
@@ -151,12 +153,15 @@ class WorkpackageController extends Controller
         if($request->reviewer_id) {
             $wp->reviewer_id = $request->reviewer_id;
             $wp->save();
+            Mail::to($wp->reviewer->user->email)->send(($wp));
         }          
 
         if($request->resource_id) {
             $wp->resource_id = $request->resource_id;
             $wp->status = 'Assigned';
             $wp->save();
+            Mail::to($wp->resource->user->email)->send(($wp));
+
         } else {
             $wp->status = 'Unassigned';
             $wp->save();
@@ -178,12 +183,14 @@ class WorkpackageController extends Controller
         if($request->reviewer_id) {
             $wp->reviewer_id = $request->reviewer_id;
             $wp->save();
+            Mail::to($wp->reviewer->user->email)->send(($wp));
         }          
 
         if($request->resource_id) {
             $wp->resource_id = $request->resource_id;
             $wp->status = 'Reassigned';
             $wp->save();
+            Mail::to($wp->resource->user->email)->send(($wp));
         }     
         
         return back();
@@ -213,6 +220,9 @@ class WorkpackageController extends Controller
         }
 
         $wp->save();
+
+        Mail::to($wp->reviewer->user->email)->send(($wp));
+        Mail::to($wp->resource->user->email)->send(($wp));
         
 
         $wp_review = WorkpackageReview::create([
