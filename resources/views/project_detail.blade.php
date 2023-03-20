@@ -370,6 +370,7 @@
                                                 <th>No</th>
                                                 <th>Date</th>
                                                 <th>Name</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -379,8 +380,12 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $meeting->meeting_date }}</td>
-                                                    <td><a href="/meetings/{{ $meeting->id }}">{{ $meeting->title }}</a>
+                                                    <td>
+                                                        {{ $meeting->title }}
                                                     </td>
+                                                    <td>
+                                                        <a href="/meetings/{{$meeting->id}}"><button class="btn btn-primary">View</button></a>
+                                                    </td>                                                    
                                                 </tr>
                                             @endforeach
 
@@ -400,7 +405,7 @@
                                                 <th>No</th>
                                                 <th>Name</th>
                                                 <th>Category</th>
-                                                <th>-</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -469,6 +474,7 @@
                                                 <th>Amount</th>
                                                 <th>Date</th>
                                                 <th>Status</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -481,6 +487,7 @@
                                                     <td>RM {{ $payment->amount }}</td>
                                                     <td>{{ $payment->date }}</td>
                                                     <td>{{ ucfirst($payment->status) }}</td>
+                                                    <td></td>
                                                 </tr>
                                             @endforeach
 
@@ -529,6 +536,7 @@
                                                 <th>No</th>
                                                 <th>Name</th>
                                                 <th>Category</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -537,8 +545,9 @@
                                             @foreach ($requirements as $requirement)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td><a href="/requirements/{{$requirement->id}}">{{ $requirement->name }}</a></td>
+                                                    <td>{{ $requirement->name }}</td>
                                                     <td>{{ $requirement->category }}</td>
+                                                    <td><a href="/requirements/{{$requirement->id}}"><button class="btn btn-primary">View</button></a></td>
                                                 </tr>
                                             @endforeach
 
@@ -588,6 +597,7 @@
                                                 <th>No</th>
                                                 <th>Name</th>
                                                 <th>Category</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -598,6 +608,7 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td><a href="/testflows/{{$testflow->id}}">{{ $testflow->name }}</a></td>
                                                     <td>{{ $testflow->category }}</td>
+                                                    <td><a href="/testflows/{{$testflow->id}}"><button class="btn btn-primary">View</button></a></td>
                                                 </tr>
                                             @endforeach
 
@@ -775,9 +786,6 @@
                                         <button type="submit" class="btn btn-primary">Create Ticket</button>
                                     </form>     
                                     
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#defaultModalPrimary">
-										Primary
-									</button>
 
                                 </div>
                             </div>
