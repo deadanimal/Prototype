@@ -132,7 +132,7 @@
                                                                     @csrf
                                                                     @method('DELETE')
         
-                                                                    <button class="dropdown-item" type="submit">Delete Timeline</button>
+                                                                    <button class="dropdown-item" type="submit">Delete</button>
                                                                 </form>                                                                    
                                                             </div>
                                                         </div>
