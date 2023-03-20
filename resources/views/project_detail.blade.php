@@ -125,9 +125,8 @@
                                                                 Action
                                                             </button>
                                                             <div class="dropdown-menu hide" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34.5px, 0px);">
-                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#defaultModalPrimary" href="#">View</a>
-                                                                <a class="dropdown-item" href="#">-</a>
-                                                                <a class="dropdown-item" href="#">-</a>
+                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalPhaseView{{$phase->id}}" href="#">View</a>
+                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalPhaseView{{$phase->id}}" href="#">Edit</a>
                                                                 <div class="dropdown-divider"></div>
                                                                 <form action="/projects/{{$project->id}}/phases/{{$phase->id}}" method="POST">                                                            
                                                                     @csrf
@@ -661,7 +660,8 @@
 
 
 
-            <div class="modal fade" id="defaultModalPrimary" tabindex="-1" style="display: none;" aria-hidden="true">
+            @foreach($phases as $phase)
+            <div class="modal fade" id="modelPhaseView{{$phase->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -679,6 +679,27 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="modelPhaseEdit{{$phase->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Default modal</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body m-3">
+                            <p class="mb-0">Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user
+                                notifications, or completely custom content.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+
+            @endforeach
 
 
 
