@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WorkpackageAssigned;
+use App\Mail\WorkpackageReviewed;
 use Illuminate\Support\Str;
 
 use App\Models\Kitab;
@@ -153,14 +155,14 @@ class WorkpackageController extends Controller
         if($request->reviewer_id) {
             $wp->reviewer_id = $request->reviewer_id;
             $wp->save();
-            Mail::to($wp->reviewer->user->email)->send(($wp));
+            Mail::to($wp->reviewer->user->email)->send(new WorkpackageAssigned($wp));
         }          
 
         if($request->resource_id) {
             $wp->resource_id = $request->resource_id;
             $wp->status = 'Assigned';
             $wp->save();
-            Mail::to($wp->resource->user->email)->send(($wp));
+            Mail::to($wp->resource->user->email)->send(new WorkpackageAssigned($wp));
 
         } else {
             $wp->status = 'Unassigned';
@@ -183,14 +185,14 @@ class WorkpackageController extends Controller
         if($request->reviewer_id) {
             $wp->reviewer_id = $request->reviewer_id;
             $wp->save();
-            Mail::to($wp->reviewer->user->email)->send(($wp));
+            Mail::to($wp->reviewer->user->email)->send(new WorkpackageAssigned($wp));
         }          
 
         if($request->resource_id) {
             $wp->resource_id = $request->resource_id;
             $wp->status = 'Reassigned';
             $wp->save();
-            Mail::to($wp->resource->user->email)->send(($wp));
+            Mail::to($wp->resource->user->email)->send(new WorkpackageAssigned($wp));
         }     
         
         return back();
@@ -221,8 +223,8 @@ class WorkpackageController extends Controller
 
         $wp->save();
 
-        Mail::to($wp->reviewer->user->email)->send(($wp));
-        Mail::to($wp->resource->user->email)->send(($wp));
+        Mail::to($wp->reviewer->user->email)->send(new WorkpackageReviewed($wp));
+        Mail::to($wp->resource->user->email)->send(new WorkpackageReviewed($wp));
         
 
         $wp_review = WorkpackageReview::create([

@@ -14,12 +14,11 @@ class WorkpackageAssigned extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct(protected Workpackage $wp)
+    public $wp;
+
+    public function __construct($wp)
     {
-        
+        $this->wp = $wp;
     }
 
     /**
@@ -27,7 +26,7 @@ class WorkpackageAssigned extends Mailable
      */
     public function envelope(): Envelope
     {
-        $statement = 'Work Package Assigned: ' + $this->wp->id;
+        $statement = 'Work Package Assigned: ' . ($this->wp->id);
         return new Envelope(
             subject: $statement,
         );
