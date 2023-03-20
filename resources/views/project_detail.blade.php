@@ -126,10 +126,11 @@
                                                     <td>{{ $phase->end_date }}</td>
                                                     <td>{{ $phase->status }}</td>
                                                     <td>
-                                                        <form action="/projects/{{$project->id}}/phases/{{$phase->id}}" method="POST">
-                                                            @method('DELETE')
+                                                        <form action="/projects/{{$project->id}}/phases/{{$phase->id}}" method="POST">                                                            
                                                             @csrf
-                                                            <button class="dropdown-item" type="submit">Delete</button>
+                                                            @method('DELETE')
+
+                                                            <button class="btn btn-danger" type="submit">Delete Timeline</button>
                                                         </form>                                                        
                                                     </td>
                                                 </tr>
