@@ -1,12 +1,12 @@
 
-Hello {{$attendee->name}}, please find below meeting details
+Hello {{$attendee->name}}, please find below meeting details:
 
 <table class="table table-striped table-sm">
     <tbody>
 
         <tr>
             <td><b>Title</b></td>
-            <td>{{$meeting->title}}</td>
+            <td><a href="https://prototype.com.my/meetings/{{$meeting->id}}">{{$meeting->title}}</a></td>
         </tr> 
         <tr>
             <td><b>Status</b></td>

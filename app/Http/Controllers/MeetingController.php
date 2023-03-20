@@ -78,6 +78,17 @@ class MeetingController extends Controller
         $meeting->save();
         Alert::success('Success', 'Meeting has been updated!');
 
+        $attendees = MeetingAttendee::where('meeting_id', $meeting->id)->get();
+
+        foreach($attendees as $attendee) {
+            if($attendee->user_id) {
+                Mail::to($attendee->user->email)->send(new MeetingInvitation($meeting, $attendee));                
+            } else {
+                Mail::to($attendee->email)->send(new MeetingInvitation($meeting, $attendee));
+            } 
+        }
+         
+
         return back();
     }    
 
@@ -187,15 +198,5 @@ class MeetingController extends Controller
     }    
     
     
-    public function datatable_meetings(Request $request) {
-        $data = Meeting::all();
-        return Datatables::of($data)
-            ->addIndexColumn()
-            ->addColumn('action', function($row){
-                $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                return $actionBtn;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
-    }    
+ 
 }
