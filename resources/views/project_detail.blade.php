@@ -907,7 +907,7 @@
                             
                             <div class="mb-3">
                                 <label class="form-label">Link</label>
-                                <input type="text" name="category" value="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{$document->link}}" class="form-control">
+                                <a href="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{$document->document}}">Document</a>
                             </div>                              
 
                         </div>
