@@ -350,6 +350,14 @@ class ProjectController extends Controller
                 
     }
 
+    public function show_testflow(Request $request) {
+        $id = (int) $request->route('testflow_id');  
+        $user = $request->user();
+
+        $testflows = ProjectTestflow::find($id);
+        return view('testflow_list', compact('testflows'));
+    }       
+
     public function create_testingflow_item(Request $request) {
         
         $user = $request->user();
