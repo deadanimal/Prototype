@@ -333,7 +333,7 @@ class ProjectController extends Controller
         return back();        
     }
 
-    public function create_testingflow(Request $request) {
+    public function create_testflow(Request $request) {
 
         $user = $request->user();
 
@@ -358,14 +358,14 @@ class ProjectController extends Controller
         return view('testflow_list', compact('testflows'));
     }       
 
-    public function create_testingflow_item(Request $request) {
+    public function create_testflow_item(Request $request) {
         
         $user = $request->user();
 
         $testflow_item = ProjectTestflowItem::create([
             'name' => $request->name,
             
-            'testingflow_id' => $request->testingflow_id,
+            'testflow_id' => $request->testflow_id,
             'project_id' => $request->project_id,
             'user_id' => $user->id,
         ]);
