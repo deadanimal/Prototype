@@ -12,8 +12,7 @@ class ProjectTestflow extends Model
     protected $fillable = [
         'name', 
         'remarks', 
-        'testflow_category',
-        'testflow_type',
+        'category',
         'project_id',
         'user_id',
     ];      

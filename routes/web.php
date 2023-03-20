@@ -65,6 +65,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/projects/{project_id}', [ProjectController::class, 'update_project']);      
     
     Route::post('/projects/{project_id}/members', [ProjectController::class, 'add_project_member']);   
+    Route::delete('/projects/{project_id}/members/{member_id}', [ProjectController::class, 'remove_project_member']);   
+    
     Route::post('/projects/{project_id}/payments', [ProjectController::class, 'add_project_payment']);   
     
     Route::post('/projects/{project_id}/phases', [ProjectController::class, 'add_project_phase']);   

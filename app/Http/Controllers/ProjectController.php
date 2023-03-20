@@ -189,19 +189,19 @@ class ProjectController extends Controller
             'category' => $request->category,
             'project_id' => $id,
             'user_id' => $request->user_id,
-        ]);
-
-        // $project = Project::find($id);
-        // $trail_message = 'Add new project member for ' + $project->name;
-
-        // Trail::create([
-        //     'category' => 'project/members',
-        //     'user_id'=>auth()->user()->id,
-        //     'message' => $trail_message,
-        // ]);         
+        ]);        
 
         return back();
     }    
+
+    public function remove_project_member(Request $request) {
+        $id = (int) $request->route('member_id');          
+
+        $member = ProjectUser::find($id);
+        $member->delete();    
+
+        return back();
+    }        
     
     public function add_project_payment(Request $request) {
         $id = (int) $request->route('project_id');  
@@ -338,6 +338,8 @@ class ProjectController extends Controller
 
         $testflow = ProjectTestflow::create([
             'name' => $request->name,
+            'category' => $request->category,
+            'remarks' => $request->remarks,
 
             'project_id' => $request->project_id,
             'user_id' => $user->id,

@@ -283,8 +283,20 @@
                                             @foreach ($documents as $document)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $document->name }}</td>
-                                                    <td>{{ $document->version }}</td>                                                 
+                                                    <td>
+                                                        @if($document->name)
+                                                            {{ $document->name }}
+                                                        @else
+                                                            -
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if($document->version)
+                                                            {{ $document->version }}
+                                                        @else
+                                                            -
+                                                        @endif                                                        
+                                                    </td>                                                 
                                                     <td>{{ ucfirst($document->category) }}</td>
                                                     <td>
                                                         <div class="btn-group">
@@ -388,6 +400,7 @@
                                                 <th>No</th>
                                                 <th>Name</th>
                                                 <th>Category</th>
+                                                <th>-</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -398,6 +411,14 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ ucfirst($member->user->name) }}</td>
                                                     <td>{{ ucfirst($member->category) }}</td>
+                                                    <td>
+                                                        <form action="/projects/{{$project->id}}/members/{{$member->id}}" method="POST">                                                            
+                                                            @csrf
+                                                            @method('DELETE')
+
+                                                            <button class="btn btn-danger" type="submit">Remove</button>
+                                                        </form>                                                           
+                                                    </td>
                                                 </tr>
                                             @endforeach
 
@@ -426,12 +447,13 @@
                                                 <option value="analyst">Analyst</option>
                                                 <option value="developer">Developer</option>
                                                 <option value="project">Project</option>
+                                                <option value="user">User</option>
                                             </select>
                                         </div>
 
 
 
-                                        <button type="submit" class="btn btn-primary">Add</button>
+                                        <button type="submit" class="btn btn-primary">Add Member</button>
 
                                     </form>
 
@@ -515,7 +537,7 @@
                                             @foreach ($requirements as $requirement)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $requirement->name }}</td>
+                                                    <td><a href="/requirements/{{$requirement->id}}">{{ $requirement->name }}</a></td>
                                                     <td>{{ $requirement->category }}</td>
                                                 </tr>
                                             @endforeach
@@ -559,6 +581,59 @@
                                 </div>
                                 <div class="tab-pane" id="vertical-icon-tab-8" role="tabpanel">
                                     <h4 class="tab-title">Testing</h4>
+
+                                    <table class="table table-striped table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Name</th>
+                                                <th>Category</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                            @foreach ($testflows as $testflow)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td><a href="/testflows/{{$testflow->id}}">{{ $testflow->name }}</a></td>
+                                                    <td>{{ $testflow->category }}</td>
+                                                </tr>
+                                            @endforeach
+
+
+
+
+                                        </tbody>
+                                    </table>
+
+                                    <form action="/testflows" method="POST" enctype="multipart/form-data">
+                                        @csrf
+
+                                        <input type="hidden" name="project_id" value="{{ $project->id }}">
+
+                                        <div class="mb-3">
+                                            <label class="form-label w-100">Name</label>
+                                            <input type="text" name="name" class="form-control">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Category</label>
+                                            <select class="form-control mb-3" name="category">
+                                                <option value="-">-</option>
+                                            </select>
+                                        </div>
+
+
+                                        <div class="mb-3">
+                                            <label class="form-label w-100">Remarks</label>
+                                            <textarea class="form-control" rows="5" name="remarks" placeholder="Textarea"></textarea>
+                                        </div>
+
+
+                                        <button type="submit" class="btn btn-primary">Add Test Flow</button>
+
+                                    </form>                                    
 
                                 </div>
                                 <div class="tab-pane" id="vertical-icon-tab-9" role="tabpanel">
