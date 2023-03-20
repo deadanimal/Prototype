@@ -656,13 +656,9 @@
                                                 <th>ID</th>
                                                 <th>Name</th>
                                                 <th>Estimated Delivery</th>
-                                                <th>Project</th>
-                                                <th>Resource</th>
-                                                <th>Reviewer</th>
-                                                {{-- <th>Coordinator</th>
-                                            <th>Type</th>
-                                            <th>Level</th> --}}
+                                                <th>Project</th>       
                                                 <th>Status</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -684,32 +680,16 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        @if ($wp->project_id)
-                                                            <a href="/projects/{{ $wp->project_id }}">
+                                                        @if ($wp->project_id)                                                            
                                                                 {{ $wp->project->name }}
-                                                            </a>
+                                                            
                                                         @else
                                                             -
                                                         @endif
                                                     </td>
-                                                    <td>
-                                                        @if ($wp->resource_id)
-                                                            {{ $wp->resource->user->name }}
-                                                        @else
-                                                            -
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if ($wp->reviewer_id)
-                                                            {{ $wp->reviewer->user->name }}
-                                                        @else
-                                                            -
-                                                        @endif
-                                                    </td>
-                                                    {{-- <td>{{ $wp->coordinator->name }}</td>
-                                            <td>{{ $wp->package_type }}</td>
-                                            <td>{{ $wp->package_level }}</td> --}}
+                                 
                                                     <td>{{ $wp->status }}</td>
+                                                    <td><a href="/workpackages/{{$wp->id}}"><button class="btn btn-primary">View</button></a></td>                                                    
                                                 </tr>
                                             @endforeach
 
@@ -731,6 +711,7 @@
                                                             <th>Title</th>
                                                             <th>Client</th>
                                                             <th>Status</th>
+                                                            <th></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -739,11 +720,10 @@
                                                         @foreach ($tickets as $ticket)
                                                             <tr>
                                                                 <td>{{ $loop->iteration }}</td>
-                                                                <td><a
-                                                                        href="/tickets/{{ $ticket->id }}">{{ $ticket->title }}</a>
-                                                                </td>
+                                                                <td>{{ $ticket->title }}</td>
                                                                 <td>{{ $ticket->organisation->name }}</td>
                                                                 <td>{{ ucfirst($ticket->status) }}</td>
+                                                                <td><a href="/tickets/{{ $ticket->id }}"><button class="btn btn-primary">View</button></a></td>
                                                             </tr>
                                                         @endforeach
 
