@@ -167,6 +167,11 @@
                                             <input type="date" name="end_date" class="form-control">
                                         </div>
 
+                                        <div class="mb-3">
+                                            <label class="form-label w-100">Remarks</label>
+                                            <textarea class="form-control" rows="5" name="remarks" placeholder="Textarea"></textarea>
+                                        </div>                                        
+
                                         <button type="submit" class="btn btn-primary">Add</button>
 
                                     </form>
@@ -665,16 +670,34 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Default modal</h5>
+                            <h5 class="modal-title">Timeline</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body m-3">
-                            <p class="mb-0">Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user
-                                notifications, or completely custom content.</p>
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Name</label>
+                                <input disabled type="text" name="name" value="{{$phase->name}}" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Start Date</label>
+                                <input disabled type="date" name="start_date" value="{{$phase->start_date}}" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">End Date</label>
+                                <input disabled type="date" name="end_date" value="{{$phase->end_date}}" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Remarks</label>
+                                <textarea disabled class="form-control" rows="5" name="remarks">{{$phase->remarks}}</textarea>
+                            </div>                                 
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
@@ -684,16 +707,44 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Default modal</h5>
+                            <h5 class="modal-title">Timeline</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body m-3">
-                            <p class="mb-0">Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user
-                                notifications, or completely custom content.</p>
+
+
+                            <form action="/projects/{{ $project->id }}/phases/{{$phase->id}}" method="POST"
+                                enctype="multipart/form-data">
+                                @method('PUT')
+                                @csrf
+
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Name</label>
+                                    <input type="text" name="name" value="{{$phase->name}}" class="form-control">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Start Date</label>
+                                    <input type="date" name="start_date" value="{{$phase->start_date}}" class="form-control">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label w-100">End Date</label>
+                                    <input type="date" name="end_date" value="{{$phase->end_date}}" class="form-control">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Remarks</label>
+                                    <textarea class="form-control" rows="5" name="remarks">{{$phase->remarks}}</textarea>
+                                </div>                                        
+
+                                <button type="submit" class="btn btn-primary">Edit</button>
+
+                            </form>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
