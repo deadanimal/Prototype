@@ -333,6 +333,14 @@ class ProjectController extends Controller
         return back();        
     }
 
+    public function show_requirement(Request $request) {
+        $id = (int) $request->route('requirement_id');  
+        $user = $request->user();
+
+        $requirement = ProjectTestflow::find($id);
+        return view('requirement_detail', compact('requirement'));
+    }       
+
     public function create_testflow(Request $request) {
 
         $user = $request->user();
@@ -354,8 +362,8 @@ class ProjectController extends Controller
         $id = (int) $request->route('testflow_id');  
         $user = $request->user();
 
-        $testflows = ProjectTestflow::find($id);
-        return view('testflow_list', compact('testflows'));
+        $testflow = ProjectTestflow::find($id);
+        return view('testflow_detail', compact('testflow'));
     }       
 
     public function create_testflow_item(Request $request) {
