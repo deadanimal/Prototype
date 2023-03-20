@@ -46,7 +46,13 @@ Route::middleware('auth')->group(function () {
     Route::put('/mockups/{mockup_id}', [MockupController::class, 'update_mockup']);  
 
     Route::get('/workpackages', [WorkpackageController::class, 'show_workpackages']);
+    
     Route::get('/workpackages/assigned', [WorkpackageController::class, 'show_workpackages_assigned']);
+    Route::get('/workpackages/completed', [WorkpackageController::class, 'show_workpackages_completed']);
+    Route::get('/workpackages/delayed', [WorkpackageController::class, 'show_workpackages_delayed']);
+    Route::get('/workpackages/inreview', [WorkpackageController::class, 'show_workpackages_inreview']);
+    Route::get('/workpackages/problems', [WorkpackageController::class, 'show_workpackages_problems']);
+
     Route::post('/workpackages', [WorkpackageController::class, 'create_workpackage']);   
     Route::get('/workpackages/{workpackage_id}', [WorkpackageController::class, 'show_workpackage']); 
     Route::put('/workpackages/{workpackage_id}', [WorkpackageController::class, 'update_workpackage']);

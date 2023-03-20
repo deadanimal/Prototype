@@ -114,11 +114,19 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="/workpackages">
-                            <i class="align-middle me-2 fa fa-fw fa-terminal"></i> <span class="align-middle">Work
-                                Package</span>
-                        </a>
-                    </li>
+						<a data-bs-target="#wps" data-bs-toggle="collapse" class="sidebar-link collapsed">
+							<i class="align-middle me-2 fa fa-fw fa-terminal"></i> <span class="align-middle">Work Package</span>
+						</a>
+						<ul id="wps" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="/workpackages">All</a></li>
+							{{-- <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/assigned">Assigned</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/completed">Completed</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/delayed">Delayed</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/inreview">In-review</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/problems">Problem</a></li> --}}
+                            
+						</ul>
+
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/tickets">
