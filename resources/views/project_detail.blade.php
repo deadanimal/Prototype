@@ -126,12 +126,26 @@
                                                     <td>{{ $phase->end_date }}</td>
                                                     <td>{{ $phase->status }}</td>
                                                     <td>
-                                                        <form action="/projects/{{$project->id}}/phases/{{$phase->id}}" method="POST">                                                            
-                                                            @csrf
-                                                            @method('DELETE')
 
-                                                            <button class="btn btn-danger" type="submit">Delete Timeline</button>
-                                                        </form>                                                        
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn mb-1 btn-primary dropdown-toggle show" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                Action
+                                                            </button>
+                                                            <div class="dropdown-menu show" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34.5px, 0px);">
+                                                                <a class="dropdown-item" href="#">Action</a>
+                                                                <a class="dropdown-item" href="#">Another action</a>
+                                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                                <div class="dropdown-divider"></div>
+                                                                <form action="/projects/{{$project->id}}/phases/{{$phase->id}}" method="POST">                                                            
+                                                                    @csrf
+                                                                    @method('DELETE')
+        
+                                                                    <button class="dropdown-item" type="submit">Delete Timeline</button>
+                                                                </form>                                                                    
+                                                            </div>
+                                                        </div>
+                                                        
+                                                                                                            
                                                     </td>
                                                 </tr>
                                             @endforeach
