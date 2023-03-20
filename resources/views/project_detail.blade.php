@@ -880,7 +880,93 @@
             @endforeach            
 
 
+            @foreach($documents as $document)
+            <div class="modal fade" id="modalDocumentView{{$document->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Document</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body m-3">
 
+                            <div class="mb-3">
+                                <label class="form-label w-100">Name</label>
+                                <input type="text" name="name" value="{{$document->name}}" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Version</label>
+                                <input type="number" name="version" value="{{$document->version}}" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Category</label>
+                                <input type="text" name="category" value="{{$document->category}}" class="form-control">
+                            </div>        
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Link</label>
+                                <input type="text" name="category" value="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{$document->link}}" class="form-control">
+                            </div>                              
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalDocumentEdit{{$document->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Document</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body m-3">
+
+
+                            <form action="/projects/{{ $project->id }}/documents/{{$document->id}}" method="POST"
+                                enctype="multipart/form-data">
+                                @method('PUT')
+                                @csrf
+
+
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Name</label>
+                                    <input type="text" name="name" value="{{$document->name}}" class="form-control">
+                                </div>
+    
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Version</label>
+                                    <input type="number" name="version" value="{{$document->version}}" class="form-control">
+                                </div>
+    
+                                <div class="mb-3">
+                                    <label class="form-label">Category</label>
+                                    <select class="form-control mb-3" name="category">
+                                        <option value="technical">Technical</option>
+                                        <option value="administration">Administration</option>
+                                    </select>
+                                </div>   
+
+             
+
+                                <button type="submit" class="btn btn-primary">Edit</button>
+
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+
+            @endforeach  
 
 
 

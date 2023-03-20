@@ -152,18 +152,35 @@ class ProjectController extends Controller
             ]);
 
             $document->document = $request->file('document')->store('prototype/document');
-            $document->save();
-
-            // $trail_message = 'Upload new document for ' + $project->name;
-
-            // Trail::create([
-            //     'category' => 'project/documents',
-            //     'user_id'=>auth()->user()->id,
-            //     'message' => $trail_message,
-            // ]);                 
+            $document->save();                 
 
         return back();
     }   
+
+    public function update_project_document(Request $request) {
+        $id = (int) $request->route('document_id');  
+        $user = $request->user();
+        $document = ProjectDocument::find($id);
+
+        $document->update([
+            'name' => $request->name,
+            'version' => $request->version,
+            'category' => $request->category,
+        ]);
+
+        return back();
+    }        
+
+    public function delete_project_document(Request $request) {
+        $id = (int) $request->route('document_id');  
+        $user = $request->user();
+
+        $document = ProjectDocument::find($id);
+        $document->delete();
+        
+        return back();
+    }       
+
     
     public function add_project_member(Request $request) {
         $id = (int) $request->route('project_id');          
