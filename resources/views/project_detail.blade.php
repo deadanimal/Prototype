@@ -96,7 +96,7 @@
                                 <div class="tab-pane active" id="vertical-icon-tab-0" role="tabpanel">
                                     <h4 class="tab-title">Summary</h4>
 
-                                    WP Costs: RM {{$wp_costs}}
+                                    
 
 
                                 </div>
@@ -599,10 +599,43 @@
                                                         @endforeach
 
                                                     </tbody>
-                                                </table>
+                                                </table>                                              
                                             </div>
                                         </div>
                                     @endif
+
+
+                                    <form action="/tickets" method="POST" enctype="multipart/form-data">
+                                        @csrf
+            
+           
+                                        <input type="hidden" name="project_id" value="{{$project->id}}">
+            
+                                        <div class="mb-3">
+                                            <label class="form-label">Title</label>
+                                            <input type="text" class="form-control" name="title" placeholder="Title">
+                                        </div>
+            
+                                        <div class="mb-3">
+                                            <label class="form-label">Category</label>
+                                            <select class="form-control mb-3" name="category">
+                                                <option value="etc">etc</option>
+                                            </select>
+                                        </div>
+                                    
+            
+                                        <div class="mb-3">
+                                            <label class="form-label">Message</label>
+                                            <textarea class="form-control" id="my-text-area" rows="5" name="message" placeholder="Textarea"></textarea>
+                                        </div>
+            
+                                        <div class="mb-3">
+                                            <label class="form-label w-100">Attachment</label>
+                                            <input type="file" name="attachment">
+                                        </div>                            
+            
+                                        <button type="submit" class="btn btn-primary">Create Ticket</button>
+                                    </form>                                      
 
                                 </div>
                             </div>
