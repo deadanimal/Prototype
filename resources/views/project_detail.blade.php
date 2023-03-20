@@ -265,9 +265,10 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Date</th>
                                                 <th>Name</th>
+                                                <th>Version</th>
                                                 <th>Category</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -276,11 +277,29 @@
                                             @foreach ($documents as $document)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $document->created_at }}</td>
-                                                    <td><a
-                                                            href="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{ $document->document }}">{{ $document->name }}</a>
-                                                    </td>
+                                                    <td>{{ $document->name }}</td>
+                                                    <td>{{ $document->version }}</td>                                                 
                                                     <td>{{ ucfirst($document->category) }}</td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn mb-1 btn-primary dropdown-toggle hide" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                Action
+                                                            </button>
+                                                            <div class="dropdown-menu hide" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34.5px, 0px);">
+                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalDocumentView{{$document->id}}" href="#">View</a>
+                                                                @if(Auth::user()->organisation_id == 1)
+                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalDocumentEdit{{$document->id}}" href="#">Edit</a>
+                                                                @endif
+                                                                <div class="dropdown-divider"></div>
+                                                                <form action="/projects/{{$project->id}}/documents/{{$document->id}}" method="POST">                                                            
+                                                                    @csrf
+                                                                    @method('DELETE')
+        
+                                                                    <button class="dropdown-item" type="submit">Delete</button>
+                                                                </form>                                                                    
+                                                            </div>
+                                                        </div>                                                        
+                                                    </td>
                                                 </tr>
                                             @endforeach
 
@@ -290,6 +309,7 @@
                                         </tbody>
                                     </table>
 
+                                    @if(Auth::user()->organisation_id == 1)
                                     <form action="/projects/{{ $project->id }}/documents" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
@@ -317,9 +337,10 @@
                                             <input type="file" name="document">
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary">Upload</button>
+                                        <button type="submit" class="btn btn-primary">Add</button>
 
                                     </form>
+                                    @endif
 
                                 </div>
                                 <div class="tab-pane" id="vertical-icon-tab-4" role="tabpanel">

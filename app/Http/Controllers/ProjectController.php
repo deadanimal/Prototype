@@ -256,6 +256,7 @@ class ProjectController extends Controller
 
         ProjectDeliverable::create([
             'name' => $request->name,
+            'date' => $request->date,
             'remarks' => $request->remarks,
             'status'=> 'draft',
             'project_id' => $id,
@@ -271,6 +272,30 @@ class ProjectController extends Controller
         //     'message' => $trail_message,
         // ]);          
 
+        return back();
+    }     
+    
+    public function update_project_deliverable(Request $request) {
+        $id = (int) $request->route('deliverable_id');  
+        $user = $request->user();
+        $deliverable = ProjectDeliverable::find($id);
+
+        $deliverable->update([
+            'name' => $request->name,
+            'date' => $request->date,
+            'remarks' => $request->remarks,
+        ]);
+
+        return back();
+    }        
+
+    public function delete_project_deliverable(Request $request) {
+        $id = (int) $request->route('deliverable_id');  
+        $user = $request->user();
+
+        $deliverable = ProjectDeliverable::find($id);
+        $deliverable->delete();
+        
         return back();
     }       
 

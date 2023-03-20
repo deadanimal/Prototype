@@ -62,17 +62,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/projects', [ProjectController::class, 'show_projects']);
     Route::post('/projects', [ProjectController::class, 'create_project']);   
     Route::get('/projects/{project_id}', [ProjectController::class, 'show_project']); 
-    Route::put('/projects/{project_id}', [ProjectController::class, 'update_project']);  
-
-    Route::post('/projects/{project_id}/documents', [ProjectController::class, 'upload_project_document']);   
-    Route::post('/projects/{project_id}/deliverables', [ProjectController::class, 'add_project_deliverable']);   
+    Route::put('/projects/{project_id}', [ProjectController::class, 'update_project']);      
+    
     Route::post('/projects/{project_id}/members', [ProjectController::class, 'add_project_member']);   
     Route::post('/projects/{project_id}/payments', [ProjectController::class, 'add_project_payment']);   
     
     Route::post('/projects/{project_id}/phases', [ProjectController::class, 'add_project_phase']);   
-    Route::put('/projects/{project_id}/phases/{phase_id}', [ProjectController::class, 'update_project_phase']);   
-    
+    Route::put('/projects/{project_id}/phases/{phase_id}', [ProjectController::class, 'update_project_phase']);       
     Route::delete('/projects/{project_id}/phases/{phase_id}', [ProjectController::class, 'delete_project_phase']);   
+
+    Route::post('/projects/{project_id}/deliverables', [ProjectController::class, 'add_project_deliverable']);   
+    Route::put('/projects/{project_id}/deliverables/{deliverable_id}', [ProjectController::class, 'update_project_deliverable']);       
+    Route::delete('/projects/{project_id}/deliverables/{deliverable_id}', [ProjectController::class, 'delete_project_deliverable']);    
+
+    Route::post('/projects/{project_id}/documents', [ProjectController::class, 'upload_project_document']);   
+    Route::put('/projects/{project_id}/documents/{document_id}', [ProjectController::class, 'update_project_document']);       
+    Route::delete('/projects/{project_id}/documents/{document_id}', [ProjectController::class, 'delete_project_document']);        
     
     Route::post('/requirements', [ProjectController::class, 'create_requirement']);   
     Route::get('/requirements/{requirement_id}', [ProjectController::class, 'show_requirement']); 
