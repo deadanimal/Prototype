@@ -126,7 +126,7 @@
                                                             </button>
                                                             <div class="dropdown-menu hide" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34.5px, 0px);">
                                                                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalPhaseView{{$phase->id}}" href="#">View</a>
-                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalPhaseView{{$phase->id}}" href="#">Edit</a>
+                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalPhaseEdit{{$phase->id}}" href="#">Edit</a>
                                                                 <div class="dropdown-divider"></div>
                                                                 <form action="/projects/{{$project->id}}/phases/{{$phase->id}}" method="POST">                                                            
                                                                     @csrf
@@ -661,7 +661,7 @@
 
 
             @foreach($phases as $phase)
-            <div class="modal fade" id="modelPhaseView{{$phase->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+            <div class="modal fade" id="modalPhaseView{{$phase->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -680,7 +680,7 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="modelPhaseEdit{{$phase->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+            <div class="modal fade" id="modalPhaseEdit{{$phase->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
