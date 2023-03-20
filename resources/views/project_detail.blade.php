@@ -778,12 +778,12 @@
             @endforeach
 
 
-            @foreach($phases as $phase)
+            @foreach($deliverables as $deliverable)
             <div class="modal fade" id="modalDeliverableView{{$deliverable->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Timeline</h5>
+                            <h5 class="modal-title">Deliverable</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body m-3">
@@ -815,7 +815,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Timeline</h5>
+                            <h5 class="modal-title">Deliverable</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body m-3">
