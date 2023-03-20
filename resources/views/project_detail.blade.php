@@ -124,7 +124,7 @@
                                                     <td>{{ ucfirst($phase->name) }}</td>
                                                     <td>{{ $phase->start_date }}</td>
                                                     <td>{{ $phase->end_date }}</td>
-                                                    <td>{{ $phase->status }}</td>
+                                                    <td>{{ ucfirst($phase->status) }}</td>
                                                     <td>
 
                                                         <div class="btn-group">
