@@ -239,7 +239,7 @@ class WorkpackageController extends Controller
         Mail::to($wp->reviewer->user->email)->send(new WorkpackageReviewed($wp, $wp_review));
         Mail::to('afeezaziz@gmail.com')->send(new WorkpackageReviewed($wp, $wp_review));
         Mail::to($wp->resource->user->email)->send(new WorkpackageReviewed($wp, $wp_review));
-        Mail::to($wp->coordinator->user->email)->send(new WorkpackageReviewed($wp, $wp_review));        
+        Mail::to($wp->coordinator->email)->send(new WorkpackageReviewed($wp, $wp_review));        
 
         return back();
     } 
