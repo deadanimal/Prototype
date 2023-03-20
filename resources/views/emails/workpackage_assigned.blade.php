@@ -24,11 +24,23 @@
         </tr>      
         <tr>
             <td><b>Resource</b></td>
-            <td>{{ $wp->resource->user->name }}</td>
+            <td>
+                @if($wp->resource_id)
+                    {{ $wp->resource->user->name }}
+                @else
+                -  
+                @endif
+            </td>
         </tr>
         <tr>
             <td><b>Reviewer</b></td>
-            <td>{{ $wp->reviewer->user->name }}</td>
+            <td>
+                @if($wp->reviewer_id)
+                    {{ $wp->reviewer->user->name }}
+                @else
+                -  
+                @endif                                
+            </td>
         </tr>            
         <tr>
             <td><b>Coordinator</b></td>
