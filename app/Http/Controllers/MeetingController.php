@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MeetingInvitation;
 use Illuminate\Http\Request;
 
 use App\Models\Meeting;
@@ -12,7 +13,7 @@ use App\Models\User;
 use App\Models\Workpackage;
 use Carbon\Carbon;
 use DataTables;
-
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MeetingController extends Controller
@@ -109,6 +110,12 @@ class MeetingController extends Controller
         }
         
         $attendee->save();
+
+        if($request->email) {
+            Mail::to($attendee->email)->send(new MeetingInvitation($meeting, $attendee));
+        } else {
+            Mail::to($attendee->user->email)->send(new MeetingInvitation($meeting, $attendee));
+        }        
 
         Alert::success('Success', 'Meeting attendee has been created!');
 
