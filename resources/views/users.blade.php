@@ -128,6 +128,11 @@
                                     <label class="form-label w-100">Name</label>
                                     <input type="text" name="name" class="form-control">
                                 </div>   
+
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Password</label>
+                                    <input type="text" name="password" class="form-control">
+                                </div>                                 
                                 
                                 <div class="mb-3">
                                     <label class="form-label w-100">Email</label>

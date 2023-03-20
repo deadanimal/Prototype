@@ -125,7 +125,7 @@ class SiteController extends Controller
         
         $new_user->save();
 
-        Mail::to($new_user->email)->send(new NewUser($request));
+        Mail::to($new_user->email)->send(new NewUser($new_user, $request->password));
 
         return back();
     }  

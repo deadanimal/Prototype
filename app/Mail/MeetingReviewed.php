@@ -13,6 +13,8 @@ class MeetingReviewed extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $user;
+    public $password;
 
     public function __construct()
     {
