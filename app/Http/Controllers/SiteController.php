@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewUser;
 use App\Models\Meeting;
 use App\Models\Organisation;
 use App\Models\Trail;
@@ -10,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SiteController extends Controller
@@ -115,7 +117,7 @@ class SiteController extends Controller
         $new_user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make('PabloEscobar')
+            'password' => Hash::make($request->password)
         ]);
         $new_user->position = $request->position;
         $new_user->organisation_id = $request->organisation_id;
@@ -123,13 +125,7 @@ class SiteController extends Controller
         
         $new_user->save();
 
-        // $trail_message = 'Add new user: ' + $request->email;
-
-        // Trail::create([
-        //     'category' => 'authentication',
-        //     'user_id'=>auth()->user()->id,
-        //     'message' => $trail_message,
-        // ]);        
+        Mail::to($new_user->email)->send(new NewUser($request));
 
         return back();
     }  

@@ -112,6 +112,7 @@
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
                                                 <th>Status</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -124,6 +125,13 @@
                                                     <td>{{ $phase->start_date }}</td>
                                                     <td>{{ $phase->end_date }}</td>
                                                     <td>{{ $phase->status }}</td>
+                                                    <td>
+                                                        <form action="/projects/{{$project->id}}/phases/{{$phase->id}}" method="POST">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <button class="dropdown-item" type="submit">Delete</button>
+                                                        </form>                                                        
+                                                    </td>
                                                 </tr>
                                             @endforeach
 

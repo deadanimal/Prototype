@@ -224,17 +224,18 @@ class ProjectController extends Controller
             'user_id' => $user->id,
         ]);
 
-        // $project = Project::find($id);
-        // $trail_message = 'Add new project phase for ' + $project->name;
-
-        // Trail::create([
-        //     'category' => 'project/phases',
-        //     'user_id'=>auth()->user()->id,
-        //     'message' => $trail_message,
-        // ]);  
-
         return back();
     }    
+
+    public function delete_project_phase(Request $request) {
+        $id = (int) $request->route('phase_id');  
+        $user = $request->user();
+
+        $phase = ProjectPhase::find($id);
+        $phase->delete();
+        
+        return back();
+    }      
     
     public function add_project_deliverable(Request $request) {
         $id = (int) $request->route('project_id');  
