@@ -128,13 +128,13 @@
                                                     <td>
 
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn mb-1 btn-primary dropdown-toggle show" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                            <button type="button" class="btn mb-1 btn-primary dropdown-toggle hide" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                                 Action
                                                             </button>
-                                                            <div class="dropdown-menu show" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34.5px, 0px);">
-                                                                <a class="dropdown-item" href="#">Action</a>
-                                                                <a class="dropdown-item" href="#">Another action</a>
-                                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                            <div class="dropdown-menu hide" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34.5px, 0px);">
+                                                                <a class="dropdown-item" href="#">-</a>
+                                                                <a class="dropdown-item" href="#">-</a>
+                                                                <a class="dropdown-item" href="#">-</a>
                                                                 <div class="dropdown-divider"></div>
                                                                 <form action="/projects/{{$project->id}}/phases/{{$phase->id}}" method="POST">                                                            
                                                                     @csrf
