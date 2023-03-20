@@ -226,6 +226,20 @@ class ProjectController extends Controller
 
         return back();
     }    
+    
+    public function update_project_phase(Request $request) {
+        $id = (int) $request->route('phase_id');  
+        $user = $request->user();
+        $phase = ProjectPhase::find($id);
+
+        $phase->update([
+            'name' => $request->name,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
+
+        return back();
+    }        
 
     public function delete_project_phase(Request $request) {
         $id = (int) $request->route('phase_id');  
