@@ -22,7 +22,7 @@ class WorkpackageController extends Controller
 
         if ($user->user_type == 'admin') {
             
-        } elseif ($user->user_type == 'staff') {
+        } elseif ($user->user_type == 'staff' || $user->user_type == 'remote - my') {
             $resource = Resource::where('user_id', $user->id)->first();
             if ($resource->resource_type == 'pmo') {
 
