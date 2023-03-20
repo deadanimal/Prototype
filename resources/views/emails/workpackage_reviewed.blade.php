@@ -1,15 +1,9 @@
 <table class="table table-striped table-sm">
-    <thead>
-        <tr>
-            <th>Item</th>
-            <th>Description</th>
-        </tr>
-    </thead>
     <tbody>
 
         <tr>
             <td><b>ID</b></td>
-            <td>{{ $wp->id }}</td>
+            <td><a href="https://prototype.com.my/workpackages/{{ $wp->id }}">{{ $wp->id }}</a></td>
         </tr>
         <tr>
             <td><b>Name</b></td>
@@ -54,4 +48,5 @@
     <br/>
     Coordinator: {{ $wp->coordinator->name }} <br/>
     Created: {{ $wp->created_at }} <br/>
+    Remarks: {{ $wp->remarks }} <br/>
 </div>
