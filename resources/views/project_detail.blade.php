@@ -202,7 +202,13 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $deliverable->name }}</td>
-                                                    <td>{{ $deliverable->date }}</td>
+                                                    <td>
+                                                        @if($deliverable->date)
+                                                            {{ $deliverable->date }}
+                                                        @else
+                                                            -
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <button type="button" class="btn mb-1 btn-primary dropdown-toggle hide" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -906,7 +912,7 @@
                             </div>        
                             
                             <div class="mb-3">
-                                <label class="form-label">Link</label>
+                                <label class="form-label">Link</label><br/>
                                 <a href="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{$document->document}}">Document</a>
                             </div>                              
 
