@@ -337,7 +337,7 @@ class ProjectController extends Controller
 
         $user = $request->user();
 
-        $testflow = ProjectTestflow::create([
+        ProjectTestflow::create([
             'name' => $request->name,
             'category' => $request->category,
             'remarks' => $request->remarks,
