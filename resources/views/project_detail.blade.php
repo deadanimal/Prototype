@@ -27,13 +27,6 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="#vertical-icon-tab-1" data-bs-toggle="tab" role="tab"
                                         aria-selected="false">
-                                        {{-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="feather feather-home align-middle">
-                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                    </svg> --}}
                                         Timeline
                                     </a>
                                 </li>
@@ -104,7 +97,7 @@
                                 <div class="tab-pane" id="vertical-icon-tab-1" role="tabpanel">
                                     <h4 class="tab-title">Timeline</h4>
 
-                                    <table class="table">
+                                    <table class="table table-striped table-sm">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -132,7 +125,7 @@
                                                                 Action
                                                             </button>
                                                             <div class="dropdown-menu hide" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34.5px, 0px);">
-                                                                <a class="dropdown-item" href="#">-</a>
+                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#defaultModalPrimary" href="#">View</a>
                                                                 <a class="dropdown-item" href="#">-</a>
                                                                 <a class="dropdown-item" href="#">-</a>
                                                                 <div class="dropdown-divider"></div>
@@ -184,7 +177,7 @@
                                 <div class="tab-pane" id="vertical-icon-tab-2" role="tabpanel">
                                     <h4 class="tab-title">Deliverable</h4>
 
-                                    <table class="table">
+                                    <table class="table table-striped table-sm">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -239,7 +232,7 @@
                                 <div class="tab-pane" id="vertical-icon-tab-3" role="tabpanel">
                                     <h4 class="tab-title">Document</h4>
 
-                                    <table class="table">
+                                    <table class="table table-striped table-sm">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -333,7 +326,7 @@
                                 <div class="tab-pane" id="vertical-icon-tab-5" role="tabpanel">
                                     <h4 class="tab-title">Member</h4>
 
-                                    <table class="table">
+                                    <table class="table table-striped table-sm">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -390,7 +383,7 @@
                                 <div class="tab-pane" id="vertical-icon-tab-6" role="tabpanel">
                                     <h4 class="tab-title">Finance</h4>
 
-                                    <table class="table">
+                                    <table class="table table-striped table-sm">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -452,7 +445,7 @@
                                 <div class="tab-pane" id="vertical-icon-tab-7" role="tabpanel">
                                     <h4 class="tab-title">Requirement</h4>
 
-                                    <table class="table">
+                                    <table class="table table-striped table-sm">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
