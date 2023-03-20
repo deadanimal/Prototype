@@ -15,12 +15,14 @@ class WorkpackageReviewed extends Mailable
     use Queueable, SerializesModels;
 
     public $wp;
+    public $review;
     /**
      * Create a new message instance.
      */
-    public function __construct($wp)
+    public function __construct($wp, $review)
     {
         $this->wp = $wp;
+        $this->review = $review;
     }
 
     /**
@@ -42,7 +44,8 @@ class WorkpackageReviewed extends Mailable
         return new Content(
             view: 'emails.workpackage_reviewed',
             with: [
-                'wp' => $this->wp
+                'wp' => $this->wp,
+                'review' => $this->review,
             ]
         );
     }

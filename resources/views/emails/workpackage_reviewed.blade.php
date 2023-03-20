@@ -50,3 +50,6 @@
     Created: {{ $wp->created_at }} <br/>
     Remarks: {{ $wp->remarks }} <br/>
 </div>
+
+Review status: {{ $review->status }} <br/>
+Review Remarks: {{ $review->remarks }} <br/>

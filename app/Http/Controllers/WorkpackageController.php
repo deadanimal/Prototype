@@ -222,11 +222,6 @@ class WorkpackageController extends Controller
         }
 
         $wp->save();
-
-        Mail::to($wp->reviewer->user->email)->send(new WorkpackageReviewed($wp));
-        Mail::to('afeezaziz@gmail.com')->send(new WorkpackageReviewed($wp));
-        Mail::to($wp->resource->user->email)->send(new WorkpackageReviewed($wp));
-        Mail::to($wp->coordinator->user->email)->send(new WorkpackageReviewed($wp));
         
 
         $wp_review = WorkpackageReview::create([
@@ -240,6 +235,11 @@ class WorkpackageController extends Controller
             $wp_review->attachment = $request->file('attachment')->store('prototype/attachment');
             $wp_review->save();
         }
+
+        Mail::to($wp->reviewer->user->email)->send(new WorkpackageReviewed($wp, $wp_review));
+        Mail::to('afeezaziz@gmail.com')->send(new WorkpackageReviewed($wp, $wp_review));
+        Mail::to($wp->resource->user->email)->send(new WorkpackageReviewed($wp, $wp_review));
+        Mail::to($wp->coordinator->user->email)->send(new WorkpackageReviewed($wp, $wp_review));        
 
         return back();
     } 
