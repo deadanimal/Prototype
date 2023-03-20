@@ -126,7 +126,9 @@
                                                             </button>
                                                             <div class="dropdown-menu hide" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34.5px, 0px);">
                                                                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalPhaseView{{$phase->id}}" href="#">View</a>
+                                                                @if(Auth::user()->organisation_id == 1)
                                                                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalPhaseEdit{{$phase->id}}" href="#">Edit</a>
+                                                                @endif
                                                                 <div class="dropdown-divider"></div>
                                                                 <form action="/projects/{{$project->id}}/phases/{{$phase->id}}" method="POST">                                                            
                                                                     @csrf
@@ -148,6 +150,7 @@
                                         </tbody>
                                     </table>
 
+                                    @if(Auth::user()->organisation_id == 1)
                                     <form action="/projects/{{ $project->id }}/phases" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
@@ -175,6 +178,7 @@
                                         <button type="submit" class="btn btn-primary">Add</button>
 
                                     </form>
+                                    @endif
 
 
                                 </div>
