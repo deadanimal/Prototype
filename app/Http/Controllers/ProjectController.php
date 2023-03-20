@@ -63,6 +63,7 @@ class ProjectController extends Controller
         $wps = Workpackage::where('project_id', $id)->orderBy('estimate_delivery')->orderBy('status')->get();
         $requirements = ProjectRequirement::where('project_id', $id)->get();
         $tickets = Ticket::where('project_id', $id)->get();
+        $testflows = ProjectTestflow::where('project_id', $id)->get();
 
         $wp_costs = 0;
         foreach($wps as $wp) {
@@ -87,7 +88,7 @@ class ProjectController extends Controller
 
         return view('project_detail', compact(['project', 'documents','meetings',
             'deliverables', 'users', 'members','payments','phases','wps', 'requirements',
-            'tickets', 'wp_costs'
+            'tickets', 'wp_costs', 'testflows'
         ]));
     }
 
