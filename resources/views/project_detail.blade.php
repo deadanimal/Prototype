@@ -190,7 +190,9 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Name</th>
-                                                <th>Remarks</th>
+                                                <th>Date</th>
+                                                <th></th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -199,10 +201,28 @@
                                             @foreach ($deliverables as $deliverable)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td><a
-                                                            href="/projects/{{ $project->id }}/deliverables/{{ $deliverable->id }}">{{ $deliverable->name }}</a>
+                                                    <td>{{ $deliverable->name }}</td>
+                                                    <td>{{ $deliverable->date }}</td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn mb-1 btn-primary dropdown-toggle hide" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                Action
+                                                            </button>
+                                                            <div class="dropdown-menu hide" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34.5px, 0px);">
+                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalDeliverableView{{$phase->id}}" href="#">View</a>
+                                                                @if(Auth::user()->organisation_id == 1)
+                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalDeliverableEdit{{$phase->id}}" href="#">Edit</a>
+                                                                @endif
+                                                                <div class="dropdown-divider"></div>
+                                                                <form action="/projects/{{$project->id}}/deliverables/{{$deliverable->id}}" method="POST">                                                            
+                                                                    @csrf
+                                                                    @method('DELETE')
+        
+                                                                    <button class="dropdown-item" type="submit">Delete</button>
+                                                                </form>                                                                    
+                                                            </div>
+                                                        </div>                                                        
                                                     </td>
-                                                    <td>{{ $deliverable->remarks }}</td>
                                                 </tr>
                                             @endforeach
 
@@ -212,6 +232,7 @@
                                         </tbody>
                                     </table>
 
+                                    @if(Auth::user()->organisation_id == 1)
                                     <form action="/projects/{{ $project->id }}/deliverables" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
@@ -231,10 +252,10 @@
                                             <textarea class="form-control" rows="5" name="remarks" placeholder="Textarea"></textarea>
                                         </div>
 
-
                                         <button type="submit" class="btn btn-primary">Add</button>
 
                                     </form>
+                                    @endif
 
                                 </div>
                                 <div class="tab-pane" id="vertical-icon-tab-3" role="tabpanel">
@@ -755,6 +776,87 @@
             </div>            
 
             @endforeach
+
+
+            @foreach($phases as $phase)
+            <div class="modal fade" id="modalDeliverableView{{$deliverable->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Timeline</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body m-3">
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Name</label>
+                                <input disabled type="text" name="name" value="{{$deliverable->name}}" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Date</label>
+                                <input disabled type="date" name="date" value="{{$deliverable->date}}" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Remarks</label>
+                                <textarea disabled class="form-control" rows="5" name="remarks">{{$deliverable->remarks}}</textarea>
+                            </div>                            
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalDeliverableEdit{{$deliverable->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Timeline</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body m-3">
+
+
+                            <form action="/projects/{{ $project->id }}/deliverables/{{$deliverable->id}}" method="POST"
+                                enctype="multipart/form-data">
+                                @method('PUT')
+                                @csrf
+
+
+                                    <div class="mb-3">
+                                        <label class="form-label w-100">Name</label>
+                                        <input type="text" name="name" value="{{$deliverable->name}}" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label w-100">Date</label>
+                                        <input type="date" name="date" value="{{$deliverable->date}}" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label w-100">Remarks</label>
+                                        <textarea class="form-control" rows="5" name="remarks">{{$deliverable->remarks}}</textarea>
+                                    </div>
+
+             
+
+                                <button type="submit" class="btn btn-primary">Edit</button>
+
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+
+            @endforeach            
 
 
 
