@@ -542,6 +542,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Name</th>
+                                                <th>Module</th>
                                                 <th>Category</th>
                                                 <th>Attachment</th>
                                                 <th></th>
@@ -554,6 +555,7 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $requirement->name }}</td>
+                                                    <td>{{ $requirement->module_name }}</td>
                                                     <td>{{ $requirement->category }}</td>
                                                     <td>
                                                         @if($requirement->attachment)
