@@ -10,6 +10,7 @@ use App\Models\ProjectDocument;
 use App\Models\ProjectPayment;
 use App\Models\ProjectPhase;
 use App\Models\ProjectRequirement;
+use App\Models\ProjectTestcase;
 use App\Models\ProjectTestflow;
 use App\Models\ProjectTestflowItem;
 use App\Models\ProjectUser;
@@ -63,7 +64,7 @@ class ProjectController extends Controller
         $wps = Workpackage::where('project_id', $id)->orderBy('estimate_delivery')->orderBy('status')->get();
         $requirements = ProjectRequirement::where('project_id', $id)->get();
         $tickets = Ticket::where('project_id', $id)->get();
-        $testflows = ProjectTestflow::where('project_id', $id)->get();
+        $testcases = ProjectTestcase::where('project_id', $id)->get();
 
         $wp_costs = 0;
         foreach($wps as $wp) {
@@ -88,7 +89,7 @@ class ProjectController extends Controller
 
         return view('project_detail', compact(['project', 'documents','meetings',
             'deliverables', 'users', 'members','payments','phases','wps', 'requirements',
-            'tickets', 'wp_costs', 'testflows'
+            'tickets', 'wp_costs', 'testcases'
         ]));
     }
 
@@ -334,7 +335,17 @@ class ProjectController extends Controller
         if($request->has('attachment')) {
             $requirement->attachment = $request->file('attachment')->store('prototype/attachment');
             $requirement->save();  
-        }        
+        }    
+        
+        ProjectTestcase::create([
+            'name' => $requirement->name,
+            'category' => $requirement->category,
+            'remarks' => 'NA',
+            'requirement_id' => $requirement->id,
+
+            'project_id' => $request->project_id,
+            'user_id' => $user->id,
+        ]);        
      
         return back();        
     }
@@ -368,48 +379,103 @@ class ProjectController extends Controller
         $requirement = ProjectRequirement::find($id);
         $requirement->delete();
         return back();
-    }           
+    }     
+    
 
-    public function create_testflow(Request $request) {
-
-        $user = $request->user();
-
-        ProjectTestflow::create([
-            'name' => $request->name,
-            'category' => $request->category,
-            'remarks' => $request->remarks,
-
-            'project_id' => $request->project_id,
-            'user_id' => $user->id,
-        ]);
-     
-        return back();   
-                
-    }
-
-    public function show_testflow(Request $request) {
-        $id = (int) $request->route('testflow_id');  
-        $user = $request->user();
-
-        $testflow = ProjectTestflow::find($id);
-        return view('testflow_detail', compact('testflow'));
-    }       
-
-    public function create_testflow_item(Request $request) {
+    public function create_testcase(Request $request) {
         
         $user = $request->user();
 
-        $testflow_item = ProjectTestflowItem::create([
+        $testcase = ProjectTestcase::create([
             'name' => $request->name,
-            
-            'testflow_id' => $request->testflow_id,
+            'category' => $request->category,
+            'remarks' => $request->remarks,
+            'requirement_id' => $request->requirement_id,
+
             'project_id' => $request->project_id,
             'user_id' => $user->id,
         ]);
-     
-        return back();  
 
+        if($request->has('attachment')) {
+            $testcase->attachment = $request->file('attachment')->store('prototype/attachment');
+            $testcase->save();  
+        }        
+     
+        return back();        
     }
+
+    public function show_testcase(Request $request) {
+        $id = (int) $request->route('testcase_id');  
+        $user = $request->user();
+
+        $testcase = ProjectTestcase::find($id);        
+        return view('testcase_detail', compact('testcase'));
+    }        
+    
+    public function update_testcase(Request $request) {
+        $id = (int) $request->route('testcase_id');  
+        $user = $request->user();
+
+        $testcase = ProjectTestcase::find($id);
+        $testcase->update([
+            'name' => $request->name,
+            'category' => $request->category,
+            'remarks' => $request->remarks,
+            'requirement_id' => $request->requirement_id,         
+        ]);
+        return back();
+    }       
+    
+    public function delete_testcase(Request $request) {
+        $id = (int) $request->route('testcase_id');  
+        $user = $request->user();
+
+        $testcase = ProjectTestcase::find($id);
+        $testcase->delete();
+        return back();
+    }        
+    
+
+    // public function create_testflow(Request $request) {
+
+    //     $user = $request->user();
+
+    //     ProjectTestflow::create([
+    //         'name' => $request->name,
+    //         'category' => $request->category,
+    //         'remarks' => $request->remarks,
+
+    //         'project_id' => $request->project_id,
+    //         'user_id' => $user->id,
+    //     ]);
+     
+    //     return back();   
+                
+    // }
+
+    // public function show_testflow(Request $request) {
+    //     $id = (int) $request->route('testflow_id');  
+    //     $user = $request->user();
+
+    //     $testflow = ProjectTestflow::find($id);
+    //     return view('testflow_detail', compact('testflow'));
+    // }       
+
+    // public function create_testflow_item(Request $request) {
+        
+    //     $user = $request->user();
+
+    //     $testflow_item = ProjectTestflowItem::create([
+    //         'name' => $request->name,
+            
+    //         'testflow_id' => $request->testflow_id,
+    //         'project_id' => $request->project_id,
+    //         'user_id' => $user->id,
+    //     ]);
+     
+    //     return back();  
+
+    // }
 
     public function show_tickets(Request $request) {
 

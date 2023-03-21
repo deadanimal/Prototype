@@ -91,14 +91,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/requirements/{requirement_id}', [ProjectController::class, 'show_requirement']); 
     Route::put('/requirements/{requirement_id}', [ProjectController::class, 'update_requirement']);
     Route::delete('/requirements/{requirement_id}', [ProjectController::class, 'delete_requirement']);
+
+    Route::post('/testcases', [ProjectController::class, 'create_testcase']);   
+    Route::get('/testcases/{testcase_id}', [ProjectController::class, 'show_testcase']); 
+    Route::put('/testcases/{testcase_id}', [ProjectController::class, 'update_testcase']);
+    Route::delete('/testcases/{testcase_id}', [ProjectController::class, 'delete_testcase']);    
     
-    Route::post('/testflows', [ProjectController::class, 'create_testflow']);   
-    Route::get('/testflows/{testflow_id}', [ProjectController::class, 'show_testflow']); 
-    Route::put('/testflows/{testflow_id}', [ProjectController::class, 'update_testflow']);   
+    // Route::post('/testflows', [ProjectController::class, 'create_testflow']);   
+    // Route::get('/testflows/{testflow_id}', [ProjectController::class, 'show_testflow']); 
+    // Route::put('/testflows/{testflow_id}', [ProjectController::class, 'update_testflow']);   
     
-    Route::post('/testflow-items', [ProjectController::class, 'create_testflow_item']);
-    Route::get('/testflow-items/{testflow_item_id}', [ProjectController::class, 'show_testflow_item']); 
-    Route::put('/testflow-items/{testflow_item_id}', [ProjectController::class, 'update_testflow_item']);     
+    // Route::post('/testflow-items', [ProjectController::class, 'create_testflow_item']);
+    // Route::get('/testflow-items/{testflow_item_id}', [ProjectController::class, 'show_testflow_item']); 
+    // Route::put('/testflow-items/{testflow_item_id}', [ProjectController::class, 'update_testflow_item']);     
 
     Route::get('/resources', [ProjectController::class, 'show_resources']);
     Route::get('/resources/{resource_id}', [ProjectController::class, 'show_resource']);

@@ -643,6 +643,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Name</th>
+                                                <th>Module</th>
                                                 <th>Category</th>
                                                 <th></th>
                                             </tr>
@@ -650,12 +651,13 @@
                                         <tbody>
 
 
-                                            @foreach ($testflows as $testflow)
+                                            @foreach ($testcases as $testcase)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td><a href="/testflows/{{$testflow->id}}">{{ $testflow->name }}</a></td>
-                                                    <td>{{ $testflow->category }}</td>
-                                                    <td><a href="/testflows/{{$testflow->id}}"><button class="btn btn-primary">View</button></a></td>
+                                                    <td>{{ $testcase->name }}</td>
+                                                    <td>{{ $testcase->module }}</td>
+                                                    <td>{{ $testcase->category }}</td>
+                                                    <td><a href="/testcases/{{$testcase->id}}"><button class="btn btn-primary">View</button></a></td>
                                                 </tr>
                                             @endforeach
 
