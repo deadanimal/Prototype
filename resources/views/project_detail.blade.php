@@ -54,12 +54,15 @@
                                         Team
                                     </a>
                                 </li>
+                                @if(Auth::user()->resource->resource_type == 'all' || 
+                                Auth::user()->resource->resource_type == 'pmo')
                                 <li class="nav-item">
                                     <a class="nav-link" href="#vertical-icon-tab-6" data-bs-toggle="tab" role="tab"
                                         aria-selected="false">
                                         Finance
                                     </a>
                                 </li>
+                                @endif
                                 <li class="nav-item">
                                     <a class="nav-link" href="#vertical-icon-tab-7" data-bs-toggle="tab" role="tab"
                                         aria-selected="false">
@@ -574,9 +577,10 @@
                                         <div class="mb-3">
                                             <label class="form-label">Category</label>
                                             <select class="form-control mb-3" name="category">
-                                                <option value="view">View</option>
-                                                <option value="function">Function</option>
-                                                <option value="other">Other</option>
+                                                <option value="View">View</option>
+                                                <option value="Function">Function</option>
+                                                <option value="Diagram">Diagram</option>
+                                                <option value="Other">Other</option>
                                             </select>
                                         </div>
 
