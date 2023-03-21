@@ -169,6 +169,8 @@ class WorkpackageController extends Controller
             $wp->save();
         }        
 
+        Mail::to('pmo@pipeline.com.my')->send(new WorkpackageAssigned($wp));
+
         return back();
     }   
 
@@ -194,6 +196,8 @@ class WorkpackageController extends Controller
             $wp->save();
             Mail::to($wp->resource->user->email)->send(new WorkpackageAssigned($wp));
         }     
+
+        Mail::to('pmo@pipeline.com.my')->send(new WorkpackageAssigned($wp));
         
         return back();
     }
@@ -237,8 +241,8 @@ class WorkpackageController extends Controller
         }
 
         Mail::to($wp->reviewer->user->email)->send(new WorkpackageReviewed($wp, $wp_review));
-        Mail::to('afeezaziz@gmail.com')->send(new WorkpackageReviewed($wp, $wp_review));
         Mail::to($wp->resource->user->email)->send(new WorkpackageReviewed($wp, $wp_review));
+        Mail::to('pmo@pipeline.com.my')->send(new WorkpackageReviewed($wp, $wp_review));
 
         return back();
     } 
