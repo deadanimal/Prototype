@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/meetings', [MeetingController::class, 'show_meetings']);
     Route::post('/meetings', [MeetingController::class, 'create_meeting']);    
     Route::put('/meetings/{meeting_id}', [MeetingController::class, 'update_meeting']);    
+
+    Route::get('/meetings/search', [MeetingController::class, 'show_searched_meeting']);    
+    Route::post('/meetings/search', [MeetingController::class, 'search_meeting']);    
     
 
     Route::post('/meetings/{meeting_id}/attendances', [MeetingController::class, 'attend_meeting']);

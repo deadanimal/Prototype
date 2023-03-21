@@ -348,6 +348,10 @@ class WorkpackageController extends Controller
             $wps->where('resource_id', $request->resource_id);
         }    
 
+        if($request->status != '-') {
+            $wps->where('status', $request->status);
+        }          
+
 
         $workpackages = $wps->get();
 

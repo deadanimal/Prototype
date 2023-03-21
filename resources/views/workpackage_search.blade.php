@@ -85,6 +85,23 @@
                                     </select>
                                 </div>
 
+                                <div class="mb-3">
+                                    <label class="form-label">Status</label>
+                                    <select class="form-control mb-3" name="status">
+                                        <option value="-" selected>- - - </option>
+                                        <option value="Assigned">Assigned</option>
+                                        <option value="Reassigned">Reassigned</option>
+                                        <option value="Unassigned">Unassigned</option>
+                                        <option value="Work Package Incomplete">Work Package Incomplete</option>
+                                        <option value="Work Package In Review">Work Package In Review</option>
+                                        <option value="Work Package Approved">Work Package Approved</option>
+                                        <option value="Has Problem">Has Problem</option>
+                                        <option value="Question Answered">Question Answered</option>
+                                        <option value="Rejected">Rejected</option>
+       
+                                    </select>
+                                </div>                                
+
                                 <button type="submit" class="btn btn-primary">Search Work Package</button>
                             </form>
                         </div>
@@ -105,6 +122,7 @@
                                     <th>Resource</th>
                                     <th>Type</th>
                                     <th>Level</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -131,6 +149,7 @@
                                         </td>
                                         <td>{{ $wp->package_type }}</td>
                                         <td>{{ $wp->package_level }}</td>
+                                        <td>{{ $wp->status }}</td>
                                     </tr>
                                 @endforeach
 

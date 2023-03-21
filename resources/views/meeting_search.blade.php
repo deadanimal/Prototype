@@ -6,9 +6,8 @@
 
             <div class="header">
                 <h1 class="header-title">
-                    Meeting 
+                    Meeting
                 </h1>
-                <h6 class="header-subtitle text-white">Look for <a href="/meetings/search">meetings?</a></h6>                            
 
             </div>            
 
@@ -17,7 +16,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Upcoming Meeting</h5>                            
+                            <h5 class="card-title">Search Meeting</h5>                            
                         </div>
                         
 
@@ -34,7 +33,7 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach($upcoming_meetings as $meeting)
+                                    @foreach($meetings as $meeting)
                                     <tr>
                                         <td>{{ $meeting->meeting_date }}</td>
                                         <td>{{ $meeting->start_time }} - {{ $meeting->end_time }}</td>
@@ -57,12 +56,13 @@
                     <div class="card">
       
                         <div class="card-body">
-                            <form action="/meetings" method="POST">
+                            <form action="/meetings/search" method="POST">
                                 @csrf
 
                                 <div class="mb-3">
                                     <label class="form-label">Project</label>
                                     <select class="form-control mb-3" name="project_id">
+                                        <option value="-" selected>- - - </option>
                                         @foreach ($projects as $project)
                                             <option value="{{ $project->id }}">({{ $project->organisation->shortname }})
                                                 {{ $project->name }}</option>
@@ -71,13 +71,9 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Meeting Title</label>
-                                    <input type="text" class="form-control" name="title" placeholder="Meeting title">
-                                </div>
-
-                                <div class="mb-3">
                                     <label class="form-label">Meeting Type</label>
                                     <select class="form-control mb-3" name="meeting_type">
+                                        <option value="-" selected>- - - </option>
                                         <option value="requirement">Requirement</option>
                                         <option value="testing">Testing</option>
                                         <option value="progress">Progress</option>
@@ -87,26 +83,19 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Meeting Date</label>
-                                    <input type="date" name="meeting_date" class="form-control">
-                                </div>
+                                    <label class="form-label">Status</label>
+                                    <select class="form-control mb-3" name="status">
+                                        <option value="-" selected>- - - </option>
+                                        <option value="draft">Draft</option>
+                                        <option value="reschedule">Reschedule</option>
+                                        <option value="cancel">Cancel</option>
+                                        <option value="complete">Complete</option>
+                                    </select>
+                                </div>                                
 
-                                <div class="mb-3">
-                                    <label class="form-label">Start Time</label>
-                                    <input type="time" name="start_time" class="form-control">
-                                </div>          
-                                
-                                <div class="mb-3">
-                                    <label class="form-label">End Time</label>
-                                    <input type="time" name="end_time" class="form-control">
-                                </div>                                   
 
-                                <div class="mb-3">
-                                    <label class="form-label">Meeting Remarks</label>
-                                    <textarea class="form-control" id="my-text-area" rows="5" name="meeting_remarks" placeholder="Textarea"></textarea>
-                                </div>
 
-                                <button type="submit" class="btn btn-primary">Create Meeting</button>
+                                <button type="submit" class="btn btn-primary">Search Meeting</button>
                             </form>
                         </div>
                     </div>
