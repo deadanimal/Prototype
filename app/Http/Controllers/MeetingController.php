@@ -112,22 +112,21 @@ class MeetingController extends Controller
         $meeting = Meeting::find($id);    
 
         $attendee = New MeetingAttendee;
-        $attendee->name = $request->name;
+        
         $attendee->meeting_id = $meeting->id;
-        if($request->email) {
-            $attendee->email = $request->email;
-        } else {
+
+        if($request->user_id) {
             $attendee->user_id = $request->user_id;
+            $attendee_user = User::find($request->user_id);
+            $attendee->email = $attendee_user->email;
+            $attendee->name = $attendee_user->name;
+        } else {
+            $attendee->name = $request->name;
+            $attendee->email = $request->email;
         }
         
         $attendee->save();
-
-        if($request->email) {
-            Mail::to($attendee->email)->send(new MeetingInvitation($meeting, $attendee));
-        } else {
-            Mail::to($attendee->user->email)->send(new MeetingInvitation($meeting, $attendee));
-        }        
-
+        Mail::to($attendee->email)->send(new MeetingInvitation($meeting, $attendee));     
         Alert::success('Success', 'Meeting attendee has been created!');
 
         return back();
