@@ -85,18 +85,6 @@
                                     </select>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label">Reviewer</label>
-                                    <select class="form-control mb-3" name="reviewer_id">
-                                        <option value="-" selected>- - - </option>
-                                        @foreach ($resources as $resource)
-                                            <option value="{{ $resource->id }}">
-                                                ({{ ucfirst($resource->resource_type) }})
-                                                {{ $resource->user->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
                                 <button type="submit" class="btn btn-primary">Search Work Package</button>
                             </form>
                         </div>

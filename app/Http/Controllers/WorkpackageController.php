@@ -324,10 +324,33 @@ class WorkpackageController extends Controller
         return view('workpackage_search', compact('projects', 'resources', 'workpackages'));
     }
 
-    public function search_workpackages() {
+    public function search_workpackages(Request $request) {
         $projects = Project::all();
         $resources = Resource::orderBy('resource_type')->get();
-        $workpackages = Workpackage::all();
+
+        $wps = Workpackage::where([
+            ['id', '>', 1]
+        ]);
+
+        if($request->package_type != '-') {
+            $wps->where('package_type', $request->package_type);
+        }
+
+        if($request->package_level != '-') {
+            $wps->where('package_level', $request->package_level);
+        }    
+
+        if($request->project_id != '-') {
+            $wps->where('project_id', $request->project_id);
+        }
+        
+        if($request->resource_id != '-') {
+            $wps->where('resource_id', $request->resource_id);
+        }    
+
+
+        $workpackages = $wps->get();
+
         return view('workpackage_search', compact('projects', 'resources', 'workpackages'));
     }    
 
