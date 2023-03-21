@@ -320,7 +320,7 @@ class WorkpackageController extends Controller
     public function show_searched_workpackages() {
         $projects = Project::all();
         $resources = Resource::orderBy('resource_type')->get();
-        $workpackages = Workpackage::all();
+        $workpackages = [];
         return view('workpackage_search', compact('projects', 'resources', 'workpackages'));
     }
 
