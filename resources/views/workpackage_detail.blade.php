@@ -102,7 +102,7 @@
                 <div class="col-8">
 
                     <div class="card">
- 
+
                         <div class="card-body">
                             <x-markdown>
                                 {{ $wp->remarks }}
@@ -223,15 +223,16 @@
                                             Question</button>
                                         <button type="submit" name="action" value="delayed" class="btn btn-danger">Mark as
                                             Delayed</button>
-                                            <button type="submit" name="action" value="rejected" class="btn btn-danger">REJECT!!</button>                                            
+                                        <button type="submit" name="action" value="rejected"
+                                            class="btn btn-danger">REJECT!!</button>
                                     @endif
                                     @if (Auth::user()->resource->resource_type == 'pmo')
-                                    <button type="submit" name="action" value="question" class="btn btn-info">Ask
-                                        Question</button>   
+                                        <button type="submit" name="action" value="question" class="btn btn-info">Ask
+                                            Question</button>
                                         <button type="submit" name="action" value="answer" class="btn btn-info">Answer
-                                            Question</button>                                                                         
-                                    <button type="submit" name="action" value="delayed" class="btn btn-danger">Mark as
-                                        Delayed</button>                                    
+                                            Question</button>
+                                        <button type="submit" name="action" value="delayed" class="btn btn-danger">Mark as
+                                            Delayed</button>
                                     @endif
                                 </form>
                             @endif
