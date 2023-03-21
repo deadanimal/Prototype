@@ -47,6 +47,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/workpackages', [WorkpackageController::class, 'show_workpackages']);
     
+    Route::get('/workpackages/search', [WorkpackageController::class, 'show_searched_workpackages']);
+    Route::post('/workpackages/search', [WorkpackageController::class, 'search_workpackages']);
+    
     Route::get('/workpackages/assigned', [WorkpackageController::class, 'show_workpackages_assigned']);
     Route::get('/workpackages/completed', [WorkpackageController::class, 'show_workpackages_completed']);
     Route::get('/workpackages/delayed', [WorkpackageController::class, 'show_workpackages_delayed']);

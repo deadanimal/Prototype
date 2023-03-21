@@ -317,5 +317,9 @@ class WorkpackageController extends Controller
         return back();
     }    
 
+    public function show_searched_workpackages() {
+        return view('workpackage_search');
+    }
+
 
 }

@@ -8,8 +8,8 @@
                 <h1 class="header-title">
                     Work Package
                 </h1>
-                <h6 class="header-subtitle text-white">See WPs assigned to self? Click 
-                    <a href="/workpackages/assigned">here</a></h6>                
+                <h6 class="header-subtitle text-white">See WPs assigned to
+                    <a href="/workpackages/assigned">self?</a> or <a href="/workpackages/search">search?</a></h6>             
 
             </div>
 
