@@ -99,18 +99,18 @@
                                         <option value="Question Answered">Question Answered</option>
                                         <option value="Delayed">Delayed</option>
                                         <option value="Rejected">Rejected</option>
-       
+
                                     </select>
-                                </div>                                
+                                </div>
 
                                 <button type="submit" class="btn btn-primary">Search Work Package</button>
                             </form>
                         </div>
                     </div>
-                </div>                
+                </div>
 
 
-                @if ($workpackages)
+
                 <div class="col-12">
                     <div class="card">
 
@@ -130,7 +130,7 @@
                             <tbody>
 
 
-                                @foreach ($workpackages as $wp)
+                                @forelse ($workpackages as $wp)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td><a href="/workpackages/{{ $wp->id }}">{{ $wp->name }}</a></td>
@@ -153,7 +153,18 @@
                                         <td>{{ $wp->package_level }}</td>
                                         <td>{{ $wp->status }}</td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                @endforelse
 
                             </tbody>
                         </table>
@@ -161,7 +172,7 @@
 
                     </div>
                 </div>
-                @endif
+
 
 
 
