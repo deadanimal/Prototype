@@ -543,6 +543,7 @@
                                                 <th>No</th>
                                                 <th>Name</th>
                                                 <th>Category</th>
+                                                <th>Attachment</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -554,6 +555,13 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $requirement->name }}</td>
                                                     <td>{{ $requirement->category }}</td>
+                                                    <td>
+                                                        @if($requirement->attachment)
+                                                        <a href="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{$requirement->attachment}}">Link</a>
+                                                        @else
+                                                            -
+                                                        @endif
+                                                    </td>
                                                     <td><a href="/requirements/{{$requirement->id}}"><button class="btn btn-primary">View</button></a></td>
                                                 </tr>
                                             @endforeach
