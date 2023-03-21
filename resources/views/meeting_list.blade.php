@@ -8,7 +8,7 @@
                 <h1 class="header-title">
                     Meeting 
                 </h1>
-                <h6 class="header-subtitle text-white">Look for <a href="/meetings/search">meetings?</a></h6>                            
+                <h6 class="header-subtitle text-white">Look for <a href="/meeting-search">meetings?</a></h6>                            
 
             </div>            
 
