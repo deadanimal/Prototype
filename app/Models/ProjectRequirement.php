@@ -11,6 +11,7 @@ class ProjectRequirement extends Model
 
     protected $fillable = [
         'name', 
+        'module_name', 
         'remarks', 
         'category',
         'project_id',

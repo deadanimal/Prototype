@@ -575,6 +575,11 @@
                                         </div>
 
                                         <div class="mb-3">
+                                            <label class="form-label w-100">Module Name</label>
+                                            <input type="text" name="module_name" class="form-control">
+                                        </div>                                        
+
+                                        <div class="mb-3">
                                             <label class="form-label">Category</label>
                                             <select class="form-control mb-3" name="category">
                                                 <option value="View">View</option>

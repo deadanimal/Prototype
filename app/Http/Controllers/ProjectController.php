@@ -323,6 +323,7 @@ class ProjectController extends Controller
 
         ProjectRequirement::create([
             'name' => $request->name,
+            'module_name' => $request->module_name,
             'category' => $request->category,
             'remarks' => $request->remarks,
 
