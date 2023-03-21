@@ -110,6 +110,7 @@
                 </div>                
 
 
+                @if ($workpackages)
                 <div class="col-12">
                     <div class="card">
 
@@ -160,6 +161,7 @@
 
                     </div>
                 </div>
+                @endif
 
 
 
