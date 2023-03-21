@@ -1,10 +1,12 @@
+Hello, there is an assignment on Work Package: {{ $wp->id }}. If you have any questions, please ask in the Work Package or create a Ticket.
+
 <h3>Work Package Detail</h3>
 <table class="table table-striped table-sm">
     <tbody>
 
         <tr>
             <td><b>ID</b></td>
-            <td><a href="https://prototype.com.my/workpackages/{{ $wp->id }}">{{ $wp->id }}</a></td>
+            <td>{{ $wp->id }}</td>
         </tr>
         <tr>
             <td><b>Name</b></td>
@@ -66,6 +68,11 @@
     </tbody>
 </table>                        
 
-<div class="card-body">
-    Remarks: {{ $wp->remarks }} <br/>
+<div class="card-body my-3">
+    <b>Remarks: </b><br/>
+    {{ $wp->remarks }} <br/>
+</div>
+
+<div class="my-3">
+    <a href="https://prototype.com.my/workpackages/{{ $wp->id }}">View Work Package</a>
 </div>
