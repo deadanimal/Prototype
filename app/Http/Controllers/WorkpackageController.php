@@ -52,6 +52,10 @@ class WorkpackageController extends Controller
                 ['status','=', 'Work Package Incomplete']
             ])->orderBy('estimate_delivery')->orderBy('status')->get();
 
+            $unassigned_wps = Workpackage::where([
+                ['status','=', 'Unassigned']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();            
+
             $delayed_wps = Workpackage::where([
                 ['status','=', 'Delayed']
             ])->orderBy('estimate_delivery')->get();                
@@ -74,7 +78,7 @@ class WorkpackageController extends Controller
         return view('workpackage_list_coordinator', compact([
             'workpackages', 'projects', 'resources',
             'all_wps','assigned_wps', 'approved_wps','inreview_wps', 'question_wps',
-            'delayed_wps'
+            'delayed_wps', 'unassigned_wps'
     ]));
     }
 
