@@ -449,10 +449,14 @@
                                         <div class="mb-3">
                                             <label class="form-label">Category</label>
                                             <select class="form-control mb-3" name="category">
-                                                <option value="analyst">Analyst</option>
-                                                <option value="developer">Developer</option>
-                                                <option value="project">Project</option>
-                                                <option value="user">User</option>
+                                                <option value="Team - Analyst">Analyst</option>
+                                                <option value="Team - Developer">Developer</option>
+                                                <option value="Team - Project">Project</option>
+                                                <option value="Team - Finance">Finance</option>
+                                                <option value="Client - User">Client - User</option>
+                                                <option value="Client - Finance">Client - Finance</option>
+                                                <option value="Client - PMO">Client - PMO</option>
+                                                <option value="Client - All">Client - All</option>
                                             </select>
                                         </div>
 

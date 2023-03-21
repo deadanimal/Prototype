@@ -56,9 +56,9 @@
                                     <label class="form-label">Level</label>
                                     <select class="form-control mb-3" name="package_level">
                                         <option value="-" selected>- - - </option>
-                                        <option value="1 - 6 hours">Level 1 - 6 Hours</option>
-                                        <option value="2 - 3 hours">Level 2 - 3 Hours</option>
-                                        <option value="3 - 1 hour">Level 3 - 1 Hour</option>
+                                        <option value="1 - 6 hours">6 Hours</option>
+                                        <option value="2 - 3 hours">3 Hours</option>
+                                        <option value="3 - 1 hour">1 Hour</option>
                                     </select>
                                 </div>
 

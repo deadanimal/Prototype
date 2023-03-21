@@ -74,7 +74,7 @@ class WorkpackageController extends Controller
                 ['status','=', 'Question Answered']
             ])->orderBy('estimate_delivery')->get();              
 
-        $resources = Resource::where('status', 'active')->orderBy('resource_type')->get();
+        $resources = Resource::where('status', 'active')->whereNotIn('resource_type', ['viewer'])->orderBy('resource_type')->get();
         return view('workpackage_list_coordinator', compact([
             'workpackages', 'projects', 'resources',
             'all_wps','assigned_wps', 'approved_wps','inreview_wps', 'question_wps',
@@ -134,7 +134,7 @@ class WorkpackageController extends Controller
         $id = (int) $request->route('workpackage_id');  
         $wp = Workpackage::find($id);
         $projects = Project::all();
-        $resources = Resource::orderBy('resource_type')->get();
+        $resources = Resource::where('status', 'active')->whereNotIn('resource_type', ['viewer'])->orderBy('resource_type')->get();
         return view('workpackage_detail', compact('wp', 'projects','resources'));
     }
 
@@ -319,14 +319,14 @@ class WorkpackageController extends Controller
 
     public function show_searched_workpackages() {
         $projects = Project::all();
-        $resources = Resource::orderBy('resource_type')->get();
+        $resources = Resource::whereNotIn('resource_type', ['viewer'])->orderBy('resource_type')->get();
         $workpackages = [];
         return view('workpackage_search', compact('projects', 'resources', 'workpackages'));
     }
 
     public function search_workpackages(Request $request) {
         $projects = Project::all();
-        $resources = Resource::orderBy('resource_type')->get();
+        $resources = Resource::whereNotIn('resource_type', ['viewer'])->orderBy('resource_type')->get();
 
         $wps = Workpackage::where([
             ['id', '>', 1]
