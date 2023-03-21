@@ -321,7 +321,7 @@ class ProjectController extends Controller
         
         $user = $request->user();
 
-        ProjectRequirement::create([
+        $requirement = ProjectRequirement::create([
             'name' => $request->name,
             'module_name' => $request->module_name,
             'category' => $request->category,
@@ -330,6 +330,11 @@ class ProjectController extends Controller
             'project_id' => $request->project_id,
             'user_id' => $user->id,
         ]);
+
+        if($request->has('attachment')) {
+            $requirement->attachment = $request->file('attachment')->store('prototype/attachment');
+            $requirement->save();  
+        }        
      
         return back();        
     }
