@@ -564,7 +564,26 @@
                                                             -
                                                         @endif
                                                     </td>
-                                                    <td><a href="/requirements/{{$requirement->id}}"><button class="btn btn-primary">View</button></a></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn mb-1 btn-primary dropdown-toggle hide" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                Action
+                                                            </button>
+                                                            <div class="dropdown-menu hide" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34.5px, 0px);">
+                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalRequirementView{{$requirement->id}}" href="#">View</a>
+                                                                @if(Auth::user()->organisation_id == 1)
+                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalRequirementEdit{{$requirement->id}}" href="#">Edit</a>
+                                                                @endif
+                                                                <div class="dropdown-divider"></div>
+                                                                <form action="/projects/{{$project->id}}/phases/{{$requirement->id}}" method="POST">                                                            
+                                                                    @csrf
+                                                                    @method('DELETE')
+        
+                                                                    <button class="dropdown-item" type="submit">Delete</button>
+                                                                </form>                                                                    
+                                                            </div>
+                                                        </div>                                                        
+                                                    </td>
                                                 </tr>
                                             @endforeach
 
@@ -1064,6 +1083,100 @@
             </div>            
 
             @endforeach  
+
+            @foreach($requirements as $requirement)
+            <div class="modal fade" id="modalRequirementView{{$requirement->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Requirement</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body m-3">
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Name</label>
+                                <input type="text" disabled name="name" value="{{$requirement->name}}" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Module Name</label>
+                                <input type="text" disabled name="module_name" value="{{$requirement->module_name}}" class="form-control">
+                            </div>                                        
+
+                            <div class="mb-3">
+                                <label class="form-label">Category</label>
+                                <input type="text" disabled name="category" value="{{$requirement->category}}" class="form-control">
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Remarks</label>
+                                <textarea class="form-control" disabled rows="5" name="remarks" placeholder="Textarea">{{$requirement->remarks}}</textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Attachment</label>
+                                {{$requirement->attachment}}
+                            </div>                              
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalRequirementEdit{{$requirement->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Requirement</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body m-3">
+
+
+                            <form action="/projects/{{ $project->id }}/documents/{{$document->id}}" method="POST"
+                                enctype="multipart/form-data">
+                                @method('PUT')
+                                @csrf
+
+
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Name</label>
+                                    <input type="text" name="name" value="{{$document->name}}" class="form-control">
+                                </div>
+    
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Version</label>
+                                    <input type="number" name="version" value="{{$document->version}}" class="form-control">
+                                </div>
+    
+                                <div class="mb-3">
+                                    <label class="form-label">Category</label>
+                                    <select class="form-control mb-3" name="category">
+                                        <option value="technical">Technical</option>
+                                        <option value="administration">Administration</option>
+                                    </select>
+                                </div>   
+
+             
+
+                                <button type="submit" class="btn btn-primary">Edit</button>
+
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+
+            @endforeach              
 
 
 

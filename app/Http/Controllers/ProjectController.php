@@ -343,9 +343,18 @@ class ProjectController extends Controller
         $id = (int) $request->route('requirement_id');  
         $user = $request->user();
 
-        $requirement = ProjectTestflow::find($id);
+        $requirement = ProjectRequirement::find($id);
         return view('requirement_detail', compact('requirement'));
-    }       
+    }     
+    
+    public function delete_requirement(Request $request) {
+        $id = (int) $request->route('requirement_id');  
+        $user = $request->user();
+
+        $requirement = ProjectRequirement::find($id);
+        $requirement->delete();
+        return back();
+    }           
 
     public function create_testflow(Request $request) {
 

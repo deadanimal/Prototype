@@ -90,6 +90,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/requirements', [ProjectController::class, 'create_requirement']);   
     Route::get('/requirements/{requirement_id}', [ProjectController::class, 'show_requirement']); 
     Route::put('/requirements/{requirement_id}', [ProjectController::class, 'update_requirement']);
+    Route::delete('/requirements/{requirement_id}', [ProjectController::class, 'delete_requirement']);
     
     Route::post('/testflows', [ProjectController::class, 'create_testflow']);   
     Route::get('/testflows/{testflow_id}', [ProjectController::class, 'show_testflow']); 
