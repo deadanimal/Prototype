@@ -327,7 +327,7 @@ class WorkpackageController extends Controller
         $projects = Project::all();
         $resources = Resource::orderBy('resource_type')->get();
         $workpackages = Workpackage::all();
-        return view('workpackage_search', compact('projects', 'resources'));
+        return view('workpackage_search', compact('projects', 'resources', 'workpackages'));
     }    
 
 
