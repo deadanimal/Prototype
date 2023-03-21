@@ -323,5 +323,12 @@ class WorkpackageController extends Controller
         return view('workpackage_search', compact('projects', 'resources'));
     }
 
+    public function search_workpackages() {
+        $projects = Project::all();
+        $resources = Resource::orderBy('resource_type')->get();
+        $workpackages = Workpackage::all();
+        return view('workpackage_search', compact('projects', 'resources'));
+    }    
+
 
 }
