@@ -345,7 +345,21 @@ class ProjectController extends Controller
 
         $requirement = ProjectRequirement::find($id);
         return view('requirement_detail', compact('requirement'));
-    }     
+    }   
+    
+    public function update_requirement(Request $request) {
+        $id = (int) $request->route('requirement_id');  
+        $user = $request->user();
+
+        $requirement = ProjectRequirement::find($id);
+        $requirement->update([
+            'name' => $request->name,
+            'module_name' => $request->module_name,
+            'category' => $request->category,
+            'remarks' => $request->remarks,            
+        ]);
+        return back();
+    }       
     
     public function delete_requirement(Request $request) {
         $id = (int) $request->route('requirement_id');  

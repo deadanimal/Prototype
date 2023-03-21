@@ -1138,29 +1138,36 @@
                         <div class="modal-body m-3">
 
 
-                            <form action="/projects/{{ $project->id }}/documents/{{$document->id}}" method="POST"
+                            <form action="/requirements/{{$requirement->id}}" method="POST"
                                 enctype="multipart/form-data">
                                 @method('PUT')
                                 @csrf
 
-
                                 <div class="mb-3">
                                     <label class="form-label w-100">Name</label>
-                                    <input type="text" name="name" value="{{$document->name}}" class="form-control">
+                                    <input type="text" name="name" value="{{$requirement->name}}" class="form-control">
                                 </div>
     
                                 <div class="mb-3">
-                                    <label class="form-label w-100">Version</label>
-                                    <input type="number" name="version" value="{{$document->version}}" class="form-control">
-                                </div>
+                                    <label class="form-label w-100">Module Name</label>
+                                    <input type="text" name="module_name" value="{{$requirement->module_name}}" class="form-control">
+                                </div>                                        
     
                                 <div class="mb-3">
                                     <label class="form-label">Category</label>
                                     <select class="form-control mb-3" name="category">
-                                        <option value="technical">Technical</option>
-                                        <option value="administration">Administration</option>
+                                        <option value="View">View</option>
+                                        <option value="Function">Function</option>
+                                        <option value="Diagram">Diagram</option>
+                                        <option value="Other">Other</option>
                                     </select>
-                                </div>   
+                                </div>
+    
+    
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Remarks</label>
+                                    <textarea class="form-control" rows="5" name="remarks" placeholder="Textarea">{{$requirement->remarks}}</textarea>
+                                </div>
 
              
 
