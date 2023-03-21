@@ -196,7 +196,7 @@ class MeetingController extends Controller
         return back();
     }    
 
-    public function show_searched_meetings() {
+    public function show_searched_meetings(Request $request) {
         $projects = Project::all();
         $meetings = Meeting::all();
         return view('meeting_search', compact('projects', 'meetings'));
@@ -209,28 +209,20 @@ class MeetingController extends Controller
             ['id', '>', 0]
         ]);
 
-        if($request->package_type != '-') {
-            $meets->where('package_type', $request->package_type);
-        }
-
-        if($request->package_level != '-') {
-            $meets->where('package_level', $request->package_level);
-        }    
+        if($request->meeting_type != '-') {
+            $meets->where('meeting_type', $request->meeting_type);
+        }   
 
         if($request->project_id != '-') {
             $meets->where('project_id', $request->project_id);
         }
-        
-        if($request->resource_id != '-') {
-            $meets->where('resource_id', $request->resource_id);
-        }    
-
+     
         if($request->status != '-') {
             $meets->where('status', $request->status);
         }          
 
 
-        $meetings = $meets->get();
+        $meetings = $meets->orderBy('meeting_date')->get();
 
         return view('meeting_search', compact('projects', 'meetings'));
     }      
