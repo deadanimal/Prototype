@@ -575,7 +575,7 @@
                                                                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalRequirementEdit{{$requirement->id}}" href="#">Edit</a>
                                                                 @endif
                                                                 <div class="dropdown-divider"></div>
-                                                                <form action="/projects/{{$project->id}}/phases/{{$requirement->id}}" method="POST">                                                            
+                                                                <form action="/requirements/{{$requirement->id}}" method="POST">                                                            
                                                                     @csrf
                                                                     @method('DELETE')
         
@@ -667,7 +667,7 @@
                                         </tbody>
                                     </table>
 
-                                    <form action="/testflows" method="POST" enctype="multipart/form-data">
+                                    <form action="/testcases" method="POST" enctype="multipart/form-data">
                                         @csrf
 
                                         <input type="hidden" name="project_id" value="{{ $project->id }}">
@@ -684,14 +684,13 @@
                                             </select>
                                         </div>
 
-
                                         <div class="mb-3">
                                             <label class="form-label w-100">Remarks</label>
                                             <textarea class="form-control" rows="5" name="remarks" placeholder="Textarea"></textarea>
                                         </div>
 
 
-                                        <button type="submit" class="btn btn-primary">Add Test Flow</button>
+                                        <button type="submit" class="btn btn-primary">Add Testcase</button>
 
                                     </form>                                    
 
