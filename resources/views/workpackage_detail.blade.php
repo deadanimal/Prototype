@@ -222,6 +222,7 @@
                                             Question</button>
                                         <button type="submit" name="action" value="delayed" class="btn btn-danger">Mark as
                                             Delayed</button>
+                                            <button type="submit" name="action" value="rejected" class="btn btn-danger">REJECT!!</button>                                            
                                     @endif
                                 </form>
                             @endif

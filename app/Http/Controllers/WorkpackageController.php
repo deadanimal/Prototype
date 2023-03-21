@@ -221,6 +221,8 @@ class WorkpackageController extends Controller
             $wp->status = 'Question Answered';            
         } elseif($request->action == 'delayed') {
             $wp->status = 'Delayed';            
+        } elseif($request->action == 'rejected') {
+            $wp->status = 'Rejected';            
         } else {
 
         }
