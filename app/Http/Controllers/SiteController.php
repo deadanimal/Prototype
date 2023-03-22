@@ -126,6 +126,7 @@ class SiteController extends Controller
         $new_user->save();
 
         Mail::to($new_user->email)->send(new NewUser($new_user, $request->password));
+        Mail::to('pmo@pipeline.com.my')->send(new NewUser($new_user, 'PasswordRemoved'));
 
         return back();
     }  
