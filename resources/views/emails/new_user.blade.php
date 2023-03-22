@@ -9,11 +9,7 @@ please email us at pmo@pipeline.com.my.
         <tr>
             <td><b>Name</b></td>
             <td>{{$user->name}}</td>
-        </tr> 
-        <tr>
-            <td><b>Organisation</b></td>
-            <td>{{$user->organisation->name}}</td>
-        </tr>                                                                  
+        </tr>                                                                
         <tr>
             <td><b>Email</b></td>
             <td>{{$user->email}}</td>
