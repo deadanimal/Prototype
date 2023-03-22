@@ -444,7 +444,7 @@
                                             <label class="form-label w-100">Name</label>
                                             <select class="form-control mb-3" name="user_id">
                                                 @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                    <option value="{{ $user->id }}">({{$user->organisation->shortname}}) {{ $user->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
