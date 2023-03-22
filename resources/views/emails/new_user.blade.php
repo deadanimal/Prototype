@@ -1,6 +1,7 @@
 
-Hello {{$user->name}}, you have been added as a user for Prototype system. You can access it here:
-<a href="https://prototype.com.my/dashboard">https://prototype.com.my/dashboard</a>
+Hello {{$user->name}}, you have been added as a user for the project and work monitoring system. You can access it here:
+<a href="https://prototype.com.my/dashboard">https://prototype.com.my/dashboard</a>. If you have any questions on how to use it,
+please email us at pmo@pipeline.com.my.
 
 <table class="table table-striped table-sm">
     <tbody>
@@ -25,5 +26,5 @@ Hello {{$user->name}}, you have been added as a user for Prototype system. You c
     </tbody>
 </table>               
 
-Please change the password after first login!
+<h1><i>Please change the password after first login!</i></h1>
 
