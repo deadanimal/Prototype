@@ -48,12 +48,14 @@
                                         Meeting
                                     </a>
                                 </li>
+                                @if(Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
                                 <li class="nav-item">
                                     <a class="nav-link" href="#vertical-icon-tab-5" data-bs-toggle="tab" role="tab"
                                         aria-selected="false">
                                         Team
                                     </a>
                                 </li>
+                                @endif
                                 @if(Auth::user()->resource->resource_type == 'all' || 
                                 Auth::user()->resource->resource_type == 'pmo')
                                 <li class="nav-item">
@@ -504,6 +506,7 @@
                                         </tbody>
                                     </table>
 
+                                    @if(Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
                                     <form action="/projects/{{ $project->id }}/payments" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
@@ -532,6 +535,7 @@
                                         <button type="submit" class="btn btn-primary">Add</button>
 
                                     </form>
+                                    @endif
 
                                 </div>
                                 <div class="tab-pane" id="vertical-icon-tab-7" role="tabpanel">
