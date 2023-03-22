@@ -52,7 +52,7 @@ class ProjectController extends Controller
             }
         }
 
-        $users = User::where('organisation_id', 1)->get();
+        $users = User::where('status', 'active')->get();
         $meetings = Meeting::where('project_id', $id)->orderBy('meeting_date')->get();
 
         $project = Project::find($id);
