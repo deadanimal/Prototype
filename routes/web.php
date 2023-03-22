@@ -52,12 +52,16 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/workpackages/search', [WorkpackageController::class, 'show_searched_workpackages']);
     Route::post('/workpackages/search', [WorkpackageController::class, 'search_workpackages']);
-    
+
+    Route::get('/workpackages/create', [WorkpackageController::class, 'show_workpackages_create']);
+    Route::get('/workpackages/calendar', [WorkpackageController::class, 'show_workpackages_calendar']);
     Route::get('/workpackages/assigned', [WorkpackageController::class, 'show_workpackages_assigned']);
     Route::get('/workpackages/completed', [WorkpackageController::class, 'show_workpackages_completed']);
     Route::get('/workpackages/delayed', [WorkpackageController::class, 'show_workpackages_delayed']);
+    Route::get('/workpackages/rejected', [WorkpackageController::class, 'show_workpackages_rejected']);
     Route::get('/workpackages/inreview', [WorkpackageController::class, 'show_workpackages_inreview']);
     Route::get('/workpackages/problems', [WorkpackageController::class, 'show_workpackages_problems']);
+    Route::get('/workpackages/answers', [WorkpackageController::class, 'show_workpackages_answers']);
 
     Route::post('/workpackages', [WorkpackageController::class, 'create_workpackage']);   
     Route::get('/workpackages/{workpackage_id}', [WorkpackageController::class, 'show_workpackage']); 

@@ -62,7 +62,6 @@
                                     </select>
                                 </div>
 
-                                @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
                                 <div class="mb-3">
                                     <label class="form-label">Project</label>
                                     <select class="form-control mb-3" name="project_id">
@@ -85,9 +84,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                @else
-                                    <input type="hidden" name="resource_id" value="{{Auth::user()->resource->id}}">
-                                @endif
 
                                 <div class="mb-3">
                                     <label class="form-label">Status</label>

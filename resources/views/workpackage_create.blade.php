@@ -16,16 +16,20 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Search Work Package</h5>
+                            <h5 class="card-title">Create Work Package</h5>
                         </div>
                         <div class="card-body">
-                            <form action="/workpackages/search" method="POST">
+                            <form action="/workpackages" method="POST">
                                 @csrf
+
+                                <div class="mb-3">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Name">
+                                </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Type</label>
                                     <select class="form-control mb-3" name="package_type">
-                                        <option value="-" selected>- - - </option>
                                         <option value="analyst - wireframe">Analyst - Wireframe</option>
                                         <option value="analyst - erd + dfd">Analyst - ERD & DFD</option>
                                         <option value="analyst - use case + process flow">Analyst - Use Case & Process Flow
@@ -55,18 +59,20 @@
                                 <div class="mb-3">
                                     <label class="form-label">Level</label>
                                     <select class="form-control mb-3" name="package_level">
-                                        <option value="-" selected>- - - </option>
-                                        <option value="1 - 6 hours">6 Hours</option>
-                                        <option value="2 - 3 hours">3 Hours</option>
-                                        <option value="3 - 1 hour">1 Hour</option>
+                                        <option value="1 - 6 hours">Level 1 - 6 Hours</option>
+                                        <option value="2 - 3 hours">Level 2 - 3 Hours</option>
+                                        <option value="3 - 1 hour">Level 3 - 1 Hour</option>
                                     </select>
                                 </div>
 
-                                @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
+                                <div class="mb-3">
+                                    <label class="form-label">Delivery Date</label>
+                                    <input type="date" name="estimate_delivery" class="form-control">
+                                </div>
+
                                 <div class="mb-3">
                                     <label class="form-label">Project</label>
                                     <select class="form-control mb-3" name="project_id">
-                                        <option value="-" selected>- - - </option>
                                         @foreach ($projects as $project)
                                             <option value="{{ $project->id }}">({{ $project->organisation->shortname }})
                                                 {{ $project->name }}</option>
@@ -77,7 +83,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Resource</label>
                                     <select class="form-control mb-3" name="resource_id">
-                                        <option value="-" selected>- - - </option>
+                                        <option value="">-</option>
                                         @foreach ($resources as $resource)
                                             <option value="{{ $resource->id }}">
                                                 ({{ ucfirst($resource->resource_type) }})
@@ -85,99 +91,29 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                @else
-                                    <input type="hidden" name="resource_id" value="{{Auth::user()->resource->id}}">
-                                @endif
 
                                 <div class="mb-3">
-                                    <label class="form-label">Status</label>
-                                    <select class="form-control mb-3" name="status">
-                                        <option value="-" selected>- - - </option>
-                                        <option value="Assigned">Assigned</option>
-                                        <option value="Reassigned">Reassigned</option>
-                                        <option value="Unassigned">Unassigned</option>
-                                        <option value="Work Package Incomplete">Work Package Incomplete</option>
-                                        <option value="Work Package In Review">Work Package In Review</option>
-                                        <option value="Work Package Approved">Work Package Approved</option>
-                                        <option value="Has Problem">Has Problem</option>
-                                        <option value="Question Answered">Question Answered</option>
-                                        <option value="Delayed">Delayed</option>
-                                        <option value="Rejected">Rejected</option>
-
+                                    <label class="form-label">Reviewer</label>
+                                    <select class="form-control mb-3" name="reviewer_id">
+                                        <option value="">-</option>
+                                        @foreach ($resources as $resource)
+                                            <option value="{{ $resource->id }}">
+                                                ({{ ucfirst($resource->resource_type) }})
+                                                {{ $resource->user->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Search Work Package</button>
+                                <div class="mb-3">
+                                    <label class="form-label">Remarks</label>
+                                    <textarea class="form-control" id="my-text-area" rows="5" name="remarks" placeholder="Textarea"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Create Work Package</button>
                             </form>
                         </div>
                     </div>
-                </div>
-
-
-
-                <div class="col-12">
-                    <div class="card">
-
-                        <table class="table table-striped table-sm">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Name</th>
-                                    <th>Estimate Delivery</th>
-                                    <th>Project</th>
-                                    <th>Resource</th>
-                                    <th>Type</th>
-                                    <th>Level</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-
-                                @forelse ($workpackages as $wp)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td><a href="/workpackages/{{ $wp->id }}">{{ $wp->name }}</a></td>
-                                        <td>{{ $wp->estimate_delivery }}</td>
-                                        <td>
-                                            @if ($wp->project_id)
-                                                {{ $wp->project->name }}
-                                            @else
-                                                -
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if ($wp->resource_id)
-                                                {{ $wp->resource->user->name }}
-                                            @else
-                                                -
-                                            @endif
-                                        </td>
-                                        <td>{{ $wp->package_type }}</td>
-                                        <td>{{ $wp->package_level }}</td>
-                                        <td>{{ $wp->status }}</td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                    </tr>
-                                @endforelse
-
-                            </tbody>
-                        </table>
-
-
-                    </div>
-                </div>
-
-
+                </div> 
 
 
 

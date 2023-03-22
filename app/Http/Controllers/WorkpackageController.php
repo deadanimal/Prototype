@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Mail;
 
 class WorkpackageController extends Controller
 {
+
     public function show_workpackages(Request $request) {
         
         
@@ -79,56 +80,158 @@ class WorkpackageController extends Controller
             'workpackages', 'projects', 'resources',
             'all_wps','assigned_wps', 'approved_wps','inreview_wps', 'question_wps',
             'delayed_wps', 'unassigned_wps'
-    ]));
+        ]));
     }
 
     public function show_workpackages_assigned(Request $request) {
         $user = $request->user();
-        $resource = Resource::where('user_id', $user->id)->first();
-
-        $all_wps = Workpackage::where([
-            ['resource_id','=', $resource->id],
-        ])->orderBy('estimate_delivery')->get();        
+        $resource = Resource::where('user_id', $user->id)->first();  
         
-        $assigned_wps = Workpackage::where([
-            ['resource_id','=', $resource->id],
-            ['status','=', 'Reassigned']
-        ])->orWhere([
-            ['resource_id','=', $resource->id],
-            ['status','=', 'Assigned']
-        ])->orWhere([
-            ['resource_id','=', $resource->id],
-            ['status','=', 'Work Package Incomplete']
-        ])->orderBy('estimate_delivery')->orderBy('status')->get();
-
-        $delayed_wps = Workpackage::where([
-            ['resource_id','=', $resource->id],
-            ['status','=', 'Delayed']
-        ])->orderBy('estimate_delivery')->get();            
-
-        $approved_wps = Workpackage::where([
-            ['resource_id','=', $resource->id],
-            ['status','=', 'Work Package Approved']
-        ])->orderBy('estimate_delivery')->get();        
-
-        $inreview_wps = Workpackage::where([
-            ['resource_id','=', $resource->id],
-            ['status','=', 'Work Package In Review']
-        ])->orderBy('estimate_delivery')->get(); 
+        if($resource->resource_type == 'all' || $resource->resource_type == 'pmo') {
+            $workpackages = Workpackage::where([                
+                ['status','=', 'Reassigned']
+            ])->orWhere([                
+                ['status','=', 'Assigned']
+            ])->orWhere([                
+                ['status','=', 'Work Package Incomplete']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();  
+        } else {
+            $workpackages = Workpackage::where([
+                ['resource_id','=', $resource->id],
+                ['status','=', 'Reassigned']
+            ])->orWhere([
+                ['resource_id','=', $resource->id],
+                ['status','=', 'Assigned']
+            ])->orWhere([
+                ['resource_id','=', $resource->id],
+                ['status','=', 'Work Package Incomplete']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();            
+        }
         
-        $question_wps = Workpackage::where([
-            ['resource_id','=', $resource->id],
-            ['status','=', 'Has Problem']
-        ])->orWhere([
-            ['resource_id','=', $resource->id],
-            ['status','=', 'Question Answered']
-        ])->orderBy('estimate_delivery')->get();          
-
-        return view('workpackage_list_resource', compact([
-            'all_wps','assigned_wps', 'approved_wps','inreview_wps', 'question_wps',
-            'resource','delayed_wps'
-        ]));        
+        return view('workpackage_simple_list', compact([
+            'workpackages'
+        ]));                
     }
+
+    public function show_workpackages_completed(Request $request) {
+        $user = $request->user();
+        $resource = Resource::where('user_id', $user->id)->first();  
+        
+        if($resource->resource_type == 'all' || $resource->resource_type == 'pmo') {
+            $workpackages = Workpackage::where([                
+                ['status','=', 'Work Package Approved']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();  
+        } else {
+            $workpackages = Workpackage::where([
+                ['resource_id','=', $resource->id],
+                ['status','=', 'Work Package Approved']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();            
+        }
+        
+        return view('workpackage_simple_list', compact([
+            'workpackages'
+        ]));                
+    }    
+
+    public function show_workpackages_delayed(Request $request) {
+        $user = $request->user();
+        $resource = Resource::where('user_id', $user->id)->first();  
+        
+        if($resource->resource_type == 'all' || $resource->resource_type == 'pmo') {
+            $workpackages = Workpackage::where([                
+                ['status','=', 'Delayed']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();  
+        } else {
+            $workpackages = Workpackage::where([
+                ['resource_id','=', $resource->id],
+                ['status','=', 'Delayed']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();            
+        }
+        
+        return view('workpackage_simple_list', compact([
+            'workpackages'
+        ]));                
+    }      
+    
+    public function show_workpackages_rejected(Request $request) {
+        $user = $request->user();
+        $resource = Resource::where('user_id', $user->id)->first();  
+        
+        if($resource->resource_type == 'all' || $resource->resource_type == 'pmo') {
+            $workpackages = Workpackage::where([                
+                ['status','=', 'Rejected']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();  
+        } else {
+            $workpackages = Workpackage::where([
+                ['resource_id','=', $resource->id],
+                ['status','=', 'Rejected']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();            
+        }
+        
+        return view('workpackage_simple_list', compact([
+            'workpackages'
+        ]));                
+    }     
+    
+    public function show_workpackages_inreview(Request $request) {
+        $user = $request->user();
+        $resource = Resource::where('user_id', $user->id)->first();  
+        
+        if($resource->resource_type == 'all' || $resource->resource_type == 'pmo') {
+            $workpackages = Workpackage::where([                
+                ['status','=', 'Work Package In Review']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();  
+        } else {
+            $workpackages = Workpackage::where([
+                ['resource_id','=', $resource->id],
+                ['status','=', 'Work Package In Review']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();            
+        }
+        
+        return view('workpackage_simple_list', compact([
+            'workpackages'
+        ]));                
+    }    
+    
+    public function show_workpackages_problems(Request $request) {
+        $user = $request->user();
+        $resource = Resource::where('user_id', $user->id)->first();  
+        
+        if($resource->resource_type == 'all' || $resource->resource_type == 'pmo') {
+            $workpackages = Workpackage::where([                
+                ['status','=', 'Has Problem']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();  
+        } else {
+            $workpackages = Workpackage::where([
+                ['resource_id','=', $resource->id],
+                ['status','=', 'Has Problem']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();            
+        }
+        
+        return view('workpackage_simple_list', compact([
+            'workpackages'
+        ]));                
+    }     
+    
+    public function show_workpackages_answers(Request $request) {
+        $user = $request->user();
+        $resource = Resource::where('user_id', $user->id)->first();  
+        
+        if($resource->resource_type == 'all' || $resource->resource_type == 'pmo') {
+            $workpackages = Workpackage::where([                
+                ['status','=', 'Question Answered']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();  
+        } else {
+            $workpackages = Workpackage::where([
+                ['resource_id','=', $resource->id],
+                ['status','=', 'Question Answered']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();            
+        }
+        
+        return view('workpackage_simple_list', compact([
+            'workpackages'
+        ]));                
+    }         
 
     public function show_workpackage(Request $request) {
         $id = (int) $request->route('workpackage_id');  
@@ -138,10 +241,20 @@ class WorkpackageController extends Controller
         return view('workpackage_detail', compact('wp', 'projects','resources'));
     }
 
+    public function show_workpackages_create(Request $request) {
+        $projects = Project::whereNotIn('organisation_id',[1])->get();
+        $user = $request->user();            
+        $resources = Resource::where('status', 'active')->whereNotIn('resource_type', ['viewer'])->orderBy('resource_type')->get();
+
+        return view('workpackage_create', compact([
+            'projects', 'resources',
+        ]));
+    }    
+
     public function create_workpackage(Request $request) {
 
         $user = $request->user();
-;  
+
         $wp = Workpackage::create([
             'name' => $request->name,
             'package_type' => $request->package_type,

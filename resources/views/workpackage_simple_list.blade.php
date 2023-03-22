@@ -1,0 +1,89 @@
+@extends('layout-auth')
+
+@section('content')
+    <main class="content">
+        <div class="container-fluid">
+
+            <div class="header">
+                <h1 class="header-title">
+                    Work Package 
+                </h1>
+
+            </div>
+
+            <div class="row">
+
+
+                <div class="col-12">
+                    <div class="card">
+
+                        <table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Estimate Delivery</th>
+                                    <th>Project</th>
+                                    <th>Resource</th>
+                                    <th>Type</th>
+                                    <th>Level</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                @forelse ($workpackages as $wp)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td><a href="/workpackages/{{ $wp->id }}">{{ $wp->name }}</a></td>
+                                        <td>{{ $wp->estimate_delivery }}</td>
+                                        <td>
+                                            @if ($wp->project_id)
+                                                {{ $wp->project->name }}
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($wp->resource_id)
+                                                {{ $wp->resource->user->name }}
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>{{ $wp->package_type }}</td>
+                                        <td>{{ $wp->package_level }}</td>
+                                        <td>{{ $wp->status }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                @endforelse
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+
+        </div>
+    </main>
+
+@endsection

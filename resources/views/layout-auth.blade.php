@@ -17,6 +17,8 @@
         }
     </style>
     <script src="/spark/js/settings.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js'></script>
+
 
 
     <!-- Datatable -->
@@ -69,12 +71,14 @@
                         </a>
                     </li>
 
+                    @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'business')
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/mockups">
                             <i class="align-middle me-2 fa fa-fw fa-television"></i> <span
                                 class="align-middle">Mock-up</span>
                         </a>
                     </li>
+                    @endif
 
 
                     @if (Auth::user()->user_type == 'admin')
@@ -112,20 +116,27 @@
                                 Book</span>
                         </a>
                     </li>
-
+                    
                     <li class="sidebar-item">
 						<a data-bs-target="#wps" data-bs-toggle="collapse" class="sidebar-link collapsed">
 							<i class="align-middle me-2 fa fa-fw fa-terminal"></i> <span class="align-middle">Work Package</span>
 						</a>
 						<ul id="wps" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="/workpackages">All</a></li>
-							{{-- <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/assigned">Assigned</a></li>
+							{{-- <li class="sidebar-item"><a class="sidebar-link" href="/workpackages">All</a></li> --}}
+							<li class="sidebar-item"><a class="sidebar-link" href="/workpackages/assigned">Assigned</a></li>
                             <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/completed">Completed</a></li>
                             <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/delayed">Delayed</a></li>
                             <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/inreview">In-review</a></li>
-                            <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/problems">Problem</a></li> --}}
+                            <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/problems">Problem</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/answers">Answer</a></li>
+                            @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
+                                <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/create">Create</a></li>
+                            @endif
+                            <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/search">Search</a></li>
+                            
                             
 						</ul>
+                    </li>
 
 
                     <li class="sidebar-item">
