@@ -26,7 +26,7 @@ class WorkpackageAssigned extends Mailable
      */
     public function envelope(): Envelope
     {
-        $statement = 'Work Package Assigned: ' . ($this->wp->id);
+        $statement = '(ASSIGNED) Work Package ID: ' . ($this->wp->id);
         return new Envelope(
             subject: $statement,
         );

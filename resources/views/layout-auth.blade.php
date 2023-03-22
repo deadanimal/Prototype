@@ -99,7 +99,7 @@
                         </li>
                     @endif
 
-                    @if (Auth::user()->user_type == 'admin' || Auth::user()->user_type == 'staff')
+                    
                         @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="/resources">
@@ -108,7 +108,7 @@
                                 </a>
                             </li>
                         @endif
-                    @endif
+                    
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/kitabs">

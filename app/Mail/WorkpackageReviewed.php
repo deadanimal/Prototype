@@ -30,7 +30,7 @@ class WorkpackageReviewed extends Mailable
      */
     public function envelope(): Envelope
     {
-        $statement = 'Work Package Reviewed: ' . $this->wp->id;
+        $statement = '('.$this->review->status.')Work Package ID: '.$this->wp->id.' reviewed by '.$this->review->resource->user->name;
         return new Envelope(
             subject: $statement,
         );

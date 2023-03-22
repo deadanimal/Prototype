@@ -121,7 +121,8 @@ class ProjectController extends Controller
                 ['user_id', '=', $user->id],
             ])->first();
         }
-        return view('resource_detail', compact('resource'));        
+        $wps = Workpackage::where('resource_id', $id)->get();
+        return view('resource_detail', compact('resource', 'wps'));        
     }    
 
     public function create_resource(Request $request) {

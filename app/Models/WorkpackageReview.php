@@ -21,4 +21,5 @@ class WorkpackageReview extends Model
     {
         return $this->belongsTo(Resource::class);
     }     
+      
 }

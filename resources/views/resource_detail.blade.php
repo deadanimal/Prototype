@@ -4,50 +4,21 @@
     <main class="content">
         <div class="container-fluid">
 
+            <div class="header">
+                <h1 class="header-title">
+                    {{$resource->user->name}}
+                </h1>
+                <p class="header-subtitle">- - </p>
+
+            </div>            
+
             <div class="row">
 
                 <div class="col-12">
                     <div class="card">
-                      
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Hourly Rate</td>
-                                    <td>
-                                        @if($resource->currency == 'myr')
-                                        RM
-                                        @else
-                                        USD 
-                                        @endif
-
-                                        {{$resource->hourly_rate}}</td>
-                                </tr>     
-                                <tr>
-                                    <td>Total Accumulated Pay</td>
-                                    <td>-</td>
-                                </tr> 
-                                <tr>
-                                    <td>Monthly Pay Assigned</td>
-                                    <td>-</td>
-                                </tr>   
-                                <tr>
-                                    <td>Monthly Pay In Review</td>
-                                    <td>-</td>
-                                </tr>      
-                                <tr>
-                                    <td>Monthly Pay Approved</td>
-                                    <td>-</td>
-                                </tr>                                                                                                                                                           
-
-
-                            </tbody>
-                        </table>
+                        <div class="card-body">
+                        <div id='calendar'></div>
+                        </div>
                     </div>
                 </div>
             
@@ -58,4 +29,38 @@
 
         </div>
     </main>
+
+    <script>
+
+var wps = @json($wps);
+console.log(wps)
+var events = []
+wps.forEach(element => {
+    var event = {
+        title: element['name'],
+        start: element['estimate_delivery'],
+        url: '/workpackages/' + element['id']
+    }
+    events.push(event)            
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+  
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    initialDate: '2023-03-01',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
+    events: events
+  });
+
+  calendar.render();
+});        
+    </script>
 @endsection
