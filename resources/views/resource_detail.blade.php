@@ -36,11 +36,31 @@ var wps = @json($wps);
 console.log(wps)
 var events = []
 wps.forEach(element => {
+
+    var color = 'blue';
+    
+    if (element['status'] == 'Delayed' || element['status'] == 'Rejected') {
+        color = 'red';
+    }
+
+    if (element['status'] == 'Work Package Approved') {
+        color = 'green';
+    }
+
+    if (element['status'] == 'Has Problem' || element['status'] == 'Question Answered') {
+        color = 'orange';
+    }    
+
+
     var event = {
         title: element['name'],
+        description: '(' + element['status'] + ') ' ,
         start: element['estimate_delivery'],
-        url: '/workpackages/' + element['id']
+        url: '/workpackages/' + element['id'],
+        color: color
     }
+
+
     events.push(event)            
 });
 

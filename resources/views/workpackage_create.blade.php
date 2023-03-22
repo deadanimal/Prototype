@@ -53,15 +53,17 @@
                                         <option value="developer - deployment">Developer - Deployment</option>
                                         <option value="developer - bug fixing">Developer - Bug Fixing</option>
                                         <option value="other - training">Other - Training</option>
+                                        <option value="other - off">Other - OFF</option>
                                     </select>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Level</label>
                                     <select class="form-control mb-3" name="package_level">
-                                        <option value="1 - 6 hours">Level 1 - 6 Hours</option>
-                                        <option value="2 - 3 hours">Level 2 - 3 Hours</option>
-                                        <option value="3 - 1 hour">Level 3 - 1 Hour</option>
+                                        <option value=""></option>
+                                        <option value="1 - 6 hours">Level 1</option>
+                                        <option value="2 - 3 hours">Level 2</option>
+                                        <option value="3 - 1 hour">Level 3</option>
                                     </select>
                                 </div>
 
