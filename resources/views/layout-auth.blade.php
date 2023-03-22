@@ -124,6 +124,9 @@
 						<ul id="wps" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
 							{{-- <li class="sidebar-item"><a class="sidebar-link" href="/workpackages">All</a></li> --}}
 							<li class="sidebar-item"><a class="sidebar-link" href="/workpackages/assigned">Assigned</a></li>
+                            @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
+                            <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/unassigned">Unassigned</a></li>
+                            @endif
                             <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/completed">Completed</a></li>
                             <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/delayed">Delayed</a></li>
                             <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/inreview">In-review</a></li>

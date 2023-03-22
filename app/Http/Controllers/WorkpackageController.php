@@ -113,6 +113,26 @@ class WorkpackageController extends Controller
         ]));                
     }
 
+    public function show_workpackages_unassigned(Request $request) {
+        $user = $request->user();
+        $resource = Resource::where('user_id', $user->id)->first();  
+        
+        if($resource->resource_type == 'all' || $resource->resource_type == 'pmo') {
+            $workpackages = Workpackage::where([                
+                ['status','=', 'Unassigned']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();  
+        } else {
+            $workpackages = Workpackage::where([
+                ['resource_id','=', $resource->id],
+                ['status','=', 'Unassigned']
+            ])->orderBy('estimate_delivery')->orderBy('status')->get();            
+        }
+        
+        return view('workpackage_simple_list', compact([
+            'workpackages'
+        ]));                
+    }     
+
     public function show_workpackages_completed(Request $request) {
         $user = $request->user();
         $resource = Resource::where('user_id', $user->id)->first();  
