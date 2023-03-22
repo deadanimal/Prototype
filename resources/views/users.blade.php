@@ -153,11 +153,16 @@
                                     <label class="form-label w-100">Position</label>
                                     <input type="text" name="position" class="form-control">
                                 </div>   
-                                
+
                                 <div class="mb-3">
-                                    <label class="form-label w-100">Organisation ID</label>
-                                    <input type="number" name="organisation_id" class="form-control">
-                                </div>                                  
+                                    <label class="form-label">Organitsation</label>
+                                    <select class="form-control mb-3" name="organitsation_id">
+                                        @foreach ($organitsations as $organitsation)
+                                            <option value="{{ $organitsation->id }}">
+                                                {{ $organitsation->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>                                                                                         
 
                                 <button type="submit" class="btn btn-primary">Submit</button>
 
