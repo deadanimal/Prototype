@@ -157,7 +157,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Organitsation</label>
                                     <select class="form-control mb-3" name="organitsation_id">
-                                        @foreach ($organitsations as $organitsation)
+                                        @foreach ($organisations as $organitsation)
                                             <option value="{{ $organitsation->id }}">
                                                 {{ $organitsation->name }}</option>
                                         @endforeach
