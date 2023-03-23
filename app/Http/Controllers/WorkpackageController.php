@@ -314,6 +314,9 @@ class WorkpackageController extends Controller
             $wp->reviewer_id = $request->reviewer_id;
             $wp->save();
             Mail::to($wp->reviewer->user->email)->send(new WorkpackageAssigned($wp));
+            if($wp->reviewer->user->whatsapp_number) {
+                $this->notify_workpackage_assigned($wp->reviewer->user, $wp);
+            }                    
         }          
 
         if($request->resource_id) {
@@ -321,6 +324,9 @@ class WorkpackageController extends Controller
             $wp->status = 'Assigned';
             $wp->save();
             Mail::to($wp->resource->user->email)->send(new WorkpackageAssigned($wp));
+            if($wp->resource->user->whatsapp_number) {
+                $this->notify_workpackage_assigned($wp->resource->user, $wp);
+            }                    
 
         } else {
             $wp->status = 'Unassigned';
@@ -346,6 +352,9 @@ class WorkpackageController extends Controller
             $wp->reviewer_id = $request->reviewer_id;
             $wp->save();
             Mail::to($wp->reviewer->user->email)->send(new WorkpackageAssigned($wp));
+            if($wp->reviewer->user->whatsapp_number) {
+                $this->notify_workpackage_assigned($wp->reviewer->user, $wp);
+            }                    
         }          
 
         if($request->resource_id) {
@@ -353,6 +362,9 @@ class WorkpackageController extends Controller
             $wp->status = 'Reassigned';
             $wp->save();
             Mail::to($wp->resource->user->email)->send(new WorkpackageAssigned($wp));
+            if($wp->resource->user->whatsapp_number) {
+                $this->notify_workpackage_assigned($wp->resource->user, $wp);
+            }               
         }     
 
         Mail::to('pmo@pipeline.com.my')->send(new WorkpackageAssigned($wp));
@@ -518,6 +530,24 @@ class WorkpackageController extends Controller
         $workpackages = $wps->get();
 
         return view('workpackage_search', compact('projects', 'resources', 'workpackages'));
+    }    
+
+    public function notify_workpackage_assigned($user, $wp) {
+        $message = "There is an assignment for the work package. Work Package ID: ". $wp->id.'.';
+        Http::post('https://api.green-api.com/waInstance'.env('WA_INSTANCE').'/SendTemplateButtons/'.env('WA_TOKEN'), [
+            'chatId' => $user->whatsapp_number."@c.us",
+            'message' => $message,
+            'footer' => 'View the Work Package '.$wp->id,
+            'templateButtons' => [
+                [
+                    "index" => 1,
+                    "urlButton" => [
+                        "displayText" => 'Work Package: '.$wp->name,
+                        "url" => "https://prototype.com.my/workpackages/".$wp->id,
+                    ],
+                ],
+            ]
+        ]);        
     }    
 
     public function notify_workpackage_review($user, $wp, $wp_review) {
