@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d0bd8d1029394e59307b0caeb8483951",
+    "content-hash": "406d6369779db7e27f81adda20a9102e",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -280,6 +280,77 @@
                 }
             ],
             "time": "2023-01-12T15:12:49+00:00"
+        },
+        {
+            "name": "biscolab/laravel-recaptcha",
+            "version": "v6.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/biscolab/laravel-recaptcha.git",
+                "reference": "c3d742e6a082cefe2ffce1e13b17a104abfc7234"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/biscolab/laravel-recaptcha/zipball/c3d742e6a082cefe2ffce1e13b17a104abfc7234",
+                "reference": "c3d742e6a082cefe2ffce1e13b17a104abfc7234",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/routing": "^7.0|^8.0|^9.0|^10.0",
+                "illuminate/support": "^7.0|^8.0|^9.0|^10.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "5.*|6.*|^7.0|^8.0",
+                "phpunit/phpunit": "^9.1"
+            },
+            "suggest": {
+                "biscolab/laravel-authlog": "It allows to handle logged-in users and force log-out if needed"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Biscolab\\ReCaptcha\\ReCaptchaServiceProvider"
+                    ],
+                    "aliases": {
+                        "ReCaptcha": "Biscolab\\ReCaptcha\\Facades\\ReCaptcha"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Biscolab\\ReCaptcha\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roberto Belotti",
+                    "email": "roby.belotti@gmail.com",
+                    "homepage": "https://biscolab.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple and painless Google reCAPTCHA package for Laravel framework",
+            "homepage": "https://biscolab.com/laravel-recaptcha",
+            "keywords": [
+                "captcha",
+                "laravel",
+                "recaptcha",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/biscolab/laravel-recaptcha/issues",
+                "source": "https://github.com/biscolab/laravel-recaptcha/tree/v6.0.0"
+            },
+            "time": "2023-02-11T17:27:50+00:00"
         },
         {
             "name": "brick/math",
@@ -7064,6 +7135,164 @@
                 }
             ],
             "time": "2022-03-08T17:03:00+00:00"
+        },
+        {
+            "name": "webklex/laravel-imap",
+            "version": "4.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Webklex/laravel-imap.git",
+                "reference": "9038139b8789e60c998eb389d419d41b969f2713"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Webklex/laravel-imap/zipball/9038139b8789e60c998eb389d419d41b969f2713",
+                "reference": "9038139b8789e60c998eb389d419d41b969f2713",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "ext-iconv": "*",
+                "ext-mbstring": "*",
+                "laravel/framework": ">=5.0.0",
+                "php": ">=5.5.9",
+                "webklex/php-imap": "^4.1.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Webklex\\IMAP\\Providers\\LaravelServiceProvider"
+                    ],
+                    "aliases": {
+                        "Client": "Webklex\\IMAP\\Facades\\Client"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webklex\\IMAP\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Malte Goldenbaum",
+                    "email": "github@webklex.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel IMAP client",
+            "homepage": "https://github.com/webklex/laravel-imap",
+            "keywords": [
+                "idle",
+                "imap",
+                "laravel",
+                "laravel-imap",
+                "mail",
+                "oauth",
+                "pop3",
+                "webklex"
+            ],
+            "support": {
+                "issues": "https://github.com/Webklex/laravel-imap/issues",
+                "source": "https://github.com/Webklex/laravel-imap/tree/4.1.2"
+            },
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/webklex",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://ko-fi.com/webklex",
+                    "type": "ko_fi"
+                }
+            ],
+            "time": "2023-01-18T18:33:20+00:00"
+        },
+        {
+            "name": "webklex/php-imap",
+            "version": "4.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Webklex/php-imap.git",
+                "reference": "94bf93ae8868ac1e073cfbaef377f0ca1acac2bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Webklex/php-imap/zipball/94bf93ae8868ac1e073cfbaef377f0ca1acac2bc",
+                "reference": "94bf93ae8868ac1e073cfbaef377f0ca1acac2bc",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "ext-iconv": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-openssl": "*",
+                "illuminate/pagination": ">=5.0.0",
+                "nesbot/carbon": ">=1.0",
+                "php": ">=7.0.0",
+                "symfony/http-foundation": ">=2.8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "symfony/mime": "Recomended for better extension support"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webklex\\PHPIMAP\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Malte Goldenbaum",
+                    "email": "github@webklex.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP IMAP client",
+            "homepage": "https://github.com/webklex/php-imap",
+            "keywords": [
+                "imap",
+                "mail",
+                "php-imap",
+                "pop3",
+                "webklex"
+            ],
+            "support": {
+                "issues": "https://github.com/Webklex/php-imap/issues",
+                "source": "https://github.com/Webklex/php-imap/tree/4.1.2"
+            },
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/webklex",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://ko-fi.com/webklex",
+                    "type": "ko_fi"
+                }
+            ],
+            "time": "2022-12-14T15:45:15+00:00"
         },
         {
             "name": "webmozart/assert",

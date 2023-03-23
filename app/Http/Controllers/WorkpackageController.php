@@ -13,6 +13,7 @@ use App\Models\Resource;
 use App\Models\Workpackage;
 use App\Models\WorkpackageReview;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -402,7 +403,13 @@ class WorkpackageController extends Controller
         }
 
         Mail::to($wp->reviewer->user->email)->send(new WorkpackageReviewed($wp, $wp_review));
+        if($wp->reviewer->user->whatsapp_number) {
+            $this->notify_workpackage_review($wp->reviewer->user, $wp, $wp_review);
+        }
         Mail::to($wp->resource->user->email)->send(new WorkpackageReviewed($wp, $wp_review));
+        if($wp->resource->user->whatsapp_number) {
+            $this->notify_workpackage_review($wp->resource->user, $wp, $wp_review);
+        }        
         Mail::to('pmo@pipeline.com.my')->send(new WorkpackageReviewed($wp, $wp_review));
 
         return back();
@@ -512,6 +519,25 @@ class WorkpackageController extends Controller
 
         return view('workpackage_search', compact('projects', 'resources', 'workpackages'));
     }    
+
+    public function notify_workpackage_review($user, $wp, $wp_review) {
+        $message = "There is an update for the work package. Work Package ID: ". $wp->id.'. Status: '.$wp_review->status;
+        Http::post('https://api.green-api.com/waInstance'.env('WA_INSTANCE').'/SendTemplateButtons/'.env('7c7826d000b74108a86e1a0161952e107248474320b042a593'), [
+            'chatId' => $user->whatsapp_number."@c.us",
+            'message' => $message,
+            'footer' => 'View the work package',
+            'templateButtons' => [
+                [
+                    "index" => 1,
+                    "urlButton" => [
+                        "displayText" => $wp->name,
+                        "url" => "https://prototype.com.my/workpackages/".$wp->id,
+                    ],
+                ],
+            ]
+        ]);        
+    }
+    
 
 
 }
