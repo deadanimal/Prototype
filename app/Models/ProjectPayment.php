@@ -26,5 +26,11 @@ class ProjectPayment extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
-    }       
+    }  
+    
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logOnly(['*']);
+    }        
 }

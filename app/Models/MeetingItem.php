@@ -22,5 +22,11 @@ class MeetingItem extends Model
     public function meeting()
     {
         return $this->belongsTo(Meeting::class);
-    }        
+    }   
+    
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logOnly(['*']);
+    }    
 }

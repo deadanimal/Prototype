@@ -26,4 +26,10 @@ class ProjectTestcase extends Model
     {
         return $this->hasMany(ProjectTestcaseExecution::class,);
     }      
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logOnly(['*']);
+    }        
 }

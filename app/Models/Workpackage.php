@@ -47,5 +47,11 @@ class Workpackage extends Model
     {
         return $this->hasMany(WorkpackageReview::class);
     }     
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logOnly(['*']);
+    }        
  
 }

@@ -35,5 +35,11 @@ class Ticket extends Model
     public function ticket_messages()
     {
         return $this->hasMany(TicketMessage::class);
-    }           
+    }   
+    
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logOnly(['*']);
+    }        
 }

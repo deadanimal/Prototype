@@ -43,7 +43,13 @@ class Meeting extends Model
     public function meeting_attendees()
     {
         return $this->hasMany(MeetingAttendee::class);
-    }      
+    }    
+    
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logOnly(['*']);
+    }        
 
 
 }

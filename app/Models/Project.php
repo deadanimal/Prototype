@@ -26,5 +26,11 @@ class Project extends Model
         return $this->hasMany(User::class, 'project_users');
     }      
 
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logOnly(['*']);
+    }        
+
 
 }

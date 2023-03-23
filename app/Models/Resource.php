@@ -34,6 +34,5 @@ class Resource extends Model
     {
         return LogOptions::defaults()
         ->logOnly(['*']);
-        // Chain fluent methods for configuration options
     }    
 }

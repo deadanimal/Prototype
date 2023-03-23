@@ -24,5 +24,11 @@ class WorkpackageReview extends Model
     {
         return $this->belongsTo(Resource::class);
     }     
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logOnly(['*']);
+    }        
       
 }

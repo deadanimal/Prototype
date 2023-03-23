@@ -587,10 +587,10 @@ class ProjectController extends Controller
         }   
       
         
-        $project_users = ProjectUser::where('project_id', $project->id)->get();
+        $project_users = ProjectUser::where('project_id', $ticket->project->id)->get();
 
         foreach($project_users as $project_user) {
-            Mail::to($project_user->user->email->send(new TicketReplied($ticket, $message));
+            Mail::to($project_user->user->email)->send(new TicketReplied($ticket, $message));
         }        
 
         Mail::to('pmo@pipeline.com.my')->send(new TicketReplied($ticket, $message));
