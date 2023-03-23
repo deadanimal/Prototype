@@ -557,11 +557,11 @@ class ProjectController extends Controller
             $message->save();
         }
 
-        $users = ProjectUser::where('project_id', $project->id)->get();
+        $project_users = ProjectUser::where('project_id', $project->id)->get();
 
-        // foreach($users as $user) {
-        //     Mail::to($user->email)->send(new TicketCreated($ticket, $message));
-        // }
+        foreach($project_users as $project_user) {
+            Mail::to($project_user->user->email)->send(new TicketCreated($ticket, $message));
+        }
         Mail::to('pmo@pipeline.com.my')->send(new TicketCreated($ticket, $message));
 
 
@@ -585,12 +585,13 @@ class ProjectController extends Controller
             $message->attachment = $request->file('attachment')->store('prototype/attachment');
             $message->save();
         }   
+      
         
-        $users = ProjectUser::where('project_id', $ticket->project->id)->get();
+        $project_users = ProjectUser::where('project_id', $project->id)->get();
 
-        // foreach($users as $user) {
-        //     Mail::to($user->email)->send(new TicketReplied($ticket, $message));
-        // }        
+        foreach($project_users as $project_user) {
+            Mail::to($project_user->user->email->send(new TicketReplied($ticket, $message));
+        }        
 
         Mail::to('pmo@pipeline.com.my')->send(new TicketReplied($ticket, $message));
         Alert::success('Success', 'Message has been created');        
