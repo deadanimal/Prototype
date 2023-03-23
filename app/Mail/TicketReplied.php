@@ -13,12 +13,13 @@ class TicketReplied extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+    public $ticket;
+    public $message;
+
+    public function __construct($ticket, $message)
     {
-        //
+        $this->ticket = $ticket;
+        $this->message = $message;
     }
 
     /**
@@ -26,8 +27,9 @@ class TicketReplied extends Mailable
      */
     public function envelope(): Envelope
     {
+        $statement = 'Ticket ID: '.$this->ticket->id.' received a reply ID: '. $this->message->id;
         return new Envelope(
-            subject: 'Ticket Replied',
+            subject: $statement,
         );
     }
 
@@ -37,7 +39,11 @@ class TicketReplied extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.ticket_replied',
+            with: [
+                'ticket' => $this->ticket,
+                'message' => $this->message,
+            ]            
         );
     }
 

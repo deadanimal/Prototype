@@ -13,12 +13,13 @@ class TicketCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+    public $ticket;
+    public $message;
+
+    public function __construct($ticket, $message)
     {
-        //
+        $this->ticket = $ticket;
+        $this->message = $message;
     }
 
     /**
@@ -26,8 +27,9 @@ class TicketCreated extends Mailable
      */
     public function envelope(): Envelope
     {
+        $statement = 'Project '.$this->ticket->project->name.' has a ticket created: '.$this->ticket->id;
         return new Envelope(
-            subject: 'Ticket Created',
+            subject: $statement,
         );
     }
 
@@ -37,7 +39,11 @@ class TicketCreated extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.ticket_created',
+            with: [
+                'ticket' => $this->ticket,
+                'message' => $this->message,
+            ]            
         );
     }
 
