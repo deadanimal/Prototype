@@ -24,6 +24,7 @@ use App\Models\Trail;
 use App\Models\User;
 use App\Models\Workpackage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -560,6 +561,9 @@ class ProjectController extends Controller
 
         foreach($project_users as $project_user) {
             Mail::to($project_user->user->email)->send(new TicketCreated($ticket, $message));
+            if($project_user->user->whatsapp_number) {
+                $this->notify_ticket($project_user->user, $ticket);
+            }            
         }
         Mail::to('pmo@pipeline.com.my')->send(new TicketCreated($ticket, $message));
 
@@ -590,6 +594,9 @@ class ProjectController extends Controller
 
         foreach($project_users as $project_user) {
             Mail::to($project_user->user->email)->send(new TicketReplied($ticket, $message));
+            if($project_user->user->whatsapp_number) {
+                $this->notify_ticket($project_user->user, $ticket);
+            }               
         }        
 
         Mail::to('pmo@pipeline.com.my')->send(new TicketReplied($ticket, $message));
@@ -606,5 +613,23 @@ class ProjectController extends Controller
         
         return back();
     }
+
+    public function notify_ticket($user, $ticket) {
+        $message = "There is a ticket created/updated. Ticket ID: ".$ticket->id;
+        Http::post('https://api.green-api.com/waInstance'.env('WA_INSTANCE').'/SendTemplateButtons/'.env('WA_TOKEN'), [
+            'chatId' => $user->whatsapp_number."@c.us",
+            'message' => $message,
+            'footer' => 'View the Ticket '.$ticket->id,
+            'templateButtons' => [
+                [
+                    "index" => 1,
+                    "urlButton" => [
+                        "displayText" => 'Ticket: '.$ticket->name,
+                        "url" => "https://prototype.com.my/tickets/".$ticket->id,
+                    ],
+                ],
+            ]
+        ]);        
+    }    
 }
 
