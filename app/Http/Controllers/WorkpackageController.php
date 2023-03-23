@@ -522,7 +522,7 @@ class WorkpackageController extends Controller
 
     public function notify_workpackage_review($user, $wp, $wp_review) {
         $message = "There is an update for the work package. Work Package ID: ". $wp->id.'. Status: '.$wp_review->status;
-        Http::post('https://api.green-api.com/waInstance'.env('WA_INSTANCE').'/SendTemplateButtons/'.env('7c7826d000b74108a86e1a0161952e107248474320b042a593'), [
+        Http::post('https://api.green-api.com/waInstance'.env('WA_INSTANCE').'/SendTemplateButtons/'.env('WA_TOKEN'), [
             'chatId' => $user->whatsapp_number."@c.us",
             'message' => $message,
             'footer' => 'View the work package',
