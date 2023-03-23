@@ -205,7 +205,7 @@
                                         <input type="file" name="attachment">
                                     </div>
 
-                                    @if (Auth::user()->resource->id == $wp->resource_id || Auth::user()->resource->resource_type == 'all')
+                                    @if (Auth::user()->resource->id == $wp->resource_id)
                                         <button type="submit" name="action" value="submit_work_complete"
                                             class="btn btn-primary">Submit Complete Work</button>
                                         <button type="submit" name="action" value="submit_work_incomplete"
@@ -213,27 +213,17 @@
                                         <button type="submit" name="action" value="question" class="btn btn-info">Ask
                                             Question</button>
                                     @endif
-                                    @if (Auth::user()->resource->id == $wp->reviewer_id || Auth::user()->resource->resource_type == 'all')
+                                    
+                                    @if (Auth::user()->resource->id == $wp->reviewer_id || Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
                                         <br />
-                                        <button type="submit" name="action" value="review_work_complete"
-                                            class="btn btn-success">Mark as Complete</button>
-                                        <button type="submit" name="action" value="review_work_incomplete"
-                                            class="btn btn-danger">Mark as Incomplete</button>
-                                        <button type="submit" name="action" value="answer" class="btn btn-info">Answer
-                                            Question</button>
-                                        <button type="submit" name="action" value="delayed" class="btn btn-danger">Mark as
-                                            Delayed</button>
-                                        <button type="submit" name="action" value="rejected"
-                                            class="btn btn-danger">REJECT!!</button>
+                                        <button type="submit" name="action" value="review_work_complete" class="btn btn-success">Complete</button>
+                                        <button type="submit" name="action" value="review_work_incomplete" class="btn btn-danger">Incomplete</button>
+                                        <button type="submit" name="action" value="query" class="btn btn-warning">Query</button>                                            
+                                        <button type="submit" name="action" value="answer" class="btn btn-info">Answer</button>
+                                        <button type="submit" name="action" value="delayed" class="btn btn-danger">Delayed</button>
+                                        <button type="submit" name="action" value="rejected" class="btn btn-danger">Reject Work Progress</button>
                                     @endif
-                                    @if (Auth::user()->resource->resource_type == 'pmo')
-                                        <button type="submit" name="action" value="question" class="btn btn-info">Ask
-                                            Question</button>
-                                        <button type="submit" name="action" value="answer" class="btn btn-info">Answer
-                                            Question</button>
-                                        <button type="submit" name="action" value="delayed" class="btn btn-danger">Mark as
-                                            Delayed</button>
-                                    @endif
+
                                 </form>
                             @endif
                         </div>

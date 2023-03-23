@@ -135,6 +135,7 @@
                             <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/delayed">Delayed</a></li>
                             <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/inreview">In-review</a></li>
                             <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/problems">Problem</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/queries">Query</a></li>
                             <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/answers">Answer</a></li>
                             @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
                                 <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/create">Create</a></li>

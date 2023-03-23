@@ -100,6 +100,7 @@
                                         <option value="Work Package In Review">Work Package In Review</option>
                                         <option value="Work Package Approved">Work Package Approved</option>
                                         <option value="Has Problem">Has Problem</option>
+                                        <option value="Has Query">Has Query</option>
                                         <option value="Question Answered">Question Answered</option>
                                         <option value="Delayed">Delayed</option>
                                         <option value="Rejected">Rejected</option>

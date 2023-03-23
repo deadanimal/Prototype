@@ -62,6 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/workpackages/rejected', [WorkpackageController::class, 'show_workpackages_rejected']);
     Route::get('/workpackages/inreview', [WorkpackageController::class, 'show_workpackages_inreview']);
     Route::get('/workpackages/problems', [WorkpackageController::class, 'show_workpackages_problems']);
+    Route::get('/workpackages/queries', [WorkpackageController::class, 'show_workpackages_queries']);
     Route::get('/workpackages/answers', [WorkpackageController::class, 'show_workpackages_answers']);
 
     Route::post('/workpackages', [WorkpackageController::class, 'create_workpackage']);   
