@@ -557,7 +557,9 @@ class ProjectController extends Controller
             $message->save();
         }
 
-        foreach($ticket->project->users as $user) {
+        $users = ProjectUser::where('project_id', $project->id)->get();
+
+        foreach($users as $user) {
             Mail::to($user->email)->send(new TicketCreated($ticket, $message));
         }
 
@@ -583,7 +585,9 @@ class ProjectController extends Controller
             $message->save();
         }   
         
-        foreach($ticket->project->users as $user) {
+        $users = ProjectUser::where('project_id', $ticket->project->id)->get();
+
+        foreach($users as $user) {
             Mail::to($user->email)->send(new TicketReplied($ticket, $message));
         }        
 
