@@ -71,6 +71,7 @@
                         </a>
                     </li>
 
+                    @if(Auth::user()->organisation_id == 1)
                     @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'business')
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/mockups">
@@ -78,6 +79,7 @@
                                 class="align-middle">Mock-up</span>
                         </a>
                     </li>
+                    @endif
                     @endif
 
 
@@ -90,16 +92,16 @@
                         </li>
                     @endif
 
-                    @if (Auth::user()->user_type == 'admin' || Auth::user()->user_type == 'staff')
+                    
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="/projects">
                                 <i class="align-middle me-2 fa fa-fw fa-bank"></i> <span
                                     class="align-middle">Project</span>
                             </a>
                         </li>
-                    @endif
-
                     
+
+                        @if(Auth::user()->organisation_id == 1)
                         @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="/resources">
@@ -107,6 +109,7 @@
                                         class="align-middle">Resource</span>
                                 </a>
                             </li>
+                        @endif
                         @endif
                     
 
@@ -117,6 +120,7 @@
                         </a>
                     </li>
                     
+                    @if(Auth::user()->organisation_id == 1)
                     <li class="sidebar-item">
 						<a data-bs-target="#wps" data-bs-toggle="collapse" class="sidebar-link collapsed">
 							<i class="align-middle me-2 fa fa-fw fa-terminal"></i> <span class="align-middle">Work Package</span>
@@ -134,12 +138,15 @@
                             <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/answers">Answer</a></li>
                             @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
                                 <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/create">Create</a></li>
+                            @else
+                                <li class="sidebar-item"><a class="sidebar-link" href="/resources/{{Auth::user()->resource->id}}">Calendar</a></li>
                             @endif
                             <li class="sidebar-item"><a class="sidebar-link" href="/workpackages/search">Search</a></li>
                             
                             
 						</ul>
                     </li>
+                    @endif
 
 
                     <li class="sidebar-item">
@@ -149,6 +156,7 @@
                         </a>
                     </li>
 
+                    @if(Auth::user()->organisation_id == 1)
                     @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'business')
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="/tenderproposals">
@@ -156,6 +164,7 @@
                                     class="align-middle">Tender</span>
                             </a>
                         </li>
+                    @endif
                     @endif
 
                     @if (Auth::user()->user_type == 'admin')
