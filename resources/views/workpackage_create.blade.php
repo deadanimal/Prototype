@@ -75,6 +75,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Project</label>
                                     <select class="form-control mb-3" name="project_id">
+                                        <option value=998>Pipeline Administration</option>                                        
                                         @foreach ($projects as $project)
                                             <option value="{{ $project->id }}">({{ $project->organisation->shortname }})
                                                 {{ $project->name }}</option>
