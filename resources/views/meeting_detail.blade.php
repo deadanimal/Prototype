@@ -268,6 +268,7 @@
     
                                     <button type="submit" name="action" value="cancel"  class="btn btn-danger">Cancel</button>
                                     <button type="submit" name="action" value="reschedule"  class="btn btn-primary">Reschedule</button>
+                                    <button type="submit" name="action" value="completed"  class="btn btn-success">Complete</button>
                                 </form>
 
                                     

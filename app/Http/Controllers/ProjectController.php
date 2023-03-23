@@ -425,8 +425,7 @@ class ProjectController extends Controller
         $testcase->update([
             'name' => $request->name,
             'category' => $request->category,
-            'remarks' => $request->remarks,
-            'requirement_id' => $request->requirement_id,         
+            'remarks' => $request->remarks,       
         ]);
         return back();
     }       

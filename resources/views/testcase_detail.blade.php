@@ -16,7 +16,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Work Package Summary</h5>
+                            <h5 class="card-title">Testcase Summary</h5>
                         </div>
 
                         <table class="table table-striped table-sm">
@@ -84,32 +84,60 @@
 
                         <div class="card-body">
 
-
-                            @if ($testcase->executions->count() > 0)
+                            
                                 <table class="table table-striped table-sm">
                                     <thead>
                                         <tr>
                                             <th>No.</th>
                                             <th>User</th>
                                             <th>Status</th>
+                                            <th>Remarks</th>
+                                            <th>Timestamp</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
 
-                                        @foreach ($testcase->executions as $execution)
+                                        @forelse ($testcase->executions as $execution)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td> 
                                                 <td>{{ $execution->user->name }}</td>                       
-                                                <td>{{ $execution->status }}</td>                       
+                                                <td>{{ $execution->status }}</td>
+                                                <td>{{ $execution->remarks }}</td>
+                                                <td>{{ $execution->created_at }}</td>                       
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                        <tr>
+                                            <td>-</td> 
+                                            <td>-</td>    
+                                            <td>-</td>                       
+                                            <td>-</td>                       
+                                            <td>-</td>  
+                                        </tr>                                        
+                                        @endforelse
 
                                     </tbody>
                                 </table>
-                            @endif
 
-                            @if(Auth::user()->organisation_id == 1)
+
+                   
+                        </div>
+
+
+                    </div>
+
+
+                </div>        
+                
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Test Case Executions</h5>
+                        </div>
+
+                        <div class="card-body">
+
                                 <form action="/testcases/{{ $testcase->id }}/execute" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
@@ -132,17 +160,16 @@
                                         <button type="submit" name="status" value="Fail" class="btn btn-danger">Fail</button>
 
                                 </form>
-                            @endif
+
                         </div>
 
 
                     </div>
 
 
-                </div>                
+                </div>                  
 
                 @if(Auth::user()->organisation_id == 1)
-                @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
                     <div class="col-12">
 
                         <div class="card">
@@ -164,7 +191,7 @@
 
                                     <div class="mb-3">
                                         <label class="form-label">Category</label>
-                                        <input type="text" class="form-control" name="name" placeholder="Name"
+                                        <input type="text" class="form-control" name="category" placeholder="Category"
                                             value="{{ $testcase->category }}">
                                     </div>
 
@@ -183,7 +210,6 @@
 
 
                     </div>
-                @endif                
                 @endif
             </div>
 
