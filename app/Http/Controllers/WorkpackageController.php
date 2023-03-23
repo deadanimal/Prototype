@@ -525,12 +525,12 @@ class WorkpackageController extends Controller
         Http::post('https://api.green-api.com/waInstance'.env('WA_INSTANCE').'/SendTemplateButtons/'.env('WA_TOKEN'), [
             'chatId' => $user->whatsapp_number."@c.us",
             'message' => $message,
-            'footer' => 'View the work package',
+            'footer' => 'View the Work Package '.$wp->id,
             'templateButtons' => [
                 [
                     "index" => 1,
                     "urlButton" => [
-                        "displayText" => $wp->name,
+                        "displayText" => 'Work Package: '.$wp->name,
                         "url" => "https://prototype.com.my/workpackages/".$wp->id,
                     ],
                 ],
