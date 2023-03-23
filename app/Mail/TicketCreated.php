@@ -14,12 +14,12 @@ class TicketCreated extends Mailable
     use Queueable, SerializesModels;
 
     public $ticket;
-    public $message;
+    public $tmessage;
 
-    public function __construct($ticket, $message)
+    public function __construct($ticket, $tmessage)
     {
         $this->ticket = $ticket;
-        $this->message = $message;
+        $this->tmessage = $tmessage;
     }
 
     /**
@@ -42,7 +42,7 @@ class TicketCreated extends Mailable
             view: 'emails.ticket_created',
             with: [
                 'ticket' => $this->ticket,
-                'message' => $this->message,
+                'tmessage' => $this->tmessage,
             ]            
         );
     }

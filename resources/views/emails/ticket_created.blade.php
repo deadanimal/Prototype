@@ -25,15 +25,15 @@ Hello, there is a new ticket created.
 
         <tr>
             <td><b>Message</b></td>
-            <td>{{$message->message}}</td>
+            <td>{{$tmessage->message}}</td>
         </tr>
         <tr>
             <td><b>Name</b></td>
-            <td>{{$message->user->name}}</td>
+            <td>{{$tmessage->user->name}}</td>
         </tr>
         <tr>
             <td><b>Created At</b></td>
-            <td>{{$message->created_at}}</td>
+            <td>{{$tmessage->created_at}}</td>
         </tr>                   
     </tbody>
 </table>

@@ -559,9 +559,10 @@ class ProjectController extends Controller
 
         $users = ProjectUser::where('project_id', $project->id)->get();
 
-        foreach($users as $user) {
-            Mail::to($user->email)->send(new TicketCreated($ticket, $message));
-        }
+        // foreach($users as $user) {
+        //     Mail::to($user->email)->send(new TicketCreated($ticket, $message));
+        // }
+        Mail::to('pmo@pipeline.com.my')->send(new TicketCreated($ticket, $message));
 
 
         Alert::success('Success', 'Ticket has been created');
@@ -587,10 +588,11 @@ class ProjectController extends Controller
         
         $users = ProjectUser::where('project_id', $ticket->project->id)->get();
 
-        foreach($users as $user) {
-            Mail::to($user->email)->send(new TicketReplied($ticket, $message));
-        }        
+        // foreach($users as $user) {
+        //     Mail::to($user->email)->send(new TicketReplied($ticket, $message));
+        // }        
 
+        Mail::to('pmo@pipeline.com.my')->send(new TicketReplied($ticket, $message));
         Alert::success('Success', 'Message has been created');        
         return back();
     }
