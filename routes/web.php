@@ -101,6 +101,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/testcases/{testcase_id}', [ProjectController::class, 'show_testcase']); 
     Route::put('/testcases/{testcase_id}', [ProjectController::class, 'update_testcase']);
     Route::delete('/testcases/{testcase_id}', [ProjectController::class, 'delete_testcase']);    
+    Route::post('/testcases/{testcase_id}/execute', [ProjectController::class, 'execute_testcase']);    
     
     // Route::post('/testflows', [ProjectController::class, 'create_testflow']);   
     // Route::get('/testflows/{testflow_id}', [ProjectController::class, 'show_testflow']); 

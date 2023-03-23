@@ -18,4 +18,9 @@ class ProjectTestcase extends Model
         'project_id',
         'user_id',
     ];     
+
+    public function executions()
+    {
+        return $this->hasMany(ProjectTestcaseExecution::class,);
+    }      
 }

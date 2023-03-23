@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TicketCreated;
+use App\Mail\TicketReplied;
 use App\Models\Meeting;
 use App\Models\Organisation;
 use App\Models\Project;
@@ -11,6 +13,7 @@ use App\Models\ProjectPayment;
 use App\Models\ProjectPhase;
 use App\Models\ProjectRequirement;
 use App\Models\ProjectTestcase;
+use App\Models\ProjectTestcaseExecution;
 use App\Models\ProjectTestflow;
 use App\Models\ProjectTestflowItem;
 use App\Models\ProjectUser;
@@ -21,6 +24,7 @@ use App\Models\Trail;
 use App\Models\User;
 use App\Models\Workpackage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProjectController extends Controller
@@ -340,7 +344,7 @@ class ProjectController extends Controller
         
         ProjectTestcase::create([
             'name' => $requirement->name,
-            'category' => $requirement->category,
+            'category' => 'NA',
             'remarks' => 'NA',
             'requirement_id' => $requirement->id,
 
@@ -434,7 +438,28 @@ class ProjectController extends Controller
         $testcase = ProjectTestcase::find($id);
         $testcase->delete();
         return back();
-    }        
+    }    
+    
+    public function execute_testcase(Request $request) {
+        $id = (int) $request->route('testcase_id');  
+        $user = $request->user();
+        $testcase = ProjectTestcase::find($id);
+        
+
+        $execution = ProjectTestcaseExecution::create([
+            'remarks' => $request->remarks, 
+            'status' => $request->status,
+            'project_testcase_id' => $testcase->id,
+            'user_id' => $user->id,
+        ]);
+
+        if($request->attachment) {
+            $execution->attachment = $request->file('attachment')->store('prototype/attachment');
+            $execution->save();
+        }
+
+        return back();
+    }     
     
 
     // public function create_testflow(Request $request) {
@@ -532,6 +557,11 @@ class ProjectController extends Controller
             $message->save();
         }
 
+        foreach($ticket->project->users as $user) {
+            Mail::to($user->email)->send(new TicketCreated($ticket, $message));
+        }
+
+
         Alert::success('Success', 'Ticket has been created');
         return back();
     }
@@ -551,6 +581,10 @@ class ProjectController extends Controller
         if($request->has('attachment')) {
             $message->attachment = $request->file('attachment')->store('prototype/attachment');
             $message->save();
+        }   
+        
+        foreach($ticket->project->users as $user) {
+            Mail::to($user->email)->send(new TicketReplied($ticket, $message));
         }        
 
         Alert::success('Success', 'Message has been created');        
