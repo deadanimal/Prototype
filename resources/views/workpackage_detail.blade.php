@@ -189,6 +189,7 @@
 
                             @if (Auth::user()->resource->id == $wp->resource_id ||
                                     Auth::user()->resource->id == $wp->reviewer_id ||
+                                    Auth::user()->resource->resource_type == 'all' ||
                                     Auth::user()->resource->resource_type == 'pmo')
                                 <form action="/workpackages/{{ $wp->id }}/review" method="POST"
                                     enctype="multipart/form-data">
