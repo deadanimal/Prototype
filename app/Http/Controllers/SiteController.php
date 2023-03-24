@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -130,6 +131,36 @@ class SiteController extends Controller
 
         return back();
     }  
+
+    public function update_user_password(Request $request) {
+        $user = $request->user();
+        $id = (int) $request->route('id');  
+        if ($user->email != 'afeezaziz@pipeline.com.my') {
+            return redirect('/');
+        }
+        
+        $found_user = User::find($id);    
+        $found_user->password = Hash::make($request->password);    
+        $found_user->save();
+
+        $message = "Your password has been changed by admin. New password is:".$request->password.'. Please change your password at the earliest oppurtunity';
+        Http::post('https://api.green-api.com/waInstance'.env('WA_INSTANCE').'/SendTemplateButtons/'.env('WA_TOKEN'), [
+            'chatId' => $found_user->whatsapp_number."@c.us",
+            'message' => $message,
+            'footer' => 'View the system ',
+            'templateButtons' => [
+                [
+                    "index" => 1,
+                    "urlButton" => [
+                        "displayText" => 'View the system',
+                        "url" => "https://prototype.com.my/dashboard",
+                    ],
+                ],
+            ]
+        ]);          
+
+        return back();
+    }      
     
     public function create_organisation(Request $request) {
         $user = $request->user();

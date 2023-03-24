@@ -121,6 +121,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/users', [SiteController::class, 'create_user']);
     Route::get('/users/{id}', [SiteController::class, 'show_user']);    
     Route::put('/users/{id}', [SiteController::class, 'update_user']);    
+    Route::put('/users/{id}/password', [SiteController::class, 'update_user_password']);    
 
     Route::post('/organisations', [SiteController::class, 'create_organisation']);
 

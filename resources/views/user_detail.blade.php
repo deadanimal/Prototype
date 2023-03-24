@@ -49,6 +49,13 @@
 
                         <div class="card-body">
 
+                            <form action="/users/{{$user->id}}/password" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <input type="password" name="password">
+                                <button type="submit">Submit</button>
+                            </form>
+
                    
 
                         </div>
