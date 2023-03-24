@@ -118,7 +118,7 @@ class ProjectController extends Controller
         $user = $request->user();
         $id = (int) $request->route('resource_id');          ;
         $projects = Project::all();
-        if ($user->user_type == 'admin') {
+        if ($user->resource->resource_type == 'all' || $user->resource->resource_type == 'pmo') {
             $resource = Resource::find($id);
         } else {
             $resource = Resource::where([
