@@ -100,7 +100,7 @@ class ProjectController extends Controller
 
     public function show_resources(Request $request) {
         $user = $request->user();
-        if ($user->user_type == 'admin') {
+        if ($user->resource->resource_type == 'all' || $user->resource->resource_type == 'pmo') {
             $resources = Resource::where('status', 'active')->orderBy('resource_type')->get();
             return view('resource_list', compact('resources'));
         } elseif ($user->user_type == 'staff') {
