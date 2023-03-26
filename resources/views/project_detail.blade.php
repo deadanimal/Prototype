@@ -89,6 +89,12 @@
                                         Ticket
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#vertical-icon-tab-11" data-bs-toggle="tab" role="tab"
+                                        aria-selected="false">
+                                        Issue
+                                    </a>
+                                </li>                                
                             </ul>
                             <div class="tab-content">
                                 {{-- <div class="tab-pane active" id="vertical-icon-tab-0" role="tabpanel">
@@ -889,6 +895,95 @@
                                     
 
                                 </div>
+                                <div class="tab-pane" id="vertical-icon-tab-11" role="tabpanel">
+                                    <h4 class="tab-title">Issue</h4>
+
+                                    @if ($issues)
+                                        <div class="col-12">
+                                            <div class="card">
+
+                                                <table class="table table-striped table-sm">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No.</th>
+                                                            <th>Title</th>
+                                                            <th>Category</th>
+                                                            <th>Status</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+
+                                                        @foreach ($issues as $issue)
+                                                            <tr>
+                                                                <td>{{ $loop->iteration }}</td>
+                                                                <td>{{ $issue->title }}</td>
+                                                                <td>{{ $issue->organisation->name }}</td>
+                                                                <td>{{ ucfirst($issue->status) }}</td>
+                                                                <td>
+                                                                    <div class="btn-group">
+                                                                        <button type="button" class="btn mb-1 btn-primary dropdown-toggle hide" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                            Action
+                                                                        </button>
+                                                                        <div class="dropdown-menu hide" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34.5px, 0px);">
+                                                                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalIssueView{{$issue->id}}" href="#">View</a>
+                                                                            @if(Auth::user()->organisation_id == 1)
+                                                                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalIssueEdit{{$issue->id}}" href="#">Edit</a>
+                                                                            @endif
+                                                                            <div class="dropdown-divider"></div>
+                                                                            <form action="/requirements/{{$issue->id}}" method="POST">                                                            
+                                                                                @csrf
+                                                                                @method('DELETE')
+                    
+                                                                                <button class="dropdown-item" type="submit">Delete</button>
+                                                                            </form>                                                                    
+                                                                        </div>
+                                                                    </div>                                                                         
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+
+                                                    </tbody>
+                                                </table>                                              
+                                            </div>
+                                        </div>
+                                    @endif
+
+
+                                    <form action="/issues" method="POST" enctype="multipart/form-data">
+                                        @csrf
+            
+           
+                                        <input type="hidden" name="project_id" value="{{$project->id}}">
+            
+                                        <div class="mb-3">
+                                            <label class="form-label">Name</label>
+                                            <input type="text" class="form-control" name="name" placeholder="name">
+                                        </div>
+            
+                                        <div class="mb-3">
+                                            <label class="form-label">Category</label>
+                                            <select class="form-control mb-3" name="category">
+                                                <option value="Admin">Admin</option>
+                                                <option value="Bug">Bug</option>
+                                                <option value="Variation">Variation</option>
+                                                <option value="Others">Others</option>
+                                            </select>
+                                        </div>
+                                    
+            
+                                        <div class="mb-3">
+                                            <label class="form-label">Remarks</label>
+                                            <textarea class="form-control" id="my-text-area" rows="5" name="remarks" placeholder="Textarea"></textarea>
+                                        </div>
+                                    
+            
+                                        <button type="submit" class="btn btn-primary">Create Issue</button>
+                                    </form>     
+                                    
+
+                                </div>                                
                             </div>
                         </div>
                     </div>
@@ -1245,6 +1340,108 @@
 
              
 
+                                <button type="submit" class="btn btn-primary">Edit</button>
+
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+
+            @endforeach     
+            
+            @foreach($issues as $issue)
+            <div class="modal fade" id="modalIssueView{{$issue->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Issue</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body m-3">
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Name</label>
+                                <input type="text" disabled name="name" value="{{$issue->name}}" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Status</label>
+                                <input type="text" disabled name="status" value="{{$issue->status}}" class="form-control">
+                            </div>                                        
+
+                            <div class="mb-3">
+                                <label class="form-label">Category</label>
+                                <input type="text" disabled name="category" value="{{$issue->category}}" class="form-control">
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Remarks</label>
+                                <textarea class="form-control" disabled rows="5" name="remarks" placeholder="Textarea">{{$issue->remarks}}</textarea>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalIssueEdit{{$issue->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Issue</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body m-3">
+
+
+                            <form action="/issues/{{$issue->id}}" method="POST"
+                                enctype="multipart/form-data">
+                                @method('PUT')
+                                @csrf
+
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Name</label>
+                                    <input type="text" name="name" value="{{$issue->name}}" class="form-control">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Status</label>
+                                    <select class="form-control mb-3" name="status">
+                                        <option value="Created">Created</option>
+                                        <option value="Inprogress">Inprogress</option>
+                                        <option value="Pending Client">Pending Client</option>
+                                        <option value="Solved">Solved</option>
+                                        <option value="Unsolved">Unsolved</option>
+                                    </select>
+                                </div>                                
+                                  
+    
+                                <div class="mb-3">
+                                    <label class="form-label">Category</label>
+                                    <select class="form-control mb-3" name="category">
+                                        <option value="Admin">Admin</option>
+                                        <option value="Bug">Bug</option>
+                                        <option value="Variation">Variation</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+    
+    
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Remarks</label>
+                                    <textarea class="form-control" rows="5" name="remarks" placeholder="Textarea">{{$issue->remarks}}</textarea>
+                                </div>
+
+            
                                 <button type="submit" class="btn btn-primary">Edit</button>
 
                             </form>

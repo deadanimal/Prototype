@@ -9,6 +9,7 @@ use App\Models\Organisation;
 use App\Models\Project;
 use App\Models\ProjectDeliverable;
 use App\Models\ProjectDocument;
+use App\Models\ProjectIssue;
 use App\Models\ProjectPayment;
 use App\Models\ProjectPhase;
 use App\Models\ProjectRequirement;
@@ -68,6 +69,7 @@ class ProjectController extends Controller
         $phases = ProjectPhase::where('project_id', $id)->orderBy('start_date')->get();
         $wps = Workpackage::where('project_id', $id)->orderBy('estimate_delivery')->orderBy('status')->get();
         $requirements = ProjectRequirement::where('project_id', $id)->get();
+        $issues = ProjectIssue::where('project_id', $id)->get();
         $tickets = Ticket::where('project_id', $id)->get();
         $testcases = ProjectTestcase::where('project_id', $id)->get();
 
@@ -94,7 +96,7 @@ class ProjectController extends Controller
 
         return view('project_detail', compact(['project', 'documents','meetings',
             'deliverables', 'users', 'members','payments','phases','wps', 'requirements',
-            'tickets', 'wp_costs', 'testcases'
+            'tickets', 'wp_costs', 'testcases', 'issues'
         ]));
     }
 
@@ -459,7 +461,39 @@ class ProjectController extends Controller
         }
 
         return back();
-    }     
+    }    
+    
+    public function create_issue(Request $request) {
+        
+        $user = $request->user();
+
+        ProjectIssue::create([
+            'name' => $request->name,
+            'status' => 'Created',
+            'category' => $request->category,
+            'remarks' => $request->remarks,
+
+            'project_id' => $request->project_id,
+            'user_id' => $user->id,
+        ]);
+      
+     
+        return back();        
+    }
+    
+    public function update_issue(Request $request) {
+        $id = (int) $request->route('issue_id');  
+        $user = $request->user();
+
+        $issue = ProjectIssue::find($id);
+        $issue->update([
+            'name' => $request->name,
+            'status' => $request->status,
+            'category' => $request->category,
+            'remarks' => $request->remarks,          
+        ]);
+        return back();
+    }           
     
 
     // public function create_testflow(Request $request) {
