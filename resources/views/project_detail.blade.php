@@ -18,12 +18,12 @@
                     <div class="card">
                         <div class="tab tab-vertical">
                             <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link active" href="#vertical-icon-tab-0" data-bs-toggle="tab"
                                         role="tab" aria-selected="true">
                                         Summary
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a class="nav-link" href="#vertical-icon-tab-1" data-bs-toggle="tab" role="tab"
                                         aria-selected="false">
@@ -91,15 +91,15 @@
                                 </li>
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane active" id="vertical-icon-tab-0" role="tabpanel">
+                                {{-- <div class="tab-pane active" id="vertical-icon-tab-0" role="tabpanel">
                                     <h4 class="tab-title">Summary</h4>
 
                                     
 
 
-                                </div>
+                                </div> --}}
 
-                                <div class="tab-pane" id="vertical-icon-tab-1" role="tabpanel">
+                                <div class="tab-pane active" id="vertical-icon-tab-1" role="tabpanel">
                                     <h4 class="tab-title">Timeline</h4>
 
                                     <table class="table table-striped table-sm">
@@ -701,6 +701,75 @@
                                 </div>
                                 <div class="tab-pane" id="vertical-icon-tab-9" role="tabpanel">
                                     <h4 class="tab-title">Work Package</h4>
+
+                                            <form action="/workpackages/search" method="POST">
+                                                @csrf
+                
+                                                <div class="mb-3">
+                                                    <label class="form-label">Type</label>
+                                                    <select class="form-control mb-3" name="package_type">
+                                                        <option value="-" selected>- - - </option>
+                                                        <option value="analyst - wireframe">Analyst - Wireframe</option>
+                                                        <option value="analyst - erd + dfd">Analyst - ERD & DFD</option>
+                                                        <option value="analyst - use case + process flow">Analyst - Use Case & Process Flow
+                                                        </option>
+                                                        <option value="analyst - system architecture">Analyst - System Architecture</option>
+                                                        <option value="analyst - testing scripts">Analyst - Testing Scripts</option>
+                                                        <option value="analyst - test">Analyst - Test</option>
+                                                        <option value="analyst - pentest + stress test">Analyst - Pentest & Stress Test
+                                                        </option>
+                                                        <option value="analyst - integration documents">Analyst - Integration Documents
+                                                        </option>
+                                                        <option value="analyst - migration documents">Analyst - Migration Documents</option>
+                                                        <option value="analyst - migration">Analyst - Migration</option>
+                                                        <option value="analyst - integration testings">Analyst - Integration Test</option>
+                                                        <option value="analyst - documentations">Analyst - Documentations</option>
+                                                        <option value="analyst - miscelleneous">Analyst - Miscelleneous</option>
+                
+                                                        <option value="developer - develop function">Developer - Develop Function
+                                                        </option>
+                                                        <option value="developer - develop interface">Developer - Develop Interface</option>
+                                                        <option value="developer - deployment">Developer - Deployment</option>
+                                                        <option value="developer - bug fixing">Developer - Bug Fixing</option>
+                                                        <option value="other - training">Other - Training</option>
+                                                    </select>
+                                                </div>
+                
+                                                <div class="mb-3">
+                                                    <label class="form-label">Level</label>
+                                                    <select class="form-control mb-3" name="package_level">
+                                                        <option value="-" selected>- - - </option>
+                                                        <option value="1 - 6 hours">6 Hours</option>
+                                                        <option value="2 - 3 hours">3 Hours</option>
+                                                        <option value="3 - 1 hour">1 Hour</option>
+                                                    </select>
+                                                </div>
+                
+                                                
+                                                <input type="hidden" name="project_id" value="{{$project->id}}">
+                
+                                                <div class="mb-3">
+                                                    <label class="form-label">Status</label>
+                                                    <select class="form-control mb-3" name="status">
+                                                        <option value="-" selected>- - - </option>
+                                                        <option value="Assigned">Assigned</option>
+                                                        <option value="Reassigned">Reassigned</option>
+                                                        <option value="Unassigned">Unassigned</option>
+                                                        <option value="Work Package Incomplete">Work Package Incomplete</option>
+                                                        <option value="Work Package In Review">Work Package In Review</option>
+                                                        <option value="Work Package Approved">Work Package Approved</option>
+                                                        <option value="Has Problem">Has Problem</option>
+                                                        <option value="Has Query">Has Query</option>
+                                                        <option value="Question Answered">Question Answered</option>
+                                                        <option value="Delayed">Delayed</option>
+                                                        <option value="Rejected">Rejected</option>
+                
+                                                    </select>
+                                                </div>
+                
+                                                <button type="submit" class="btn btn-primary">Search Work Package</button>
+                                            </form>
+                                                  
 
                                     <table class="table table-striped table-sm">
                                         <thead>
