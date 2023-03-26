@@ -213,7 +213,7 @@
                                         <button type="submit" name="action" value="question" class="btn btn-info">Ask
                                             Question</button>
                                     @endif
-                                    
+
                                     @if (Auth::user()->resource->id == $wp->reviewer_id || Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
                                         <br />
                                         <button type="submit" name="action" value="review_work_complete" class="btn btn-success">Complete</button>
@@ -253,6 +253,16 @@
                                         <input type="text" class="form-control" name="name" placeholder="Name"
                                             value="{{ $wp->name }}">
                                     </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Level</label>
+                                        <select class="form-control mb-3" name="package_level">
+                                            <option value=""></option>
+                                            <option value="1 - 6 hours" {{ $wp->package_level == "1 - 6 hours" ? 'selected' : '' }}>Level 1</option>
+                                            <option value="2 - 3 hours" {{ $wp->package_level == "2 - 3 hours" ? 'selected' : '' }}>Level 2</option>
+                                            <option value="3 - 1 hour" {{ $wp->package_level == "3 - 1 hour" ? 'selected' : '' }}>Level 3</option>
+                                        </select>
+                                    </div>                                    
 
 
                                     <div class="mb-3">
