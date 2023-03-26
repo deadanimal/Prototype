@@ -532,6 +532,7 @@ class WorkpackageController extends Controller
     public function search_project_workpackages(Request $request) {
 
         $id = (int) $request->route('project_id');  
+        $project = Project::find($id);
         $wps = Workpackage::where([
             ['project_id', '=', $id]
         ]);
