@@ -727,7 +727,7 @@
                                 <div class="tab-pane" id="vertical-icon-tab-9" role="tabpanel">
                                     <h4 class="tab-title">Work Package</h4>
 
-                                            <form action="/workpackages/search" method="POST">
+                                            <form action="/projects/{{$project->id}}/workpackages/search" method="POST">
                                                 @csrf
                 
                                                 <div class="mb-3">

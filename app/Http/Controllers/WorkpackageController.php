@@ -527,7 +527,33 @@ class WorkpackageController extends Controller
         $workpackages = $wps->get();
 
         return view('workpackage_search', compact('projects', 'resources', 'workpackages'));
-    }    
+    }   
+    
+    public function search_project_workpackages(Request $request) {
+
+        $id = (int) $request->route('project_id');  
+        $wps = Workpackage::where([
+            ['project_id', '=', $id]
+        ]);
+
+
+        if($request->package_type != '-') {
+            $wps->where('package_type', $request->package_type);
+        }
+
+        if($request->package_level != '-') {
+            $wps->where('package_level', $request->package_level);
+        }    
+
+        if($request->status != '-') {
+            $wps->where('status', $request->status);
+        }          
+
+
+        $workpackages = $wps->get();
+
+        return view('workpackage_search', compact('projects', 'resources', 'workpackages'));
+    }        
 
     public function notify_workpackage_assigned($user, $wp) {
         $message = "There is an assignment for the work package. Work Package ID: ". $wp->id.'.';

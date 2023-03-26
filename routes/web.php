@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/workpackages/search', [WorkpackageController::class, 'show_searched_workpackages']);
     Route::post('/workpackages/search', [WorkpackageController::class, 'search_workpackages']);
+    Route::post('/projects/{project_id}/workpackages/search', [WorkpackageController::class, 'search_project_workpackages']);
 
     Route::get('/workpackages/create', [WorkpackageController::class, 'show_workpackages_create']);
     Route::get('/workpackages/calendar', [WorkpackageController::class, 'show_workpackages_calendar']);

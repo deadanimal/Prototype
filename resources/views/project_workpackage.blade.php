@@ -1,0 +1,236 @@
+@extends('layout-auth')
+
+@section('content')
+    <main class="content">
+        <div class="container-fluid">
+
+            <div class="header">
+                <h1 class="header-title">
+                    Work Package
+                </h1>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Search Work Package</h5>
+                        </div>
+                        <div class="card-body">
+                            <form action="/projects/{{$project->id}}/workpackages/search" method="POST">
+                                @csrf
+
+                                <div class="mb-3">
+                                    <label class="form-label">Type</label>
+                                    <select class="form-control mb-3" name="package_type">
+                                        <option value="-" selected>- - - </option>
+                                        <option value="analyst - wireframe">Analyst - Wireframe</option>
+                                        <option value="analyst - erd + dfd">Analyst - ERD & DFD</option>
+                                        <option value="analyst - use case + process flow">Analyst - Use Case & Process Flow
+                                        </option>
+                                        <option value="analyst - system architecture">Analyst - System Architecture</option>
+                                        <option value="analyst - testing scripts">Analyst - Testing Scripts</option>
+                                        <option value="analyst - test">Analyst - Test</option>
+                                        <option value="analyst - pentest + stress test">Analyst - Pentest & Stress Test
+                                        </option>
+                                        <option value="analyst - integration documents">Analyst - Integration Documents
+                                        </option>
+                                        <option value="analyst - migration documents">Analyst - Migration Documents</option>
+                                        <option value="analyst - migration">Analyst - Migration</option>
+                                        <option value="analyst - integration testings">Analyst - Integration Test</option>
+                                        <option value="analyst - documentations">Analyst - Documentations</option>
+                                        <option value="analyst - miscelleneous">Analyst - Miscelleneous</option>
+
+                                        <option value="developer - develop function">Developer - Develop Function
+                                        </option>
+                                        <option value="developer - develop interface">Developer - Develop Interface</option>
+                                        <option value="developer - deployment">Developer - Deployment</option>
+                                        <option value="developer - bug fixing">Developer - Bug Fixing</option>
+                                        <option value="other - training">Other - Training</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Level</label>
+                                    <select class="form-control mb-3" name="package_level">
+                                        <option value="-" selected>- - - </option>
+                                        <option value="1 - 6 hours">6 Hours</option>
+                                        <option value="2 - 3 hours">3 Hours</option>
+                                        <option value="3 - 1 hour">1 Hour</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Status</label>
+                                    <select class="form-control mb-3" name="status">
+                                        <option value="-" selected>- - - </option>
+                                        <option value="Assigned">Assigned</option>
+                                        <option value="Reassigned">Reassigned</option>
+                                        <option value="Unassigned">Unassigned</option>
+                                        <option value="Work Package Incomplete">Work Package Incomplete</option>
+                                        <option value="Work Package In Review">Work Package In Review</option>
+                                        <option value="Work Package Approved">Work Package Approved</option>
+                                        <option value="Has Problem">Has Problem</option>
+                                        <option value="Has Query">Has Query</option>
+                                        <option value="Question Answered">Question Answered</option>
+                                        <option value="Delayed">Delayed</option>
+                                        <option value="Rejected">Rejected</option>
+
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Search Work Package</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-12">
+                    <div class="card">
+
+                        <table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Estimate Delivery</th>
+                                    <th>Project</th>
+                                    <th>Resource</th>
+                                    <th>Type</th>
+                                    <th>Level</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                @forelse ($workpackages as $wp)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td><a href="/workpackages/{{ $wp->id }}">{{ $wp->name }}</a></td>
+                                        <td>{{ $wp->estimate_delivery }}</td>
+                                        <td>
+                                            @if ($wp->project_id)
+                                                {{ $wp->project->name }}
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($wp->resource_id)
+                                                {{ $wp->resource->user->name }}
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>{{ $wp->package_type }}</td>
+                                        <td>{{ $wp->package_level }}</td>
+                                        <td>{{ $wp->status }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                @endforelse
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id='calendar'></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+
+        </div>
+    </main>
+
+    <script>
+        function markdown_editor() {
+            const easyMDE = new EasyMDE({
+                element: document.getElementById('my-text-area')
+            });
+
+        }
+
+
+        markdown_editor();
+    </script>
+
+    <script>
+        var wps = @json($workpackages);
+        console.log(wps)
+        var events = []
+        wps.forEach(element => {
+
+            var color = 'blue';
+
+            if (element['status'] == 'Delayed' || element['status'] == 'Rejected') {
+                color = 'red';
+            }
+
+            if (element['status'] == 'Work Package Approved') {
+                color = 'green';
+            }
+
+            if (element['status'] == 'Has Problem' || element['status'] == 'Question Answered') {
+                color = 'orange';
+            }
+
+
+            var event = {
+                title: element['name'],
+                description: '(' + element['status'] + ') ',
+                start: element['estimate_delivery'],
+                url: '/workpackages/' + element['id'],
+                color: color
+            }
+
+
+            events.push(event)
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                initialDate: '2023-03-01',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: events
+            });
+
+            calendar.render();
+        });
+    </script>
+@endsection
