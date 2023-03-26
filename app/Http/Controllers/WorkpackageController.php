@@ -552,7 +552,7 @@ class WorkpackageController extends Controller
 
         $workpackages = $wps->get();
 
-        return view('workpackage_search', compact('projects', 'resources', 'workpackages'));
+        return view('project_workpackage', compact('project', 'workpackages'));
     }        
 
     public function notify_workpackage_assigned($user, $wp) {
