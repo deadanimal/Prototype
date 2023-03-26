@@ -502,7 +502,26 @@
                                                     <td>RM {{ $payment->amount }}</td>
                                                     <td>{{ $payment->date }}</td>
                                                     <td>{{ ucfirst($payment->status) }}</td>
-                                                    <td></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn mb-1 btn-primary dropdown-toggle hide" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                Action
+                                                            </button>
+                                                            <div class="dropdown-menu hide" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34.5px, 0px);">
+                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalPaymentView{{$payment->id}}" href="#">View</a>
+                                                                @if(Auth::user()->organisation_id == 1)
+                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalPaymentEdit{{$payment->id}}" href="#">Edit</a>
+                                                                @endif
+                                                                <div class="dropdown-divider"></div>
+                                                                <form action="/projects/{{ $project->id }}/payments/{{$payment->id}}" method="POST">                                                            
+                                                                    @csrf
+                                                                    @method('DELETE')
+        
+                                                                    <button class="dropdown-item" type="submit">Delete</button>
+                                                                </form>                                                                    
+                                                            </div>
+                                                        </div>                                                                                                                
+                                                    </td>
                                                 </tr>
                                             @endforeach
 
@@ -1458,6 +1477,114 @@
 
 
 
+
+            @foreach($payments as $payment)
+            <div class="modal fade" id="modalPaymentView{{$payment->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Payment</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body m-3">
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Name</label>
+                                <input type="text" disabled name="name" value="{{$payment->name}}" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Date</label>
+                                <input type="text" disabled name="date" value="{{$payment->date}}" class="form-control">
+                            </div>          
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Status</label>
+                                <input type="text" disabled name="status" value="{{$payment->status}}" class="form-control">
+                            </div>                                        
+
+                            <div class="mb-3">
+                                <label class="form-label">Amount</label>
+                                <input type="number" disabled name="amount" value="{{$payment->amount}}" class="form-control">
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label class="form-label w-100">Remarks</label>
+                                <textarea class="form-control" disabled rows="5" name="remarks" placeholder="Textarea">{{$payment->remarks}}</textarea>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalPaymentEdit{{$payment->id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Payment</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body m-3">
+
+
+                            <form action="/projects/{{$project->id}}/payments/{{$payment->id}}" method="POST"
+                                enctype="multipart/form-data">
+                                @method('PUT')
+                                @csrf
+
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Name</label>
+                                    <input type="text" name="name" value="{{$payment->name}}" class="form-control">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Date</label>
+                                    <input type="date" name="date" value="{{$payment->date}}" class="form-control">
+                                </div>                                
+
+                                <div class="mb-3">
+                                    <label class="form-label">Status</label>
+                                    <select class="form-control mb-3" name="status">
+                                        <option value="Draft">Draft</option>
+                                        <option value="Pending Payment">Pending Payment</option>
+                                        <option value="Paid">Paid</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>   
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Amount</label>
+                                    <input type="number" name="amount" value="{{$payment->amount}}" class="form-control">
+                                </div>
+    
+    
+
+    
+    
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Remarks</label>
+                                    <textarea class="form-control" rows="5" name="remarks" placeholder="Textarea">{{$payment->remarks}}</textarea>
+                                </div>
+
+            
+                                <button type="submit" class="btn btn-primary">Edit</button>
+
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+
+            @endforeach               
         </div>
     </main>
 @endsection

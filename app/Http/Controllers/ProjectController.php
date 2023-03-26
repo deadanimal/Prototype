@@ -221,7 +221,7 @@ class ProjectController extends Controller
             'date' => $request->date,
             'amount' => $request->amount,
             'remarks' => $request->remarks,
-            'status'=> 'draft',
+            'status'=> 'Draft',
             'project_id' => $id,
             'user_id' => $request->user_id,
         ]);
@@ -237,6 +237,32 @@ class ProjectController extends Controller
 
         return back();
     }    
+
+    public function update_project_payment(Request $request) {
+        $id = (int) $request->route('payment_id');  
+
+        $payment = ProjectPayment::find($id);
+        $payment->update([
+            'name' => $request->name,
+            'date' => $request->date,
+            'amount' => $request->amount,
+            'remarks' => $request->remarks,
+            'status'=> $request->remarks,
+            'project_id' => $id,
+            'user_id' => $request->user_id,
+        ]);        
+        
+
+        return back();
+    }    
+    
+    public function delete_project_payment(Request $request) {
+        $id = (int) $request->route('payment_id');  
+
+        $payment = ProjectPayment::find($id);
+        $payment->delete();
+        return back();
+    }       
     
     public function add_project_phase(Request $request) {
         $id = (int) $request->route('project_id');  
