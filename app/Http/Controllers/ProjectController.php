@@ -493,7 +493,16 @@ class ProjectController extends Controller
             'remarks' => $request->remarks,          
         ]);
         return back();
-    }           
+    }     
+    
+    public function delete_issue(Request $request) {
+        $id = (int) $request->route('issue_id');  
+        $user = $request->user();
+
+        $issue = ProjectIssue::find($id);
+        $issue->delete();
+        return back();
+    }            
     
 
     // public function create_testflow(Request $request) {
