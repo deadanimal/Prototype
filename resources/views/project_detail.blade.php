@@ -499,7 +499,7 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ ucfirst($payment->name) }}</td>
-                                                    <td>RM {{ $payment->amount }}</td>
+                                                    <td>RM {{ number_format({{$payment->amount}}, 2, '.', '') }}</td>
                                                     <td>{{ $payment->date }}</td>
                                                     <td>{{ ucfirst($payment->status) }}</td>
                                                     <td>
@@ -1505,7 +1505,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Amount</label>
-                                <input type="number" disabled name="amount" value="{{$payment->amount}}" class="form-control">
+                                <input type="number" disabled name="amount" value="number_format({{$payment->amount}}, 2, '.', '')" class="form-control">
                             </div>
 
 
