@@ -52,6 +52,9 @@
                                         <option value="developer - develop interface">Developer - Develop Interface</option>
                                         <option value="developer - deployment">Developer - Deployment</option>
                                         <option value="developer - bug fixing">Developer - Bug Fixing</option>
+                                        <option value="pmo - Administration">PMO - Administration</option>
+                                        <option value="pmo - coordination">PMO - Coordination</option>
+                                        <option value="pmo - Meeting">PMO - Meeting</option>
                                         <option value="other - training">Other - Training</option>
                                         <option value="other - off">Other - OFF</option>
                                     </select>
