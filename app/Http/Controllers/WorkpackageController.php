@@ -333,7 +333,6 @@ class WorkpackageController extends Controller
             $wp->save();
         }        
 
-        Mail::to('pmo@pipeline.com.my')->send(new WorkpackageAssigned($wp));
 
         return back();
     }   
@@ -367,7 +366,6 @@ class WorkpackageController extends Controller
             }               
         }     
 
-        Mail::to('pmo@pipeline.com.my')->send(new WorkpackageAssigned($wp));
         
         return back();
     }
@@ -422,7 +420,6 @@ class WorkpackageController extends Controller
         if($wp->resource->user->whatsapp_number) {
             $this->notify_workpackage_review($wp->resource->user, $wp, $wp_review);
         }        
-        Mail::to('pmo@pipeline.com.my')->send(new WorkpackageReviewed($wp, $wp_review));
 
         return back();
     } 
