@@ -14,9 +14,10 @@ use App\Http\Controllers\UserUpdateController;
 Route::get('/', [SiteController::class, 'show_home']);
 
 Route::get('/meetings/guest', [MeetingController::class, 'show_meeting_guest']);
-Route::get('/meetings/{meeting_id}', [MeetingController::class, 'show_meeting']);
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/meetings/{meeting_id}', [MeetingController::class, 'show_meeting']);
     
     Route::get('/dashboard', [SiteController::class, 'show_dashboard']);
     Route::get('/profile', [SiteController::class, 'show_profile']);
