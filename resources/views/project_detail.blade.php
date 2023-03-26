@@ -918,8 +918,8 @@
                                                         @foreach ($issues as $issue)
                                                             <tr>
                                                                 <td>{{ $loop->iteration }}</td>
-                                                                <td>{{ $issue->title }}</td>
-                                                                <td>{{ $issue->organisation->name }}</td>
+                                                                <td>{{ $issue->name }}</td>
+                                                                <td>{{ $issue->category }}</td>
                                                                 <td>{{ ucfirst($issue->status) }}</td>
                                                                 <td>
                                                                     <div class="btn-group">
