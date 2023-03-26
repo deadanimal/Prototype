@@ -63,30 +63,31 @@
                                 </div>
 
                                 @if (Auth::user()->resource->resource_type == 'all' || Auth::user()->resource->resource_type == 'pmo')
-                                <div class="mb-3">
-                                    <label class="form-label">Project</label>
-                                    <select class="form-control mb-3" name="project_id">
-                                        <option value="-" selected>- - - </option>
-                                        @foreach ($projects as $project)
-                                            <option value="{{ $project->id }}">({{ $project->organisation->shortname }})
-                                                {{ $project->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Project</label>
+                                        <select class="form-control mb-3" name="project_id">
+                                            <option value="-" selected>- - - </option>
+                                            @foreach ($projects as $project)
+                                                <option value="{{ $project->id }}">
+                                                    ({{ $project->organisation->shortname }})
+                                                    {{ $project->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label">Resource</label>
-                                    <select class="form-control mb-3" name="resource_id">
-                                        <option value="-" selected>- - - </option>
-                                        @foreach ($resources as $resource)
-                                            <option value="{{ $resource->id }}">
-                                                ({{ ucfirst($resource->resource_type) }})
-                                                {{ $resource->user->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Resource</label>
+                                        <select class="form-control mb-3" name="resource_id">
+                                            <option value="-" selected>- - - </option>
+                                            @foreach ($resources as $resource)
+                                                <option value="{{ $resource->id }}">
+                                                    ({{ ucfirst($resource->resource_type) }})
+                                                    {{ $resource->user->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 @else
-                                    <input type="hidden" name="resource_id" value="{{Auth::user()->resource->id}}">
+                                    <input type="hidden" name="resource_id" value="{{ Auth::user()->resource->id }}">
                                 @endif
 
                                 <div class="mb-3">
@@ -178,6 +179,14 @@
                     </div>
                 </div>
 
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id='calendar'></div>
+                        </div>
+                    </div>
+                </div>
+
 
 
 
@@ -198,5 +207,58 @@
 
 
         markdown_editor();
+    </script>
+
+    <script>
+        var wps = @json($wps);
+        console.log(wps)
+        var events = []
+        wps.forEach(element => {
+
+            var color = 'blue';
+
+            if (element['status'] == 'Delayed' || element['status'] == 'Rejected') {
+                color = 'red';
+            }
+
+            if (element['status'] == 'Work Package Approved') {
+                color = 'green';
+            }
+
+            if (element['status'] == 'Has Problem' || element['status'] == 'Question Answered') {
+                color = 'orange';
+            }
+
+
+            var event = {
+                title: element['name'],
+                description: '(' + element['status'] + ') ',
+                start: element['estimate_delivery'],
+                url: '/workpackages/' + element['id'],
+                color: color
+            }
+
+
+            events.push(event)
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                initialDate: '2023-03-01',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: events
+            });
+
+            calendar.render();
+        });
     </script>
 @endsection
