@@ -324,9 +324,9 @@ class WorkpackageController extends Controller
             $wp->status = 'Assigned';
             $wp->save();
             Mail::to($wp->resource->user->email)->send(new WorkpackageAssigned($wp));
-            if($wp->resource->user->whatsapp_number) {
-                $this->notify_workpackage_assigned($wp->resource->user, $wp);
-            }                    
+            // if($wp->resource->user->whatsapp_number) {
+            //     $this->notify_workpackage_assigned($wp->resource->user, $wp);
+            // }                    
 
         } else {
             $wp->status = 'Unassigned';
@@ -351,9 +351,9 @@ class WorkpackageController extends Controller
             $wp->reviewer_id = $request->reviewer_id;
             $wp->save();
             Mail::to($wp->reviewer->user->email)->send(new WorkpackageAssigned($wp));
-            if($wp->reviewer->user->whatsapp_number) {
-                $this->notify_workpackage_assigned($wp->reviewer->user, $wp);
-            }                    
+            // if($wp->reviewer->user->whatsapp_number) {
+            //     $this->notify_workpackage_assigned($wp->reviewer->user, $wp);
+            // }                    
         }          
 
         if($request->resource_id) {
@@ -361,9 +361,9 @@ class WorkpackageController extends Controller
             $wp->status = 'Reassigned';
             $wp->save();
             Mail::to($wp->resource->user->email)->send(new WorkpackageAssigned($wp));
-            if($wp->resource->user->whatsapp_number) {
-                $this->notify_workpackage_assigned($wp->resource->user, $wp);
-            }               
+            // if($wp->resource->user->whatsapp_number) {
+            //     $this->notify_workpackage_assigned($wp->resource->user, $wp);
+            // }               
         }     
 
         
@@ -413,13 +413,13 @@ class WorkpackageController extends Controller
         }
 
         Mail::to($wp->reviewer->user->email)->send(new WorkpackageReviewed($wp, $wp_review));
-        if($wp->reviewer->user->whatsapp_number) {
-            $this->notify_workpackage_review($wp->reviewer->user, $wp, $wp_review);
-        }
+        // if($wp->reviewer->user->whatsapp_number) {
+        //     $this->notify_workpackage_review($wp->reviewer->user, $wp, $wp_review);
+        // }
         Mail::to($wp->resource->user->email)->send(new WorkpackageReviewed($wp, $wp_review));
-        if($wp->resource->user->whatsapp_number) {
-            $this->notify_workpackage_review($wp->resource->user, $wp, $wp_review);
-        }        
+        // if($wp->resource->user->whatsapp_number) {
+        //     $this->notify_workpackage_review($wp->resource->user, $wp, $wp_review);
+        // }        
 
         return back();
     } 
