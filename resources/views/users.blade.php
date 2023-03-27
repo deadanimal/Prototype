@@ -159,7 +159,7 @@
                                     <select class="form-control mb-3" name="organisation_id">
                                         @foreach ($organisations as $organisation)
                                             <option value="{{ $organisation->id }}">
-                                                {{ $organitsation->name }}</option>
+                                                {{ $organisation->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>                                                                                         
