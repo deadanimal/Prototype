@@ -356,7 +356,7 @@ class WorkpackageController extends Controller
             // }                    
         }          
 
-        if($request->resource_id) {
+        if($wp->resource_id != $request->resource_id) {
             $wp->resource_id = $request->resource_id;
             $wp->status = 'Reassigned';
             $wp->save();
