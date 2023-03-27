@@ -155,10 +155,10 @@
                                 </div>   
 
                                 <div class="mb-3">
-                                    <label class="form-label">Organitsation</label>
-                                    <select class="form-control mb-3" name="organitsation_id">
-                                        @foreach ($organisations as $organitsation)
-                                            <option value="{{ $organitsation->id }}">
+                                    <label class="form-label">Organisation</label>
+                                    <select class="form-control mb-3" name="organisation_id">
+                                        @foreach ($organisations as $organisation)
+                                            <option value="{{ $organisation->id }}">
                                                 {{ $organitsation->name }}</option>
                                         @endforeach
                                     </select>
