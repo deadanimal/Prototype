@@ -68,7 +68,7 @@ class MeetingController extends Controller
 
         $event = new Event;
         $event->name = '(MEETING) '.$meeting->title;
-        $event->description = $meeting->remarks;
+        $event->description = $meeting->meeting_remarks;
         $event->startDate = $meeting->meeting_date;
         $event->endDate = $meeting->meeting_date;
         $event->save();
