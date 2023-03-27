@@ -128,7 +128,7 @@ class ProjectController extends Controller
                 ['user_id', '=', $user->id],
             ])->first();
         }
-        $wps = Workpackage::where('resource_id', $resource->id)->get();
+        $wps = Workpackage::where('resource_id', $resource->id)->whereNotIn('status', ['Rejected'])->get();
         return view('resource_detail', compact('resource', 'wps'));        
     }    
 
