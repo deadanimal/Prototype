@@ -67,8 +67,11 @@ class MeetingController extends Controller
         ]);
 
         $event = new Event;
-        $event->quickSave($meeting->title.' on '.$meeting->meeting_date.' '.$meeting->start_time.'-'.$meeting->end_time);
-
+        $event->name = '(MEETING) '.$meeting->title;
+        $event->description = $meeting->remarks;
+        $event->startDate = $meeting->meeting_date;
+        $event->endDate = $meeting->meeting_date;
+        $event->save();
 
         $meeting->event_id = $event->id;
         $meeting->save();
@@ -91,15 +94,12 @@ class MeetingController extends Controller
         $meeting->save();
         Alert::success('Success', 'Meeting has been updated!');
 
-        $attendees = MeetingAttendee::where('meeting_id', $meeting->id)->get();
-
-        foreach ($attendees as $attendee) {
-            if ($attendee->user_id) {
-                Mail::to($attendee->user->email)->send(new MeetingInvitation($meeting, $attendee));
-            } else {
-                Mail::to($attendee->email)->send(new MeetingInvitation($meeting, $attendee));
-            }
-        }
+        $event = Event::find($meeting->event_id);
+        $event->name = '(MEETING) '.$meeting->title;
+        $event->description = $meeting->remarks;
+        $event->startDate = $meeting->meeting_date;
+        $event->endDate = $meeting->meeting_date;
+        $event->save();        
 
 
         return back();
