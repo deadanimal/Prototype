@@ -1,7 +1,7 @@
 
 Hello {{$user->name}}, you have been added as a user for the project and work monitoring system. You can access it here:
-<a href="https://prototype.com.my/dashboard">https://prototype.com.my/dashboard</a>. If you have any questions on how to use it,
-please email us at pmo@pipeline.com.my.
+<a href="https://prototype.com.my/dashboard">https://prototype.com.my/dashboard</a>. If you have any questions on how to use the system,
+please email us at pmo@pipeline.com.my. It can be a bit overwhelming for first time users, fret not, we are ready to handhold you throughout the process.
 
 <table class="table table-striped table-sm">
     <tbody>
