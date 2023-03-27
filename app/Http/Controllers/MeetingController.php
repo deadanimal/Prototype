@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MeetingCompleted;
 use App\Mail\MeetingInvitation;
 use Illuminate\Http\Request;
 
@@ -205,6 +206,11 @@ class MeetingController extends Controller
                 'status' => 'draft',
                 'user_id' => $user->id,
             ]);
+        } elseif ($meeting->status == 'completed') {
+            $attendees = MeetingAttendee::where('meeting_id', $meeting->id)->get();
+            foreach($attendees as $attendee) {
+                Mail::to($attendee->email)->send(new MeetingCompleted($meeting));
+            }            
         }
 
 
