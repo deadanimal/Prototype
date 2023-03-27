@@ -66,7 +66,8 @@ class MeetingController extends Controller
             'user_id' => $user->id,
         ]);
 
-        $event = Event::quickSave($meeting->title.' on '.$meeting->meeting_date.' '.$meeting->start_time.'-'.$meeting->end_time);
+        $event = new Event;
+        $event->quickSave($meeting->title.' on '.$meeting->meeting_date.' '.$meeting->start_time.'-'.$meeting->end_time);
 
 
         $meeting->event_id = $event->id;
