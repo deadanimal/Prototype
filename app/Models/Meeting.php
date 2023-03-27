@@ -21,6 +21,7 @@ class Meeting extends Model
         'end_time',
         'remarks',
         'status',
+        'event_id',
         'user_id',
     ];  
 
