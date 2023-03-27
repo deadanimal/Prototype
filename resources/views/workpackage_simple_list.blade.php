@@ -97,7 +97,7 @@
 
     <script>
 
-        var wps = @json($wps);
+        var wps = @json($workpackages);
         console.log(wps)
         var events = []
         wps.forEach(element => {
