@@ -25,9 +25,6 @@
                                     <th>Estimate Delivery</th>
                                     <th>Project</th>
                                     <th>Resource</th>
-                                    <th>Type</th>
-                                    <th>Level</th>
-                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,15 +49,9 @@
                                                 -
                                             @endif
                                         </td>
-                                        <td>{{ $wp->package_type }}</td>
-                                        <td>{{ $wp->package_level }}</td>
-                                        <td>{{ $wp->status }}</td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
                                         <td>-</td>
                                         <td>-</td>
                                         <td>-</td>
