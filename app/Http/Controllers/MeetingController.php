@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Workpackage;
 use Carbon\Carbon;
 use DataTables;
+use Exception;
 use Spatie\GoogleCalendar\Event;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -67,15 +68,23 @@ class MeetingController extends Controller
             'user_id' => $user->id,
         ]);
 
-        $event = new Event;
-        $event->name = '(MEETING) '.$meeting->title;
-        $event->description = $meeting->meeting_remarks;
-        $event->startDate = $meeting->meeting_date;
-        $event->endDate = $meeting->meeting_date;
-        $event->save();
+        try {
+            $event = new Event;
+            $event->name = '(MEETING) ' . $meeting->title;
+            $event->description = $meeting->meeting_remarks;
+            $event->startDate = $meeting->meeting_date;
+            $event->endDate = $meeting->meeting_date;
+            $event->save();
 
-        $meeting->event_id = $event->id;
-        $meeting->save();
+            $meeting->event_id = $event->id;
+            $meeting->save();
+        }
+        catch (Exception $e) {
+            echo 'Message: ' . $e->getMessage();
+        }
+
+
+
 
         Alert::success('Success', 'Meeting is in Draft');
 
@@ -96,11 +105,11 @@ class MeetingController extends Controller
         Alert::success('Success', 'Meeting has been updated!');
 
         $event = Event::find($meeting->event_id);
-        $event->name = '(MEETING) '.$meeting->title;
+        $event->name = '(MEETING) ' . $meeting->title;
         $event->description = $meeting->remarks;
         $event->startDate = $meeting->meeting_date;
         $event->endDate = $meeting->meeting_date;
-        $event->save();        
+        $event->save();
 
 
         return back();
@@ -208,9 +217,9 @@ class MeetingController extends Controller
             ]);
         } elseif ($meeting->status == 'completed') {
             $attendees = MeetingAttendee::where('meeting_id', $meeting->id)->get();
-            foreach($attendees as $attendee) {
+            foreach ($attendees as $attendee) {
                 Mail::to($attendee->email)->send(new MeetingCompleted($meeting));
-            }            
+            }
         }
 
 
