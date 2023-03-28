@@ -5,3 +5,18 @@
 ## Things to do:
 1. Implement passwordless [based on this package.](https://github.com/grosv/laravel-passwordless-login)
 2. Do [datatable](https://spark.bootlab.io/tables-datatables-buttons.html) for the system.
+3. Dashboard for resource(analyst, BD, developer, PMO, all) & client
+4. Correspondence module in Project.
+5. PDF...
+
+```
+    public function createPDF() {
+      // retreive all records from db
+      $data = Employee::all();
+      // share data to view
+      view()->share('employee',$data);
+      $pdf = PDF::loadView('pdf_view', $data);
+      // download PDF file with download method
+      return $pdf->download('pdf_file.pdf');
+    }
+```
