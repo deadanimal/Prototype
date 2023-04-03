@@ -68,20 +68,20 @@ class MeetingController extends Controller
             'user_id' => $user->id,
         ]);
 
-        try {
-            $event = new Event;
-            $event->name = '(MEETING) ' . $meeting->title;
-            $event->description = $meeting->meeting_remarks;
-            $event->startDate = $meeting->meeting_date;
-            $event->endDate = $meeting->meeting_date;
-            $event->save();
+        // try {
+        //     $event = new Event;
+        //     $event->name = '(MEETING) ' . $meeting->title;
+        //     $event->description = $meeting->meeting_remarks;
+        //     $event->startDate = $meeting->meeting_date;
+        //     $event->endDate = $meeting->meeting_date;
+        //     $event->save();
 
-            $meeting->event_id = $event->id;
-            $meeting->save();
-        }
-        catch (Exception $e) {
-            echo 'Message: ' . $e->getMessage();
-        }
+        //     $meeting->event_id = $event->id;
+        //     $meeting->save();
+        // }
+        // catch (Exception $e) {
+        //     echo 'Message: ' . $e->getMessage();
+        // }
 
 
 
